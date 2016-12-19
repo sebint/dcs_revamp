@@ -158,13 +158,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${userList}" var="user">
+                    <c:forEach items="${userList}" var="user" varStatus="counter">
                        <c:forEach items="${user.role}" var="role">
                             <c:set value="${role.strRoleName}" var="roleName"/>
                             <c:set value="${role.intRoleId}" var="roleId"/>
                        	</c:forEach>   
                      <tr>
-                      	<td>1</td>
+                      	<td>${counter.index+1}</td>
                         <td>${user.strFirstName} ${user.strLastName}</td>  
                         <td>${roleName}</td>          
                         <td>${user.strEmail}</td>

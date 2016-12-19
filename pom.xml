@@ -80,6 +80,7 @@
 		    <artifactId>thymeleaf</artifactId>
 		    <version>3.0.2.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>

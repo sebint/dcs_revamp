@@ -111,7 +111,7 @@
 <%--                     <span class="glyphicon glyphicon-tasks"></span>Basic Datatable</div> --%>
 <!--                 </div> -->
                 <div class="panel-body">
-                 <s:url action="object/update" var="url"></s:url>
+                <spring:url value="/security/object/update" var="url"/>
                   <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
                     <thead>
                       <tr>
@@ -123,15 +123,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <s:iterator value="lstMenuSub" status="status">   
+                    <c:forEach items="${lstMenuSub}" var="menu" varStatus="counter">  
                       <tr>
-                        <td><s:property value="#status.count"/></td>
-                        <td><s:property value="menu.strMenuName"/></td>
-                        <td><s:property value="strMenuSubLabel"/></td>
-                        <s:if test='%{boolSubIsScreenType==true}'><td>Screen</td></s:if><s:else><td>Report</td></s:else>
-                        <td><s:hidden name="sr-prop" cssClass="sr-info" value='{"intMenuMasterId":"%{intMenuMasterId}","strMenuSubLabel":"%{strMenuSubLabel}","boolSubIsScreenType":"%{boolSubIsScreenType}"}'></s:hidden><a href="#" class="sr-update" data-action="<s:property value="#url"/>/<s:property value="intMenuSubId"/>" data-toggle="modal" data-target=".object_modal"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td>${counter.index+1}</td>
+                        <td>${menu.strMenuName}</td>
+                        <td>${strMenuSubLabel}</td>
+                        <c:choose>
+                        	<c:when test="${boolSubIsScreenType==true}">
+                        		<td>Screen</td>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<td>Report</td>
+                        	</c:otherwise>
+                        </c:choose>                
+                        <td><input type="hidden" name="sr-prop" class="sr-info" value='{"intMenuMasterId":"${intMenuMasterId}","strMenuSubLabel":"${strMenuSubLabel}","boolSubIsScreenType":"${boolSubIsScreenType}"}'/><a href="#" class="sr-update" data-action="${url}/${intMenuSubId}" data-toggle="modal" data-target=".object_modal"><span class="glyphicon glyphicon-edit"></span></a></td>
                       </tr>
-                       </s:iterator>     
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
