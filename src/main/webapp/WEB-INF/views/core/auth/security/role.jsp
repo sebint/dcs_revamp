@@ -182,6 +182,9 @@
 										</div>
 										<!-- .section-divider -->
 										<div class="section">
+											<span class="field-alt fw600">
+												New Role <div class="ico-help" title="New Role Name"><i class="fa fa-question-circle"></i></div>
+											</span>	
 											<label for="strRoleName" class="field prepend-icon"> 
 											   <form:input path="strRoleName" id="strRoleName" cssClass="gui-input br5" placeholder="New Role"/>
 													<label for="strRoleName" class="field-icon"> 
@@ -190,6 +193,9 @@
 											</label>
 										</div>
 										<div class="section">
+											<span class="field-alt fw600">
+												Description <div class="ico-help" title="Describe the role functonality."><i class="fa fa-question-circle"></i></div>
+											</span>											
 											<label for="strRoleDesc" class="field prepend-icon"> 
 											   <form:input path="strRoleDesc" id="strRoleDesc" cssClass="gui-input br5" placeholder="Role Description"/>
 													<label for="strRoleDesc" class="field-icon"> 
@@ -198,6 +204,9 @@
 											</label>
 										</div>
 										<div class="section">
+											<span class="field-alt fw600">
+												Home Page <div class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></div>
+											</span>	
 											 <label class="field select">
 											 <form:select path="">
 											 
