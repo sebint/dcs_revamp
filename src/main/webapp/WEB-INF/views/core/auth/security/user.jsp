@@ -283,11 +283,11 @@
 					                          <label class="field select">
 					                          <span></span>
 					                          	<form:select path="intRoleId">
-					                          		<form:option value="-1" label="Please Select"/>
-      												<form:options items="${rolesOptions}"/>
+					                          		<form:option value="-1" label="Please Select" selected="selected"/>
+      												<form:options items="${rolesOptions}" itemValue="intRoleId" itemLabel="strRoleName"/>
 					                          	</form:select>
 					                            <i class="arrow double"></i>
-					                          </label>						                          
+					                          </label>				                          
 					                        </div>
 											<!-- end section -->
 										</div>
@@ -335,10 +335,9 @@
 										</div>
 										<div class="col-md-6 pr0">
 											<div class="section">
-												<label class="option option-primary">
-		<%-- 											<s:checkbox value="1" id="intPassStatus" name="intPassStatus"></s:checkbox> --%>
+												<label for="boolPwdChange pr0">
 		                              				<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1" checked="checked"/>
-		                              				<span class="checkbox"></span>Change password on next login.
+		                              				Change password on next login.
 		                              			</label>			                              			
 		                              		</div>
 										</div>
@@ -346,9 +345,9 @@
 										</div>
 										<div class="col-md-12 pr0">
 											<div class="section">
-												<label class="option option-primary pr0">
+												<label class="boolLockPwd pr0">
 		                              				<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1" checked="checked"/>
-		                              				<span class="checkbox"></span>Activate Account Lockout Threshold after                        
+		                              				Activate Account Lockout Threshold after                        
 		                              			</label>
 		                              			<form:input path="intPwdAttempt" id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="5" placeholder="5" readonly="true"></form:input>
 		                              			<span>attempts.</span>	
