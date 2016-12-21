@@ -50,7 +50,7 @@
 	          <i class="fa fa-circle"></i>
 	        </li>
 	        <li class="dropdown menu-merge">
-	          <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown"> <img src="${pageContext.request.contextPath}/resources/img/avatars/1.jpg" alt="avatar" class="mw30 br64 mr15"> John.Smith
+	          <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown"> <img src="${pageContext.request.contextPath}/resources/img/avatars/1.jpg" alt="avatar" class="mw30 br64 mr15"><security:authentication property="principal.firstName"/> <security:authentication property="principal.lastName"/>
 	            <span class="caret caret-tp hidden-xs"></span>
 	          </a>
 	          <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">
@@ -69,7 +69,7 @@
 						<div class="no-margin">
 							 <a class="media list-group-item" href="#">
 								 <img src="${pageContext.request.contextPath}/resources/img/avatars/1.jpg" alt="avatar" class="mw60 br64 m066p">
-										<span class="media-body ta-center block no-margin ln-hgt"><small class="p5 block text-grey"><security:authentication property="principal.username"/></small><small class="text-yellow">mails4sebin@gmail.com</small></span>
+										<span class="media-body ta-center block no-margin ln-hgt"><small class="p5 block text-grey"><security:authentication property="principal.username"/></small><small class="text-yellow"><security:authentication property="principal.email"/></small></span>
 							</a>
 						</div>
 					</div>

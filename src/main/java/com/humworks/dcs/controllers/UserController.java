@@ -1,6 +1,5 @@
 package com.humworks.dcs.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -49,6 +48,11 @@ public class UserController {
 		if (result.hasErrors()) {
 			return page;
 		}
+		try{
+			userService.save(user);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		return page;
 	}
 	
@@ -65,6 +69,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return page;
 		}
+		
 		return page;
 	}
 	

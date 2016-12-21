@@ -27,7 +27,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-//		SpringUser  springUser = null;
 		User user = userService.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username + "Not Found!");
@@ -45,10 +44,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 		for (Role role : user.getRole()) {
-//			System.out.println("UserProfile : " + role);
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + roleStringConvertion(role.getStrRoleName())));
 		}
-		System.out.print("Authorities :" + authorities);
 		return authorities;
 	}
 	/**
