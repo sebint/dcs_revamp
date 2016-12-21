@@ -1,9 +1,6 @@
 package com.humworks.dcs.controllers;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -100,28 +97,8 @@ public class UserController {
 	}
 	
 	@ModelAttribute("rolesOptions")
-	public Map<Integer, String> getRoles(){
-		List<Role> roles = roleService.findAll();
-		Map<Integer, String> rs = new LinkedHashMap<Integer, String>();
-		try{
-			Iterator<Role> iterator = roles.iterator();
-			while (iterator.hasNext()) {
-				  Integer id = iterator.next().getIntRoleId();
-				  String role = iterator.next().getStrRoleName();
-				  System.out.println(id);
-				  System.out.println(role);
-				}
-//		for (Role role: roles) {	
-//			System.out.println(role.getIntRoleId());
-//			System.out.println(role.getStrRoleName());
-//			rs.put(role.getIntRoleId(), role.getStrRoleName());
-//		}
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
-		rs.put(1, "sebin");
-		rs.put(2, "jithin");
-		return rs;
+	public List<Role> getRoles(){
+		return roleService.findAll();
 	}
 	
 	@ModelAttribute("userList")
