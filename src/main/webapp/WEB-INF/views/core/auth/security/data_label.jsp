@@ -21,49 +21,6 @@
 	    <!-- Start: Content-Wrapper -->
 	    <section id="content_wrapper">
 	
-	      <!-- Start: Topbar-Dropdown -->
-	     <div id="topbar-dropmenu">
-	        <div class="topbar-menu row">
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-inbox"></span>
-	              <p class="metro-title">Messages</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-user"></span>
-	              <p class="metro-title">Users</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-headphones"></span>
-	              <p class="metro-title">Support</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon fa fa-gears"></span>
-	              <p class="metro-title">Settings</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-facetime-video"></span>
-	              <p class="metro-title">Videos</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-picture"></span>
-	              <p class="metro-title">Pictures</p>
-	            </a>
-	          </div>
-	        </div>
-	      </div>
-	      <!-- End: Topbar-Dropdown -->
-	
 	      <!-- Start: Topbar -->
 	      <header id="topbar">
 	        <div class="topbar-left">
@@ -114,7 +71,7 @@
 <%--                     <span class="glyphicon glyphicon-tasks"></span>Basic Datatable</div> --%>
 <!--                 </div> -->
                 <div class="panel-body">
-                <s:url action="label/update" var="url"></s:url>
+                <spring:url value="/security/update" var="url"/>
                   <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
                     <thead>
                       <tr>
@@ -126,15 +83,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                     <s:iterator value="labelList" status="status">   
+                     <c:forEach items="${labelList}" var="label" varStatus="counter">
                       <tr>
-                        <td><s:property value="#status.count"/></td>
-                        <td><s:property value="menuSub.menu.strMenuName"/></td>
-                        <td><s:property value="menuSub.strMenuSubLabel"/></td>
-                        <td><s:property value="strLabelName"/></td>
-                        <td><s:hidden name="sr-prop" cssClass="sr-info" value='{"intMenuMasterId":"%{menuSub.menu.intMenuMasterId}","intMenuSubId":"%{intMenuSubId}","strLabelName":"%{strLabelName}"}'></s:hidden><a href="#" class="sr-update" data-action="<s:property value="#url"/>/<s:property value="intLabelMasterId"/>" data-toggle="modal" data-target=".label_modal"><span class="glyphicon glyphicon-edit"></span></a></td> 
+                        <td>${counter.index+1}</td>
+                        <td>${menuSub.menu.strMenuName}</td>
+                        <td>${menuSub.strMenuSubLabel}</td>
+                        <td>${trLabelName}</td>
+                        <td><input type="hidden" name="sr-prop" class="sr-info" value='{"intMenuMasterId":"${menuSub.menu.intMenuMasterId}","intMenuSubId":"${intMenuSubId}","strLabelName":"${strLabelName}"}'/><a href="#" class="sr-update" data-action="${url}/${intLabelMasterId}" data-toggle="modal" data-target=".label_modal"><span class="glyphicon glyphicon-edit"></span></a></td> 
                         </tr>
-                      </s:iterator>    
+                      </c:forEach>    
                     </tbody>
                   </table>
                 </div>

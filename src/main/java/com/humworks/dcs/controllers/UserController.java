@@ -51,6 +51,11 @@ public class UserController {
 		if (result.hasErrors()) {
 			return page;
 		}
+		try{
+			userService.save(user);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		return page;
 	}
 	
@@ -67,6 +72,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return page;
 		}
+		
 		return page;
 	}
 	

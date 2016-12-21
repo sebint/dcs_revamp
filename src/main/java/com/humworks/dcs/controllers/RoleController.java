@@ -24,7 +24,6 @@ public class RoleController {
 		return "auth/security/role";
 	}
 	
-	
 	@ModelAttribute("role")
 	public Role getUser(){
 		return new Role();

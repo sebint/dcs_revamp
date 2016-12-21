@@ -21,49 +21,6 @@
 	    <!-- Start: Content-Wrapper -->
 	    <section id="content_wrapper">
 	
-	      <!-- Start: Topbar-Dropdown -->
-	     <div id="topbar-dropmenu">
-	        <div class="topbar-menu row">
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-inbox"></span>
-	              <p class="metro-title">Messages</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-user"></span>
-	              <p class="metro-title">Users</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-headphones"></span>
-	              <p class="metro-title">Support</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon fa fa-gears"></span>
-	              <p class="metro-title">Settings</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-facetime-video"></span>
-	              <p class="metro-title">Videos</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-picture"></span>
-	              <p class="metro-title">Pictures</p>
-	            </a>
-	          </div>
-	        </div>
-	      </div>
-	      <!-- End: Topbar-Dropdown -->
-	
 	      <!-- Start: Topbar -->
 	      <header id="topbar">
 	        <div class="topbar-left">
@@ -158,13 +115,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${userList}" var="user">
+                    <c:forEach items="${userList}" var="user" varStatus="counter">
                        <c:forEach items="${user.role}" var="role">
                             <c:set value="${role.strRoleName}" var="roleName"/>
                             <c:set value="${role.intRoleId}" var="roleId"/>
                        	</c:forEach>   
                      <tr>
-                      	<td>1</td>
+                      	<td>${counter.index+1}</td>
                         <td>${user.strFirstName} ${user.strLastName}</td>  
                         <td>${roleName}</td>          
                         <td>${user.strEmail}</td>
@@ -283,11 +240,11 @@
 					                          <label class="field select">
 					                          <span></span>
 					                          	<form:select path="intRoleId">
-					                          		<form:option value="-1" label="Please Select"/>
-      												<form:options items="${rolesOptions}"/>
+					                          		<form:option value="-1" label="Please Select" selected="selected"/>
+      												<form:options items="${rolesOptions}" itemValue="intRoleId" itemLabel="strRoleName"/>
 					                          	</form:select>
 					                            <i class="arrow double"></i>
-					                          </label>						                          
+					                          </label>				                          
 					                        </div>
 											<!-- end section -->
 										</div>
@@ -335,10 +292,9 @@
 										</div>
 										<div class="col-md-6 pr0">
 											<div class="section">
-												<label class="option option-primary">
-		<%-- 											<s:checkbox value="1" id="intPassStatus" name="intPassStatus"></s:checkbox> --%>
+												<label for="boolPwdChange pr0">
 		                              				<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1" checked="checked"/>
-		                              				<span class="checkbox"></span>Change password on next login.
+		                              				Change password on next login.
 		                              			</label>			                              			
 		                              		</div>
 										</div>
@@ -346,9 +302,9 @@
 										</div>
 										<div class="col-md-12 pr0">
 											<div class="section">
-												<label class="option option-primary pr0">
+												<label class="boolLockPwd pr0">
 		                              				<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1" checked="checked"/>
-		                              				<span class="checkbox"></span>Activate Account Lockout Threshold after                        
+		                              				Activate Account Lockout Threshold after                        
 		                              			</label>
 		                              			<form:input path="intPwdAttempt" id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="5" placeholder="5" readonly="true"></form:input>
 		                              			<span>attempts.</span>	

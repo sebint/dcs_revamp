@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.humworks.dcs.dao.AbstractDao;
@@ -20,9 +21,11 @@ public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao {
 	public List<Role> findAll() {
 		
 		Criteria criteria = createEntityCriteria();
-		criteria.setProjection(Projections.projectionList().add(
-		Projections.property("intRoleId")).add(Projections.property("strRoleName"))); 
-		criteria.addOrder(Order.desc("strRoleName"));
+		criteria.setProjection(Projections.projectionList()
+				.add(Projections.property("intRoleId"), "intRoleId")
+				.add(Projections.property("strRoleName"), "strRoleName"))
+		.setResultTransformer(Transformers.aliasToBean(Role.class));
+		criteria.addOrder(Order.asc("strRoleName"));
 		List<Role> roles = criteria.list();
 		return roles;
 	}

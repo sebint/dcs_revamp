@@ -20,49 +20,6 @@
 		<jsp:include page="../../../fragments/menu.jsp"></jsp:include>
 	    <!-- Start: Content-Wrapper -->
 	    <section id="content_wrapper">
-	      <!-- Start: Topbar-Dropdown -->
-	     <div id="topbar-dropmenu">
-	        <div class="topbar-menu row">
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-inbox"></span>
-	              <p class="metro-title">Messages</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-user"></span>
-	              <p class="metro-title">Users</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-headphones"></span>
-	              <p class="metro-title">Support</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon fa fa-gears"></span>
-	              <p class="metro-title">Settings</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-facetime-video"></span>
-	              <p class="metro-title">Videos</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-picture"></span>
-	              <p class="metro-title">Pictures</p>
-	            </a>
-	          </div>
-	        </div>
-	      </div>
-	      <!-- End: Topbar-Dropdown -->
-	
 	      <!-- Start: Topbar -->
 	      <header id="topbar">
 	        <div class="topbar-left">
@@ -140,9 +97,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${listRoles}" var="role">                   
+                    <c:forEach items="${listRoles}" var="role" varStatus="counter">                   
                       <tr>
-                        <td>1</td>
+                        <td>${counter.index+1}</td>
                         <td>${role.strRoleName}</td>
                         <td>${role.strRoleDesc}</td>
                         <td><a href="#" data-toggle="modal" data-target="#permission_modal"><span class="fa fa-file-text"></span></a></td>
@@ -182,6 +139,9 @@
 										</div>
 										<!-- .section-divider -->
 										<div class="section">
+											<span class="field-alt fw600">
+												New Role <div class="ico-help" title="New Role Name"><i class="fa fa-question-circle"></i></div>
+											</span>	
 											<label for="strRoleName" class="field prepend-icon"> 
 											   <form:input path="strRoleName" id="strRoleName" cssClass="gui-input br5" placeholder="New Role"/>
 													<label for="strRoleName" class="field-icon"> 
@@ -190,6 +150,9 @@
 											</label>
 										</div>
 										<div class="section">
+											<span class="field-alt fw600">
+												Description <div class="ico-help" title="Describe the role functonality."><i class="fa fa-question-circle"></i></div>
+											</span>											
 											<label for="strRoleDesc" class="field prepend-icon"> 
 											   <form:input path="strRoleDesc" id="strRoleDesc" cssClass="gui-input br5" placeholder="Role Description"/>
 													<label for="strRoleDesc" class="field-icon"> 
@@ -198,6 +161,9 @@
 											</label>
 										</div>
 										<div class="section">
+											<span class="field-alt fw600">
+												Home Page <div class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></div>
+											</span>	
 											 <label class="field select">
 											 <form:select path="">
 											 
@@ -251,47 +217,39 @@
 								<tr>
 									<th></th>
 									<th>
-<!-- 										<label class="option option-success"> -->
-												<input type="checkbox" name="checkallview" id="checkallview" value="1" checked="checked"> 
-<!-- 												<span class="checkbox"></span> -->
-<!-- 										</label> -->
+										<%-- <form:checkbox path="checkallview" id="checkallview" value="1" checked="checked"/> --%>
+										<input type="checkbox" name="checkallview" id="checkallview" value="1" checked="checked"> 
 										<input type="hidden" id="rolepermid" name="rolepermid" value="1">
 										<input type="hidden" class="form-control" id="roleupdate" name="roleupdate" value="Update">
 									</th>
 									<th>
-										<label class="option option-success">
-												<input type="checkbox" name="checkalladd" id="checkalladd" value="1" checked="checked"> 
-												<span class="checkbox"></span>
-										</label> 
+										<label for="checkalledit">
+                              				<input type="checkbox" name="checkalledit" id="checkalledit" value="1" checked="checked">
+                              			</label>			                              			
 									</th>
 									<th>
-										<label class="option option-success">
+										<label for="checkalledit">
 												<input type="checkbox" name="checkalledit" id="checkalledit" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>
 									</th>
 									<th>
-										<label class="option option-success">
+										<label for="checkalldelete">
 												<input type="checkbox" name="checkalldelete" id="checkalldelete" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>
 									</th>
 									<th>
-										<label class="option option-success">
+										<label for="checkallexport">
 												<input type="checkbox" name="checkallexport" id="checkallexport" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>
 									</th>
 									<th>
-										<label class="option option-success">
+										<label for="checkallprint">
 												<input type="checkbox" name="checkallprint" id="checkallprint" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>
 									</th>
 									<th>
-										<label class="option option-success">
+										<label for="checkallemail">
 												<input type="checkbox" name="checkallemail" id="checkallemail" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>
 									</th>
 								</tr>
@@ -304,90 +262,76 @@
 								<tr>
 									<td>Project Template Status</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_1">
 												<input type="checkbox" name="1_1" id="1_1" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>					
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>									
 								    </td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>									
 									</td>
 								</tr>
 								<tr>
 									<td>Project Journal Status</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
@@ -399,270 +343,228 @@
 								<tr>
 									<td>Journal Data Entry</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Journal Data Entry Non Progressive</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
+										</label>								
+									</td>
+									<td>
+										<label for="1_2">
+												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
-										</label>										
-									</td>
-									<td>
-										<label class="option option-primary">
-												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Journal Validation</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Journal Validation Non Progressive</td>
-									<td>
-										<label class="option option-primary">
+								<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Audit Data Change Log</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Pending Journal Data Entry</td>
-								<td>
-										<label class="option option-primary">
+									<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
@@ -673,226 +575,191 @@
 								</tr>
 								<tr>
 									<td>Project Template</td>
-									<td>
-										<label class="option option-primary">
+										<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Progressive Journal</td>
-									<td>
-										<label class="option option-primary">
+										<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Non Progressive Journal</td>
-									<td>
-										<label class="option option-primary">
+										<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Change Data Entry Owner</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Manage Templates</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
@@ -903,226 +770,191 @@
 								</tr>
 								<tr>
 									<td>Data Attributes Group</td>
-									<td>
-										<label class="option option-primary">
+										<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Progressive Data Attributes</td>
-									<td>
-										<label class="option option-primary">
+										<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Non Progressive Data Attributes</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Unit of Measure</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Lookup Data</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
@@ -1134,225 +966,190 @@
 								<tr>
 									<td>Object</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Data Label</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Role</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>User</td>
-								<td>
-										<label class="option option-primary">
+									<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Change Password</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
@@ -1363,91 +1160,77 @@
 								</tr>
 								<tr>
 									<td>Reminders</td>
-									<td>
-										<label class="option option-primary">
+										<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
 								<tr>
 									<td>Alert</td>
-								<td>
-										<label class="option option-primary">
+									<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 								</tr>
@@ -1458,46 +1241,39 @@
 								</tr>
 								<tr>
 									<td>Photo Report</td>
-								<td>
-										<label class="option option-primary">
+									<td>
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>								
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
+										<label for="1_2">
 												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
-												<span class="checkbox"></span>
 										</label>										
 									</td>
 									<td>
-										<label class="option option-primary">
-												<input type="checkbox" name="1_2" id="1_2" value="1"> 
-												<span class="checkbox"></span>
+										<label for="1_2">
+												<input type="checkbox" name="1_2" id="1_2" value="1" checked="checked"> 
 										</label>										
 									</td>
 								</tr>
