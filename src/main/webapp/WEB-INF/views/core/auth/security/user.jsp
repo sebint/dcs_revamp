@@ -167,7 +167,7 @@
 											<spring:bind path="strFirstName">
 											   <c:if test="${status.error}">
 											   		<span class="field-error">
-														<form:errors path="strFirstName" />
+														<form:errors path="strFirstName" /> 
 													</span>
 											   </c:if>
 											   <c:if test="${not status.error}">
@@ -339,12 +339,9 @@
 						</div>
 		    </div>
 		  </div>
-<!-- 		  <s:if test="fieldErrors.containsKey('strFirstName') || fieldErrors.containsKey('strLastName') || fieldErrors.containsKey('strEmail') || fieldErrors.containsKey('intRoleId') || fieldErrors.containsKey('strDeptName') || fieldErrors.containsKey('strUserName')">
-		  	<s:hidden name="has_error" id="has_field_error" value="1"></s:hidden>
-		  </s:if>
-		  <s:else>
-		  	<s:hidden name="has_error" id="has_field_error" value="0"></s:hidden>
-		  </s:else> -->
+		  <spring:hasBindErrors name="user">
+		 	 <input type="hidden" name="has_error" id="has_field_error" value="1">
+		  </spring:hasBindErrors>
 		</div>
 		<div class="modal fade" id="password_reset_modal" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-md">

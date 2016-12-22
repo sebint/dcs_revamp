@@ -58,5 +58,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private String roleStringConvertion(String role){
 		return ("Administrator".equals(role))?"ADMIN":((("Gate Keeper".equals(role))?"GK":("Information Manager".equals(role)?"IM":("PDO".equals(role)?"PDO":role))));
 	}
+	
 
 }
