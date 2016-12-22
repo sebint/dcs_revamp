@@ -83,11 +83,11 @@
                                  <div class="forum-icon">
                                      <i class="fa fa-users"></i>
                                   </div>
-                                  <span class="forum-item-title">Manage Users</span>
-                                  <div class="forum-sub-title">Create new user along with the permissions / Remove existing user.</div>
+                                  <span class="forum-item-title"><spring:message code="user.header"/></span>
+                                  <div class="forum-sub-title"><spring:message code="user.subheader"/></div>
                              </div>
                              <div class="col-md-3">
-	        	           		<button type="button" data-toggle="modal" data-target="#user_modal" class="btn btn-success br3 fw600 pull-right"><span class="fa fa-plus"></span> Add New User </button>
+	        	           		<button type="button" data-toggle="modal" data-target="#user_modal" class="btn btn-success br3 fw600 pull-right"><span class="fa fa-plus"></span> <spring:message code="user.add"/> </button>
 	        	           	</div>	
 	        	 		</div>
 	        	 	</div>
@@ -164,57 +164,62 @@
 										</div>
 										<!-- .section-divider -->
 										<div class="col-md-6 pl0">
-<!-- 											<s:if test="fieldErrors.get('strFirstName').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strFirstName').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
-												<span class="field-alt fw600">
-													First name <div class="ico-help" title="First Name of the user."><i class="fa fa-question-circle"></i></div>
-												</span>													
-<!-- 											</s:else> -->
-											<div class="section">												
-												<label for="strFirstName" class="field prepend-icon"> 														
-												   	<form:input path="strFirstName" id="strFirstName" cssClass="gui-input br5" placeholder="First Name"></form:input>
-														<label for="strFirstName" class="field-icon"> 
-															<i class="glyphicon glyphicon-pencil"></i>
-														</label>												
-												</label>
-											</div>
+											<spring:bind path="strFirstName">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strFirstName" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
+											   		<span class="field-alt fw600">
+														<spring:message code="user.firstname"/> <div class="ico-help" title="First Name of the user."><i class="fa fa-question-circle"></i></div>
+													</span>	
+											   </c:if>								
+												<div class="section">												
+													<label for="strFirstName" class="field prepend-icon"> 														
+													   	<form:input path="strFirstName" id="strFirstName" cssClass="gui-input br5" placeholder="First Name"></form:input>
+															<label for="strFirstName" class="field-icon"> 
+																<i class="glyphicon glyphicon-pencil"></i>
+															</label>												
+													</label>
+												</div>
+											</spring:bind>	
 										</div>
-										<div class="col-md-6 pr0">
-<!-- 											<s:if test="fieldErrors.get('strLastName').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strLastName').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+										<div class="col-md-6 pr0">																		 
+											<spring:bind path="strLastName">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strLastName" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Last name <div class="ico-help" title="Last Name of the user."><i class="fa fa-question-circle"></i></div>
-												</span>																							
-<!-- 											</s:else>																		 -->
-											<div class="section">
-												<label for="strLastName" class="field prepend-icon"> 
-												   <form:input path="strLastName" id="strLastName" cssClass="gui-input br5" placeholder="Last Name"></form:input>
-														<label for="strLastName" class="field-icon"> 
-															<i class="glyphicon glyphicon-pencil"></i>
-														</label>
-												</label>
-											</div>
+													<spring:message code="user.lastname"/> <div class="ico-help" title="Last Name of the user."><i class="fa fa-question-circle"></i></div>
+												</span>	
+											   </c:if>	
+												<div class="section">
+													<label for="strLastName" class="field prepend-icon"> 
+													   <form:input path="strLastName" id="strLastName" cssClass="gui-input br5" placeholder="Last Name"></form:input>
+															<label for="strLastName" class="field-icon"> 
+																<i class="glyphicon glyphicon-pencil"></i>
+															</label>
+													</label>
+												</div>
+											</spring:bind>
 										</div>
 										<!-- <div class="col-md-12">		 -->
-										<div class="col-md-6 pl0">
-<!-- 											<s:if test="fieldErrors.get('strEmail').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strEmail').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+										<div class="col-md-6 pl0">																				 
+											<spring:bind path="strEmail">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strEmail" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Email address <div class="ico-help" title="Current active Email Address."><i class="fa fa-question-circle"></i></div>
-												</span>																								
-<!-- 											</s:else>																				 -->
+													<spring:message code="user.email"/> <div class="ico-help" title="Current active Email Address."><i class="fa fa-question-circle"></i></div>
+												</span>	
+											   </c:if>	
 											<div class="section">
 												<label for="strEmail" class="field prepend-icon"> 
 												<form:input path="strEmail" id="strEmail" cssClass="gui-input br5" placeholder="Email Address (Ex:Muhammadhilmi@mrt.com)"/>
@@ -223,78 +228,85 @@
 													</label>
 												</label>										
 											</div>
+											</spring:bind>
 										</div>
 										<!-- end section -->
 										<div class="col-md-6 pr0">
-<!-- 											<s:if test="fieldErrors.get('intRoleId').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('intRoleId').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+											<spring:bind path="intRoleId">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="intRoleId" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Select role <div class="ico-help" title="User Role."><i class="fa fa-question-circle"></i></div>
-												</span>																									
-<!-- 											</s:else>																				 -->
-											<div class="section">
-					                          <label class="field select">
-					                          <span></span>
-					                          	<form:select path="intRoleId">
-					                          		<form:option value="-1" label="Please Select" selected="selected"/>
-      												<form:options items="${rolesOptions}" itemValue="intRoleId" itemLabel="strRoleName"/>
-					                          	</form:select>
-					                            <i class="arrow double"></i>
-					                          </label>				                          
-					                        </div>
+													<spring:message code="user.role"/> <div class="ico-help" title="User Role."><i class="fa fa-question-circle"></i></div>
+												</span>	
+											   </c:if>	
+												<div class="section">
+						                          <label class="field select">
+						                          <span></span>
+						                          	<form:select path="intRoleId">
+						                          		<form:option value="" label="Please Select" selected="selected"/>
+	      												<form:options items="${rolesOptions}" itemValue="intRoleId" itemLabel="strRoleName"/>
+						                          	</form:select>
+						                            <i class="arrow double"></i>
+						                          </label>				                          
+						                        </div>
+					                        </spring:bind>
 											<!-- end section -->
 										</div>
 										<div class="col-md-6 pl0">
-<!-- 											<s:if test="fieldErrors.get('strDeptName').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strDeptName').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+											<spring:bind path="strDeptName">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strDeptName" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Department <div class="ico-help" title="Department user belongs to."><i class="fa fa-question-circle"></i></div>
-												</span>														
-<!-- 											</s:else>																				 -->
-											<div class="section">
-												<label for="strDeptName" class="field prepend-icon"> 
-													<form:input path="strDeptName" id="strDeptName" cssClass="gui-input br5" placeholder="Department (Ex:Strategic & Planning)"></form:input>
-													<label for="strDeptName" class="field-icon"> 
-														<i class="fa fa-university"></i>
-													</label>
-												</label>													
-											</div>
+													<spring:message code="user.department"/> <div class="ico-help" title="Department user belongs to."><i class="fa fa-question-circle"></i></div>
+												</span>	
+											   </c:if>	
+												<div class="section">
+													<label for="strDeptName" class="field prepend-icon"> 
+														<form:input path="strDeptName" id="strDeptName" cssClass="gui-input br5" placeholder="Department (Ex:Strategic & Planning)"></form:input>
+														<label for="strDeptName" class="field-icon"> 
+															<i class="fa fa-university"></i>
+														</label>
+													</label>													
+												</div>
+											</spring:bind>
 										</div>
 										<!-- end section -->
 										<div class="col-md-6 pr0">
-<!-- 											<s:if test="fieldErrors.get('strUserName').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strUserName').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+											<spring:bind path="strUserName">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strUserName" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Username (Login name) <div class="ico-help" title="Username (This is used for login)."><i class="fa fa-question-circle"></i></div>
-												</span>												
-<!-- 											</s:else>																				 -->
-											<div class="section">
-												<label for="strUserName" class="field prepend-icon">
-													<form:input path="strUserName" id="strUserName" cssClass="gui-input br5" placeholder="Username"></form:input> 
-													<label for="strUserName" class="field-icon"> 
-														<i class="fa fa-user"></i>
-													</label>
-												</label>													
-											</div>
+													<spring:message code="user.username"/> <div class="ico-help" title="Username (This is used for login)."><i class="fa fa-question-circle"></i></div>
+												</span>
+											   </c:if>	
+												<div class="section">
+													<label for="strUserName" class="field prepend-icon">
+														<form:input path="strUserName" id="strUserName" cssClass="gui-input br5" placeholder="Username"></form:input> 
+														<label for="strUserName" class="field-icon"> 
+															<i class="fa fa-user"></i>
+														</label>
+													</label>													
+												</div>
+											</spring:bind>
 											<!-- end section -->
 										</div>
 										<div class="col-md-6 pr0">
 											<div class="section">
 												<label for="boolPwdChange pr0">
 		                              				<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1" checked="checked"/>
-		                              				Change password on next login.
+		                              				<spring:message code="user.request.change.password"/>
 		                              			</label>			                              			
 		                              		</div>
 										</div>
@@ -304,10 +316,10 @@
 											<div class="section">
 												<label class="boolLockPwd pr0">
 		                              				<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1" checked="checked"/>
-		                              				Activate Account Lockout Threshold after                        
+		                              				<spring:message code="user.request.activate1"/>                        
 		                              			</label>
 		                              			<form:input path="intPwdAttempt" id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="5" placeholder="5" readonly="true"></form:input>
-		                              			<span>attempts.</span>	
+		                              			<span><spring:message code="user.request.activate2"/></span>	
 		                              		</div>
 										</div>
 										<!-- end section -->

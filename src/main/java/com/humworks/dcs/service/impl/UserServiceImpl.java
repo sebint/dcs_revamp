@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.humworks.dcs.dao.UserDao;
+import com.humworks.dcs.dao.UserRoleDao;
 import com.humworks.dcs.entities.User;
+import com.humworks.dcs.entities.UserRole;
 import com.humworks.dcs.service.UserService;
 
 @Service("userService")
@@ -20,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private UserRoleDao userRoleDao;
 	
 	@Autowired
 	private Environment environment;
@@ -32,7 +37,17 @@ public class UserServiceImpl implements UserService {
 	       user.setStrPassword(passwordEncoder.encode(environment.getProperty("default_password")));
 	       user.setIntCreatedBy(1);
 	       user.setIntModifiedBy(1);
-	       userDao.save(user);
+	       int uid = userDao.saveUser(user);
+	       
+	       //User Role Insertion
+	       
+	       UserRole userRole = new UserRole();
+	       userRole.setIntUserId(uid);
+	       userRole.setIntRoleId(user.getIntRoleId());
+	       userRole.setIntCreatedBy(1);
+	       userRole.setIntModifiedBy(1);
+	       userRoleDao.saveUserRole(userRole);
+	       
 	}
 
 	@Override

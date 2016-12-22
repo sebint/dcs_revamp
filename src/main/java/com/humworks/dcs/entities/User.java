@@ -23,6 +23,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_user_master")
@@ -38,18 +40,22 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer intUserId;
 
+	@NotEmpty
 	@Column(name = "FIRST_NAME")
 	private String strFirstName;
 
 	@Column(name = "LAST_NAME")
 	private String strLastName;
 
+	@NotEmpty
 	@Column(name = "USER_NAME")
 	private String strUserName;
-
+	
 	@Column(name = "USER_PASS")
 	private String strPassword;
 
+	@NotEmpty 
+	@Email
 	@Column(name = "EMAIL")
 	private String strEmail;
 
@@ -62,6 +68,7 @@ public class User implements Serializable {
 			@JoinColumn(name = "ROLE_MASTER_ID") })
 	private Set<Role> role = new HashSet<Role>();
 
+	@NotEmpty
 	@Column(name = "USER_DEPT_NAME")
 	private String strDeptName;
 

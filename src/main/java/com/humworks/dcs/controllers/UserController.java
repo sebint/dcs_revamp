@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.humworks.dcs.entities.Role;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.service.RoleService;
 import com.humworks.dcs.service.UserService;
+import com.humworks.dcs.validators.UserValidators;
 
 @Controller	
 @RequestMapping("/security/user")
@@ -29,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+	private UserValidators userValidators;
 
 	@GetMapping(value={"/","list"})
 	public String getUser(Model model){
@@ -45,15 +50,16 @@ public class UserController {
 	
 	@PostMapping("add")
 	public String add(@Valid @ModelAttribute User user, BindingResult result){
-		if (result.hasErrors()) {
-			return page;
-		}
 		try{
+			userValidators.validate(user, result);
+			if (result.hasErrors()) {
+				return page;
+			}
 			userService.save(user);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
-		return page;
+		return "redirect:/security/user/";
 	}
 	
 	@PostMapping("update")

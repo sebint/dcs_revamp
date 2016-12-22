@@ -16,8 +16,8 @@ import com.humworks.dcs.entities.User;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	@Override
-	public void save(User user) {
-		 persist(user);
+	public int saveUser(User user) {
+		 return save(user);
 	}
 
 	@Override
