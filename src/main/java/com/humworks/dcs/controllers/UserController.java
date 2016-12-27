@@ -33,11 +33,6 @@ public class UserController {
 	
 	@Autowired
 	private UserValidators userValidators;
-
-	@GetMapping(value={""})
-	public String get(){
-		return "redirect:/security/user/";
-	}
 	
 	@GetMapping(value={"/","list"})
 	public String getUser(Model model){
@@ -118,4 +113,13 @@ public class UserController {
 		return userService.selectAll();
 	}
 	
+	/*-------------------------------------------------------
+	 * 	To Avoid invalid url 
+	 * ------------------------------------------------------
+	 * */
+	
+	@GetMapping(value={"","add/**","add"})
+	public String get(){
+		return "redirect:/security/user/";
+	}
 }
