@@ -2,6 +2,7 @@ package com.humworks.dcs.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.humworks.dcs.entities.Login;
+import com.humworks.dcs.entities.SpringUser;
 import com.humworks.dcs.service.UserService;
 
 @Controller
@@ -49,7 +51,12 @@ public class LoginController {
 	
 
 	@GetMapping("dashboard")
-	public String dashboard() {
+	public String dashboard(HttpSession session) {	
+		if(session.getAttribute("DCSUID") == null){
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			SpringUser currentUser = (SpringUser) authentication.getPrincipal();
+			session.setAttribute("DCSUID", currentUser.getUserId());
+		}
 		return "auth/dashboard";
 	}
 	

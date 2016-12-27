@@ -34,6 +34,11 @@ public class UserController {
 	@Autowired
 	private UserValidators userValidators;
 
+	@GetMapping(value={""})
+	public String get(){
+		return "redirect:/security/user/";
+	}
+	
 	@GetMapping(value={"/","list"})
 	public String getUser(Model model){
 		return page;
