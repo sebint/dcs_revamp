@@ -7,6 +7,10 @@ import com.humworks.dcs.entities.User;
 public interface UserDao {
 
 	int saveUser(User user);
+	
+	void updateUser(User user);
+	
+	void deleteUser(User user);
     
     User findById(Integer uid);
      

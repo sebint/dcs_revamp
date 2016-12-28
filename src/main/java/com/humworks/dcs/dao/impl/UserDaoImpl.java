@@ -38,5 +38,17 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		criteria.addOrder(Order.desc("intUserId"));
 		return (ArrayList<User>) criteria.list();
 	}
+
+	@Override
+	public void updateUser(User user) {
+		update(user);
+		
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		delete(user);
+		
+	}
 	
 }

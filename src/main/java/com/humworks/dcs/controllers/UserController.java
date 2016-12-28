@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,20 +64,25 @@ public class UserController {
 		return "redirect:/security/user/";
 	}
 	
-	@PostMapping("update")
-	public String update(@Valid @ModelAttribute User user, BindingResult result){
-		if (result.hasErrors()) {
-			return page;
+	@PostMapping("update/{intUserId}")
+	public String update(@Valid @ModelAttribute User user, @PathVariable("intUserId") Integer intUserId, BindingResult result){
+		try{
+			if (result.hasErrors()) {
+				return page;
+			}
+			userService.update(user);
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
-		return page;
+		return "redirect:/security/user/";
 	}
 	
-	@PostMapping("delete")
-	public String delete(@Valid @ModelAttribute User user, BindingResult result){
+	@PostMapping("delete/{intUserId}")
+	public String delete(@Valid @ModelAttribute User user, @PathVariable("intUserId") Integer intUserId, BindingResult result){
 		if (result.hasErrors()) {
 			return page;
 		}
-		
+		userService.delete(user);
 		return page;
 	}
 	

@@ -65,4 +65,20 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectAll();
 	}
 
+	@Override
+	public void update(User user) {
+		try{
+			userDao.updateUser(user);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void delete(User user) {
+		userDao.deleteUser(user);
+		
+	}
+
 }

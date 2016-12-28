@@ -33,8 +33,16 @@ public abstract class AbstractDao<PrimaryKey extends Serializable, T> {
 		getSession().persist(entity);
 	}
 	
-	public int save(T entity){
-		return (int) getSession().save(entity);
+	public void update(T entity){
+		getSession().update(entity);
+	}
+	
+	public void saveOrUpdate(T entity){
+		getSession().saveOrUpdate(entity);
+	}
+	
+	public Integer save(T entity){
+		return (Integer) getSession().save(entity);
 	}
 	
 	public void delete(T entity){
