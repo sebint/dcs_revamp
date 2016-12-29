@@ -10808,8 +10808,9 @@ a.list-group-item:focus {
 .panel {
   position: relative;
   margin-bottom: 20px;
-  background-color: #ffffff;
-  border-radius: 2px;
+  background: #fafafa;
+  border-radius: 3px;
+  border: 1px solid #e0e2e3;
 }
 .panel.panel-transparent {
   background: none;
