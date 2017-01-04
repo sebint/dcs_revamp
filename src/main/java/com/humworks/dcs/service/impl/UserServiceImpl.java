@@ -2,6 +2,8 @@ package com.humworks.dcs.service.impl;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -32,22 +34,24 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private HttpSession session;
+	
 	@Override
 	public void save(User user) {
 	       user.setStrPassword(passwordEncoder.encode(environment.getProperty("default_password")));
-	       user.setIntCreatedBy(1);
-	       user.setIntModifiedBy(1);
-	       int uid = userDao.saveUser(user);
-	       
-	       //User Role Insertion
-	       
-	       UserRole userRole = new UserRole();
-	       userRole.setIntUserId(uid);
-	       userRole.setIntRoleId(user.getIntRoleId());
-	       userRole.setIntCreatedBy(1);
-	       userRole.setIntModifiedBy(1);
-	       userRoleDao.saveUserRole(userRole);
-	       
+	       user.setIntCreatedBy((Integer)session.getAttribute("DCSUID"));
+	       user.setIntModifiedBy((Integer)session.getAttribute("DCSUID"));
+	       System.out.println(session.getAttribute("DCSUID"));
+	       Integer uid = userDao.saveUser(user);
+	       if(uid!=null){
+		       UserRole userRole = new UserRole();
+		       userRole.setIntUserId(uid);
+		       userRole.setIntRoleId(user.getIntRoleId());
+		       userRole.setIntCreatedBy((Integer)session.getAttribute("DCSUID"));
+		       userRole.setIntModifiedBy((Integer)session.getAttribute("DCSUID"));
+		       userRoleDao.saveUserRole(userRole);
+	       }	       
 	}
 
 	@Override
@@ -66,11 +70,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User user) {
+	public Integer update(User user) {
 		try{
-			userDao.updateUser(user);
+		   user.setIntModifiedBy((Integer)session.getAttribute("DCSUID"));
+		   if(userDao.updateUser(user)>0){
+		       UserRole userRole = new UserRole();
+		       userRole.setIntUserId(user.getIntUserId());
+		       userRole.setIntRoleId(user.getIntRoleId());
+		       userRole.setIntModifiedBy((Integer)session.getAttribute("DCSUID"));
+		       if(userRoleDao.updateUserRole(userRole)>0){
+		    	   return 1;
+		       }
+		   }
+//		   userDao.transactionRollback();
+		   return 0;
 		}catch(Exception ex){
 			ex.printStackTrace();
+			return 0;
 		}
 		
 	}
@@ -79,6 +95,11 @@ public class UserServiceImpl implements UserService {
 	public void delete(User user) {
 		userDao.deleteUser(user);
 		
+	}
+
+	@Override
+	public Integer findUid(String username) {		
+		return userDao.findUid(username);
 	}
 
 }

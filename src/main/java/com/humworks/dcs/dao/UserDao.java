@@ -6,15 +6,19 @@ import com.humworks.dcs.entities.User;
 
 public interface UserDao {
 
-	int saveUser(User user);
+	Integer saveUser(User user);
 	
-	void updateUser(User user);
+	Integer updateUser(User user);
 	
 	void deleteUser(User user);
     
+	Integer findUid(String username);
+	
     User findById(Integer uid);
      
     User findByUsername(String username);
     
     ArrayList<User> selectAll();
+    
+    void transactionRollback();
 }

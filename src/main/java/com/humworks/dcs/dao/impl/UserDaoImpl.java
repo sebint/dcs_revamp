@@ -1,10 +1,13 @@
 package com.humworks.dcs.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 
 import com.humworks.dcs.dao.AbstractDao;
@@ -15,7 +18,7 @@ import com.humworks.dcs.entities.User;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	@Override
-	public int saveUser(User user) {
+	public Integer saveUser(User user) {
 		 return save(user);
 	}
 
@@ -23,31 +26,77 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	public User findById(Integer uid) {
 		return getByKey(uid);
 	}
-
+	
 	@Override
 	public User findByUsername(String username) {
-        Criteria crit = createEntityCriteria();
-        crit.add(Restrictions.eq("strUserName", username));
-        return (User) crit.uniqueResult();
+		try{
+			CriteriaBuilder cb = createCriteriaQuery();
+			CriteriaQuery<User> cq = cb.createQuery(User.class);
+			Root<User> root = cq.from(User.class);
+			cq.where(cb.equal(root.get("strUserName"), username));
+	        return (User) getSession().createQuery(cq).getSingleResult();
+		}catch(javax.persistence.NoResultException nr){
+			return null;
+		}catch(java.lang.NullPointerException np){
+			return null;
+		}catch(Exception ex){
+			return null;
+		}
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public ArrayList<User> selectAll() {
-		Criteria criteria = createEntityCriteria();
-		criteria.addOrder(Order.desc("intUserId"));
-		return (ArrayList<User>) criteria.list();
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> root = cq.from(User.class);
+		cq.select(root);
+		cq.orderBy(cb.desc(root.get("intUserId")));
+		return (ArrayList<User>) getSession().createQuery(cq).getResultList();
 	}
 
 	@Override
-	public void updateUser(User user) {
-		update(user);
+	public Integer updateUser(User user) {
+		
+		String hql = "UPDATE User SET strFirstName = :strFirstName,strLastName =:strLastName, "
+					+ "strUserName =:strUserName, strEmail = :strEmail, strDeptName= :strDeptName, "
+					+ "boolPwdChange =:boolPwdChange, boolLockPwd =:boolLockPwd, "
+					+ "intPwdAttempt =:intPwdAttempt, intModifiedBy =:intModifiedBy, dtDateModified =:dtDateModified "
+					+ "WHERE intUserId = :intUserId";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("strFirstName", user.getStrFirstName());
+		query.setParameter("strLastName", user.getStrLastName());
+		query.setParameter("strUserName", user.getStrUserName());
+		query.setParameter("strEmail", user.getStrEmail());
+		query.setParameter("strDeptName", user.getStrDeptName());
+		query.setParameter("boolPwdChange", user.getBoolPwdChange());
+		query.setParameter("boolLockPwd", user.getBoolLockPwd());
+		query.setParameter("intPwdAttempt", user.getIntPwdAttempt());
+		query.setParameter("intModifiedBy", user.getIntModifiedBy());
+		query.setParameter("dtDateModified", new Date());
+		query.setParameter("intUserId", user.getIntUserId());
+		return query(query);		
+	}
+	
+	@Override
+	public void deleteUser(User user) {
+		delete(user);
 		
 	}
 
 	@Override
-	public void deleteUser(User user) {
-		delete(user);
+	public Integer findUid(String username) {
+		String hql = "SELECT intUserId FROM User WHERE strUserName =:strUserName";
+		Query query = getSession().createQuery(hql).setParameter("strUserName", username);
+		Integer uid = (Integer) query.getSingleResult();
+		if(uid != null){
+			return uid;
+		}
+		return null;
+	}
+
+	@Override
+	public void transactionRollback() {
+		getSession().getTransaction().rollback();
 		
 	}
 	

@@ -76,7 +76,14 @@
 	          <div class="col-md-12">
 	            <div class="panel panel-visible" id="spy1">
                 	<div class="panel-body">
-		                    <spring:url value="/security/user/new" var="url_alt"/>
+                		<c:choose>
+                			<c:when test="${!empty(strUserName)}">
+                				<spring:url value="/security/user/${strUserName}" var="url_alt"/>
+                			</c:when>
+                			<c:otherwise>
+                				<spring:url value="/security/user/new" var="url_alt"/>
+                			</c:otherwise>
+                		</c:choose>
 							<div class="mpxd theme-primary mw1000 center-block">
 								<form:form method="post" action="${url_alt}" id="user-form" modelAttribute="user">
 									<div class="panel-body pt0">

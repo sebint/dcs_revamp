@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.humworks.dcs.entities.Role;
 import com.humworks.dcs.entities.User;
+import com.humworks.dcs.exception.InternalServerException;
+import com.humworks.dcs.exception.ResourceNotFoundException;
 import com.humworks.dcs.service.RoleService;
 import com.humworks.dcs.service.UserService;
 import com.humworks.dcs.validators.UserValidators;
@@ -65,6 +67,12 @@ public class UserController {
 			if (result.hasErrors()) {
 				return add;
 			}
+			if(user.getBoolPwdChange()==null){
+				user.setBoolPwdChange(0);
+			}
+			if(user.getBoolLockPwd()==null){
+				user.setBoolLockPwd(0);
+			}
 			userService.save(user);
 			redirectAttributes.addFlashAttribute("message", "Successfull");
 		}catch(Exception ex){
@@ -72,8 +80,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
 			return "redirect:/security/user/new";
 		}
-		if(mode.equals("save")){
-			
+		if(mode.equals("save")){			
 			return "redirect:/security/user/";
 		}else{
 			return "redirect:/security/user/new";
@@ -81,22 +88,40 @@ public class UserController {
 	}
 	
 	@GetMapping("{strUserName}")
-	public String view(@PathVariable("strUserName") String strUserName, Model model){
-		model.addAttribute("user", userService.findByUsername(strUserName));
+	public String view(@PathVariable("strUserName") String strUserName, Model model)throws Exception{
+		final User user = userService.findByUsername(strUserName);
+		if(user==null){
+			throw new ResourceNotFoundException(strUserName);
+		}
+		model.addAttribute("user", user);
 		return add;
 	}
 	
-	@PostMapping("update/{intUserId}")
-	public String update(@PathVariable("intUserId") Integer intUserId,@Valid @ModelAttribute User user, BindingResult result){
+	@PostMapping("{strUserName}")
+	public String update(@PathVariable String strUserName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute User user, BindingResult result) throws Exception {
+		if (result.hasErrors()) {
+			return page;
+		}
 		try{
-			if (result.hasErrors()) {
-				return page;
+			user.setIntUserId(userService.findUid(strUserName));
+			if(user.getIntUserId()!=null){
+				if(userService.update(user)>0){
+					redirectAttributes.addFlashAttribute("message", "Successfull");
+				}else{
+					redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
+				}
+			}else{
+				throw new InternalServerException(new Exception("No Primary Key found for User"));
 			}
-			userService.update(user);
 		}catch(Exception ex){
 			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
 		}
-		return "redirect:/security/user/";
+		if(mode.equals("save")){			
+			return "redirect:/security/user/";
+		}else{
+			return "redirect:/security/user/new";
+		}
 	}
 	
 	@PostMapping("delete/{intUserId}")
@@ -122,9 +147,7 @@ public class UserController {
 			return "auth/security/change_password";
 		}
 		return "auth/security/change_password";
-	}
-	
-	
+	}		
 	
 	@ModelAttribute("user")
 	public User getUser(){

@@ -12,10 +12,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tbl_user_role_master")
@@ -43,17 +44,17 @@ public class UserRole implements Serializable {
 	@Column(name = "CREATED_BY", updatable = false)
 	private Integer intCreatedBy;
 
-	@Column(name = "CREATED_DATE", updatable = false)
+	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
+	@Column(name = "CREATED_DATE", updatable = false)
 	private Date dtDateCreated;
 
 	@Column(name = "MODIFIED_BY")
 	private Integer intModifiedBy;
 
-	@Column(name = "MODIFIED_DATE")
+	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
+	@Column(name = "MODIFIED_DATE")
 	private Date dtDateModified;
 
 	public Integer getIntUserRoleId() {

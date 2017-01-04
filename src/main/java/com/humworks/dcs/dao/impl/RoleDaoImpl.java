@@ -2,11 +2,12 @@ package com.humworks.dcs.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.humworks.dcs.dao.AbstractDao;
@@ -15,19 +16,20 @@ import com.humworks.dcs.entities.Role;
 
 @Repository("roleDao")
 public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao {
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public List<Role> findAll() {
-		
-		Criteria criteria = createEntityCriteria();
-		criteria.setProjection(Projections.projectionList()
-				.add(Projections.property("intRoleId"), "intRoleId")
-				.add(Projections.property("strRoleName"), "strRoleName"))
-		.setResultTransformer(Transformers.aliasToBean(Role.class));
-		criteria.addOrder(Order.asc("strRoleName"));
-		List<Role> roles = criteria.list();
-		return roles;
+		try{
+			CriteriaBuilder cb = createCriteriaQuery();
+			CriteriaQuery<Role> cq = cb.createQuery(Role.class);
+			Root<Role> root = cq.from(Role.class);
+			cq.select(root);
+			cq.orderBy(cb.asc(root.get("strRoleName")));
+			return (List<Role>) getSession().createQuery(cq).getResultList();
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

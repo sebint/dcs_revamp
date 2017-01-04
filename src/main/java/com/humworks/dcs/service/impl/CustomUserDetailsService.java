@@ -22,7 +22,7 @@ import com.humworks.dcs.service.UserService;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserService userService;
+	private UserService userService;	
 
 	@Override
 	@Transactional(readOnly = true)

@@ -1898,9 +1898,9 @@ table.dataTable tr.odd {
 }
 /* Table Header Changes */
 table.dataTable thead th {
-  	background: #b5d4dd;
+  	background: #edf2ef; /* #b5d4dd; */
 	padding: 10px;
-	color: #495154;
+	color: #2999BD; /* #495154; */
 }
 /* Table Footer Changes */
 table.dataTable tfoot th {
@@ -7814,11 +7814,11 @@ th {
 }
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-  background-color: #e4eff0;
+  /* background-color: #f0fafb; */ /* #e4eff0; */
 }
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
-  background-color: #cbeae7;
+  background-color: #e9eced; /* #cbeae7; */
 }
 .table-curved > tbody > tr > td:first-child {
   border-radius: 4px 0 0 4px;
@@ -10807,7 +10807,7 @@ a.list-group-item:focus {
 ==================================================== */
 .panel {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background: #fafafa;
   border-radius: 3px;
   border: 1px solid #e0e2e3;
@@ -17416,11 +17416,13 @@ body.sb-top #sidebar_left .sidebar-menu > li > ul {
   left: 0;
   top: 100%;
  /*  width: 195px; */
- width : 284px;
+  width : 284px;
   height: auto;
   border-left: 0;
   padding-bottom: 2px;
   overflow: hidden;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 body.sb-top #sidebar_left .sidebar-menu > li > ul > li {
   overflow: hidden;
@@ -21948,15 +21950,18 @@ blockquote.blockquote-dark {
   color: #2363b6;
 }
 .alert-success {
-	background-color: #ddfbf3;
+/* 	background-color: #ddfbf3;
 	border-color: #bafbdc;
-	color: #1d9d74;
+	color: #1d9d74; */
+	background-color: #31b064;
+	border-color: #0e9957;
+	color: #DDE4E1;
 }
 /* .alert-success span {
   font-weight: 600;
 } */
 .alert-success .close {
-	color: #1d9d74;
+	color: #000;
 }
 .alert-success .close:hover {
 	color: #408080;
@@ -22077,12 +22082,15 @@ blockquote.blockquote-dark {
   color: #e19b0b;
 }
 .alert-danger {
-  background-color: #fbeeed;
+/*   background-color: #fbeeed;
   border-color: #f7d8dd;
-  color: #d9534f;
+  color: #d9534f; */
+  background-color: #ef6f65;
+  border-color: #e14962;
+  color: #eae3e3;
 }
 .alert-danger .close {
-  color: #d9534f;
+  color: #000;
 }
 .alert-danger .close:hover {
   color: #cd302c;

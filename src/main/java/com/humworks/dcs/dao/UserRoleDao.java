@@ -6,4 +6,8 @@ public interface UserRoleDao {
 
 	Integer saveUserRole(UserRole userRole);
 	
+	Integer updateUserRole(UserRole userRole);
+	
+	UserRole findById(Integer urid);
+	
 }

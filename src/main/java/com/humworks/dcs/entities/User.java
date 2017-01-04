@@ -19,18 +19,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_user_master")
-@DynamicInsert(true)
-@DynamicUpdate(true)
-@SelectBeforeUpdate(true)
+@DynamicInsert
+@DynamicUpdate
+@SelectBeforeUpdate
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -87,17 +88,17 @@ public class User implements Serializable {
 	@Column(name = "CREATED_BY", updatable = false)
 	private Integer intCreatedBy;
 
-	@Column(name = "CREATED_DATE", updatable = false)
+	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
+	@Column(name = "CREATED_DATE", updatable = false)
 	private Date dtDateCreated;
 
 	@Column(name = "MODIFIED_BY")
 	private Integer intModifiedBy;
 
+	@UpdateTimestamp
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
 	private Date dtDateModified;
 
 	@Transient

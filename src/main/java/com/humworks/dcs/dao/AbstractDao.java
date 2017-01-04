@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -49,6 +52,10 @@ public abstract class AbstractDao<PrimaryKey extends Serializable, T> {
 		getSession().delete(entity);
 	}
 	
+	public Integer query(Query query){
+		return query.executeUpdate();
+	}
+	
 	public ArrayList<T> listAllByQuery(String query){
 		@SuppressWarnings("unchecked")
 		ArrayList<T> list = (ArrayList<T>) getSession().createQuery(query).getResultList();
@@ -60,6 +67,8 @@ public abstract class AbstractDao<PrimaryKey extends Serializable, T> {
         return getSession().createCriteria(persistentClass);
     }
 	
-	
+	protected CriteriaBuilder createCriteriaQuery(){
+		return getSession().getCriteriaBuilder();
+	}
 
 }
