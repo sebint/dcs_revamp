@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       
       http.sessionManagement()
       		.maximumSessions(1).expiredUrl("/login?r=sc&expired")
-      	.and().sessionFixation().migrateSession();
+      	.and().sessionFixation().migrateSession().invalidSessionUrl("/login?r=sc&expired");
       
       http.logout()
 		.logoutUrl("/logout")
