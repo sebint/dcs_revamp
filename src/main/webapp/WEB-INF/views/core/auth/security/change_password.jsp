@@ -21,49 +21,6 @@
 	    <!-- Start: Content-Wrapper -->
 	    <section id="content_wrapper">
 	
-	      <!-- Start: Topbar-Dropdown -->
-	     <div id="topbar-dropmenu">
-	        <div class="topbar-menu row">
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-inbox"></span>
-	              <p class="metro-title">Messages</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-user"></span>
-	              <p class="metro-title">Users</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-headphones"></span>
-	              <p class="metro-title">Support</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon fa fa-gears"></span>
-	              <p class="metro-title">Settings</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-facetime-video"></span>
-	              <p class="metro-title">Videos</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-picture"></span>
-	              <p class="metro-title">Pictures</p>
-	            </a>
-	          </div>
-	        </div>
-	      </div>
-	      <!-- End: Topbar-Dropdown -->
-	
 	      <!-- Start: Topbar -->
 	      <header id="topbar">
 	        <div class="topbar-left">
@@ -106,31 +63,33 @@
 	            <div class="panel bt-blue">
 	                <div class="panel-body ">
 	                	<div class="mpxd theme-primary mw1000 center-block">
-			                <s:form method="post" action="user/change/1" namespace="/security" id="password-change-form">
+			                <form:form method="post" action="user/change/1" modelAttribute="reset" id="password-change-form">
 			                  <div class="panel-body p0">
 			                    <div class="section-divider mv40" id="spy4">
 			                      <span> Provide the following information to change Password </span>
 			                    </div>
 			                    <!-- .section-divider -->
-								<span class="field-alt fw600">
-									Current Password <div class="ico-help" title="Current password of your account."><i class="fa fa-question-circle"></i></div>
-								</span>				                    
-			                    <div class="section">
-			                      <label for="strExPassword" class="field prepend-icon">
-			                        <s:password name="strExPassword" id="strExPassword" cssClass="gui-input br5" placeholder="Current Password"></s:password>
-			                        <label for="strExPassword" class="field-icon">
-			                          <i class="fa fa-lock"></i>
-			                        </label>
-			                      </label>
-			                    </div>
+			                     <div class="col-md-12">
+									<span class="field-alt fw600">
+										Current Password <div class="ico-help" title="Current password of your account."><i class="fa fa-question-circle"></i></div>
+									</span>				                    
+				                    <div class="section">
+				                      <label for="strExPassword" class="field prepend-icon">
+				                        <form:password path="strExPassword" id="strExPassword" cssClass="gui-input br5" placeholder="Current Password"/>
+				                        <label for="strExPassword" class="field-icon">
+				                          <i class="fa fa-lock"></i>
+				                        </label>
+				                      </label>
+				                    </div>
+			                     </div>
 				                 <!-- <div class="col-md-12">		 -->
-					                 <div class="col-md-6 pl0">
+					                 <div class="col-md-6">
 										<span class="field-alt fw600">
 											New Password <div class="ico-help" title="New Password for your account."><i class="fa fa-question-circle"></i></div>
 										</span>						                 				
 					                    <div class="section">
 					                      <label for="strPassword" class="field prepend-icon">
-					                       	<s:password name="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="New Password"></s:password>
+					                       	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="New Password"/>
 					                        <label for="strPassword" class="field-icon">
 					                          <i class="fa fa-lock"></i>
 					                        </label>
@@ -138,13 +97,13 @@
 					                    </div>
 					                 </div>
 				                    	<!-- end section -->
-									 <div class="col-md-6 pr0">	
+									 <div class="col-md-6">	
 										<span class="field-alt fw600">
 											Confirm Password <div class="ico-help" title="Confirm the given new password."><i class="fa fa-question-circle"></i></div>
 										</span>										 
 						                    <div class="section">
-						                      <label for="strRePassword" class="field prepend-icon">
-						                       <s:password name="strRePassword" id="strRePassword" cssClass="gui-input br5" placeholder="Confirm Password"></s:password>
+						                      <label for="strConfirmPassword" class="field prepend-icon">
+						                       <form:password path="strConfirmPassword" id="strConfirmPassword" cssClass="gui-input br5" placeholder="Confirm Password"/>
 						                        <label for="strRePassword" class="field-icon">
 						                          <i class="fa fa-unlock-alt"></i>
 						                        </label>
@@ -160,7 +119,7 @@
 			                    <button type="reset" class="button br3"> Cancel </button>
 			                  </div>
 			                  <!-- end .form-footer section -->
-			                </s:form>
+			                </form:form>
 			             </div>   
 	                </div>
 	            </div>

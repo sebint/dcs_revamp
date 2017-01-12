@@ -30,5 +30,8 @@ public class UserValidators implements Validator {
 	        }
 		
 	}
-
+	
+	public void validateUp(Object arg0, Errors errors) {
+		 ValidationUtils.rejectIfEmptyOrWhitespace(errors, "intRoleId", "intRoleId.NotEmpty");
+	}
 }

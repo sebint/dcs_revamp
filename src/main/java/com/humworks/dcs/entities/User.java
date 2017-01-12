@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
@@ -42,13 +43,16 @@ public class User implements Serializable {
 	private Integer intUserId;
 
 	@NotEmpty
+	@Pattern(regexp="[^0-9<>'\"/;`%~@#$^*()_+={}|\\,.?: -]*")
 	@Column(name = "FIRST_NAME")
 	private String strFirstName;
 
+	@Pattern(regexp="[^0-9<>'\"/;`%~@#$^*()_+={}|\\,.?: -]*")
 	@Column(name = "LAST_NAME")
 	private String strLastName;
 
 	@NotEmpty
+	@Pattern(regexp="[^0-9<>'\"/;`%~@#$^*()_+={}|\\,.?: -]*")
 	@Column(name = "USER_NAME")
 	private String strUserName;
 	
@@ -70,6 +74,7 @@ public class User implements Serializable {
 	private Set<Role> role = new HashSet<Role>();
 
 	@NotEmpty
+	@Pattern(regexp="[^0-9<>'\"/;`%~@#$^*()_+={}|\\,.?: ]*")
 	@Column(name = "USER_DEPT_NAME")
 	private String strDeptName;
 

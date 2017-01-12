@@ -2818,7 +2818,7 @@
   padding: 12px 13px;
   border: 0;
   border-top: 1px solid #DDD;
-  background: #fff;
+  background: transparent;
 }
 /*==================================================================
   Progress Bars 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.humworks.dcs.dao.AbstractDao;
 import com.humworks.dcs.dao.UserDao;
+import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 
 @Repository("userDao")
@@ -58,14 +59,13 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	public Integer updateUser(User user) {
 		
 		String hql = "UPDATE User SET strFirstName = :strFirstName,strLastName =:strLastName, "
-					+ "strUserName =:strUserName, strEmail = :strEmail, strDeptName= :strDeptName, "
+					+ "strEmail = :strEmail, strDeptName= :strDeptName, "
 					+ "boolPwdChange =:boolPwdChange, boolLockPwd =:boolLockPwd, "
 					+ "intPwdAttempt =:intPwdAttempt, intModifiedBy =:intModifiedBy, dtDateModified =:dtDateModified "
 					+ "WHERE intUserId = :intUserId";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("strFirstName", user.getStrFirstName());
 		query.setParameter("strLastName", user.getStrLastName());
-		query.setParameter("strUserName", user.getStrUserName());
 		query.setParameter("strEmail", user.getStrEmail());
 		query.setParameter("strDeptName", user.getStrDeptName());
 		query.setParameter("boolPwdChange", user.getBoolPwdChange());
@@ -98,6 +98,13 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	public void transactionRollback() {
 		getSession().getTransaction().rollback();
 		
+	}
+
+	@Override
+	public Integer resetPassword(Login reset) {
+		String hql = "UPDATE User SET strPassword =:strPassword WHERE intUserId =:intUserId";
+		Query query = getSession().createQuery(hql).setParameter("strPassword", reset.getStrPassword()).setParameter("intUserId", reset.getIntUserId());
+		return query(query);
 	}
 	
 }

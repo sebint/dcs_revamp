@@ -19,4 +19,11 @@ public class SessionServiceImpl implements SessionService {
 		return currentUser.getUserId();
 	}
 	
+	@Override
+	public String getActiveUsername() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		SpringUser currentUser = (SpringUser) authentication.getPrincipal();
+		return currentUser.getUsername();
+	}
+	
 }

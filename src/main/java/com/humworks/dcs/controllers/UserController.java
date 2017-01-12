@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.Role;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.exception.InternalServerException;
 import com.humworks.dcs.exception.ResourceNotFoundException;
 import com.humworks.dcs.service.RoleService;
 import com.humworks.dcs.service.UserService;
+import com.humworks.dcs.validators.PasswordResetValidators;
 import com.humworks.dcs.validators.UserValidators;
 
 @Controller	
@@ -40,18 +42,21 @@ public class UserController {
 	@Autowired
 	private UserValidators userValidators;
 	
+	@Autowired
+	private PasswordResetValidators resetValidators;
+	
 	@GetMapping(value={"/","list"})
 	public String getUser(Model model){
 		return page;
 	}
 	
-	@PostMapping(value={"/","list"})
+/*	@PostMapping(value={"/","list"})
 	public String saveUser(@Valid @ModelAttribute User user, BindingResult result){
 		if (result.hasErrors()) {
 			return page;
 		}
 		return page;
-	}
+	}*/
 	
 	@GetMapping("new")
 	public String loadAdd(@ModelAttribute User user){
@@ -64,20 +69,22 @@ public class UserController {
 			//As intRoleId is @Trancient property the validation won't work for role alone.
 			//Added user defined validation class and invoked below.
 			userValidators.validate(user, result);
-			if (result.hasErrors()) {
-				return add;
-			}
+			
 			if(user.getBoolPwdChange()==null){
 				user.setBoolPwdChange(0);
 			}
 			if(user.getBoolLockPwd()==null){
 				user.setBoolLockPwd(0);
 			}
+			
+			if (result.hasErrors()) {
+				return add;
+			}
 			userService.save(user);
-			redirectAttributes.addFlashAttribute("message", "Successfull");
+			redirectAttributes.addFlashAttribute("message", "User Created Successfully.");
 		}catch(Exception ex){
 			ex.printStackTrace();
-			redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
+			redirectAttributes.addFlashAttribute("error", "Unable to Create User. Try again later.");
 			return "redirect:/security/user/new";
 		}
 		if(mode.equals("save")){			
@@ -93,22 +100,34 @@ public class UserController {
 		if(user==null){
 			throw new ResourceNotFoundException(strUserName);
 		}
+		model.addAttribute("optn", true);
 		model.addAttribute("user", user);
 		return add;
 	}
 	
 	@PostMapping("{strUserName}")
-	public String update(@PathVariable String strUserName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute User user, BindingResult result) throws Exception {
-		if (result.hasErrors()) {
-			return page;
-		}
+	public String update(@PathVariable String strUserName, @RequestParam String mode, Model model, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute User user, BindingResult result) throws Exception {
 		try{
+			userValidators.validateUp(user, result);
+			
+			model.addAttribute("optn", true);
+			
+			if(user.getBoolPwdChange()==null){
+				user.setBoolPwdChange(0);
+			}
+			if(user.getBoolLockPwd()==null){
+				user.setBoolLockPwd(0);
+			}
+			
+			if (result.hasErrors()) {
+				return add;
+			}
 			user.setIntUserId(userService.findUid(strUserName));
 			if(user.getIntUserId()!=null){
 				if(userService.update(user)>0){
-					redirectAttributes.addFlashAttribute("message", "Successfull");
+					redirectAttributes.addFlashAttribute("message", "<strong>"+strUserName+"</strong> Updated Successfully.");
 				}else{
-					redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
+					redirectAttributes.addFlashAttribute("error", "Unable to Update <strong>"+strUserName+"</strong>. Try again later.");
 				}
 			}else{
 				throw new InternalServerException(new Exception("No Primary Key found for User"));
@@ -120,29 +139,47 @@ public class UserController {
 		if(mode.equals("save")){			
 			return "redirect:/security/user/";
 		}else{
-			return "redirect:/security/user/new";
+			return "redirect:/security/user/"+strUserName;
 		}
 	}
 	
-	@PostMapping("delete/{intUserId}")
-	public String delete(@Valid @ModelAttribute User user, @PathVariable("intUserId") Integer intUserId, BindingResult result){
-		if (result.hasErrors()) {
-			return page;
+	@GetMapping("delete/{strUserName}")
+	public String delete(@PathVariable String strUserName, final RedirectAttributes redirectAttributes) throws Exception{
+		final User user = userService.findByUsername(strUserName);
+		if(user==null){
+			throw new ResourceNotFoundException(strUserName);
 		}
-		userService.delete(user);
-		return page;
+		try{
+			userService.delete(user);
+			redirectAttributes.addFlashAttribute("message", "<strong>"+strUserName+"</strong> deleted successfully.");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unable to delete <strong>"+strUserName+"</strong>. Try again later.");
+		}
+		return "redirect:/security/user/";
 	}
 	
-	@GetMapping("password/change")
-	public String reset(@Valid @ModelAttribute User user, BindingResult result){
-		if (result.hasErrors()) {
-			return page;
+	@PostMapping("reset")
+	public String reset(final RedirectAttributes redirectAttributes,@ModelAttribute("reset") Login reset, BindingResult result){
+		try{
+			resetValidators.validate(reset, result);
+			if (result.hasErrors()) {
+				return page;
+			}
+			if(userService.resetPassword(reset)>0){
+				redirectAttributes.addFlashAttribute("message", "Password Reset Successfully.");
+			}else{
+				redirectAttributes.addFlashAttribute("error", "Unable to Reset Password. Try again later.");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unable to Reset Password. Try again later.");
 		}
-		return page;
+		return "redirect:/security/user/";
 	}
 	
 	@GetMapping("account/password-change")
-	public String changePassword(@Valid @ModelAttribute User user, BindingResult result){
+	public String changePassword(@Valid @ModelAttribute Login reset, BindingResult result){
 		if (result.hasErrors()) {
 			return "auth/security/change_password";
 		}
@@ -152,6 +189,11 @@ public class UserController {
 	@ModelAttribute("user")
 	public User getUser(){
 		return new User();
+	}
+	
+	@ModelAttribute("reset")
+	public Login getLogin(){
+		return new Login();
 	}
 	
 	@ModelAttribute("rolesOptions")
