@@ -35,7 +35,7 @@
 	              <a href='<spring:url value="/security/user"/>'>User</a>
 	            </li>
 	            <li class="crumb-link">
-	              <a href='<spring:url value="/security/user/new"/>'>New</a>
+	              <a href='<spring:url value="/security/user/${!empty(strUserName)? strUserName :  'new'}"/>'>${!empty(strUserName)? strUserName :  'New'}</a>
 	            </li>
 	          </ol>
 	        </div>
@@ -91,11 +91,11 @@
 											<span class="desc_text"> <spring:message code="user.new.info"/> </span>
 										</div>
 										<!-- .section-divider -->
-										<div class="col-md-6 pl0">
+										<div class="col-md-6">
 											<spring:bind path="strFirstName">
 											   <c:if test="${status.error}">
-											   		<span class="field-error">
-														<form:errors path="strFirstName" /> 
+											   		<span class="field-error ${strFirstName.error}" >
+													<form:errors path="strFirstName" />
 													</span>
 											   </c:if>
 											   <c:if test="${not status.error}">
@@ -113,7 +113,7 @@
 												</div>
 											</spring:bind>	
 										</div>
-										<div class="col-md-6 pr0">																		 
+										<div class="col-md-6">																		 
 											<spring:bind path="strLastName">
 											   <c:if test="${status.error}">
 											   		<span class="field-error">
@@ -136,7 +136,7 @@
 											</spring:bind>
 										</div>
 										<!-- <div class="col-md-12">		 -->
-										<div class="col-md-6 pl0">																				 
+										<div class="col-md-6">																				 
 											<spring:bind path="strEmail">
 											   <c:if test="${status.error}">
 											   		<span class="field-error">
@@ -159,7 +159,7 @@
 											</spring:bind>
 										</div>
 										<!-- end section -->
-										<div class="col-md-6 pr0">
+										<div class="col-md-6">
 											<spring:bind path="intRoleId">
 											   <c:if test="${status.error}">
 											   		<span class="field-error">
@@ -200,8 +200,8 @@
 					                        </spring:bind>
 											<!-- end section -->
 										</div>
-										<div class="col-md-6 pl0">
-											<spring:bind path="strDeptName">
+										<spring:bind path="strDeptName">
+											<div class="${!optn ? 'col-md-6' : 'col-md-12'}">
 											   <c:if test="${status.error}">
 											   		<span class="field-error">
 														<form:errors path="strDeptName" />
@@ -219,55 +219,87 @@
 															<i class="fa fa-university"></i>
 														</label>
 													</label>													
-												</div>
-											</spring:bind>
-										</div>
+												</div>											
+											</div>
+										</spring:bind>
 										<!-- end section -->
-										<div class="col-md-6 pr0">
-											<spring:bind path="strUserName">
-											   <c:if test="${status.error}">
-											   		<span class="field-error">
-														<form:errors path="strUserName" />
-													</span>
-											   </c:if>
-											   <c:if test="${not status.error}">
-												<span class="field-alt fw600">
-													<spring:message code="user.new.username"/> <div class="ico-help" title="Username (This is used for login)."><i class="fa fa-question-circle"></i></div>
-												</span>
-											   </c:if>	
-												<div class="section">
-													<label for="strUserName" class="field prepend-icon">
-														<form:input path="strUserName" id="strUserName" cssClass="gui-input br5" placeholder="Username"></form:input> 
-														<label for="strUserName" class="field-icon"> 
-															<i class="fa fa-user"></i>
-														</label>
-													</label>													
-												</div>
-											</spring:bind>
-											<!-- end section -->
-										</div>
-										<div class="col-md-6 pr0">
+										<spring:bind path="strUserName">
+										<c:if test="${!optn}">
+											<div class="col-md-6">
+													   <c:if test="${status.error}">
+													   		<span class="field-error">
+																<form:errors path="strUserName" />
+															</span>
+													   </c:if>
+													   <c:if test="${not status.error}">
+														<span class="field-alt fw600">
+															<spring:message code="user.new.username"/> <div class="ico-help" title="Username (This is used for login)."><i class="fa fa-question-circle"></i></div>
+														</span>
+													   </c:if>	
+														<div class="section">
+															<label for="strUserName" class="field prepend-icon">
+																<form:input path="strUserName" id="strUserName" cssClass="gui-input br5" placeholder="Username"></form:input> 
+																<label for="strUserName" class="field-icon"> 
+																	<i class="fa fa-user"></i>
+																</label>
+															</label>													
+														</div>									
+												<!-- end section -->
+											</div>
+											</c:if>
+										</spring:bind>	
+										<div class="col-md-6">
 											<div class="section">
 												<label for="boolPwdChange pr0">
-		                              				<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1" checked="checked"/>
+												 <c:choose>
+						                          <c:when test="${not empty(user.boolPwdChange)}">
+						                          		<c:choose>
+						                          			<c:when test="${user.boolPwdChange eq 1}">
+						                          				<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1" checked="checked"/>
+						                          			</c:when>
+						                          			<c:otherwise>
+						                          				<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1"/>
+						                          			</c:otherwise>
+						                          		</c:choose>
+						                          	</c:when>
+						                          	<c:otherwise>
+						                          		<form:checkbox path="boolPwdChange" id="boolPwdChange" value="1" checked="checked"/>
+						                          	</c:otherwise>
+						                          </c:choose>		                             
 		                              				<spring:message code="user.new.request.change.password"/>
 		                              			</label>			                              			
 		                              		</div>
 										</div>
-										<div class="col-md-6 pr0">
+										<div class="col-md-6">
 										</div>
-										<div class="col-md-12 pr0">
+										<div class="col-md-12">
 											<div class="section">
 												<label class="boolLockPwd pr0">
-		                              				<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1" checked="checked"/>
+													<c:choose>
+						                          		<c:when test="${not empty(user.boolLockPwd)}">
+						                          			<c:choose>
+						                          				<c:when test="${user.boolLockPwd eq 1}">
+						                          					<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1" checked="checked"/>
+						                          				</c:when>
+						                          				<c:otherwise>
+						                          					<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1"/>
+						                          				</c:otherwise>
+						                          			</c:choose>						                          									                          	
+						                          		</c:when>
+						                          		<c:otherwise>
+						                          			<form:checkbox path="boolLockPwd" id="boolLockPwd" value="1" checked="checked"/>
+						                          		</c:otherwise>
+						                          	</c:choose>	
 		                              				<spring:message code="user.new.request.activate1"/>                        
 		                              			</label>
-		                              			<form:input path="intPwdAttempt" id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="5" placeholder="5" readonly="true"></form:input>
+<%-- 		                              			<c:if test="${user.intPwdAttempt eq 0 }">
+		                              			
+		                              			</c:if> --%>
+		                              			<form:input path="intPwdAttempt" id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="${not empty(user.intPwdAttempt)? user.intPwdAttempt : 5}" maxlength="1"></form:input>
 		                              			<span><spring:message code="user.new.request.activate2"/></span>	
 		                              		</div>
 										</div>
 										<!-- end section -->
-										<!-- </div> -->
 									</div>
 									<!-- end .form-body section -->
 									<div class="panel-footer text-right">
@@ -293,80 +325,6 @@
 			<jsp:include page="../../../fragments/footer.jsp"></jsp:include>
 	  </div>
 	  <!-- End: Main -->
-		<div class="modal fade" id="password_reset_modal" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-md">
-		    <div class="modal-content">
-		      <div class="modal-header gradient-2">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">×</span>
-		        </button>
-		        <h4 class="modal-title" id="password_resetLabel"><span class="fa fa-unlock-alt"></span> Reset Password</h4>
-		      </div>
-		      <div class="modal-body pt0 gradient-2-modal-body">
-					<div class="mpxd theme-primary mw1000 center-block">
-							<spring:url value="/security/user/change" var="url_cpass"/>
-								<form:form method="POST" action="${url_cpass}" id="reset-password-form" modelAttribute="user">
-									<div class="panel-body pt0">
-										<div class="section-divider mv40" id="spy4">
-											<span class="desc_text"> Provide the following information to Reset Password </span>
-										</div>
-										<!-- .section-divider -->
-										<div class="col-md-12 pl0">
-<!-- 											<s:if test="fieldErrors.get('strPassword').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strFirstName').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
-												<span class="field-alt fw600">
-													Password <div class="ico-help" title="New Password for the User."><i class="fa fa-question-circle"></i></div>
-												</span>													
-<!-- 											</s:else> -->
-											<div class="section">												
-												<label for="strPassword" class="field prepend-icon"> 														
-												   	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="Password"></form:password>
-														<label for="strPassword" class="field-icon"> 
-															<i class="fa fa-lock"></i>
-														</label>												
-												</label>
-											</div>
-<!-- 										</div> -->
-<!-- 										<div class="col-md-6 pr0"> -->
-<!-- 											<s:if test="fieldErrors.get('strRePassword').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strRePassword').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
-												<span class="field-alt fw600">
-													Confirm Password <div class="ico-help" title="Confirm the new password."><i class="fa fa-question-circle"></i></div>
-												</span>																							
-<!-- 											</s:else>																		 -->
-											<div class="section">
-												<label for="strRePassword" class="field prepend-icon"> 
-												   <form:password path="strRePassword" id="strRePassword" cssClass="gui-input br5" placeholder="Confirm Password"></form:password>
-														<label for="strLastName" class="field-icon"> 
-															<i class="fa fa-lock"></i>
-														</label>
-												</label>
-											</div>
-										</div>
-									</div>
-									<!-- end .form-body section -->
-									<div class="panel-footer text-right">
-										<button type="submit" class="button btn-primary br3"><i class="fa fa-check"></i> 
-											<span class="btn-text">Save</span></button>
-										<button type="reset" data-dismiss="modal" class="button br3">
-											<i class="fa fa-close"></i> Cancel
-									   </button>
-									</div>
-									<!-- end .form-footer section -->
-								</form:form>
-							</div>		      	
-		      </div>
-		    </div>
-		  </div>
-		</div>  
 	  <!-- BEGIN: PAGE SCRIPTS -->	
 	  <!-- jQuery -->
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>

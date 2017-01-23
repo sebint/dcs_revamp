@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.humworks.dcs.dao.UserDao;
 import com.humworks.dcs.dao.UserRoleDao;
+import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.entities.UserRole;
 import com.humworks.dcs.service.SessionService;
@@ -100,6 +101,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer findUid(String username) {		
 		return userDao.findUid(username);
+	}
+
+	@Override
+	public Integer resetPassword(Login reset) {
+		reset.setStrPassword(passwordEncoder.encode(reset.getStrPassword()));
+		return userDao.resetPassword(reset);
 	}
 
 }

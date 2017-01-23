@@ -86,7 +86,7 @@
               <div class="panel panel-visible" id="spy1">
                 <div class="panel-body">
                  <spring:url value="/security/user" var="url"/>
-                 <spring:url value="/security/user/reset" var="urlReset"/>
+                 <spring:url value="/security/user/password/reset" var="urlReset"/>
                   <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
                     <thead>
                       <tr>
@@ -112,9 +112,9 @@
                         <td>${roleName}</td>          
                         <td>${user.strEmail}</td>
                         <td>${user.strUserName}</td>
-                        <td><a href="#" class="td-none sr-reset" data-toggle="modal" data-target="#password_reset_modal" data-action="${urlReset}/${user.intUserId}" ><i class="fa fa-unlock-alt"></i> Reset</a></td>
+                        <td><a href="#" class="td-none sr-reset" data-toggle="modal" data-target="#password_reset_modal" data-value="${user.intUserId}"><i class="fa fa-unlock-alt"></i> Reset</a></td>
                         <td><a href="${url}/${user.strUserName}" class="sr-update"><span class="glyphicon glyphicon-edit"></span></a></td>
-                        <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${user.strUserName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete User" href="<spring:url value="/security/user/delete"/>/${user.intUserId}"><span class="glyphicon glyphicon-trash">&nbsp;</span></a></td>
+                        <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${user.strUserName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete User" href="<spring:url value="/security/user/delete"/>/${user.strUserName}"><span class="glyphicon glyphicon-trash">&nbsp;</span></a></td>
                       </tr>
                     </c:forEach>               
                     </tbody>
@@ -137,28 +137,30 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">×</span>
 		        </button>
-		        <h4 class="modal-title" id="password_resetLabel"><span class="fa fa-unlock-alt"></span> Reset Password</h4>
+		        <h4 class="modal-title" id="password_resetLabel"><span class="fa fa-unlock-alt"></span> <spring:message code="user.reset.header"/></h4>
 		      </div>
 		      <div class="modal-body pt0 gradient-2-modal-body">
 					<div class="mpxd theme-primary mw1000 center-block">
-							<spring:url value="/security/user/change" var="url_cpass"/>
-								<form:form method="POST" action="${url_cpass}" id="reset-password-form" modelAttribute="user">
+							<spring:url value="/security/user/reset" var="url_cpass"/>
+								<form:form method="post" action="${url_cpass}" id="reset-password-form" modelAttribute="reset">
+									<form:hidden path="intUserId" id="uid"/>
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
-											<span class="desc_text"> Provide the following information to Reset Password </span>
+											<span class="desc_text"> <spring:message code="user.reset.subheader"/> </span>
 										</div>
 										<!-- .section-divider -->
 										<div class="col-md-12 pl0">
-<!-- 											<s:if test="fieldErrors.get('strPassword').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strFirstName').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+											<spring:bind path="strPassword">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strPassword" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Password <div class="ico-help" title="New Password for the User."><i class="fa fa-question-circle"></i></div>
-												</span>													
-<!-- 											</s:else> -->
+													<spring:message code="user.reset.password"/> <div class="ico-help" title="New Password for the User."><i class="fa fa-question-circle"></i></div>
+												</span>	
+											   </c:if>																								
 											<div class="section">												
 												<label for="strPassword" class="field prepend-icon"> 														
 												   	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="Password"></form:password>
@@ -167,43 +169,47 @@
 														</label>												
 												</label>
 											</div>
-<!-- 										</div> -->
-<!-- 										<div class="col-md-6 pr0"> -->
-<!-- 											<s:if test="fieldErrors.get('strRePassword').size() > 0">
-												<span class="field-error">
-													<s:property value="fieldErrors.get('strRePassword').get(0)" />
-												</span>	
-											</s:if>
-											<s:else> -->
+											</spring:bind>
+											<spring:bind path="strConfirmPassword">
+											   <c:if test="${status.error}">
+											   		<span class="field-error">
+														<form:errors path="strConfirmPassword" />
+													</span>
+											   </c:if>
+											   <c:if test="${not status.error}">
 												<span class="field-alt fw600">
-													Confirm Password <div class="ico-help" title="Confirm the new password."><i class="fa fa-question-circle"></i></div>
-												</span>																							
-<!-- 											</s:else>																		 -->
-											<div class="section">
-												<label for="strRePassword" class="field prepend-icon"> 
-												   <form:password path="strRePassword" id="strRePassword" cssClass="gui-input br5" placeholder="Confirm Password"></form:password>
-														<label for="strLastName" class="field-icon"> 
-															<i class="fa fa-lock"></i>
-														</label>
-												</label>
-											</div>
+													<spring:message code="user.reset.confirmPassword"/> <div class="ico-help" title="Confirm the new password."><i class="fa fa-question-circle"></i></div>
+												</span>		
+											   </c:if>																																	
+												<div class="section">
+													<label for="strConfirmPassword" class="field prepend-icon"> 
+													   <form:password path="strConfirmPassword" id="strConfirmPassword" cssClass="gui-input br5" placeholder="Confirm Password"></form:password>
+															<label for="strConfirmPassword" class="field-icon"> 
+																<i class="fa fa-lock"></i>
+															</label>
+													</label>
+												</div>
+											</spring:bind>
 										</div>
 									</div>
 									<!-- end .form-body section -->
 									<div class="panel-footer text-right">
 										<button type="submit" class="button btn-primary br3"><i class="fa fa-check"></i> 
-											<span class="btn-text">Save</span></button>
+											<span class="btn-text"><spring:message code="common.save"/></span></button>
 										<button type="reset" data-dismiss="modal" class="button br3">
-											<i class="fa fa-close"></i> Cancel
+											<i class="fa fa-close"></i> <spring:message code="common.cancel"/>
 									   </button>
 									</div>
 									<!-- end .form-footer section -->
+									<spring:hasBindErrors name="reset">
+										<input type="hidden" name="has_error" id="has_field_error" value="1"/>
+									</spring:hasBindErrors>
 								</form:form>
 							</div>		      	
-		      </div>
-		    </div>
-		  </div>
-		</div>  
+				      </div>
+				    </div>
+				  </div>
+			</div>  
 	  <!-- BEGIN: PAGE SCRIPTS -->	
 	  <!-- jQuery -->
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>

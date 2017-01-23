@@ -68,8 +68,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and().exceptionHandling().accessDeniedPage("/404");
       
       http.sessionManagement()
-      		.maximumSessions(1).expiredUrl("/login?r=sc&expired")
-      	.and().sessionFixation().migrateSession().invalidSessionUrl("/login?r=sc&expired");
+//      .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) Default
+      		.invalidSessionUrl("/login")     		
+      		.maximumSessions(1).expiredUrl("/login?r=ms&expired")
+      	.and().sessionFixation().migrateSession();
       
       http.logout()
 		.logoutUrl("/logout")

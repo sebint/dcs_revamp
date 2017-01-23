@@ -2,6 +2,7 @@ package com.humworks.dcs.dao;
 
 import java.util.ArrayList;
 
+import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 
 public interface UserDao {
@@ -9,6 +10,8 @@ public interface UserDao {
 	Integer saveUser(User user);
 	
 	Integer updateUser(User user);
+	
+	Integer resetPassword(Login reset);
 	
 	void deleteUser(User user);
     

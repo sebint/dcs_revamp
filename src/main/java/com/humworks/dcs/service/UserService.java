@@ -2,6 +2,7 @@ package com.humworks.dcs.service;
 
 import java.util.ArrayList;
 
+import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 
 public interface UserService {
@@ -11,6 +12,8 @@ public interface UserService {
 	
 	Integer update(User user);
     
+	Integer resetPassword(Login reset);
+	
 	void delete(User user);
 	
     User findById(Integer id);
