@@ -24582,10 +24582,6 @@ span.forum-item-title {
     color: #ca0303;
     text-transform: none;
 }
-.field-error{
-	font-size: 12px;
-    text-transform: none;
-}
 .ico-help {
     display: table-cell;
     color: #3c8dbc;
@@ -24598,3 +24594,8 @@ span.forum-item-title {
 .margin-t-b15{
 	margin: 15px 0;
 }
+@media (min-width: 1100px) {
+  .mpxd {
+   	min-height: 650px;
+  }
+} 

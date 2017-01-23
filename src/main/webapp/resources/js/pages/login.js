@@ -15,7 +15,7 @@ $(".submit").click(function() {
 	        $this.fadeIn(500);
 		})
 	}, 3000);
-	$("#mpxd-login").submit();
+//	$("#mpxd-login").submit();
 });
 var $container = $(".loading");
 $(".overlay").fadeIn().css("top", $container.scrollTop() + "px");
