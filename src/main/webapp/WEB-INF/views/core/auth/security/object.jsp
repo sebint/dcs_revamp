@@ -79,7 +79,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${lstMenuSub}" var="menu" varStatus="counter">  
+                    <c:forEach items="${objectsList}" var="menu" varStatus="counter">  
                       <tr>
                         <td>${counter.index+1}</td>
                         <td>${menu.strMenuName}</td>
