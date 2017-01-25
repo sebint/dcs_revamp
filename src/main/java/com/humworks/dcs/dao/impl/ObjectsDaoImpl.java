@@ -11,18 +11,19 @@ import org.springframework.stereotype.Repository;
 import com.humworks.dcs.dao.AbstractDao;
 import com.humworks.dcs.dao.ObjectsDao;
 import com.humworks.dcs.entities.Objects;
+import com.humworks.dcs.entities.ObjectsMaster;
 
 @Repository("objectDao")
-public class ObjectsDaoImpl extends AbstractDao<Objects, Integer> implements ObjectsDao {
+public class ObjectsDaoImpl extends AbstractDao<ObjectsMaster, Integer> implements ObjectsDao {
 
 	@Override
-	public ArrayList<Objects> selectAll() {
+	public ArrayList<ObjectsMaster> selectAll() {
 			CriteriaBuilder cb = createCriteriaQuery();
-			CriteriaQuery<Objects> cq = cb.createQuery(Objects.class);
-			Root<Objects> root = cq.from(Objects.class);
+			CriteriaQuery<ObjectsMaster> cq = cb.createQuery(ObjectsMaster.class);
+			Root<ObjectsMaster> root = cq.from(ObjectsMaster.class);
 			cq.select(root);
-			cq.orderBy(cb.desc(root.get("intMenuId")));
-			return (ArrayList<Objects>) getSession().createQuery(cq).getResultList();
+			cq.orderBy(cb.desc(root.get("intMenuMasterId")));
+			return (ArrayList<ObjectsMaster>) getSession().createQuery(cq).getResultList();
 	}
 
 }

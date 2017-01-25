@@ -2,18 +2,12 @@ package com.humworks.dcs.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -78,10 +72,6 @@ public class Objects implements Serializable {
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tbl_menu_master", joinColumns = { @JoinColumn(name = "MENU_MASTER_ID") })
-	private Set<ObjectsMaster> menu = new HashSet<ObjectsMaster>();
 
 	public Integer getIntMenuSubId() {
 		return intMenuSubId;
@@ -129,10 +119,6 @@ public class Objects implements Serializable {
 
 	public Date getDtDateModified() {
 		return dtDateModified;
-	}
-
-	public Set<ObjectsMaster> getMenu() {
-		return menu;
 	}
 
 	public void setIntMenuSubId(Integer intMenuSubId) {
@@ -183,17 +169,13 @@ public class Objects implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
-	public void setMenu(Set<ObjectsMaster> menu) {
-		this.menu = menu;
-	}
-
 	@Override
 	public String toString() {
 		return "Objects [intMenuSubId=" + intMenuSubId + ", strMenuName=" + strMenuName + ", strUrlPath=" + strUrlPath
 				+ ", strUrlIcon=" + strUrlIcon + ", intSeqNo=" + intSeqNo + ", boolIsEnabled=" + boolIsEnabled
 				+ ", boolIsScreen=" + boolIsScreen + ", intMenuMasterId=" + intMenuMasterId + ", intCreatedBy="
 				+ intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy=" + intModifiedBy
-				+ ", dtDateModified=" + dtDateModified + ", menu=" + menu + "]";
+				+ ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -209,7 +191,6 @@ public class Objects implements Serializable {
 		result = prime * result + ((intMenuSubId == null) ? 0 : intMenuSubId.hashCode());
 		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
 		result = prime * result + ((intSeqNo == null) ? 0 : intSeqNo.hashCode());
-		result = prime * result + ((menu == null) ? 0 : menu.hashCode());
 		result = prime * result + ((strMenuName == null) ? 0 : strMenuName.hashCode());
 		result = prime * result + ((strUrlIcon == null) ? 0 : strUrlIcon.hashCode());
 		result = prime * result + ((strUrlPath == null) ? 0 : strUrlPath.hashCode());
@@ -269,11 +250,6 @@ public class Objects implements Serializable {
 			if (other.intSeqNo != null)
 				return false;
 		} else if (!intSeqNo.equals(other.intSeqNo))
-			return false;
-		if (menu == null) {
-			if (other.menu != null)
-				return false;
-		} else if (!menu.equals(other.menu))
 			return false;
 		if (strMenuName == null) {
 			if (other.strMenuName != null)
