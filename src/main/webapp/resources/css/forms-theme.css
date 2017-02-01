@@ -4171,3 +4171,10 @@
 .mpxd.theme-dark .wizard .steps li.current a {
   background-color: #2c2f3c;
 }
+
+
+
+
+.modal-body .mpxd.theme-primary .section-divider span {
+    background: #fff;
+}

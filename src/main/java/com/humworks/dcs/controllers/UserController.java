@@ -179,12 +179,28 @@ public class UserController {
 	}
 	
 	@GetMapping("account/password-change")
-	public String changePassword(@Valid @ModelAttribute Login reset, BindingResult result){
-		if (result.hasErrors()) {
-			return "auth/security/change_password";
-		}
+	public String loadChangePassword(Model model){
 		return "auth/security/change_password";
 	}		
+	
+	@PostMapping("account/password-change")
+	public String changePassword(final RedirectAttributes redirectAttributes, @ModelAttribute("reset") Login reset, BindingResult result){
+		try{
+			resetValidators.currentValidate(reset, result);
+			if (result.hasErrors()) {
+				return "auth/security/change_password";
+			}
+			if(userService.resetPassword(reset)>0){
+				redirectAttributes.addFlashAttribute("message", "Password Changed Successfully.");
+			}else{
+				redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
+		}
+		return "redirect:/security/user/account/password-change";
+	}	
 	
 	@ModelAttribute("user")
 	public User getUser(){

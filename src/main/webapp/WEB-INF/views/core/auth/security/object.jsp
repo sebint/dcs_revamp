@@ -82,10 +82,10 @@
                     <c:forEach items="${objectsList}" var="menu" varStatus="counter">  
                       <tr>
                         <td>${counter.index+1}</td>
+                        <td>${menu.getMenu().strMenuName}</td>
                         <td>${menu.strMenuName}</td>
-                        <td>${strMenuSubLabel}</td>
                         <c:choose>
-                        	<c:when test="${boolSubIsScreenType==true}">
+                        	<c:when test="${menu.boolIsScreen==true}">
                         		<td>Screen</td>
                         	</c:when>
                         	<c:otherwise>
@@ -119,7 +119,8 @@
 		      </div>
 		      <div class="modal-body pt0 gradient-2-modal-body">
 							<div class="mpxd theme-primary mw1000 center-block">
-								<s:form method="post" action="object/update" namespace="/security" id="object-form">
+								<spring:url value="/security/object/" var="url"/>
+							   <form:form method="post" action="${url}" id="object-form" modelAttribute="objects">
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
 											<span class="desc_text">Update</span>
@@ -130,10 +131,10 @@
 										</span>	
 										<div class="section">
 											 <label class="field select">
-											  <s:select key="intMenuMasterId" id="intMenuMasterId"
-													headerKey="-1" headerValue="Select Group"
-														list="lstMenu" listKey="intMenuMasterId" 
-											       			listValue="strMenuName" /> 
+											 	<form:select path="menu.strMenuName">
+						                          	<form:option value="" label="Please Select" selected="selected"/>
+						                          	<form:options items="${menuOptions}" itemValue="intMenuMasterId" itemLabel="strMenuName"/> 
+						                        </form:select>
 												<i class="arrow double"></i>
 											</label>	                           								
 										</div>
@@ -142,8 +143,8 @@
 										</span>	
 										<div class="section">
 											<label for="password" class="field prepend-icon"> 
-											 <s:textfield name="strMenuSubLabel" id="strMenuSubLabel" cssClass="gui-input br5" placeholder="Object Name"></s:textfield>
-													<label for="strRoleName" class="field-icon"> 
+											<form:input path="strMenuName" id="strMenuName" cssClass="gui-input br5" placeholder="Object Name"/>
+													<label for="strMenuName" class="field-icon"> 
 														<i class="glyphicon glyphicon-pencil"></i>
 													</label>
 											</label>
@@ -153,25 +154,26 @@
 										</span>	
 										<div class="section">
 											 <label class="field select">
-											 <select name="boolSubIsScreenType" id="boolSubIsScreenType">
-   													 <option value="-1">Select Type</option>
-   													 <option value="true">Screen</option>
-   													 <option value="false">Report</option>
-											</select>
+												 <form:select path="boolIsScreen">
+												 	<form:option value="" label="Please Select" selected="selected"/>
+												 	<form:option value="true">Screen</form:option>
+												 	<form:option value="false">Report</form:option>
+												 </form:select>
 												<i class="arrow double"></i>
 											</label>	                           								
 										</div>
 									</div>
 									<!-- end .form-body section -->
 									<div class="panel-footer text-right">
-										<s:submit type="button" cssClass="button btn-primary br3"><i class="fa fa-check"></i> 
-											<span class="btn-text">Update</span></s:submit>
+										<button type="submit" class="button btn-primary br3"><i class="fa fa-check"></i> 
+											<span class="btn-text">Update</span>
+										</button>
 										<button type="reset" data-dismiss="modal" class="button br3">
 											<i class="fa fa-close"></i> Cancel
 									   </button>
 									</div>
 									<!-- end .form-footer section -->
-								</s:form>
+								</form:form>
 							</div>
 						</div>
 		    </div>

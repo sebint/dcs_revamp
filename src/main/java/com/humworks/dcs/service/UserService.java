@@ -22,5 +22,7 @@ public interface UserService {
     
     User findByUsername(String username);
     
+    Boolean checkPassword(Integer uid, String password);
+    
     ArrayList<User> selectAll();
 }

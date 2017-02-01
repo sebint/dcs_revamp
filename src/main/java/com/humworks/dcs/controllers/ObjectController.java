@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.humworks.dcs.entities.Objects;
 import com.humworks.dcs.entities.ObjectsMaster;
 import com.humworks.dcs.service.ObjectService;
 
@@ -26,13 +28,29 @@ public class ObjectController {
 		return page;
 	}
 	
+	@ModelAttribute("objects")
+	public Objects getObjects(){
+		return new Objects();
+	}
+	
 	@ModelAttribute("objectsList")
-	public List<ObjectsMaster> menuList(){
+	public List<Objects> menuList(){
 		try{
 			return objectService.selectAll();
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 		return null;
+	}
+	
+	@PostMapping(value={"/"})
+	public String update(Model model){
+		return page;
+	}
+	
+	
+	@ModelAttribute("menuOptions")
+	public List<ObjectsMaster> getRoles(){
+		return objectService.findParentMenu();
 	}
 }

@@ -23,5 +23,7 @@ public interface UserDao {
     
     ArrayList<User> selectAll();
     
+    String checkPassword(Integer uid);
+    
     void transactionRollback();
 }

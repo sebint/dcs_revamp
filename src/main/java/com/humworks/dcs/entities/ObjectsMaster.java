@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -68,10 +66,6 @@ public class ObjectsMaster implements Serializable {
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
-	
-	@ManyToOne
-    @JoinColumn(name="MENU_MASTER_ID", insertable = false, updatable = false)
-    private Objects menu;
 
 	public Integer getIntMenuMasterId() {
 		return intMenuMasterId;
@@ -153,20 +147,12 @@ public class ObjectsMaster implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
-	public Objects getMenu() {
-		return menu;
-	}
-
-	public void setMenu(Objects menu) {
-		this.menu = menu;
-	}
-
 	@Override
 	public String toString() {
 		return "ObjectsMaster [intMenuMasterId=" + intMenuMasterId + ", strMenuName=" + strMenuName + ", strUrlPath="
 				+ strUrlPath + ", strUrlIcon=" + strUrlIcon + ", intSeqNo=" + intSeqNo + ", intIsEnabled="
 				+ intIsEnabled + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated
-				+ ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + ", menu=" + menu + "]";
+				+ ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -180,7 +166,6 @@ public class ObjectsMaster implements Serializable {
 		result = prime * result + ((intMenuMasterId == null) ? 0 : intMenuMasterId.hashCode());
 		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
 		result = prime * result + ((intSeqNo == null) ? 0 : intSeqNo.hashCode());
-		result = prime * result + ((menu == null) ? 0 : menu.hashCode());
 		result = prime * result + ((strMenuName == null) ? 0 : strMenuName.hashCode());
 		result = prime * result + ((strUrlIcon == null) ? 0 : strUrlIcon.hashCode());
 		result = prime * result + ((strUrlPath == null) ? 0 : strUrlPath.hashCode());
@@ -231,11 +216,6 @@ public class ObjectsMaster implements Serializable {
 				return false;
 		} else if (!intSeqNo.equals(other.intSeqNo))
 			return false;
-		if (menu == null) {
-			if (other.menu != null)
-				return false;
-		} else if (!menu.equals(other.menu))
-			return false;
 		if (strMenuName == null) {
 			if (other.strMenuName != null)
 				return false;
@@ -253,6 +233,7 @@ public class ObjectsMaster implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 	
 }

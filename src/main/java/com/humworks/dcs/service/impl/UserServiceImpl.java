@@ -109,4 +109,12 @@ public class UserServiceImpl implements UserService {
 		return userDao.resetPassword(reset);
 	}
 
+	@Override
+	public Boolean checkPassword(Integer uid, String password) {	
+		if(passwordEncoder.matches(password, userDao.checkPassword(uid))){
+			return true;
+		}
+		return false;
+	}
+
 }

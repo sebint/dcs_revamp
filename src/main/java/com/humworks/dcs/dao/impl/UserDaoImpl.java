@@ -106,5 +106,14 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		Query query = getSession().createQuery(hql).setParameter("strPassword", reset.getStrPassword()).setParameter("intUserId", reset.getIntUserId());
 		return query(query);
 	}
+
+	@Override
+	public String checkPassword(Integer uid) {
+		String hql = "SELECT strPassword FROM User WHERE intUserId =:intUserId";
+		Query query = getSession().createQuery(hql).setParameter("intUserId", uid);
+		String strPassword = (String) query.getSingleResult();
+		return strPassword;
+		
+	}
 	
 }

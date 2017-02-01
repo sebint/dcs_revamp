@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.humworks.dcs.dao.ObjectsDao;
+import com.humworks.dcs.entities.Objects;
 import com.humworks.dcs.entities.ObjectsMaster;
 import com.humworks.dcs.service.ObjectService;
 
@@ -18,9 +19,13 @@ public class ObjectServiceImpl implements ObjectService {
 	private ObjectsDao objectDao;
 	
 	@Override
-	public ArrayList<ObjectsMaster> selectAll() {			
-		 System.out.println(objectDao.selectAll());
+	public ArrayList<Objects> selectAll() {			
 		 return objectDao.selectAll();
+	}
+
+	@Override
+	public ArrayList<ObjectsMaster> findParentMenu() {
+		return objectDao.getParentMenu();
 	}
 
 

@@ -14,16 +14,25 @@ import com.humworks.dcs.entities.Objects;
 import com.humworks.dcs.entities.ObjectsMaster;
 
 @Repository("objectDao")
-public class ObjectsDaoImpl extends AbstractDao<ObjectsMaster, Integer> implements ObjectsDao {
+public class ObjectsDaoImpl extends AbstractDao<Objects, Integer> implements ObjectsDao {
 
 	@Override
-	public ArrayList<ObjectsMaster> selectAll() {
+	public ArrayList<Objects> selectAll() {
 			CriteriaBuilder cb = createCriteriaQuery();
-			CriteriaQuery<ObjectsMaster> cq = cb.createQuery(ObjectsMaster.class);
-			Root<ObjectsMaster> root = cq.from(ObjectsMaster.class);
+			CriteriaQuery<Objects> cq = cb.createQuery(Objects.class);
+			Root<Objects> root = cq.from(Objects.class);
 			cq.select(root);
-			cq.orderBy(cb.desc(root.get("intMenuMasterId")));
-			return (ArrayList<ObjectsMaster>) getSession().createQuery(cq).getResultList();
+			cq.orderBy(cb.asc(root.get("intMenuSubId")));
+			return (ArrayList<Objects>) getSession().createQuery(cq).getResultList();
 	}
 
+	@Override
+	public ArrayList<ObjectsMaster> getParentMenu() {
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<ObjectsMaster> cq = cb.createQuery(ObjectsMaster.class);
+		Root<ObjectsMaster> root = cq.from(ObjectsMaster.class);
+		cq.select(root);
+		cq.orderBy(cb.asc(root.get("intMenuMasterId")));
+		return (ArrayList<ObjectsMaster>) getSession().createQuery(cq).getResultList();
+	}
 }

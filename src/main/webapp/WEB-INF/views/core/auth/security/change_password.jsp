@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
 	            </li>
 	            <li class="crumb-trail">Security</li>
 	            <li class="crumb-link">
-	              <a href='<spring:url value="/security/account"/>'>Change Password</a>
+	              <a href='<spring:url value="/security/password-changes"/>'>Change Password</a>
 	            </li>
 	          </ol>
 	        </div>
@@ -48,6 +49,28 @@
 	      <section id="content" class="animated fadeIn">
 	
 	        <div class="row">
+		      <c:if test="${ not empty error}">
+		        	<div class="col-md-12">	
+						<div class="section animated fadeIn">
+							<div class="alert alert-danger alert-dismissable mt10">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+									<span>${error}</span>
+							</div>
+						</div>
+					</div>        
+		        </c:if>
+		        <c:if test="${ not empty message}">
+		        	<div class="col-md-12">	
+						<div class="section animated fadeIn">
+							<div class="alert alert-success alert-dismissable mt10">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+									<span>${message}</span>
+							</div>
+						</div>
+					</div>	        
+		        </c:if>	 
 	        	<div class="col-md-12">
 	        	 	<div class="panel panel-visible bt-green" id="spy1">
 	        	 		<div class="panel-body">
@@ -63,44 +86,73 @@
 	            <div class="panel bt-blue">
 	                <div class="panel-body ">
 	                	<div class="mpxd theme-primary mw1000 center-block">
-			                <form:form method="post" action="user/change/1" modelAttribute="reset" id="password-change-form">
+	                	<spring:url value="/security/user/account/password-change" var="url"/>
+			                <form:form method="post" action="${url}" modelAttribute="reset" id="password-change-form">
 			                  <div class="panel-body p0">
+			                  <security:authentication property="principal.userId" var="a_uid"/>
+			                  <form:hidden path="intUserId" value="${a_uid}"/>
 			                    <div class="section-divider mv40" id="spy4">
 			                      <span> Provide the following information to change Password </span>
 			                    </div>
 			                    <!-- .section-divider -->
 			                     <div class="col-md-12">
-									<span class="field-alt fw600">
-										Current Password <div class="ico-help" title="Current password of your account."><i class="fa fa-question-circle"></i></div>
-									</span>				                    
-				                    <div class="section">
-				                      <label for="strExPassword" class="field prepend-icon">
-				                        <form:password path="strExPassword" id="strExPassword" cssClass="gui-input br5" placeholder="Current Password"/>
-				                        <label for="strExPassword" class="field-icon">
-				                          <i class="fa fa-lock"></i>
-				                        </label>
-				                      </label>
-				                    </div>
-			                     </div>
-				                 <!-- <div class="col-md-12">		 -->
-					                 <div class="col-md-6">
-										<span class="field-alt fw600">
-											New Password <div class="ico-help" title="New Password for your account."><i class="fa fa-question-circle"></i></div>
-										</span>						                 				
+			                     	<spring:bind path="strExPassword">
+									   <c:if test="${status.error}">
+									   		<span class="field-error">
+												<form:errors path="strExPassword" />
+											</span>
+									   </c:if>
+									    <c:if test="${not status.error}">
+											<span class="field-alt fw600">
+												Current Password <div class="ico-help" title="Current password of your account."><i class="fa fa-question-circle"></i></div>
+											</span>			
+										</c:if>	                    
 					                    <div class="section">
-					                      <label for="strPassword" class="field prepend-icon">
-					                       	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="New Password"/>
-					                        <label for="strPassword" class="field-icon">
+					                      <label for="strExPassword" class="field prepend-icon">
+					                        <form:password path="strExPassword" id="strExPassword" cssClass="gui-input br5" placeholder="Current Password"/>
+					                        <label for="strExPassword" class="field-icon">
 					                          <i class="fa fa-lock"></i>
 					                        </label>
 					                      </label>
 					                    </div>
+				                    </spring:bind>
+			                     </div>
+				                 <!-- <div class="col-md-12">		 -->
+					                 <div class="col-md-6">
+						                 <spring:bind path="strPassword">
+										   <c:if test="${status.error}">
+										   		<span class="field-error">
+													<form:errors path="strPassword" />
+												</span>
+										   </c:if>
+										   <c:if test="${not status.error}">
+												<span class="field-alt fw600">
+													New Password <div class="ico-help" title="New Password for your account."><i class="fa fa-question-circle"></i></div>
+												</span>		
+											</c:if>				                 				
+							                    <div class="section">
+							                      <label for="strPassword" class="field prepend-icon">
+							                       	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="New Password"/>
+							                        <label for="strPassword" class="field-icon">
+							                          <i class="fa fa-lock"></i>
+							                        </label>
+							                      </label>
+							                    </div>
+					                    </spring:bind>
 					                 </div>
 				                    	<!-- end section -->
-									 <div class="col-md-6">	
-										<span class="field-alt fw600">
-											Confirm Password <div class="ico-help" title="Confirm the given new password."><i class="fa fa-question-circle"></i></div>
-										</span>										 
+									 <div class="col-md-6">
+									 	<spring:bind path="strConfirmPassword">
+										   <c:if test="${status.error}">
+										   		<span class="field-error">
+													<form:errors path="strConfirmPassword" />
+												</span>
+										   </c:if>
+										   <c:if test="${not status.error}">	
+												<span class="field-alt fw600">
+													Confirm Password <div class="ico-help" title="Confirm the given new password."><i class="fa fa-question-circle"></i></div>
+												</span>		
+											</c:if>								 
 						                    <div class="section">
 						                      <label for="strConfirmPassword" class="field prepend-icon">
 						                       <form:password path="strConfirmPassword" id="strConfirmPassword" cssClass="gui-input br5" placeholder="Confirm Password"/>
@@ -109,6 +161,7 @@
 						                        </label>
 						                      </label>
 						                    </div>
+						                 </spring:bind>
 						                    <!-- end section -->
 						             </div>
 						         <!-- </div> -->
