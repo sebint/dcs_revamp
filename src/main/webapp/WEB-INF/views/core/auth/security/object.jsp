@@ -92,7 +92,7 @@
                         		<td>Report</td>
                         	</c:otherwise>
                         </c:choose>                
-                        <td><input type="hidden" name="sr-prop" class="sr-info" value='{"intMenuMasterId":"${intMenuMasterId}","strMenuSubLabel":"${strMenuSubLabel}","boolSubIsScreenType":"${boolSubIsScreenType}"}'/><a href="#" class="sr-update" data-action="${url}/${intMenuSubId}" data-toggle="modal" data-target=".object_modal"><span class="glyphicon glyphicon-edit"></span></a></td>
+                        <td><input type="hidden" name="sr-prop" class="sr-info" value='{"intMenuMasterId":"${menu.getMenu().intMenuMasterId}","strMenuName":"${menu.strMenuName}","boolIsScreen":"${menu.boolIsScreen}"}'/><a href="#" class="sr-update" data-action="${url}/${intMenuSubId}" data-toggle="modal" data-target=".object_modal"><span class="glyphicon glyphicon-edit"></span></a></td>
                       </tr>
                       </c:forEach>
                     </tbody>
@@ -131,7 +131,7 @@
 										</span>	
 										<div class="section">
 											 <label class="field select">
-											 	<form:select path="menu.strMenuName">
+											 	<form:select path="intMenuMasterId" id="intMenuMasterId">
 						                          	<form:option value="" label="Please Select" selected="selected"/>
 						                          	<form:options items="${menuOptions}" itemValue="intMenuMasterId" itemLabel="strMenuName"/> 
 						                        </form:select>
