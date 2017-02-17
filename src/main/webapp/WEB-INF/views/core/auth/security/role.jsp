@@ -1297,7 +1297,7 @@
 	  <script type="text/javascript" src="<spring:url value='../../resources/lib/dataTables/jquery.dataTables.min.js'/>"></script>
 	  <script type="text/javascript" src="<spring:url value='../../resources/lib/jquery-confirm/jquery-confirm.min.js'/>"></script>
 	  <script type="text/javascript" src="<spring:url value='../../resources/js/_sn.js'/>"></script>
-	  <script type="text/javascript" src="<s:url value='../../assets/js/pages/role.js'/>"></script>
+	  <script type="text/javascript" src="<spring:url value='../../resources/js/pages/role.js'/>"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
 		  $('.scroller').slimScroll({
