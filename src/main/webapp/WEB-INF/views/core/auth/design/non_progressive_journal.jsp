@@ -20,49 +20,6 @@
 	    <!-- Start: Content-Wrapper -->
 	    <section id="content_wrapper">
 	
-	      <!-- Start: Topbar-Dropdown -->
-	     <div id="topbar-dropmenu">
-	        <div class="topbar-menu row">
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-inbox"></span>
-	              <p class="metro-title">Messages</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-user"></span>
-	              <p class="metro-title">Users</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-headphones"></span>
-	              <p class="metro-title">Support</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon fa fa-gears"></span>
-	              <p class="metro-title">Settings</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-facetime-video"></span>
-	              <p class="metro-title">Videos</p>
-	            </a>
-	          </div>
-	          <div class="col-xs-4 col-sm-2">
-	            <a href="#" class="metro-tile">
-	              <span class="metro-icon glyphicon glyphicon-picture"></span>
-	              <p class="metro-title">Pictures</p>
-	            </a>
-	          </div>
-	        </div>
-	      </div>
-	      <!-- End: Topbar-Dropdown -->
-	
 	      <!-- Start: Topbar -->
 	      <header id="topbar">
 	        <div class="topbar-left">
@@ -89,30 +46,96 @@
 	      <!-- Begin: Content -->
 	      <section id="content" class="animated fadeIn">
 	
-	        <div class="row">
-	          <div class="col-md-8">
-	            <div class="panel">
-	                <div class="panel-heading">
-	                   <span class="panel-icon"></span>
-	                   <span class="panel-title"> Panel One</span>
-	                </div>    
+	       <div class="row">
+	        <div class="col-md-12">
+	        	 	<div class="panel panel-visible bt-red" id="spy1">
+	        	 		<div class="panel-body">
+	        	 			<div class="col-xs-12 col-sm-9 col-md-9">
+                                 <div class="forum-icon">
+                                     <i class="glyphicon glyphicon-equalizer"></i>
+                                  </div>
+                                  <span class="forum-item-title">Non-Progressive Journal</span>
+                                  <div class="forum-sub-title">Manage non-progressive journals.</div>
+                             </div>
+                             <div class="col-xs-12 col-sm-3 col-md-3">	        	     
+	        	           		<a href="<spring:url value="/design/non-progressive/new" />" class="btn btn-primary br3 fw600 pull-right"><span class="fa fa-plus"></span> <spring:message code="npj.add"/> </a>
+	        	           	</div>	
+	        	 		</div>
+	        	 	</div>
+	        </div>
+	          <div class="col-md-12">
+	             <div class="panel panel-visible bt-blue" id="spy1"> 
 	                <div class="panel-body">
-	                  <p class="">
-	                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	                  </p>
-	                </div>
-	            </div>
-	          </div>
-	          <div class="col-md-4">
-	            <div class="panel">
-	                <div class="panel-heading">
-	                   <span class="panel-icon"></span>
-	                   <span class="panel-title"> Panel Two</span>
-	                </div>    
-	                <div class="panel-body">
-	                  <p class="">
-	                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-	                  </p>
+		                <spring:url value="/security/object/update" var="url"/>
+		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+		                    <thead>
+		                      <tr>
+		                        <th width="5%">No</th>
+		                        <th>Project Name</th>
+		                        <th>Journal Name</th>
+		                        <th>Owner</th>
+		                        <th width="5%">Edit</th>
+		                        <th width="5%">Design</th>
+		                        <th width="5%">Delete</th>
+		                      </tr>
+		                    </thead>
+		                    <tbody>
+		                      <tr>
+		                        <td>1</td>
+		                        <td>qqwd</td>
+		                        <td>qwrdwefdewfe</td>           
+		                        <td>ererwefwefefew</td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+		                      </tr>
+		                       <tr>
+		                        <td>1</td>
+		                        <td>qqwd</td>
+		                        <td>qwrdwefdewfe</td>           
+		                        <td>ererwefwefefew</td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+		                      </tr>
+		                      <tr>
+		                        <td>1</td>
+		                        <td>qqwd</td>
+		                        <td>qwrdwefdewfe</td>           
+		                        <td>ererwefwefefew</td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+		                      </tr>
+		                      <tr>
+		                        <td>1</td>
+		                        <td>qqwd</td>
+		                        <td>qwrdwefdewfe</td>           
+		                        <td>ererwefwefefew</td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+		                      </tr>
+		                      <tr>
+		                        <td>1</td>
+		                        <td>qqwd</td>
+		                        <td>qwrdwefdewfe</td>           
+		                        <td>ererwefwefefew</td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+		                      </tr>
+		                      <tr>
+		                        <td>1</td>
+		                        <td>qqwd</td>
+		                        <td>qwrdwefdewfe</td>           
+		                        <td>ererwefwefefew</td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+		                      </tr>		                      		                      		                      
+		                    </tbody>
+		                  </table>
 	                </div>
 	            </div>
 	          </div>
@@ -132,6 +155,7 @@
 	  <script type="text/javascript" src="<spring:url value='../../resources/lib/jquery/jquery2.2.4.min.js'/>"></script>
 	  <script type="text/javascript" src="<spring:url value='../../resources/lib/jquery/jquery-ui.min.js'/>"></script>
 	  <script type="text/javascript" src="<spring:url value='../../resources/js/util.js'/>"></script>
+	  <script type="text/javascript" src="<spring:url value='../../resources/lib/dataTables/jquery.dataTables.min.js'/>"></script>
 	  <script type="text/javascript" src="<spring:url value='../../resources/js/_sn.js'/>"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	</body>

@@ -24599,3 +24599,26 @@ span.forum-item-title {
    	min-height: 650px;
   }
 }  */
+
+.footer {    
+	background-color: #f9f9f9;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    bottom: 0px;
+    color: #58666e;
+    text-align: left !important;
+    padding: 20px 0px;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+}
+.ta-center {
+    text-align: center;
+}
+.forum-icon .glyphicon {
+    font-size: 30px;
+    margin-top: 8px;
+    color: #9b9b9b;
+}
+.txt-red{
+	color: red;
+}

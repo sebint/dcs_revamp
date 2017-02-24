@@ -165,8 +165,9 @@
 												Home Page <div class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></div>
 											</span>	
 											 <label class="field select">
-											 <form:select path="">
-											 
+											 <form:select path="intRoleHome">
+											 		<form:option value="" label="Please Select" selected="selected"/>
+						                          	<%-- <form:options items="${menuOptions}" itemValue="intMenuMasterId" itemLabel="strMenuName"/>  --%>
 											 </form:select>
 <!-- 											  <s:select key="intRoleHome" id="intRoleHome"
 													headerKey="-1" headerValue="Select Home url"
