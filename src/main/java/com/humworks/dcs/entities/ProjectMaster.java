@@ -17,6 +17,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_pjct_template_master")
@@ -35,15 +36,19 @@ public class ProjectMaster implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer projectMasterId;
 	
+	@NotEmpty
 	@Column(name = "PJCT_NAME", unique = true, nullable = false)
 	private String projectName;
 	
+	@NotEmpty
 	@Column(name = "PJCT_DESC", nullable = false)
 	private String projectDesc;
 	
+	@NotEmpty
 	@Column(name = "USER_MASTER_ID", nullable = false)
 	private Integer userMasterId;
 	
+	@NotEmpty
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
 	

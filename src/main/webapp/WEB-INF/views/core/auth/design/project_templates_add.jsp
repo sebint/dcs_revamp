@@ -153,6 +153,7 @@
 												<label class="field select">
 													<form:select path="userMasterId">
 					                          			<form:option value="" label="Please Select" selected="selected"/>
+					                          			<form:options items="${userList}" itemValue="intUserId" itemLabel="strUserName"/> 
 					                          		</form:select> 
 					                          		<i class="arrow double"></i>
 												</label>										
@@ -174,10 +175,10 @@
 											   </c:if>	
 												<div class="section">
 													<label for="startDate" class="field prepend-icon"> 
-													   <form:input path="startDate" id="startDate" cssClass="gui-input br5" placeholder="Start Date"></form:input>
-															<label for="startDate" class="field-icon"> 
-																<i class="glyphicon glyphicon-pencil"></i>
-															</label>
+													   <form:input path="startDate" id="startDate" cssClass="gui-input br5 datepicker" readonly="readonly" placeholder="Start Date"></form:input>
+									                          <label class="field-icon">
+									                            <i class="fa fa-calendar-o"></i>
+									                          </label>
 													</label>			                          
 						                        </div>
 					                        </spring:bind>
@@ -197,7 +198,7 @@
 											   </c:if>	
 												<div class="section">
 													<label for="endDate" class="field prepend-icon"> 
-													   <form:input path="endDate" id="endDate" cssClass="gui-input br5" placeholder="End Date"></form:input>
+													   <form:input path="endDate" id="endDate" cssClass="gui-input br5 datepicker" readonly="readonly" placeholder="End Date"></form:input>
 															<label for="endDate" class="field-icon"> 
 																<i class="glyphicon glyphicon-pencil"></i>
 															</label>
@@ -214,7 +215,7 @@
 											<span class="btn-text">Save</span></button>
 										<button type="submit" name="mode" value="save_continue" class="button btn-primary br3"><i class="fa fa-check"></i> 
 											<span class="btn-text">Save and Continue</span></button>
-										<a href="<spring:url value="/security/user/"/>" class="button br3">
+										<a href="<spring:url value="/design/templates/"/>" class="button br3">
 											<i class="fa fa-close"></i> Cancel
 									   </a>
 									</div>
@@ -240,7 +241,23 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui-datepicker/jquery-ui-datepicker.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/user.js"></script>	  
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	    $(".datepicker").datepicker({
+	        prevText: '<i class="fa fa-chevron-left"></i>',
+	        nextText: '<i class="fa fa-chevron-right"></i>',
+	        showButtonPanel: false,
+	        beforeShow: function(input, inst) {
+	          var newclass = 'admin-form';
+	          var themeClass = $(this).parents('.admin-form').attr('class');
+	          var smartpikr = inst.dpDiv.parent();
+	          if (!smartpikr.hasClass(themeClass)) {
+	            inst.dpDiv.wrap('<div class="' + themeClass + '"></div>');
+	          }
+	        }
+	      });
+	  </script>
 	</body>
 </html>
