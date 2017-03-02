@@ -108,6 +108,22 @@ public class ProjectTemplatesController {
 		}
 	}
 	
+	@GetMapping("delete/{projectMasterId}")
+	public String delete(@PathVariable Integer projectMasterId, final RedirectAttributes redirectAttributes) throws Exception{
+		final ProjectMaster project = projectService.findById(projectMasterId);
+		if(project==null){
+			throw new ResourceNotFoundException(projectMasterId.toString());
+		}
+		try{
+			projectService.delete(project);
+			redirectAttributes.addFlashAttribute("message", "<strong>"+project.getProjectName()+"</strong> deleted successfully.");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unable to delete <strong>"+project.getProjectName()+"</strong>. Try again later.");
+		}
+		return "redirect:/design/templates/";
+	}
+	
 	@ModelAttribute("project")
 	public ProjectMaster getProject(){
 		return new ProjectMaster();

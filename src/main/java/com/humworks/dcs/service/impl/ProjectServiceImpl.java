@@ -47,14 +47,14 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void delete(ProjectMaster project) {
-		// TODO Auto-generated method stub
+		projectDao.deleteProject(project);
 
 	}
 
 	@Override
 	public ProjectMaster findById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return projectDao.findById(id);
 	}
 
 	@Override

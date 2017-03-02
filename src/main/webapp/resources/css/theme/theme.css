@@ -24625,3 +24625,6 @@ span.forum-item-title {
 .t-t-capt{
 	text-transform: capitalize !important;
 }
+.alert > span > strong{
+	text-transform: capitalize;
+}

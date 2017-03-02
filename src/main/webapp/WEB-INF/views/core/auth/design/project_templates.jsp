@@ -12,7 +12,7 @@
 		<title>MPXD Data Capture System</title>
 		<link rel="shortcut icon" type="image/ico" href="${pageContext.request.contextPath}/resources/img/fav.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
-		<link rel="stylesheet" type="text/css" href="<spring:url value='../../resources/css/theme/theme.css'/>">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/theme/theme.css">
 	</head>
 	<body class="sb-top sb-top-sm">
 	  <!-- Start: Main -->
@@ -111,7 +111,7 @@
 									<td><fmt:formatDate value="${project.startDate}" pattern="dd-MMM-YYYY" /></td>
 									<td><fmt:formatDate value="${project.endDate}" pattern="dd-MMM-YYYY" /></td>
 									<td><a href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}" class="sr-update"><span class="glyphicon glyphicon-edit"></span></a></td>
-									<td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+									<td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${project.projectName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete Project" href="<spring:url value="/design/templates/delete"/>/${project.projectMasterId}"><span class="glyphicon glyphicon-trash">&nbsp;</span></a></td>
 								</tr>
 							</c:forEach>                   		                      		                      
 		                    </tbody>
@@ -132,11 +132,13 @@
 	
 	  <!-- BEGIN: PAGE SCRIPTS -->	
 	  <!-- jQuery -->
-	  <script type="text/javascript" src="<spring:url value='../../resources/lib/jquery/jquery2.2.4.min.js'/>"></script>
-	  <script type="text/javascript" src="<spring:url value='../../resources/lib/jquery/jquery-ui.min.js'/>"></script>
-	  <script type="text/javascript" src="<spring:url value='../../resources/js/util.js'/>"></script>
-	  <script type="text/javascript" src="<spring:url value='../../resources/lib/dataTables/jquery.dataTables.min.js'/>"></script>
-	  <script type="text/javascript" src="<spring:url value='../../resources/js/_sn.js'/>"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery-ui.min.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
+	   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	</body>
 </html>

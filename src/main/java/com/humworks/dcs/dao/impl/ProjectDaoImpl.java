@@ -34,8 +34,7 @@ public class ProjectDaoImpl extends AbstractDao<Integer, ProjectMaster> implemen
 
 	@Override
 	public void deleteProject(ProjectMaster project) {
-		// TODO Auto-generated method stub
-
+		delete(project);
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class ProjectDaoImpl extends AbstractDao<Integer, ProjectMaster> implemen
 	@Override
 	public ProjectMaster findById(Integer pid) {
 		// TODO Auto-generated method stub
-		return null;
+		return getByKey(pid);
 	}
 
 	@Override
