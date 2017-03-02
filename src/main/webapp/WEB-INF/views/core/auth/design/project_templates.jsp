@@ -138,7 +138,6 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
-	   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	</body>
 </html>
