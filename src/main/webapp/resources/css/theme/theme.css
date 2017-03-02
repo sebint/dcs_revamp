@@ -24622,3 +24622,6 @@ span.forum-item-title {
 .txt-red{
 	color: red;
 }
+.t-t-capt{
+	text-transform: capitalize !important;
+}

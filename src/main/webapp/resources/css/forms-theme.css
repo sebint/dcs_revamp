@@ -1588,7 +1588,7 @@
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #DDD;
+  border: 1px solid #B5D4F3;
   z-index: 1025 !important;
   text-align: center;
   color: #666;
@@ -1617,7 +1617,7 @@
   position: absolute;
   text-decoration: none;
   cursor: pointer;
-  color: #666;
+  color: #3EA4D4;
   top: 20.5%;
 }
 .ui-datepicker .ui-datepicker-prev {
@@ -1630,7 +1630,7 @@
   margin: 0 2.3em;
   line-height: 1.8em;
   text-align: center;
-  color: #555;
+  color: #3EA4D4;
 }
 .ui-datepicker .ui-datepicker-title select {
   font-size: 1em;
@@ -1686,10 +1686,10 @@
 .ui-datepicker .ui-state-highlight {
   font-weight: 600;
   color: #fff;
-  background: #CCC !important;
+  background: #B8D5ED !important;
 }
 .ui-datepicker .ui-state-active {
-  background: #888 !important;
+  background: #3D79AA !important;
 }
 /* jQuery UI Buttons */
 .ui-datepicker-buttonpane {

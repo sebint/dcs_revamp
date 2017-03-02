@@ -14,6 +14,9 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) {
 		ModelAndView mav = new ModelAndView();
+		//remove later
+		exception.printStackTrace();
+		//
 		mav.setViewName("error/500");
 		return mav;
 	}

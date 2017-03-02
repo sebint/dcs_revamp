@@ -2,6 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -46,6 +48,28 @@
 	      <section id="content" class="animated fadeIn">
 	
 	       <div class="row">
+       		<c:if test="${not empty error}">
+	        	<div class="col-md-12">	
+					<div class="section animated fadeIn">
+						<div class="alert alert-danger alert-dismissable mt10">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+								<span>${error}</span>
+						</div>
+					</div>
+				</div>        
+	        </c:if>
+	        <c:if test="${not empty message}">
+	        	<div class="col-md-12">	
+					<div class="section animated fadeIn">
+						<div class="alert alert-success alert-dismissable mt10">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+								<span>${message}</span>
+						</div>
+					</div>
+				</div>	        
+	        </c:if>	 
 	        <div class="col-md-12">
 	        	 	<div class="panel panel-visible bt-gray">
 	        	 		<div class="panel-body">
@@ -65,7 +89,7 @@
 	          <div class="col-md-12">
 	             <div class="panel panel-visible bt-green" id="spy1"> 
 	                <div class="panel-body">
-		                <spring:url value="/security/object/update" var="url"/>
+		                <spring:url value="/design/templates" var="url"/>
 		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
 		                    <thead>
 		                      <tr>
@@ -79,60 +103,17 @@
 		                      </tr>
 		                    </thead>
 		                    <tbody>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>12-10-2017</td>
-		                        <td>12-10-2018</td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>12-10-2017</td>
-		                        <td>12-10-2018</td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>12-10-2017</td>
-		                        <td>12-10-2018</td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>12-10-2017</td>
-		                        <td>12-10-2018</td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>12-10-2017</td>
-		                        <td>12-10-2018</td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>12-10-2017</td>
-		                        <td>12-10-2018</td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                        <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>	                      		                      		                      
+							<c:forEach items="${projectList}" var="project" varStatus="counter">
+							 	<tr>
+									<td>${counter.index+1}</td>
+									<td>${project.projectName}</td>
+									<td>${project.user.strFirstName} ${project.user.strLastName}</td>
+									<td><fmt:formatDate value="${project.startDate}" pattern="dd-MMM-YYYY" /></td>
+									<td><fmt:formatDate value="${project.endDate}" pattern="dd-MMM-YYYY" /></td>
+									<td><a href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}" class="sr-update"><span class="glyphicon glyphicon-edit"></span></a></td>
+									<td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+								</tr>
+							</c:forEach>                   		                      		                      
 		                    </tbody>
 		                  </table>
 	                </div>

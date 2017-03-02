@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
@@ -18,6 +21,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tbl_pjct_template_master")
@@ -44,15 +48,17 @@ public class ProjectMaster implements Serializable {
 	@Column(name = "PJCT_DESC", nullable = false)
 	private String projectDesc;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "USER_MASTER_ID", nullable = false)
 	private Integer userMasterId;
 	
-	@NotEmpty
+	@NotNull
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
 	
-	@Column(name = "END_DATE", nullable = false)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column(name = "END_DATE")
 	private Date endDate;
 	
 	@Column(name = "CREATED_BY", updatable = false)
@@ -70,6 +76,10 @@ public class ProjectMaster implements Serializable {
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
+	
+	@ManyToOne
+    @JoinColumn(name="USER_MASTER_ID", insertable = false, updatable = false)
+    private User user;
 
 	public Integer getProjectMasterId() {
 		return projectMasterId;
@@ -151,12 +161,20 @@ public class ProjectMaster implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectMaster [projectMasterId=" + projectMasterId + ", projectName=" + projectName + ", projectDesc="
 				+ projectDesc + ", userMasterId=" + userMasterId + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", user=" + user + "]";
 	}
 
 	@Override
@@ -172,6 +190,7 @@ public class ProjectMaster implements Serializable {
 		result = prime * result + ((projectMasterId == null) ? 0 : projectMasterId.hashCode());
 		result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((userMasterId == null) ? 0 : userMasterId.hashCode());
 		return result;
 	}
@@ -230,6 +249,11 @@ public class ProjectMaster implements Serializable {
 				return false;
 		} else if (!startDate.equals(other.startDate))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		if (userMasterId == null) {
 			if (other.userMasterId != null)
 				return false;
@@ -237,6 +261,7 @@ public class ProjectMaster implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 	
 }
