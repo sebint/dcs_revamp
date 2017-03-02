@@ -127,7 +127,7 @@ public class UserController {
 				if(userService.update(user)>0){
 					redirectAttributes.addFlashAttribute("message", "<strong>"+strUserName+"</strong> Updated Successfully.");
 				}else{
-					redirectAttributes.addFlashAttribute("error", "Unable to Update <strong>"+strUserName+"</strong>. Try again later.");
+					redirectAttributes.addFlashAttribute("error", "Unable to Update user <strong>"+strUserName+"</strong>. Try again later.");
 				}
 			}else{
 				throw new InternalServerException(new Exception("No Primary Key found for User"));

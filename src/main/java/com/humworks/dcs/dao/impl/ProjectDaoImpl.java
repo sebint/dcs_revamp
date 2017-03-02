@@ -22,8 +22,14 @@ public class ProjectDaoImpl extends AbstractDao<Integer, ProjectMaster> implemen
 
 	@Override
 	public Integer updateProject(ProjectMaster project) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			update(project);
+			return 1;
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return 0;
+		}
+		
 	}
 
 	@Override
@@ -50,7 +56,7 @@ public class ProjectDaoImpl extends AbstractDao<Integer, ProjectMaster> implemen
 			CriteriaBuilder cb = createCriteriaQuery();
 			CriteriaQuery<ProjectMaster> cq = cb.createQuery(ProjectMaster.class);
 			Root<ProjectMaster> root = cq.from(ProjectMaster.class);
-			cq.where(cb.equal(cb.lower(root.get("projectName")), projectName.replace('-', ' ').toLowerCase()));
+			cq.where(cb.equal(cb.lower(root.get("projectName")), projectName));
 	        return (ProjectMaster) getSession().createQuery(cq).getSingleResult();
 		}catch(javax.persistence.NoResultException nr){
 			return null;

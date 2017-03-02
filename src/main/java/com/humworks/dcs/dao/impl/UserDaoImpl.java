@@ -56,8 +56,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@Override
-	public Integer updateUser(User user) {
-		
+	public Integer updateUser(User user) {		
 		String hql = "UPDATE User SET strFirstName = :strFirstName,strLastName =:strLastName, "
 					+ "strEmail = :strEmail, strDeptName= :strDeptName, "
 					+ "boolPwdChange =:boolPwdChange, boolLockPwd =:boolLockPwd, "

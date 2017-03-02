@@ -31,8 +31,18 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public Integer update(ProjectMaster project) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			   Integer currentUser = sessionService.getActiveUid();
+			   project.setIntModifiedBy(currentUser);
+			   if(projectDao.updateProject(project)>0){
+			    	   return 1;
+			   }
+//			   userDao.transactionRollback();
+			   return 0;
+			}catch(Exception ex){
+				ex.printStackTrace();
+				return 0;
+			}
 	}
 
 	@Override
@@ -50,7 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public ProjectMaster findByName(String projectName) {
 		// TODO Auto-generated method stub
-		return projectDao.findByName(projectName);
+		return projectDao.findByName(projectName.replace('-', ' ').toLowerCase());
 	}
 
 	@Override

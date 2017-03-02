@@ -81,10 +81,10 @@
                 	<div class="panel-body">
                 	 		<c:choose>
 	                			<c:when test="${!empty(projectName)}">
-	                				<spring:url value="/security/user/${projectName}" var="url_alt"/>
+	                				<spring:url value="/design/templates/${projectName}" var="url_alt"/>
 	                			</c:when>
 	                			<c:otherwise>
-	                				<spring:url value="/security/user/new" var="url_alt"/>
+	                				<spring:url value="/design/templates/new" var="url_alt"/>
 	                			</c:otherwise>
 	                		</c:choose>
 							<div class="mpxd theme-primary mw1000 center-block">

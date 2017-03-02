@@ -21,6 +21,7 @@ import com.humworks.dcs.entities.User;
 import com.humworks.dcs.exception.ResourceNotFoundException;
 import com.humworks.dcs.service.ProjectService;
 import com.humworks.dcs.service.UserService;
+import com.humworks.dcs.validators.ProjectValidators;
 
 @Controller
 @RequestMapping("/design/templates/")
@@ -34,6 +35,9 @@ public class ProjectTemplatesController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private ProjectValidators projectValidator;
 
 	@GetMapping(value={"/","list"})
 	public String list(Model model){
@@ -48,18 +52,19 @@ public class ProjectTemplatesController {
 	@PostMapping("new")
 	public String saveAdd(@RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("project") ProjectMaster project, BindingResult result){
 		try{
+			projectValidator.validate(project, result);
 			if (result.hasErrors()) {
 				return add;
 			}
 			if(projectService.save(project)>0){
 				redirectAttributes.addFlashAttribute("message", "Project Created Successfully.");
 			}else{
-				redirectAttributes.addFlashAttribute("error", "Unable to Create User. Try again later.");
+				redirectAttributes.addFlashAttribute("error", "Unable to Create Project. Try again later.");
 			}
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
-			redirectAttributes.addFlashAttribute("error", "Unable to Create User. Try again later.");
+			redirectAttributes.addFlashAttribute("error", "Unable to Create Project. Try again later.");
 			return "redirect:/design/templates/new";
 		}
 		if(mode.equals("save")){			
@@ -77,6 +82,30 @@ public class ProjectTemplatesController {
 		}
 		model.addAttribute("project", project);
 		return add;
+	}
+	
+	@PostMapping("{projectName}")
+	 public String updateProject(@PathVariable("projectName") String projectName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("project") ProjectMaster project, BindingResult result){
+		try{
+			projectValidator.validate(project, result);
+			if (result.hasErrors()) {
+				return add;
+			}
+			if(projectService.update(project)>0){
+				redirectAttributes.addFlashAttribute("message", "<strong>"+projectName.replace("-", " ")+"</strong> Updated Successfully.");
+			}else{
+				redirectAttributes.addFlashAttribute("error", "Unable to Update Project <strong>"+projectName.replace("-", " ")+"</strong>. Try again later.");
+			}
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
+		}
+		if(mode.equals("save")){			
+			return "redirect:/design/templates/";
+		}else{
+			return "redirect:/design/templates/"+projectName;
+		}
 	}
 	
 	@ModelAttribute("project")
