@@ -108,6 +108,7 @@
 													<label class="field select">
 														<form:select path="projectMasterId">
 						                          			<form:option value="" label="Please Select" selected="selected"/>
+						                          			<form:options items="${projectList}" itemValue="projectMasterId" itemLabel="projectName" />
 						                          		</form:select> 	
 						                          		<i class="arrow double"></i>																							
 													</label>
@@ -153,6 +154,7 @@
 												<label class="field select">
 													<form:select path="jounralOwner">
 					                          			<form:option value="" label="Please Select" selected="selected"/>
+					                          			<form:options items="${userList}" itemValue="intUserId" itemLabel="strUserName"/>
 					                          		</form:select> 
 					                          		<i class="arrow double"></i>
 												</label>										
@@ -176,6 +178,7 @@
 						                          <label class="field select">
 													<form:select path="validatorId">
 					                          			<form:option value="" label="Please Select" selected="selected"/>
+					                          			<form:options items="${userList}" itemValue="intUserId" itemLabel="strUserName"/>
 					                          		</form:select> 
 					                          		<i class="arrow double"></i>
 						                          </label>				                          
@@ -199,6 +202,7 @@
 													<label class="field select">
 														<form:select path="dataEntryId">
 						                          			<form:option value="" label="Please Select" selected="selected"/>
+						                          			<form:options items="${userList}" itemValue="intUserId" itemLabel="strUserName"/>
 						                          		</form:select> 
 						                          		<i class="arrow double"></i>
 													</label>													
@@ -223,6 +227,7 @@
 													<label class="field select">
 														<form:select path="reminderFreq">
 						                          			<form:option value="" label="Please Select" selected="selected"/>
+						                          			<form:options items="${frequencyList}" itemValue="frequencyMasterId" itemLabel="frequencyName"/>
 						                          		</form:select> 
 						                          		<i class="arrow double"></i>
 													</label>													

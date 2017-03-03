@@ -8,9 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
@@ -36,7 +39,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer nonProgressiveMasterId;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "PJCT_TEMPLATE_MASTER_ID")
 	private Integer projectMasterId;
 	
@@ -44,23 +47,24 @@ public class NonProgressiveJournalMaster implements Serializable {
 	@Column(name = "JRNL_NAME")
 	private String journalName;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "OWNER")
 	private Integer jounralOwner;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "VAL_ID")
 	private Integer validatorId;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "DTETR_OPERATOR_ID")
 	private Integer dataEntryId;
 	
 	@Column(name = "STATUS")
-	private String status;
+	private Integer status;
 	
 	@Column(name = "REMAINDER_FREQUENCY")
-	private String reminderFreq;
+	private Integer reminderFreq;
+	
 	@Column(name = "CREATED_BY", updatable = false)
 	private Integer intCreatedBy;
 
@@ -76,6 +80,10 @@ public class NonProgressiveJournalMaster implements Serializable {
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
+	
+	@ManyToOne
+    @JoinColumn(name="PJCT_TEMPLATE_MASTER_ID", insertable = false, updatable = false)
+    private NonProgressiveJournalMaster nonProgressive;
 
 	public Integer getNonProgressiveMasterId() {
 		return nonProgressiveMasterId;
@@ -101,11 +109,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return dataEntryId;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public String getReminderFreq() {
+	public Integer getReminderFreq() {
 		return reminderFreq;
 	}
 
@@ -123,6 +131,10 @@ public class NonProgressiveJournalMaster implements Serializable {
 
 	public Date getDtDateModified() {
 		return dtDateModified;
+	}
+
+	public NonProgressiveJournalMaster getNonProgressive() {
+		return nonProgressive;
 	}
 
 	public void setNonProgressiveMasterId(Integer nonProgressiveMasterId) {
@@ -149,11 +161,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 		this.dataEntryId = dataEntryId;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public void setReminderFreq(String reminderFreq) {
+	public void setReminderFreq(Integer reminderFreq) {
 		this.reminderFreq = reminderFreq;
 	}
 
@@ -173,13 +185,17 @@ public class NonProgressiveJournalMaster implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
+	public void setNonProgressive(NonProgressiveJournalMaster nonProgressive) {
+		this.nonProgressive = nonProgressive;
+	}
+
 	@Override
 	public String toString() {
 		return "NonProgressiveJournalMaster [nonProgressiveMasterId=" + nonProgressiveMasterId + ", projectMasterId="
 				+ projectMasterId + ", journalName=" + journalName + ", jounralOwner=" + jounralOwner + ", validatorId="
 				+ validatorId + ", dataEntryId=" + dataEntryId + ", status=" + status + ", reminderFreq=" + reminderFreq
 				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", nonProgressive=" + nonProgressive + "]";
 	}
 
 	@Override
@@ -193,6 +209,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
 		result = prime * result + ((jounralOwner == null) ? 0 : jounralOwner.hashCode());
 		result = prime * result + ((journalName == null) ? 0 : journalName.hashCode());
+		result = prime * result + ((nonProgressive == null) ? 0 : nonProgressive.hashCode());
 		result = prime * result + ((nonProgressiveMasterId == null) ? 0 : nonProgressiveMasterId.hashCode());
 		result = prime * result + ((projectMasterId == null) ? 0 : projectMasterId.hashCode());
 		result = prime * result + ((reminderFreq == null) ? 0 : reminderFreq.hashCode());
@@ -245,6 +262,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 				return false;
 		} else if (!journalName.equals(other.journalName))
 			return false;
+		if (nonProgressive == null) {
+			if (other.nonProgressive != null)
+				return false;
+		} else if (!nonProgressive.equals(other.nonProgressive))
+			return false;
 		if (nonProgressiveMasterId == null) {
 			if (other.nonProgressiveMasterId != null)
 				return false;
@@ -273,5 +295,8 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return true;
 	}
 	
+	
+	
+
 	
 }

@@ -80,60 +80,17 @@
 		                      </tr>
 		                    </thead>
 		                    <tbody>
+		                    <c:forEach items="${nonProgressiveList}" var="nonList" varStatus="counter">
 		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
+		                        <td>${counter.index+1}</td>
+		                        <td>${nonList.nonProgressive.projectName} </td>
 		                        <td>qwrdwefdewfe</td>           
 		                        <td>ererwefwefefew</td>
 		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
 		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
 		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                       <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>ererwefwefefew</td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>ererwefwefefew</td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>ererwefwefefew</td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>ererwefwefefew</td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>
-		                      <tr>
-		                        <td>1</td>
-		                        <td>qqwd</td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>ererwefwefefew</td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>		                      		                      		                      
+		                      </tr>  
+		                      </c:forEach>		                      		                      
 		                    </tbody>
 		                  </table>
 	                </div>
