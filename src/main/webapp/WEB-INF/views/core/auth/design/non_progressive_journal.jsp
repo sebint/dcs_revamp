@@ -48,6 +48,28 @@
 	      <section id="content" class="animated fadeIn">
 	
 	       <div class="row">
+	       	<c:if test="${ not empty error}">
+	        	<div class="col-md-12">	
+					<div class="section animated fadeIn">
+						<div class="alert alert-danger alert-dismissable mt10">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+								<span>${error}</span>
+						</div>
+					</div>
+				</div>        
+	        </c:if>
+	        <c:if test="${ not empty message}">
+	        	<div class="col-md-12">	
+					<div class="section animated fadeIn">
+						<div class="alert alert-success alert-dismissable mt10">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+								<span>${message}</span>
+						</div>
+					</div>
+				</div>	        
+	        </c:if>	
 	        <div class="col-md-12">
 	        	 	<div class="panel panel-visible bt-red" id="spy1">
 	        	 		<div class="panel-body">

@@ -72,10 +72,11 @@ public class NonProgressiveJournalController {
 	}
 	
 	@PostMapping("{journalName}")
-	public String update(@PathVariable("journalName") String journalName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("nonprogressive") NonProgressiveJournalMaster nonProgressive, BindingResult result)throws Exception{
+	public String update(@PathVariable("journalName") String journalName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("nonprogressive") NonProgressiveJournalMaster nonProgressive, BindingResult result){
 		try{
 			nonJournalValidators.validate(nonProgressive, result);
 			if (result.hasErrors()) {
+				System.out.println("in"+nonProgressive);
 				return add;
 			}
 			if(nonProgressiveService.update(nonProgressive)>0){
