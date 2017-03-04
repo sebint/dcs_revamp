@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -66,7 +67,7 @@
 	          <div class="col-md-12">
 	             <div class="panel panel-visible bt-blue" id="spy1"> 
 	                <div class="panel-body">
-		                <spring:url value="/security/object/update" var="url"/>
+		                <spring:url value="/design/non-progressive" var="url"/>
 		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
 		                    <thead>
 		                      <tr>
@@ -80,17 +81,19 @@
 		                      </tr>
 		                    </thead>
 		                    <tbody>
-		                    <c:forEach items="${nonProgressiveList}" var="nonList" varStatus="counter">
-		                      <tr>
-		                        <td>${counter.index+1}</td>
-		                        <td>${nonList.nonProgressive.projectName} </td>
-		                        <td>qwrdwefdewfe</td>           
-		                        <td>ererwefwefefew</td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-		                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-		                      </tr>  
-		                      </c:forEach>		                      		                      
+			                    <c:if test="${fn:length(nonProgressiveList) gt 0}">
+				                    <c:forEach items="${nonProgressiveList}" var="nonList" varStatus="counter">
+				                      <tr>
+				                        <td>${counter.index+1}</td>
+				                        <td>${nonList.project.projectName}</td>
+				                        <td>${nonList.journalName}</td>           
+				                        <td>${nonList.user.strFirstName} ${nonList.user.strLastName}</td>
+				                         <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}"><span class="glyphicon glyphicon-edit"></span></a></td>
+				                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+				                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+				                      </tr>  
+				                      </c:forEach>	
+			                      </c:if>	                      		                      
 		                    </tbody>
 		                  </table>
 	                </div>

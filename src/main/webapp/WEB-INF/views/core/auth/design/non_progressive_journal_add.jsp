@@ -115,6 +115,7 @@
 												</div>
 											</spring:bind>	
 										</div>
+										<form:hidden path="nonProgressiveMasterId"/>
 										<div class="col-md-6">																		 
 											<spring:bind path="journalName">
 											   <c:if test="${status.error}">

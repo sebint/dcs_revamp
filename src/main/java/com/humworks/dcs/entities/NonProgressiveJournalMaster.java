@@ -3,8 +3,10 @@ package com.humworks.dcs.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -44,7 +47,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 	private Integer projectMasterId;
 	
 	@NotEmpty
-	@Column(name = "JRNL_NAME")
+	@Column(name = "JRNL_NAME", unique = true, nullable = false)
 	private String journalName;
 	
 	@NotNull
@@ -83,7 +86,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 	
 	@ManyToOne
     @JoinColumn(name="PJCT_TEMPLATE_MASTER_ID", insertable = false, updatable = false)
-    private NonProgressiveJournalMaster nonProgressive;
+    private ProjectMaster project;
+	
+	@ManyToOne
+    @JoinColumn(name="OWNER", insertable = false, updatable = false)
+    private User user;
 
 	public Integer getNonProgressiveMasterId() {
 		return nonProgressiveMasterId;
@@ -133,8 +140,12 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return dtDateModified;
 	}
 
-	public NonProgressiveJournalMaster getNonProgressive() {
-		return nonProgressive;
+	public ProjectMaster getProject() {
+		return project;
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	public void setNonProgressiveMasterId(Integer nonProgressiveMasterId) {
@@ -185,8 +196,12 @@ public class NonProgressiveJournalMaster implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
-	public void setNonProgressive(NonProgressiveJournalMaster nonProgressive) {
-		this.nonProgressive = nonProgressive;
+	public void setProject(ProjectMaster project) {
+		this.project = project;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -195,7 +210,8 @@ public class NonProgressiveJournalMaster implements Serializable {
 				+ projectMasterId + ", journalName=" + journalName + ", jounralOwner=" + jounralOwner + ", validatorId="
 				+ validatorId + ", dataEntryId=" + dataEntryId + ", status=" + status + ", reminderFreq=" + reminderFreq
 				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", nonProgressive=" + nonProgressive + "]";
+				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", project=" + project + ", user=" + user
+				+ "]";
 	}
 
 	@Override
@@ -209,11 +225,12 @@ public class NonProgressiveJournalMaster implements Serializable {
 		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
 		result = prime * result + ((jounralOwner == null) ? 0 : jounralOwner.hashCode());
 		result = prime * result + ((journalName == null) ? 0 : journalName.hashCode());
-		result = prime * result + ((nonProgressive == null) ? 0 : nonProgressive.hashCode());
 		result = prime * result + ((nonProgressiveMasterId == null) ? 0 : nonProgressiveMasterId.hashCode());
+		result = prime * result + ((project == null) ? 0 : project.hashCode());
 		result = prime * result + ((projectMasterId == null) ? 0 : projectMasterId.hashCode());
 		result = prime * result + ((reminderFreq == null) ? 0 : reminderFreq.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((validatorId == null) ? 0 : validatorId.hashCode());
 		return result;
 	}
@@ -262,15 +279,15 @@ public class NonProgressiveJournalMaster implements Serializable {
 				return false;
 		} else if (!journalName.equals(other.journalName))
 			return false;
-		if (nonProgressive == null) {
-			if (other.nonProgressive != null)
-				return false;
-		} else if (!nonProgressive.equals(other.nonProgressive))
-			return false;
 		if (nonProgressiveMasterId == null) {
 			if (other.nonProgressiveMasterId != null)
 				return false;
 		} else if (!nonProgressiveMasterId.equals(other.nonProgressiveMasterId))
+			return false;
+		if (project == null) {
+			if (other.project != null)
+				return false;
+		} else if (!project.equals(other.project))
 			return false;
 		if (projectMasterId == null) {
 			if (other.projectMasterId != null)
@@ -287,6 +304,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		if (validatorId == null) {
 			if (other.validatorId != null)
 				return false;
@@ -294,9 +316,6 @@ public class NonProgressiveJournalMaster implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
-	
+
 }
