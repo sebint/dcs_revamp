@@ -23,14 +23,14 @@ public class NonProgressiveJournalValidators implements Validator {
 	@Override
 	public void validate(Object journal, Errors errors) {
 		NonProgressiveJournalMaster journalMaster = (NonProgressiveJournalMaster) journal;
-		NonProgressiveJournalMaster jrnal = nonProgressiveService.findByName(journalMaster.getJournalName());
+		NonProgressiveJournalMaster jrnal = nonProgressiveService.findByName(journalMaster.getJournalName(), journalMaster.getProjectMasterId());
 		if(journalMaster.getNonProgressiveMasterId()==null){
-			if(jrnal!=null){
+			if(jrnal!=null && jrnal.getProjectMasterId().equals(journalMaster.getProjectMasterId())){
 				errors.rejectValue("journalName", "journal.exist");
 			}
 		}else{
 			if(jrnal!=null){
-				if(jrnal.getNonProgressiveMasterId() != journalMaster.getNonProgressiveMasterId()){
+				if(jrnal.getNonProgressiveMasterId() != journalMaster.getNonProgressiveMasterId() && jrnal.getProjectMasterId().equals(journalMaster.getProjectMasterId())){
 					errors.rejectValue("journalName", "journal.exist");
 				}
 			}

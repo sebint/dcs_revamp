@@ -95,8 +95,7 @@ public class ProjectTemplatesController {
 				redirectAttributes.addFlashAttribute("message", "<strong>"+projectName.replace("-", " ")+"</strong> Updated Successfully.");
 			}else{
 				redirectAttributes.addFlashAttribute("error", "Unable to Update Project <strong>"+projectName.replace("-", " ")+"</strong>. Try again later.");
-			}
-			
+			}			
 		}catch(Exception ex){
 			ex.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");

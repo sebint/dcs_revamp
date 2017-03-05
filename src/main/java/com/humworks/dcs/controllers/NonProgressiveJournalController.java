@@ -33,6 +33,7 @@ public class NonProgressiveJournalController {
 	
 	private final String page = "auth/design/non_progressive_journal";
 	private final String add = "auth/design/non_progressive_journal_add";
+	private final String design = "auth/design/non_progressive_journal_design";
 	
 	@Autowired
 	private NonProgressiveJournalService nonProgressiveService;
@@ -61,9 +62,13 @@ public class NonProgressiveJournalController {
 		return add;
 	}
 	
-	@GetMapping("{journalName}")
-	public String view(@PathVariable("journalName") String journalName, Model model)throws Exception{
-		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName);
+	@GetMapping("{projectName}/{journalName}")
+	public String view(@PathVariable("projectName") String projectName, @PathVariable("journalName") String journalName, Model model)throws Exception{
+		final ProjectMaster project = projectService.findByName(projectName);
+		if(project==null){
+			throw new ResourceNotFoundException(projectName);
+		}
+		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName,project.getProjectMasterId());
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
@@ -71,12 +76,25 @@ public class NonProgressiveJournalController {
 		return add;
 	}
 	
-	@PostMapping("{journalName}")
-	public String update(@PathVariable("journalName") String journalName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("nonprogressive") NonProgressiveJournalMaster nonProgressive, BindingResult result){
+	@GetMapping("{projectName}/{journalName}/design")
+	public String design(@PathVariable("projectName") String projectName, @PathVariable("journalName") String journalName, Model model)throws Exception{
+		final ProjectMaster project = projectService.findByName(projectName);
+		if(project==null){
+			throw new ResourceNotFoundException(projectName);
+		}
+		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName, projectService.findByName(projectName).getProjectMasterId());
+		if(journal==null){
+			throw new ResourceNotFoundException(journalName);
+		}
+		model.addAttribute("nonprogressive", journal);
+		return design;
+	}
+	
+	@PostMapping("{projectName}/{journalName}")
+	public String updateNonProgressive(@PathVariable("projectName") String projectName, @PathVariable("journalName") String journalName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("nonprogressive") NonProgressiveJournalMaster nonProgressive, BindingResult result){
 		try{
 			nonJournalValidators.validate(nonProgressive, result);
 			if (result.hasErrors()) {
-				System.out.println("in"+nonProgressive);
 				return add;
 			}
 			if(nonProgressiveService.update(nonProgressive)>0){
@@ -84,7 +102,8 @@ public class NonProgressiveJournalController {
 			}else{
 				redirectAttributes.addFlashAttribute("error", "Unable to Update Project <strong>"+journalName.replace("-", " ")+"</strong>. Try again later.");
 			}
-			
+		}catch(NullPointerException np){
+			np.printStackTrace();	
 		}catch(Exception ex){
 			ex.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Unsuccessfull.Try again later.");
@@ -118,6 +137,22 @@ public class NonProgressiveJournalController {
 		}else{
 			return "redirect:/design/non-progressive/new";
 		}
+	}
+	
+	@GetMapping("delete/{nonProgressiveMasterId}")
+	public String delete(@PathVariable Integer nonProgressiveMasterId, final RedirectAttributes redirectAttributes) throws Exception{
+		final NonProgressiveJournalMaster journal = nonProgressiveService.findById(nonProgressiveMasterId);
+		if(journal==null){
+			throw new ResourceNotFoundException(nonProgressiveMasterId.toString());
+		}
+		try{
+			nonProgressiveService.delete(journal);
+			redirectAttributes.addFlashAttribute("message", "<strong>"+journal.getJournalName()+"</strong> deleted successfully.");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unable to delete <strong>"+journal.getJournalName()+"</strong>. Try again later.");
+		}
+		return "redirect:/design/non-progressive/";
 	}
 	
 	@ModelAttribute("nonprogressive")

@@ -110,9 +110,9 @@
 				                        <td>${nonList.project.projectName}</td>
 				                        <td>${nonList.journalName}</td>           
 				                        <td>${nonList.user.strFirstName} ${nonList.user.strLastName}</td>
-				                         <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}"><span class="glyphicon glyphicon-edit"></span></a></td>
-				                         <td><a href="#"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-				                         <td><a href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+				                         <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.project.projectName),' ', '-')}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}"><span class="glyphicon glyphicon-edit"></span></a></td>
+				                         <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.project.projectName),' ', '-')}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}/design"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+				                         <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${nonList.journalName}</code></b> permanantly .Continue deleting?" data-title="Delete Non Progressive Journal" href="<spring:url value="/design/non-progressive/delete"/>/${nonList.nonProgressiveMasterId}"><span class="glyphicon glyphicon-trash"></span></a></td>
 				                      </tr>  
 				                      </c:forEach>	
 			                      </c:if>	                      		                      

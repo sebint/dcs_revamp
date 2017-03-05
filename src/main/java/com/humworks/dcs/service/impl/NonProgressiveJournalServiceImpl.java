@@ -35,6 +35,7 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 		try{
 			   Integer currentUser = sessionService.getActiveUid();
 			   nonProgressive.setIntModifiedBy(currentUser);
+			   nonProgressive.setStatus(1);
 			   if(nonProgressiveDao.updateNonProgressive(nonProgressive)>0){
 			    	   return 1;
 			   }
@@ -48,19 +49,18 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 
 	@Override
 	public void delete(NonProgressiveJournalMaster nonProgressive) {
-		// TODO Auto-generated method stub
+		nonProgressiveDao.deleteNonProgressive(nonProgressive);
 
 	}
 
 	@Override
 	public NonProgressiveJournalMaster findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return nonProgressiveDao.findById(id); 
 	}
 
 	@Override
-	public NonProgressiveJournalMaster findByName(String journalName) {
-		return nonProgressiveDao.findByName(journalName.replace('-', ' ').toLowerCase());
+	public NonProgressiveJournalMaster findByName(String journalName, Integer projectMasterId) {
+		return nonProgressiveDao.findByName(journalName.replace('-', ' ').toLowerCase(), projectMasterId);
 	}
 
 	@Override

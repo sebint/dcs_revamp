@@ -14,7 +14,7 @@ public interface NonProgressiveJournalDao {
 	
 	NonProgressiveJournalMaster findById(Integer npid);
      
-	NonProgressiveJournalMaster findByName(String nonProgressiveName);
+	NonProgressiveJournalMaster findByName(String nonProgressiveName, Integer projrctMasterId);
     
     ArrayList<NonProgressiveJournalMaster> selectAll();
     
