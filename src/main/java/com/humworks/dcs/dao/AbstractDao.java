@@ -11,7 +11,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.GeneratorStrategy;
 
 public abstract class AbstractDao<PrimaryKey extends Serializable, T> {
 
