@@ -21,6 +21,7 @@ import com.humworks.dcs.entities.ProjectMaster;
 import com.humworks.dcs.entities.RemainderFrequency;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.exception.ResourceNotFoundException;
+import com.humworks.dcs.service.CommonService;
 import com.humworks.dcs.service.NonProgressiveJournalService;
 import com.humworks.dcs.service.ProjectService;
 import com.humworks.dcs.service.RemainderFrequencyService;
@@ -45,6 +46,9 @@ public class NonProgressiveJournalController {
 	private ProjectService projectService;
 	
 	@Autowired
+	private CommonService commonService;
+	
+	@Autowired
 	private RemainderFrequencyService frequencyService;
 	
 	@Autowired
@@ -62,36 +66,35 @@ public class NonProgressiveJournalController {
 		return add;
 	}
 	
-	@GetMapping("{projectName}/{journalName}")
-	public String view(@PathVariable("projectName") String projectName, @PathVariable("journalName") String journalName, Model model)throws Exception{
-		final ProjectMaster project = projectService.findByName(projectName);
-		if(project==null){
-			throw new ResourceNotFoundException(projectName);
-		}
-		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName,project.getProjectMasterId());
+	@GetMapping("{journalUrl}")
+	public String view(@PathVariable("journalUrl") String journalUrl, Model model)throws Exception{
+		Integer projectMasterId = commonService.getIdFromUrl(journalUrl);
+		String journalName = commonService.getNameFromUrl(journalUrl);
+		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName,projectMasterId);
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
 		model.addAttribute("nonprogressive", journal);
+		model.addAttribute("journalName",journalName);
 		return add;
 	}
 	
-	@GetMapping("{projectName}/{journalName}/design")
-	public String design(@PathVariable("projectName") String projectName, @PathVariable("journalName") String journalName, Model model)throws Exception{
-		final ProjectMaster project = projectService.findByName(projectName);
-		if(project==null){
-			throw new ResourceNotFoundException(projectName);
-		}
-		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName, projectService.findByName(projectName).getProjectMasterId());
+	@GetMapping("{journalUrl}/design")
+	public String design(@PathVariable("journalUrl") String journalUrl, Model model)throws Exception{
+		Integer projectMasterId = commonService.getIdFromUrl(journalUrl);
+		String journalName = commonService.getNameFromUrl(journalUrl);
+		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName, projectMasterId);
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
 		model.addAttribute("nonprogressive", journal);
+		model.addAttribute("journalName",journalName);
 		return design;
 	}
 	
-	@PostMapping("{projectName}/{journalName}")
-	public String updateNonProgressive(@PathVariable("projectName") String projectName, @PathVariable("journalName") String journalName, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("nonprogressive") NonProgressiveJournalMaster nonProgressive, BindingResult result){
+	@PostMapping("{journalUrl}")
+	public String updateNonProgressive(@PathVariable("journalUrl") String journalUrl, @RequestParam String mode, final RedirectAttributes redirectAttributes, @Valid @ModelAttribute("nonprogressive") NonProgressiveJournalMaster nonProgressive, BindingResult result){
+		String journalName = commonService.getNameFromUrl(journalUrl);
 		try{
 			nonJournalValidators.validate(nonProgressive, result);
 			if (result.hasErrors()) {
@@ -139,8 +142,9 @@ public class NonProgressiveJournalController {
 		}
 	}
 	
-	@GetMapping("delete/{nonProgressiveMasterId}")
-	public String delete(@PathVariable Integer nonProgressiveMasterId, final RedirectAttributes redirectAttributes) throws Exception{
+	@GetMapping("delete/{pattern}")
+	public String delete(@PathVariable String pattern, final RedirectAttributes redirectAttributes) throws Exception{
+		Integer nonProgressiveMasterId = commonService.getPatternFromUrl(pattern);
 		final NonProgressiveJournalMaster journal = nonProgressiveService.findById(nonProgressiveMasterId);
 		if(journal==null){
 			throw new ResourceNotFoundException(nonProgressiveMasterId.toString());

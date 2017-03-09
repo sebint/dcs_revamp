@@ -36,7 +36,7 @@
 	              <a href='<spring:url value="/design/non-progressive/"/>'>Non-Progressive Journal</a>
 	            </li>
 	            <li class="crumb-link">
-	            	<a class="t-t-capt" href='<spring:url value="/design/non-progressive/${!empty(projectName)? projectName :  ''}/${!empty(journalName)? journalName :  'new'}"/>'>${!empty(journalName)? (fn:replace(fn:toLowerCase(journalName),'-', ' ')) :  'New'}</a>
+	            	<a class="t-t-capt" href='<spring:url value="/design/non-progressive/${!empty(journalUrl)? journalUrl :  'new'}"/>'>${!empty(journalUrl)? (fn:replace(fn:toLowerCase(journalName),'-', ' ')) :  'New'}</a>
 	            </li>
 	          </ol>
 	        </div>
@@ -78,8 +78,8 @@
 	            <div class="panel panel-visible" id="spy1">
                 	<div class="panel-body">
 	                       	<c:choose>
-	                			<c:when test="${!empty(journalName) && !empty(projectName)}">
-	                				<spring:url value="/design/non-progressive/${projectName}/${journalName}" var="url_alt"/>
+	                			<c:when test="${!empty(journalUrl)}">
+	                				<spring:url value="/design/non-progressive/${journalUrl}" var="url_alt"/>
 	                			</c:when>
 	                			<c:otherwise>
 	                				<spring:url value="/design/non-progressive/new" var="url_alt"/>

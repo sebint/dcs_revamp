@@ -18,6 +18,7 @@
 	  <div id="main">
 		<jsp:include page="../../../fragments/header.jsp"></jsp:include>
 		<jsp:include page="../../../fragments/menu.jsp"></jsp:include>
+		<jsp:useBean id="random" class="java.util.Random" scope="application"/>
 	    <!-- Start: Content-Wrapper -->
 	    <section id="content_wrapper">
 	
@@ -107,12 +108,13 @@
 				                    <c:forEach items="${nonProgressiveList}" var="nonList" varStatus="counter">
 				                      <tr>
 				                        <td>${counter.index+1}</td>
-				                        <td>${nonList.project.projectName}</td>
-				                        <td>${nonList.journalName}</td>           
-				                        <td>${nonList.user.strFirstName} ${nonList.user.strLastName}</td>
-				                         <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.project.projectName),' ', '-')}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}"><span class="glyphicon glyphicon-edit"></span></a></td>
-				                         <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.project.projectName),' ', '-')}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}/design"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
-				                         <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${nonList.journalName}</code></b> permanantly .Continue deleting?" data-title="Delete Non Progressive Journal" href="<spring:url value="/design/non-progressive/delete"/>/${nonList.nonProgressiveMasterId}"><span class="glyphicon glyphicon-trash"></span></a></td>
+				                        <td class="t-t-capt">${nonList.project.projectName}</td>
+				                        <td class="t-t-capt">${nonList.journalName}</td>           
+				                        <td class="t-t-capt">${nonList.user.strFirstName} ${nonList.user.strLastName}</td>
+				                        <c:set var="rand" value="${100+random.nextInt(1000-(100+1))}"/>
+				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}"><span class="glyphicon glyphicon-edit"></span></a></td>
+				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}/design"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
+				                        <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${nonList.journalName}</code></b> permanantly .Continue deleting?" data-title="Delete Non Progressive Journal" href="<spring:url value="/design/non-progressive/delete"/>/${rand}${nonList.nonProgressiveMasterId}"><span class="glyphicon glyphicon-trash"></span></a></td>
 				                      </tr>  
 				                      </c:forEach>	
 			                      </c:if>	                      		                      

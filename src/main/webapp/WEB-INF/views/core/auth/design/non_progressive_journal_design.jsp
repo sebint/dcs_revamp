@@ -38,7 +38,7 @@
 	              <a href='<spring:url value="/design/non-progressive/"/>'>Non-Progressive Journal</a>
 	            </li>
 	            <li class="crumb-link">
-	              <a class="t-t-capt" href='<spring:url value="/design/non-progressive/${projectName}/${journalName}/design"/>'>${journalName}</a>
+	              <a class="t-t-capt" href='<spring:url value="/design/non-progressive/${journalUrl}"/>'>${fn:replace(journalName,'-',' ')}</a>
 	            </li>
 	             <li class="crumb-trail">Design</li>
 	          </ol>
