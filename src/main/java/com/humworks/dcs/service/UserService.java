@@ -6,8 +6,7 @@ import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 
 public interface UserService {
-	
-	
+		
 	void save(User user);
 	
 	Integer update(User user);
