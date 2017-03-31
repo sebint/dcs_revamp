@@ -25,6 +25,7 @@ import com.humworks.dcs.service.CommonService;
 import com.humworks.dcs.service.NonProgressiveJournalService;
 import com.humworks.dcs.service.ProjectService;
 import com.humworks.dcs.service.RemainderFrequencyService;
+import com.humworks.dcs.service.UnitMeasureService;
 import com.humworks.dcs.service.UserService;
 import com.humworks.dcs.validators.NonProgressiveJournalValidators;
 
@@ -50,6 +51,9 @@ public class NonProgressiveJournalController {
 	
 	@Autowired
 	private RemainderFrequencyService frequencyService;
+	
+	@Autowired
+	private UnitMeasureService unitMeasureService;
 	
 	@Autowired
 	private NonProgressiveJournalValidators nonJournalValidators;
@@ -88,6 +92,8 @@ public class NonProgressiveJournalController {
 			throw new ResourceNotFoundException(journalName);
 		}
 		model.addAttribute("nonprogressive", journal);
+		System.out.println(unitMeasureService.selectAll());
+		model.addAttribute("unitMeasure",unitMeasureService.selectAll());
 		model.addAttribute("journalName",journalName);
 		return design;
 	}

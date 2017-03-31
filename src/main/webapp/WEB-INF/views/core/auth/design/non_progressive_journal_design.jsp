@@ -78,24 +78,46 @@
 				</div>	        
 	        </c:if>	
 	        <div class="col-md-12">
-	        	 	<div class="panel panel-visible bt-gray" id="spy1">
-	        	 		<div class="panel-body">
-	        	 			<div class="col-xs-12 col-sm-9 col-md-9">
-                                 <div class="forum-icon">
-                                     <i class="glyphicon glyphicon-equalizer"></i>
-                                  </div>
-                                  <span class="forum-item-title"><span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></span>
-                                  <div class="forum-sub-title">Design  <span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></div>
-                             </div>
-                             <div class="col-xs-12 col-sm-3 col-md-3">	        	     
-	        	           		<a href="#" data-toggle="modal" data-target=".column_modal" class="btn btn-warning br3 fw600 pull-right"><span class="fa fa-plus"></span> <spring:message code="npj.dsign.row.add"/> </a>
-	        	           	</div>	
-	        	 		</div>
-	        	 	</div>
+        	 	<div class="panel panel-visible bt-gray" id="spy1">
+        	 		<div class="panel-body">
+        	 			<div class="col-xs-12 col-sm-9 col-md-9">
+                                <div class="forum-icon">
+                                    <i class="glyphicon glyphicon-equalizer"></i>
+                                 </div>
+                                 <span class="forum-item-title"><span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></span>
+                                 <div class="forum-sub-title">Design  <span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-3 col-md-3">	        	     
+        	           		<a href="#" data-toggle="modal" data-target=".column_modal" class="btn btn-warning br3 fw600 pull-right"><span class="fa fa-plus"></span> <spring:message code="npj.dsign.row.add"/> </a>
+        	           	</div>	
+        	 		</div>
+        	 	</div>
 	        </div>
 	          <div class="col-md-12">
 	             <div class="panel panel-visible bt-blue" id="spy1"> 
-	                <div class="panel-body">
+	                <div class="panel-body mpxd">
+	                	<div class="row">
+	               			<div class="col-md-12">
+								<div class="section-divider mb40" id="spy1">
+			                      <span>Journal Information</span>
+			                    </div>
+			                    <ul class="icon-list">
+						          <li>
+						            <i class="fa fa-exclamation-circle text-warning fa-lg pr10"></i>
+						            <b> Project Name :</b> ${nonprogressive.project.projectName }
+						          </li>
+						          <li>
+						            <i class="fa fa-exclamation-circle text-warning fa-lg pr10"></i>
+						            <b> Journal Name :</b> ${nonprogressive.journalName }
+						          </li>
+						          <li>
+						            <i class="fa fa-exclamation-circle text-warning fa-lg pr10"></i>
+						            <b> Owner :</b> ${nonprogressive.user.strFirstName} ${nonprogressive.user.strLastName}		         
+						          </li>
+						        </ul>
+						        <hr class="short alt">
+							</div>
+						</div>
 	               		<div class="row">
 	               			<div class="col-md-12">
 								<div id="scroll_container" style="overflow:hidden;">
@@ -106,9 +128,7 @@
 	                </div>
 	            </div>
 	          </div>
-	        </div>
-	        
-	
+	        </div>	       	
 	      </section>
 	      <!-- End: Content -->
 	
@@ -124,7 +144,7 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">×</span>
 		        </button>
-		        <h4 class="modal-title" id="myLargeModalLabel"><span class="glyphicon glyphicon-education"></span><span class="head_text"> New Role</span></h4>
+		        <h4 class="modal-title" id="myLargeModalLabel"><span class="glyphicon glyphicon-education"></span><span class="head_text"> Add Column</span></h4>
 		      </div>
 		      <div class="modal-body pt0 gradient-2-modal-body">
 					<div class="mpxd theme-primary mw1000 center-block">
@@ -136,10 +156,10 @@
 								<!-- .section-divider -->
 								<div class="section">
 									<span class="field-alt fw600">
-										Column Title <div class="ico-help" title="New Role Name"><i class="fa fa-question-circle"></i></div>
+										Column Title <span class="ico-help" title="Prefered Column Title"><i class="fa fa-question-circle"></i></span>
 									</span>	
 									<label for="strRoleName" class="field prepend-icon"> 
-									   <input name="strRoleName" id="strRoleName" class="gui-input br5" placeholder="New Role"/>
+									   <input name="strRoleName" id="strRoleName" class="gui-input br5" placeholder="Column Title"/>
 											<label for="strRoleName" class="field-icon"> 
 												<i class="glyphicon glyphicon-education"></i>
 											</label>
@@ -147,23 +167,42 @@
 								</div>
 								<div class="section">
 									<span class="field-alt fw600">
-										Column Type <div class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></div>
+										Column Type <span class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></span>
 									</span>	
 									 <label class="field select">
-									 <select name="intRoleHome">
-									 		<option value="" label="Please Select" selected="selected"/>
-									 </select>
+										<select class="form-control" id="column_type" name="column_type">
+										 			<option value="" selected="selected">-- Please Select --</option>
+													<option value="text">Text</option>
+													<option value="date">Date</option>
+													<option value="percentround2">Percent</option>
+													<option value="price_myr">Ringgit</option>
+													<option value="numeric">Number</option>
+													<option value="decimal2">Decimal (2)</option>
+													<option value="lookup">Lookup</option>
+													<option value="progressive_link">Progressive Link</option>
+													<option value="non_progressive_link">Non-Progressive Link</option>
+													<option value="formula">Formula</option>
+										 </select>
 										<i class="arrow double"></i>
 									</label>	                           								
 								</div>
 								<div class="section">
+									<div id="lookup_container"></div>
+									<div id="link_container"></div>
+									<div id="nonp_link_container"></div>
+									<div id="formula_container"></div>
+								</div>
+								<div class="section">
 									<span class="field-alt fw600">
-										Unit of Measurement <div class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></div>
+										Unit of Measurement <span class="ico-help" title="Home page for this role."><i class="fa fa-question-circle"></i></span>
 									</span>	
 									 <label class="field select">
-									 <select name="sdsf">
-									 		<option value="" label="Please Select" selected="selected"/>
-									 </select>
+									 	<select class="form-control" id="uom" name="uom">
+									 		<option value="" selected="selected">-- Please Select --</option>
+									 		 <c:forEach items="${unitMeasure}" var="unit" varStatus="counter">
+									 		 	<option value="${unit.uomId}">${unit.uomLabel}</option>
+									 		 </c:forEach>
+									 	</select>
 										<i class="arrow double"></i>
 									</label>	                           								
 								</div>
@@ -171,7 +210,7 @@
 									<span class="field-alt fw600">
 										Read only
 									</span>	
-									<label class="checkbox-inline mr10">
+									<label class="checkbox-inline mr10" style="margin-top:-14px">
 									  	<input type="checkbox" id="inlineCheckbox1" value="option1" >
 									</label>                           								
 								</div>
@@ -191,7 +230,9 @@
 		    </div>
 		  </div>
 		</div>	
-	
+	  <script type="text/javascript">
+	  
+	  </script>
 	  <!-- BEGIN: PAGE SCRIPTS -->	
 	  <!-- jQuery -->
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>
@@ -203,7 +244,7 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery.json.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/rulejs/ruleJS.all.full.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.formula.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/ilyas.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.config.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	</body>

@@ -62,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .antMatchers("/security/**","/design/**","/manage/**").hasRole("ADMIN")
 	        .antMatchers("/timeline/**","/assessment/**","/report/**","/security/user/account/**").hasAnyRole("ADMIN","GK")
 	        .antMatchers("/assessment/journal-entry/**","/assessment/change-log/**").hasRole("IM")
-        .and().formLogin().loginPage("/login").failureUrl("/login").defaultSuccessUrl("/dashboard")
+        .and().formLogin().loginPage("/login").failureUrl("/login")
+//        .defaultSuccessUrl("/dashboard")
         	.usernameParameter("strUserName").passwordParameter("strPassword")
         .and().csrf()
         .and().exceptionHandling().accessDeniedPage("/404");
