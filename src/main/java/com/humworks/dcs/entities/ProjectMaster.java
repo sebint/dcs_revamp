@@ -83,6 +83,14 @@ public class ProjectMaster implements Serializable {
 	@ManyToOne
     @JoinColumn(name="USER_MASTER_ID", insertable = false, updatable = false)
     private User user;
+	
+	@ManyToOne
+    @JoinColumn(name="MODIFIED_BY", insertable = false, updatable = false)
+    private User modifiedUser;
+	
+	@ManyToOne
+    @JoinColumn(name="CREATED_BY", insertable = false, updatable = false)
+    private User createdUser;
 
 	public Integer getProjectMasterId() {
 		return projectMasterId;
@@ -122,6 +130,18 @@ public class ProjectMaster implements Serializable {
 
 	public Date getDtDateModified() {
 		return dtDateModified;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public User getModifiedUser() {
+		return modifiedUser;
+	}
+
+	public User getCreatedUser() {
+		return createdUser;
 	}
 
 	public void setProjectMasterId(Integer projectMasterId) {
@@ -164,12 +184,16 @@ public class ProjectMaster implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public void setModifiedUser(User modifiedUser) {
+		this.modifiedUser = modifiedUser;
+	}
+
+	public void setCreatedUser(User createdUser) {
+		this.createdUser = createdUser;
 	}
 
 	@Override
@@ -177,18 +201,21 @@ public class ProjectMaster implements Serializable {
 		return "ProjectMaster [projectMasterId=" + projectMasterId + ", projectName=" + projectName + ", projectDesc="
 				+ projectDesc + ", userMasterId=" + userMasterId + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", user=" + user + "]";
+				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", user=" + user + ", modifiedUser="
+				+ modifiedUser + ", createdUser=" + createdUser + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((createdUser == null) ? 0 : createdUser.hashCode());
 		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
 		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((intCreatedBy == null) ? 0 : intCreatedBy.hashCode());
 		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
+		result = prime * result + ((modifiedUser == null) ? 0 : modifiedUser.hashCode());
 		result = prime * result + ((projectDesc == null) ? 0 : projectDesc.hashCode());
 		result = prime * result + ((projectMasterId == null) ? 0 : projectMasterId.hashCode());
 		result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
@@ -207,6 +234,11 @@ public class ProjectMaster implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProjectMaster other = (ProjectMaster) obj;
+		if (createdUser == null) {
+			if (other.createdUser != null)
+				return false;
+		} else if (!createdUser.equals(other.createdUser))
+			return false;
 		if (dtDateCreated == null) {
 			if (other.dtDateCreated != null)
 				return false;
@@ -231,6 +263,11 @@ public class ProjectMaster implements Serializable {
 			if (other.intModifiedBy != null)
 				return false;
 		} else if (!intModifiedBy.equals(other.intModifiedBy))
+			return false;
+		if (modifiedUser == null) {
+			if (other.modifiedUser != null)
+				return false;
+		} else if (!modifiedUser.equals(other.modifiedUser))
 			return false;
 		if (projectDesc == null) {
 			if (other.projectDesc != null)
@@ -264,7 +301,5 @@ public class ProjectMaster implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 	
 }

@@ -24628,3 +24628,6 @@ span.forum-item-title {
 .alert > span > strong{
 	text-transform: capitalize;
 }
+.p-fixed{
+	position: fixed !important;
+}

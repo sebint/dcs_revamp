@@ -39,7 +39,7 @@ public class UnitMeasure implements Serializable {
 	private String uomDesc;
 	
 	@Column(name = "STATUS")
-	private String status;
+	private Integer status;
 
 	@Column(name = "CREATED_BY", updatable = false)
 	private Integer intCreatedBy;
@@ -69,7 +69,7 @@ public class UnitMeasure implements Serializable {
 		return uomDesc;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
@@ -101,7 +101,7 @@ public class UnitMeasure implements Serializable {
 		this.uomDesc = uomDesc;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -194,5 +194,6 @@ public class UnitMeasure implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 }

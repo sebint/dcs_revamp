@@ -1,6 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 	    <!-- Start: Sidebar -->
-	    <aside id="sidebar_left" class="">
+	    <aside id="sidebar_left" class="p-fixed">
 	
 	      <!-- Start: Sidebar Left Content -->
 	      <div class="sidebar-left-content nano-content">

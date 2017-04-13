@@ -4178,3 +4178,40 @@
 .modal-body .mpxd.theme-primary .section-divider span {
     background: #fff;
 }
+
+.table-view tbody > tr > td {
+	padding: 8px;
+	font-size: 13px;
+}
+.view-header{
+	position: relative;
+    /* height: 20px; */
+	line-height: 22px;
+	font-weight: 600;
+	padding: 0 0;
+}
+.view-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+	text-transform: uppercase;
+	text-decoration: none !important;
+}
+.view-sub-title{
+	font-size: 13px;
+	text-transform: lowercase;
+}
+.mt-20{
+	margin-top: -20px;
+}
+.mt-45 {
+    margin-top: -45px;
+}
+.b-1-s-grey{
+	border: 1px solid #f0efed;
+}
+.well-box{
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 20px;
+}

@@ -80,6 +80,7 @@ public class ProjectTemplatesController {
 		if(project==null){
 			throw new ResourceNotFoundException(projectName);
 		}
+		
 		model.addAttribute("project", project);
 		return add;
 	}
@@ -103,7 +104,7 @@ public class ProjectTemplatesController {
 		if(mode.equals("save")){			
 			return "redirect:/design/templates/";
 		}else{
-			return "redirect:/design/templates/"+projectName;
+			return "redirect:/design/templates/"+project.getProjectName().replace(" ", "-").toLowerCase();
 		}
 	}
 	

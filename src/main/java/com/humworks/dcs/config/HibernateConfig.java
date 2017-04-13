@@ -45,6 +45,9 @@ public class HibernateConfig {
 	
 	private Properties hibernateProperties(){
 		Properties properties = new Properties();
+		properties.put("connection.CharSet", environment.getRequiredProperty("charSet"));
+		properties.put("connection.characterEncoding", environment.getRequiredProperty("characterEncoding"));
+		properties.put("connection.useUnicode", environment.getRequiredProperty("useUnicode"));
 		properties.put("dialect", environment.getRequiredProperty("dialect"));
 		properties.put("show_sql", environment.getRequiredProperty("show_sql"));
 		properties.put("cache.provider_class", environment.getRequiredProperty("cache.provider_class"));

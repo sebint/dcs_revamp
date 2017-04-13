@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<footer class="footer text-right">
+<!-- <footer class="footer text-right">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 ta-center">
@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 <div class="modal fade bd-alert-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

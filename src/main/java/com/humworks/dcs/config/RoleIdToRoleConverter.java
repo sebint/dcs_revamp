@@ -16,9 +16,9 @@ public class RoleIdToRoleConverter implements Converter<Object, Role> {
 	@Override
 	public Role convert(Object obj) {
 		Integer id = Integer.parseInt((String)obj);
-		System.out.println("Sebin"+id);
+//		System.out.println("Sebin"+id);
 		Role profile= roleService.findById(id);
-        System.out.println("Profile : "+profile);
+//     	System.out.println("Profile : "+profile);
         return profile;
 	}
 }

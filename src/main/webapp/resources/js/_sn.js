@@ -41,81 +41,7 @@ var _sn = function(options) {
 				Splash.fadeOut('slow');
 			});
 			
-	   }
-	   
-	   var runDataTables = function(options){
-
-		    // Table setup
-		    // ------------------------------
-
-		    // Setting datatable defaults
-		    $.extend( $.fn.dataTable.defaults, {
-		        autoWidth: false,
-		        columnDefs: [{ 
-		            orderable: false,
-		            width: '100px',
-		            'checkboxes': {
-		                'selectRow': true
-		             }
-//		            targets: [ 5 ]
-		        }],
-		        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
-		        language: {
-		            search: '<span>Filter:</span> _INPUT_',
-		            lengthMenu: '<span>Show:</span> _MENU_',
-		            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
-		        },
-		        drawCallback: function () {
-		            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
-		        },
-		        preDrawCallback: function() {
-		            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
-		        }
-		    });
-		    function ck(option){
-	    		return $("#datatable").attr('data-'+option);
-	    	}
-		    
-		    // Basic datatable
-		    $('#datatable').DataTable({
-		    	"bFilter": ck('bFilter'),
-		    	"bSort": ck('bSort'),
-		    	"bLengthChange": ck('bLengthChange')
-		    });
-		    // Alternative pagination
-		    $('.datatable-pagination').DataTable({
-		        pagingType: "simple",
-		        language: {
-		            paginate: {'next': 'Next &rarr;', 'previous': '&larr; Prev'}
-		        }
-		    });
-
-
-		    // Datatable with saving state
-		    $('.datatable-save-state').DataTable({
-		        stateSave: true
-		    });
-
-
-		    // Scrollable datatable
-		    $('.datatable-scroll-y').DataTable({
-		        autoWidth: true,
-		        scrollY: 300
-		    });
-
-
-
-		    // External table additions
-		    // ------------------------------
-
-		    // Add placeholder to the datatable filter option
-		    $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
-
-		    // Enable Select2 select for the length option
-//		    $('.dataTables_length select').select2({
-//		        minimumResultsForSearch: "6"
-//		    });
-	   }
+	   }	   
 
 	   var runSideMenu = function(options) {
 		   
@@ -254,7 +180,6 @@ var _sn = function(options) {
 		   init: function(options) {
 			   runCustom();
 			   runSideMenu();
-			   runDataTables();
 
 	   }
 	}
@@ -283,13 +208,147 @@ $.fn.toggleDiv = function(){
 $.fn.disable = function(){
 	$(this).attr("disabled","disabled");
 }
+var _confirm = function(options) {
+	var deleteConfirm = function() {
+		$('.dr-confirm').confirm({
+			icon : "fa fa-question-circle",
+			confirmButton : "Delete",
+			confirmButtonClass : "btn-info add-loader",
+			cancelButton : "Cancel",
+			autoClose : 'cancel|8000',
+			keyboardEnabled : true,
+		});
+	}
+	return {
+		   init: function(options) {
+			   deleteConfirm();
+	   }
+	}
+}();
 
-$('.dr-confirm').confirm({
-	icon : "fa fa-question-circle",
-	confirmButton : "Delete",
-	confirmButtonClass : "btn-info add-loader",
-	cancelButton : "Cancel",
-	autoClose : 'cancel|8000',
-	keyboardEnabled : true,
-});
+var _datePicker = function(options) {
+	var datepicker = function() {
+	    $(".datepicker").datepicker({
+	    	dateFormat : "dd-mm-yy",
+		 	prevText: '<i class="fa fa-chevron-left"></i>',
+	        nextText: '<i class="fa fa-chevron-right"></i>',
+	        showButtonPanel: false,
+	        beforeShow: function(input, inst) {
+	          var newclass = 'admin-form';
+	          var themeClass = $(this).parents('.admin-form').attr('class');
+	          var smartpikr = inst.dpDiv.parent();
+	          if (!smartpikr.hasClass(themeClass)) {
+	            inst.dpDiv.wrap('<div class="' + themeClass + '"></div>');
+	          }
+	        }
+	      });
+	}
+	return {
+		   init: function(options) {
+			   datepicker();
+	   }
+	}
+}();
+
+var _toggleUpdate = function(options) {
+		var showedit = function() {
+			$(".btn-update").on("click", function(){
+				$("#view-port").fadeOut("fast");
+				$("#update-port").fadeIn("fast");
+			});
+		}
+		var showview = function(){
+			$(".btn-cancel").on("click",function(){
+				$("#update-port").fadeOut("fast");
+				$("#view-port").fadeIn("fast");
+			});
+		}
+	return {
+		   init: function(options) {
+			   showedit();
+			   showview();
+	   }
+	}
+}();
+
+var _dataTable = function(options){
+	   var runDataTables = function(options){
+
+		    // Table setup
+		    // ------------------------------
+
+		    // Setting datatable defaults
+		    $.extend( $.fn.dataTable.defaults, {
+		        autoWidth: false,
+		        columnDefs: [{ 
+		            orderable: false,
+		            width: '100px',
+		            'checkboxes': {
+		                'selectRow': true
+		             }
+//		            targets: [ 5 ]
+		        }],
+		        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+		        language: {
+		            search: '<span>Filter:</span> _INPUT_',
+		            lengthMenu: '<span>Show:</span> _MENU_',
+		            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+		        },
+		        drawCallback: function () {
+		            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+		        },
+		        preDrawCallback: function() {
+		            $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+		        }
+		    });
+		    function ck(option){
+	    		return $("#datatable").attr('data-'+option);
+	    	}
+		    
+		    // Basic datatable
+		    $('#datatable').DataTable({
+		    	"bFilter": ck('bFilter'),
+		    	"bSort": ck('bSort'),
+		    	"bLengthChange": ck('bLengthChange')
+		    });
+		    // Alternative pagination
+		    $('.datatable-pagination').DataTable({
+		        pagingType: "simple",
+		        language: {
+		            paginate: {'next': 'Next &rarr;', 'previous': '&larr; Prev'}
+		        }
+		    });
+
+
+		    // Datatable with saving state
+		    $('.datatable-save-state').DataTable({
+		        stateSave: true
+		    });
+
+
+		    // Scrollable datatable
+		    $('.datatable-scroll-y').DataTable({
+		        autoWidth: true,
+		        scrollY: 300
+		    });
+
+
+
+		    // External table additions
+		    // ------------------------------
+
+		    // Add placeholder to the datatable filter option
+		    $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
+
+		    // Enable Select2 select for the length option
+//		    $('.dataTables_length select').select2({
+//		        minimumResultsForSearch: "6"
+//		    });
+	   }
+	return {
+	   init: function(options) {
+		   runDataTables();
+	   }
+	}
+}();
 

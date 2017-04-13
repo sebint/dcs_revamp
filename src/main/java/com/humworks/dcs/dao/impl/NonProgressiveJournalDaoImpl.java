@@ -40,7 +40,7 @@ public class NonProgressiveJournalDaoImpl extends AbstractDao<Integer, NonProgre
 
 	@Override
 	public NonProgressiveJournalMaster findById(Integer npid) {
-		return findById(npid);
+		return getByKey(npid);
 	}
 
 	@Override

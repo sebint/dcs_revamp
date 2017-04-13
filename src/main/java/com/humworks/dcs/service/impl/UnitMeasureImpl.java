@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.humworks.dcs.dao.UnitMeasureDao;
 import com.humworks.dcs.entities.UnitMeasure;
+import com.humworks.dcs.service.SessionService;
 import com.humworks.dcs.service.UnitMeasureService;
 
 @Service("unitMeasureService")
@@ -16,10 +17,17 @@ public class UnitMeasureImpl implements UnitMeasureService {
 	
 	@Autowired
 	private UnitMeasureDao unitMeasureDao;
+	
+	@Autowired
+	private SessionService sessionService;
 
 	@Override
-	public void save(UnitMeasure uom) {
-		// TODO Auto-generated method stub
+	public Integer save(UnitMeasure uom) {
+		Integer currentUser = sessionService.getActiveUid();
+		uom.setIntCreatedBy(currentUser);
+		uom.setIntModifiedBy(currentUser);
+		uom.setStatus(1);
+		return unitMeasureDao.saveUnitMeasure(uom);
 
 	}
 

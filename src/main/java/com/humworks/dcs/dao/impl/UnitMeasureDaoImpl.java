@@ -16,9 +16,8 @@ import com.humworks.dcs.entities.UnitMeasure;
 public class UnitMeasureDaoImpl extends AbstractDao<Integer, UnitMeasure> implements UnitMeasureDao {
 
 	@Override
-	public Integer saveUnitMeasure(UnitMeasure uom) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer saveUnitMeasure(UnitMeasure uom) {		
+		return save(uom);
 	}
 
 	@Override

@@ -44,7 +44,16 @@
 	        </div>
 	        <div class="topbar-right mt-5">
 	          <div class="ib topbar-dropdown">
-	             <label for="topbar-multiple" class="control-label pr10 fs20 text-muted"><spring:message code="prj.new.header"/></label>
+	             <label for="topbar-multiple" class="control-label pr10 fs20 text-muted">
+            	   <c:choose>
+               			<c:when test="${!empty(projectName)}">
+               				<span class="t-t-capt">${(fn:replace(fn:toLowerCase(projectName),'-', ' '))}</span>
+               			</c:when>
+               			<c:otherwise>
+               				<spring:message code="prj.new.header"/>
+               			</c:otherwise>
+               		</c:choose>
+	             </label>
 	          </div>
 	        </div>
 	      </header>
@@ -77,8 +86,226 @@
 				</div>	        
 	        </c:if>	          
 	          <div class="col-md-12">
-	            <div class="panel panel-visible" id="spy1">
-                	<div class="panel-body">
+	            <div class="panel panel-visible">
+                	<div class="panel-body">              		
+	                	<div class="well-box" id="view-port">
+							<div id="search" class="tab-pane active search-results-page">					
+			                    <!-- Begin Search Result Entries -->
+			                    <div class="search-result">
+			                    <jsp:useBean id="now" class="java.util.Date" scope="request"/>
+			                    <fmt:parseNumber value="${ now.time / (1000*60*60*24) }" integerOnly="true" var="nowDays" scope="request"/>
+			                    <fmt:parseNumber value="${ project.dtDateCreated.time / (1000*60*60*24) }" integerOnly="true" var="otherDays" scope="page"/>
+			                    <c:set value="${nowDays - otherDays}" var="dateDiff"/>
+				                    <div class="view-header">
+										<div class="media">
+					                      <a class="pull-left" href="#"> <img class="media-object mn thumbnail thumbnail-sm rounded mw50" src="${pageContext.request.contextPath}/resources/img/head-logo/project.png" alt="..."> </a>
+					                      <div class="media-body mb5">
+					                        <h5 class="media-heading view-title">${project.projectName}
+					                          <small class="view-sub-title"> - Created <a title="<fmt:formatDate value="${project.dtDateCreated}" pattern="dd-MMM-YYYY hh:mm:ss" />">
+					                          <c:choose>
+												    <c:when test="${dateDiff eq 0}">today</c:when>
+												    <c:when test="${dateDiff eq 1}">yesterday</c:when>
+												    <c:otherwise>${dateDiff} day(s) ago</c:otherwise>
+											  </c:choose></a> by <a href='<spring:url value="/security/user/${project.createdUser.strUserName}"/>' class="t-t-capt">${project.createdUser.strFirstName} ${project.createdUser.strLastName}</a></small>
+					                        </h5>
+					                        <p> ${project.projectDesc}</p>
+					                      </div>
+					                    </div>				                    
+				                    	<div class="panel-header-menu pull-right mt-45">
+				                    		<div class="btn-group mb10">
+						                      <a class="btn btn-default light no-loader btn-update" title="Edit Project">
+						                        <i class="fa fa-edit"></i>
+						                      </a>
+						                      <a class="btn btn-default light no-loader" title="Delete Project">
+						                        <i class="fa fa-trash"></i>
+						                      </a>
+						                      <a class="btn btn-default light dropdown-toggle ph8 no-loader" data-toggle="dropdown" aria-expanded="false">
+						                          <span class="glyphicon glyphicon-cog"></span>
+						                          <span class="caret ml5"></span>
+						                      </a>
+						                       <ul class="dropdown-menu pull-right" role="menu">
+								                  <li>
+										              <a href="javascript:window.print()" class="no-loader">
+										                <i class="fa fa-print fs13"></i> Print
+										              </a>
+								                  </li>
+								                  <li>
+								                    <a>
+								                      <i class="fa fa-envelope-o"></i> Message </a>
+								                  </li>
+						                          <li class="divider"></li>
+						                          <li>
+						                            <a href="#">
+						                              <span class="fa fa-plus pr5"></span> Create New</a>
+						                          </li>
+						                        </ul>
+						                    </div>
+							            </div>
+				                    </div>
+			                       <hr class="short alt">
+			                       <div class="row">
+										<div class="table-layout bg-light">
+						                  <div class="col-xs-12 col-lg-6">
+						                  	<div class="table-responsive">
+												<table class="table table-striped table-view">
+								                  <tbody>
+								                    <tr>
+								                      <td  width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Starts <span class="pull-right">:</span></strong></td>
+								                      <td><fmt:formatDate value="${project.startDate}" pattern="dd-MMM-YYYY" /></td>
+								                    </tr>
+								                    <tr>
+								                      <td width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Ends <span class="pull-right">:</span></strong></td>
+								                      <td><fmt:formatDate value="${project.endDate}" pattern="dd-MMM-YYYY" /></td>
+								                    </tr>
+								                  </tbody>
+								                </table>
+							                </div>
+						                  </div>
+						                  <div class="col-xs-12 col-lg-6 br-l">
+						                  	<div class="table-responsive">
+												<table class="table table-striped table-view">
+								                  <tbody>
+								                    <tr>
+								                      <td width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Owner <span class="pull-right">:</span></strong></td>
+								                      <td>${project.user.strFirstName} ${project.user.strLastName}</td>
+								                    </tr>
+								                    <tr>
+								                      <td width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Created On <span class="pull-right">:</span></strong></td>
+								                      <td><fmt:formatDate value="${project.dtDateCreated}" pattern="dd-MMM-YYYY" /></td>
+								                    </tr>
+								                  </tbody>
+								                </table>
+							                </div>
+						                  </div>
+						                </div>
+									</div>
+									<ul class="result-meta mt10 pull-right">
+			                          <li><i class="glyphicon glyphicon-time"></i> Last Modified on <code><fmt:formatDate value="${project.dtDateModified}" pattern="dd-MMM-YYYY" /></code> by <code>${project.modifiedUser.strFirstName} ${project.modifiedUser.strLastName}</code></li>
+			                       </ul>
+			                    </div>
+			                </div>	
+			               <hr>
+			               <h5>Referenced Journals</h5>
+			               <table id="message-table" class="table tc-checkbox-1 mpxd theme-warning br-t b-1-s-grey">
+					            <tbody>
+					              <tr class="message-unread">
+					                <td class="hidden-xs">
+					                  <label class="option block mn">
+					                    <input type="checkbox" name="mobileos" value="FR">
+					                    <span class="checkbox mn"></span>
+					                  </label>
+					                </td>
+					                <td class="hidden-xs">
+					                  <span class="rating block mn pull-left">
+					                    <input class="rating-input" id="r1" type="radio" name="custom">
+					                    <label class="rating-star" for="r1">
+					                      <i class="fa fa-star va-m"></i>
+					                    </label>
+					                  </span>
+					                </td>
+					                <td class="">Sony Inc</td>
+					                <td class="hidden-xs">
+					                  <span class="badge badge-warning mr10 fs11"> Work </span>
+					                </td>
+					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
+					                <td class="hidden-xs">
+					                  <i class="fa fa-paperclip fs15 text-muted va-b"></i>
+					                </td>
+					                <td class="text-right fw600">March 11</td>
+					              </tr>
+					              <tr class="message-unread">
+					                <td class="hidden-xs">
+					                  <label class="option block mn">
+					                    <input type="checkbox" name="mobileos" value="FR">
+					                    <span class="checkbox mn"></span>
+					                  </label>
+					                </td>
+					                <td class="hidden-xs">
+					                  <span class="rating block mn pull-left">
+					                    <input class="rating-input" id="r1" type="radio" name="custom">
+					                    <label class="rating-star" for="r1">
+					                      <i class="fa fa-star va-m"></i>
+					                    </label>
+					                  </span>
+					                </td>
+					                <td class="">Disney</td>
+					                <td class="hidden-xs"></td>
+					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
+					                <td class="hidden-xs">
+					                  <i class="fa fa-paperclip fs15 text-muted va-b"></i>
+					                </td>
+					                <td class="text-right fw600">March 11</td>
+					              </tr>
+					              <tr class="message-unread">
+					                <td class="hidden-xs">
+					                  <label class="option block mn">
+					                    <input type="checkbox" name="mobileos" value="FR">
+					                    <span class="checkbox mn"></span>
+					                  </label>
+					                </td>
+					                <td class="hidden-xs">
+					                  <span class="rating block mn pull-left">
+					                    <input class="rating-input" id="r1" type="radio" name="custom">
+					                    <label class="rating-star" for="r1">
+					                      <i class="fa fa-star va-m"></i>
+					                    </label>
+					                  </span>
+					                </td>
+					                <td class="">Marvel</td>
+					                <td class="hidden-xs">
+					                  <span class="badge badge-system mr10 fs11"> Meeting </span>
+					                </td>
+					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
+					                <td class="hidden-xs"></td>
+					                <td class="text-right fw600">March 11</td>
+					              </tr>
+					              <tr class="message-unread">
+					                <td class="hidden-xs">
+					                  <label class="option block mn">
+					                    <input type="checkbox" name="mobileos" value="FR">
+					                    <span class="checkbox mn"></span>
+					                  </label>
+					                </td>
+					                <td class="hidden-xs">
+					                  <span class="rating block mn pull-left">
+					                    <input class="rating-input" id="r1" type="radio" name="custom">
+					                    <label class="rating-star" for="r1">
+					                      <i class="fa fa-star va-m"></i>
+					                    </label>
+					                  </span>
+					                </td>
+					                <td class="">Microsoft</td>
+					                <td class="hidden-xs"></td>
+					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
+					                <td class="hidden-xs"></td>
+					                <td class="text-right fw600">March 11</td>
+					              </tr>
+					              <tr class="message-read">
+					                <td class="hidden-xs">
+					                  <label class="option block mn">
+					                    <input type="checkbox" name="mobileos" value="FR">
+					                    <span class="checkbox mn"></span>
+					                  </label>
+					                </td>
+					                <td class="hidden-xs">
+					                  <span class="rating block mn pull-left">
+					                    <input class="rating-input" id="r1" type="radio" name="custom">
+					                    <label class="rating-star" for="r1">
+					                      <i class="fa fa-star va-m"></i>
+					                    </label>
+					                  </span>
+					                </td>
+					                <td class="">Facebook</td>
+					                <td class="hidden-xs">
+					                  <span class="badge badge-info mr10 fs11"> Social </span>
+					                </td>
+					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
+					                <td class="hidden-xs"></td>
+					                <td class="text-right">March 11</td>
+					              </tr>
+					            </tbody>
+					          </table>					
+	                  	</div>
                 	 		<c:choose>
 	                			<c:when test="${!empty(projectName)}">
 	                				<spring:url value="/design/templates/${projectName}" var="url_alt"/>
@@ -87,7 +314,7 @@
 	                				<spring:url value="/design/templates/new" var="url_alt"/>
 	                			</c:otherwise>
 	                		</c:choose>
-							<div class="mpxd theme-primary mw1000 center-block">
+							<div class="mpxd theme-primary mw1000 center-block" style="display: none;" id="update-port">								
 								<form:form method="post" action="${url_alt}" id="project-form" modelAttribute="project">
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
@@ -218,7 +445,7 @@
 											<span class="btn-text">Save</span></button>
 										<button type="submit" name="mode" value="save_continue" class="button btn-primary br3"><i class="fa fa-check"></i> 
 											<span class="btn-text">Save and Continue</span></button>
-										<a href="<spring:url value="/design/templates/"/>" class="button br3">
+										<a href="#" class="button br3 btn-cancel">
 											<i class="fa fa-close"></i> Cancel
 									   </a>
 									</div>
@@ -241,27 +468,11 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery-ui.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui-datepicker/jquery-ui-datepicker.min.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/user.js"></script>	  
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-datepicker/jquery-ui-datepicker.min.js"></script>  
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
-	    $(".datepicker").datepicker({
-	    	dateFormat : "dd-mm-yy",
-		 	prevText: '<i class="fa fa-chevron-left"></i>',
-	        nextText: '<i class="fa fa-chevron-right"></i>',
-	        showButtonPanel: false,
-	        beforeShow: function(input, inst) {
-	          var newclass = 'admin-form';
-	          var themeClass = $(this).parents('.admin-form').attr('class');
-	          var smartpikr = inst.dpDiv.parent();
-	          if (!smartpikr.hasClass(themeClass)) {
-	            inst.dpDiv.wrap('<div class="' + themeClass + '"></div>');
-	          }
-	        }
-	      });
+	  jQuery(document).ready(function() {"use strict";  _datePicker.init(); _toggleUpdate.init(); });
 	  </script>
 	</body>
 </html>

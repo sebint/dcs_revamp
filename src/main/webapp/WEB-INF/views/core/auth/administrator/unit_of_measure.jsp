@@ -140,7 +140,8 @@
 		      </div>
 		      <div class="modal-body pt0 gradient-2-modal-body">
 					<div class="mpxd theme-primary mw1000 center-block">
-						<form:form method="post" action="#" id="role-form" modelAttribute="unit">
+					<spring:url value="/manage/unit-measure/" var="url"/>
+						<form:form method="post" action="${url}" id="role-form" modelAttribute="unit">
 							<div class="panel-body pt0">
 								<div class="section-divider mv40" id="spy4">
 									<span class="desc_text"><spring:message code="uom.new.info"/></span>
@@ -171,8 +172,7 @@
 							</div>
 							<!-- end .form-body section -->
 							<div class="panel-footer text-right">
-								<button id="add_new_unit" type="button" class="button btn-primary br3"><i class="fa fa-check"></i> 
-									<span class="btn-text">Add Unit</span></button>
+							<form:button id="add_new_unit" class="button btn-primary br3"><i class="fa fa-check"></i> <span class="btn-text">Add Unit</span></form:button>
 								<button type="reset" data-dismiss="modal" class="button br3">
 									<i class="fa fa-close"></i> Cancel
 							   </button>
@@ -190,6 +190,7 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery-ui.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	</body>

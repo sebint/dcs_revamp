@@ -159,7 +159,7 @@
 										Column Title <span class="ico-help" title="Prefered Column Title"><i class="fa fa-question-circle"></i></span>
 									</span>	
 									<label for="strRoleName" class="field prepend-icon"> 
-									   <input name="strRoleName" id="strRoleName" class="gui-input br5" placeholder="Column Title"/>
+									   <input id="column_title" name="column_title" class="gui-input br5" placeholder="Column Title"/>
 											<label for="strRoleName" class="field-icon"> 
 												<i class="glyphicon glyphicon-education"></i>
 											</label>
@@ -211,7 +211,7 @@
 										Read only
 									</span>	
 									<label class="checkbox-inline mr10" style="margin-top:-14px">
-									  	<input type="checkbox" id="inlineCheckbox1" value="option1" >
+									  	<input type="checkbox" id="readonly" name="readonly">
 									</label>                           								
 								</div>
 							</div>
@@ -230,9 +230,6 @@
 		    </div>
 		  </div>
 		</div>	
-	  <script type="text/javascript">
-	  
-	  </script>
 	  <!-- BEGIN: PAGE SCRIPTS -->	
 	  <!-- jQuery -->
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>
@@ -247,5 +244,98 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.config.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	  
+	  function initialize_hot() {
+			if ((typeof hot_object == "undefined") || (hot_object == null)) {
+				hot_object = new HOT(Handsontable, raw_config, [[]], 'design');
+				hot_object.register_edit_callback(edit_callback);
+				refresh_progressive_links();
+				refresh_non_progressive_links();
+			}
+			
+		}
+	  
+	  function add_new_column(title,type,uom,extra) {
+			initialize_hot();
+			hot_object.add_new_column(title,type,uom,extra);
+			if (type == "progressive_link") {
+				load_progressive_link(hot_object.raw_config[hot_object.raw_config.length-1]);
+				//refresh_progressive_links();
+			} else if (type == "non_progressive_link") {
+				load_non_progressive_link(hot_object.raw_config[hot_object.raw_config.length-1]);
+			}
+		}
+	  //Needs Change
+	  function load_progressive_link(obj) {
+			$.getJSON("<?php echo $this->config->base_url().'index.php/api/get_progressive_attributes?jid='; ?>"+obj.progressive_link, function(data){
+				hot_object.fill_column(obj.order, data);
+				//console.log('object',obj);
+			})
+		}
+	  
+	  function refresh_progressive_links() {
+			for (var i = 0; i < hot_object.raw_config.length; i++) {
+				var obj = hot_object.raw_config[i];
+				
+				if (obj.type == "progressive_link") {
+					load_progressive_link(obj);
+					//(function(saved_obj){})(obj);
+				}
+			}
+		}
+	  //Needs Change
+	  function load_non_progressive_link(obj) {
+			var link = obj.non_progressive_link.split('|');
+			var jid = link[0];
+			var config_no = link[1];
+			$.getJSON("<?php echo $this->config->base_url().'index.php/api/get_nonp_column_value?jid='; ?>"+jid+"&config_no="+config_no, function(data){
+				hot_object.fill_column(obj.order, data);
+				console.log('object',obj);
+			})
+		}
+
+		function refresh_non_progressive_links() {
+			for (var i = 0; i < hot_object.raw_config.length; i++) {
+				var obj = hot_object.raw_config[i];
+				
+				if (obj.type == "non_progressive_link") {
+					load_non_progressive_link(obj);
+				}
+			}
+		}
+		
+		function edit_callback(object) {
+			console.log(object);
+		}
+	  
+	  $(function(){
+			var formhandler = function() {
+				var title = $.trim($('#column_title').val());
+				var type = $('#column_type').val();
+				var uom = $('#uom').val();
+				var readonly = $("#readonly").is(":checked");
+				
+				var extra = {};
+				
+				if (type == "lookup") { extra["lookup_id"] = $("#lookup").val()}
+				if (type == "progressive_link") { extra["progressive_link"] = $("#link_jid").val() }
+				if (type == "non_progressive_link") { extra["non_progressive_link"] = $("#nonp_link_jid").val() +"|"+$("#nonp_link_column").val() }
+				if (type == "formula") { extra["formula"] = $("#formula").val() }
+				
+				if (readonly != "undefined") { extra["readonly"] = readonly; }
+				
+				console.log(extra);
+				add_new_column(title,type,uom,extra);
+				$('.column_modal').modal('toggle');
+				$('#column_title').val('');
+			}
+			$('#add_new_column').on('click', function(){
+				formhandler();
+			}); 
+			
+			raw_config = [];
+	  });
+	  </script>
 	</body>
 </html>

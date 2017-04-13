@@ -6,7 +6,7 @@ import com.humworks.dcs.entities.UnitMeasure;
 
 public interface UnitMeasureService {
 
-	void save(UnitMeasure uom);
+	Integer save(UnitMeasure uom);
 	
 	Integer update(UnitMeasure uom);    
 	

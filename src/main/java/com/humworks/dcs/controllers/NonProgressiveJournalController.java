@@ -92,7 +92,6 @@ public class NonProgressiveJournalController {
 			throw new ResourceNotFoundException(journalName);
 		}
 		model.addAttribute("nonprogressive", journal);
-		System.out.println(unitMeasureService.selectAll());
 		model.addAttribute("unitMeasure",unitMeasureService.selectAll());
 		model.addAttribute("journalName",journalName);
 		return design;
@@ -120,7 +119,7 @@ public class NonProgressiveJournalController {
 		if(mode.equals("save")){			
 			return "redirect:/design/non-progressive/";
 		}else{
-			return "redirect:/design/non-progressive/"+journalName;
+			return "redirect:/design/non-progressive/"+journalUrl;
 		}
 	}
 	
