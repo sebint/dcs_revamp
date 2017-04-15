@@ -17,4 +17,6 @@ public interface NonProgressiveJournalService {
 	NonProgressiveJournalMaster findByName(String projectName, Integer projectMasterId);
     
     ArrayList<NonProgressiveJournalMaster> selectAll();
+
+    ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId);
 }

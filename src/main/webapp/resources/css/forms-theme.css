@@ -4215,3 +4215,47 @@
 	padding: 19px;
 	margin-bottom: 20px;
 }
+
+/* User Add */
+
+.panel .panel-bg-cover {
+    max-height: 180px;
+    overflow: hidden;
+}
+.panel .panel-bg-cover img {
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
+}
+.panel-media {
+    box-shadow: 0 -50px 20px -10px rgba(0,0,0,0.2);
+    padding: 10px 15px 15px 140px;
+    position: relative;
+}
+.panel-media-img {
+    position: absolute;
+    width: 96px;
+    height: 96px;
+    left: 20px;
+    top: -48px;
+}
+.img-border-light {
+    box-shadow: 0 0 0 4px #fff;
+}
+.panel-media-heading {
+    color: #fff;
+    position: absolute;
+    top: -2.7em;
+}
+.btn-link {
+    border-color: transparent;
+}
+.text-muted, a.text-muted:hover, a.text-muted:focus, a.text-muted:focus {
+    color: #606060;
+}
+.mar-btm {
+    margin-bottom: 15px;
+}
+.t-a-right{
+	text-align: right;
+}

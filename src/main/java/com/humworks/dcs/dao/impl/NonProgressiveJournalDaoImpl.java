@@ -76,11 +76,24 @@ public class NonProgressiveJournalDaoImpl extends AbstractDao<Integer, NonProgre
 		cq.orderBy(cb.desc(root.get("projectMasterId")));
 		return (ArrayList<NonProgressiveJournalMaster>) getSession().createQuery(cq).getResultList();
 	}
+	
+	
 
 	@Override
 	public void transactionRollback() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId) {
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<NonProgressiveJournalMaster> cq = cb.createQuery(NonProgressiveJournalMaster.class);
+		Root<NonProgressiveJournalMaster> root = cq.from(NonProgressiveJournalMaster.class);
+		cq.select(root);
+		cq.where(cb.equal(root.get("projectMasterId"),projectMasterId));
+		cq.orderBy(cb.desc(root.get("projectMasterId")));
+		return (ArrayList<NonProgressiveJournalMaster>) getSession().createQuery(cq).getResultList();
 	}
 
 }

@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.humworks.dcs.entities.NonProgressiveJournalMaster;
 import com.humworks.dcs.entities.ProjectMaster;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.exception.ResourceNotFoundException;
+import com.humworks.dcs.service.NonProgressiveJournalService;
 import com.humworks.dcs.service.ProjectService;
 import com.humworks.dcs.service.UserService;
 import com.humworks.dcs.validators.ProjectValidators;
 
 @Controller
-@RequestMapping("/design/templates/")
+@RequestMapping("/design/templates")
 public class ProjectTemplatesController {
 	
 	private final String page = "auth/design/project_templates";
@@ -39,7 +41,10 @@ public class ProjectTemplatesController {
 	@Autowired
 	private ProjectValidators projectValidator;
 
-	@GetMapping(value={"/","list"})
+	@Autowired
+	private NonProgressiveJournalService nonProgressiveService; 
+	
+	@GetMapping(value={"","/","list"})
 	public String list(Model model){
 		return page;
 	}
@@ -80,8 +85,10 @@ public class ProjectTemplatesController {
 		if(project==null){
 			throw new ResourceNotFoundException(projectName);
 		}
-		
+		final List<NonProgressiveJournalMaster> journal = nonProgressiveService.findByProjectId(project.getProjectMasterId());
 		model.addAttribute("project", project);
+		System.out.println(journal);
+		model.addAttribute("journal", journal);
 		return add;
 	}
 	

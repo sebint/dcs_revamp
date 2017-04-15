@@ -24631,3 +24631,9 @@ span.forum-item-title {
 .p-fixed{
 	position: fixed !important;
 }
+.tab-mpxd li{
+	width:50%;
+}
+.b-none{
+	border: none;
+}

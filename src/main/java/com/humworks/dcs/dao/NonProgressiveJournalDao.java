@@ -18,6 +18,8 @@ public interface NonProgressiveJournalDao {
     
     ArrayList<NonProgressiveJournalMaster> selectAll();
     
+    ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId);
+    
     void transactionRollback();
 
 }

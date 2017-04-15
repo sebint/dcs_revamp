@@ -88,7 +88,7 @@
 	          <div class="col-md-12">
 	            <div class="panel panel-visible">
                 	<div class="panel-body">              		
-	                	<div class="well-box" id="view-port">
+	                	<div class="well-box" id="${!empty(projectName)? 'view-port' :  'update-port'}" style="${empty(projectName)? 'display: none;' :  ''}">
 							<div id="search" class="tab-pane active search-results-page">					
 			                    <!-- Begin Search Result Entries -->
 			                    <div class="search-result">
@@ -144,17 +144,17 @@
 				                    </div>
 			                       <hr class="short alt">
 			                       <div class="row">
-										<div class="table-layout bg-light">
+										<div class="bg-light">
 						                  <div class="col-xs-12 col-lg-6">
 						                  	<div class="table-responsive">
 												<table class="table table-striped table-view">
 								                  <tbody>
 								                    <tr>
-								                      <td  width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Starts <span class="pull-right">:</span></strong></td>
+								                      <td  width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Starts <span class="pull-right">:</span></strong></td>
 								                      <td><fmt:formatDate value="${project.startDate}" pattern="dd-MMM-YYYY" /></td>
 								                    </tr>
 								                    <tr>
-								                      <td width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Ends <span class="pull-right">:</span></strong></td>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Ends <span class="pull-right">:</span></strong></td>
 								                      <td><fmt:formatDate value="${project.endDate}" pattern="dd-MMM-YYYY" /></td>
 								                    </tr>
 								                  </tbody>
@@ -166,11 +166,11 @@
 												<table class="table table-striped table-view">
 								                  <tbody>
 								                    <tr>
-								                      <td width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Owner <span class="pull-right">:</span></strong></td>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Project Owner <span class="pull-right">:</span></strong></td>
 								                      <td>${project.user.strFirstName} ${project.user.strLastName}</td>
 								                    </tr>
 								                    <tr>
-								                      <td width="33%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Created On <span class="pull-right">:</span></strong></td>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Created On <span class="pull-right">:</span></strong></td>
 								                      <td><fmt:formatDate value="${project.dtDateCreated}" pattern="dd-MMM-YYYY" /></td>
 								                    </tr>
 								                  </tbody>
@@ -186,34 +186,75 @@
 			                </div>	
 			               <hr>
 			               <h5>Referenced Journals</h5>
-			               <table id="message-table" class="table tc-checkbox-1 mpxd theme-warning br-t b-1-s-grey">
+							<div class="panel b-none">
+							  <div class="panel-heading">
+							    <ul class="nav panel-tabs-border panel-tabs panel-tabs-left tab-mpxd">
+							      <li class="active">
+							        <a href="#tab2_1" class="no-loader" data-toggle="tab" aria-expanded="true"><span class="glyphicon glyphicon-equalizer"></span> Non Progressive</a>
+							      </li>
+							      <li class="">
+							        <a href="#tab2_2" class="no-loader" data-toggle="tab" aria-expanded="false"><span class="glyphicon glyphicon-modal-window"></span> Progressive</a>
+							      </li>
+							    </ul>
+							  </div>
+							  <div class="panel-body b-none">
+							    <div class="tab-content pn br-n">
+							      <div id="tab2_1" class="tab-pane active">
+							        <div class="row">
+										<div class="table-responsive">
+							                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+							               		<thead>
+							               			<tr class="bg-light">
+							               				<th>Journal Name</th>
+							               				<th>Journal Owner</th>
+							               				<th>Data Entry</th>
+							               				<th>Validator</th>
+							               				<th>Status</th>
+							               			</tr>
+							               		</thead>
+									            <tbody>
+									              <c:forEach items="${journal}" var="journal" varStatus="counter">
+										              <tr class="message-unread">
+										                <td>${journal.journalName}</td>
+										                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+										                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+										                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+										                <td><span class="label label-success">IN PROGRESS</span></td>
+										              </tr>
+									              </c:forEach>
+							                  </tbody>
+							                </table>
+							              </div>							        
+							        </div>
+							      </div>
+							      <div id="tab2_2" class="tab-pane">
+							        <div class="row">
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+							</div>							
+<%-- 			               <table id="message-table" class="table tc-checkbox-1 mpxd theme-warning br-t b-1-s-grey">
+			               		<thead>
+			               			<tr>
+			               				<td>Journal Name</td>
+			               				<td>Journal Owner</td>
+			               				<td>Data Entry</td>
+			               				<td>Validator</td>
+			               				<td>Status</td>
+			               			</tr>
+			               		</thead>
 					            <tbody>
-					              <tr class="message-unread">
-					                <td class="hidden-xs">
-					                  <label class="option block mn">
-					                    <input type="checkbox" name="mobileos" value="FR">
-					                    <span class="checkbox mn"></span>
-					                  </label>
-					                </td>
-					                <td class="hidden-xs">
-					                  <span class="rating block mn pull-left">
-					                    <input class="rating-input" id="r1" type="radio" name="custom">
-					                    <label class="rating-star" for="r1">
-					                      <i class="fa fa-star va-m"></i>
-					                    </label>
-					                  </span>
-					                </td>
-					                <td class="">Sony Inc</td>
-					                <td class="hidden-xs">
-					                  <span class="badge badge-warning mr10 fs11"> Work </span>
-					                </td>
-					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
-					                <td class="hidden-xs">
-					                  <i class="fa fa-paperclip fs15 text-muted va-b"></i>
-					                </td>
-					                <td class="text-right fw600">March 11</td>
-					              </tr>
-					              <tr class="message-unread">
+					              <c:forEach items="${journal}" var="journal" varStatus="counter">
+						              <tr class="message-unread">
+						                <td>${journal.journalName}</td>
+						                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+						                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+						                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+						                <td><span class="label label-success">IN PROGRESS</span></td>
+						              </tr>
+					              </c:forEach> --%>
+<!-- 					              <tr class="message-unread">
 					                <td class="hidden-xs">
 					                  <label class="option block mn">
 					                    <input type="checkbox" name="mobileos" value="FR">
@@ -235,76 +276,9 @@
 					                  <i class="fa fa-paperclip fs15 text-muted va-b"></i>
 					                </td>
 					                <td class="text-right fw600">March 11</td>
-					              </tr>
-					              <tr class="message-unread">
-					                <td class="hidden-xs">
-					                  <label class="option block mn">
-					                    <input type="checkbox" name="mobileos" value="FR">
-					                    <span class="checkbox mn"></span>
-					                  </label>
-					                </td>
-					                <td class="hidden-xs">
-					                  <span class="rating block mn pull-left">
-					                    <input class="rating-input" id="r1" type="radio" name="custom">
-					                    <label class="rating-star" for="r1">
-					                      <i class="fa fa-star va-m"></i>
-					                    </label>
-					                  </span>
-					                </td>
-					                <td class="">Marvel</td>
-					                <td class="hidden-xs">
-					                  <span class="badge badge-system mr10 fs11"> Meeting </span>
-					                </td>
-					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
-					                <td class="hidden-xs"></td>
-					                <td class="text-right fw600">March 11</td>
-					              </tr>
-					              <tr class="message-unread">
-					                <td class="hidden-xs">
-					                  <label class="option block mn">
-					                    <input type="checkbox" name="mobileos" value="FR">
-					                    <span class="checkbox mn"></span>
-					                  </label>
-					                </td>
-					                <td class="hidden-xs">
-					                  <span class="rating block mn pull-left">
-					                    <input class="rating-input" id="r1" type="radio" name="custom">
-					                    <label class="rating-star" for="r1">
-					                      <i class="fa fa-star va-m"></i>
-					                    </label>
-					                  </span>
-					                </td>
-					                <td class="">Microsoft</td>
-					                <td class="hidden-xs"></td>
-					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
-					                <td class="hidden-xs"></td>
-					                <td class="text-right fw600">March 11</td>
-					              </tr>
-					              <tr class="message-read">
-					                <td class="hidden-xs">
-					                  <label class="option block mn">
-					                    <input type="checkbox" name="mobileos" value="FR">
-					                    <span class="checkbox mn"></span>
-					                  </label>
-					                </td>
-					                <td class="hidden-xs">
-					                  <span class="rating block mn pull-left">
-					                    <input class="rating-input" id="r1" type="radio" name="custom">
-					                    <label class="rating-star" for="r1">
-					                      <i class="fa fa-star va-m"></i>
-					                    </label>
-					                  </span>
-					                </td>
-					                <td class="">Facebook</td>
-					                <td class="hidden-xs">
-					                  <span class="badge badge-info mr10 fs11"> Social </span>
-					                </td>
-					                <td class="">Lorem ipsum dolor sit amet, adipiscing eli</td>
-					                <td class="hidden-xs"></td>
-					                <td class="text-right">March 11</td>
-					              </tr>
-					            </tbody>
-					          </table>					
+					              </tr> -->
+<!-- 					            </tbody>
+					          </table>	 -->				
 	                  	</div>
                 	 		<c:choose>
 	                			<c:when test="${!empty(projectName)}">
@@ -314,7 +288,7 @@
 	                				<spring:url value="/design/templates/new" var="url_alt"/>
 	                			</c:otherwise>
 	                		</c:choose>
-							<div class="mpxd theme-primary mw1000 center-block" style="display: none;" id="update-port">								
+							<div class="mpxd theme-primary mw1000 center-block" style="${!empty(projectName)? 'display: none;' :  'view-port'}" id="${!empty(projectName)? 'update-port' :  'view-port'}">								
 								<form:form method="post" action="${url_alt}" id="project-form" modelAttribute="project">
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
@@ -469,7 +443,7 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery-ui.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-datepicker/jquery-ui-datepicker.min.js"></script>  
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-datepicker/jquery-ui-datepicker.min.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
 	  jQuery(document).ready(function() {"use strict";  _datePicker.init(); _toggleUpdate.init(); });
