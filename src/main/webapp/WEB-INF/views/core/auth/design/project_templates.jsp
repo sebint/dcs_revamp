@@ -98,7 +98,7 @@
 		                        <th>Owner</th>
 		                        <th width="10%">Start Date</th>
 		                        <th width="10%">End Date</th>
-		                        <th width="5%">Edit</th>
+		                        <!-- <th width="5%">Edit</th> -->
 		                        <th width="5%">Delete</th>
 		                      </tr>
 		                    </thead>
@@ -106,11 +106,11 @@
 							<c:forEach items="${projectList}" var="project" varStatus="counter">
 							 	<tr>
 									<td>${counter.index+1}</td>
-									<td>${project.projectName}</td>
+									<td><a href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}">${project.projectName}</a></td>
 									<td>${project.user.strFirstName} ${project.user.strLastName}</td>
 									<td><fmt:formatDate value="${project.startDate}" pattern="dd-MMM-YYYY" /></td>
 									<td><fmt:formatDate value="${project.endDate}" pattern="dd-MMM-YYYY" /></td>
-									<td><a href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}" class="sr-update"><span class="glyphicon glyphicon-edit"></span></a></td>
+									<%-- <td><a href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}" class="sr-update"><span class="glyphicon glyphicon-edit"></span></a></td> --%>
 									<td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${project.projectName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete Project" href="<spring:url value="/design/templates/delete"/>/${project.projectMasterId}"><span class="glyphicon glyphicon-trash">&nbsp;</span></a></td>
 								</tr>
 							</c:forEach>                   		                      		                      

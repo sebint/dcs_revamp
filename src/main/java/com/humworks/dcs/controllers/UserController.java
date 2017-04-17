@@ -100,6 +100,7 @@ public class UserController {
 		if(user==null){
 			throw new ResourceNotFoundException(strUserName);
 		}
+		System.out.println(user);
 		model.addAttribute("optn", true);
 		model.addAttribute("user", user);
 		return add;

@@ -201,6 +201,7 @@
 							    <div class="tab-content pn br-n">
 							      <div id="tab2_1" class="tab-pane active">
 							        <div class="row">
+							        <spring:url value="/design/non-progressive/new" var="journal_add"/>
 										<div class="table-responsive">
 							                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
 							               		<thead>
@@ -213,15 +214,24 @@
 							               			</tr>
 							               		</thead>
 									            <tbody>
-									              <c:forEach items="${journal}" var="journal" varStatus="counter">
-										              <tr class="message-unread">
-										                <td>${journal.journalName}</td>
-										                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
-										                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
-										                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
-										                <td><span class="label label-success">IN PROGRESS</span></td>
-										              </tr>
-									              </c:forEach>
+									            	<c:choose>
+									            		<c:when test="${fn:length(nonProgressiveList) gt 0}">
+											              <c:forEach items="${journal}" var="journal" varStatus="counter">
+												              <tr class="message-unread">
+												                <td>${journal.journalName}</td>
+												                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+												                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+												                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
+												                <td><span class="label label-success">IN PROGRESS</span></td>
+												              </tr>
+											              </c:forEach>									            		
+									            		</c:when>
+									            		<c:otherwise>
+									            			<tr>
+									            				<td colspan="5" class="text-center">No Journals found.Click <a href="${journal_add}">Here</a> to Add.</td>
+									            			</tr>
+									            		</c:otherwise>
+									            	</c:choose>
 							                  </tbody>
 							                </table>
 							              </div>							        
@@ -419,7 +429,8 @@
 											<span class="btn-text">Save</span></button>
 										<button type="submit" name="mode" value="save_continue" class="button btn-primary br3"><i class="fa fa-check"></i> 
 											<span class="btn-text">Save and Continue</span></button>
-										<a href="#" class="button br3 btn-cancel">
+											<spring:url value="/design/templates" var="list_url"></spring:url>
+										<a href="${!empty(projectName)? '#' :  list_url}" class="button br3 btn-cancel">
 											<i class="fa fa-close"></i> Cancel
 									   </a>
 									</div>

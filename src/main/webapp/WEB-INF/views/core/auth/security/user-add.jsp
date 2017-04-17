@@ -41,7 +41,8 @@
 	        </div>
  	        <div class="topbar-right mt-5"> 
 	          <div class="ib topbar-dropdown">
-	            <label for="topbar-multiple" class="control-label pr10 fs20 text-muted">New User</label>
+	          	<c:set value="${user.strFirstName} ${user.strLastName}" var="fullName" />
+	            <label for="topbar-multiple" class="control-label pr10 fs20 text-muted t-t-capt">${!empty(strUserName)? fullName :  'New User'}</label>
 	          </div>
 	        </div> 
 	      </header>
@@ -76,7 +77,7 @@
 	          <div class="col-md-12">
 	            <div class="panel panel-visible" id="spy1">
                 	<div class="panel-body">
-							<div class="panel">
+							<div class="panel" id="${!empty(strUserName)? 'view-port' :  'update-port'}" style="${empty(strUserName)? 'display: none;' :  ''}">
 								<div class="panel-bg-cover">
 									<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/thumbs/img1.jpg" alt="Image">
 								</div>
@@ -84,13 +85,22 @@
 									<img src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" class="panel-media-img img-circle img-border-light" alt="Profile Picture">
 									<div class="row">
 										<div class="col-lg-7">
-											<h3 class="panel-media-heading">Stephen Tran</h3>
-											<a href="#" class="btn-link">@stephen_doe</a>
-											<p class="text-muted mar-btm">Web and Graphic designer</p>
+											<h3 class="panel-media-heading text-upper">${fullName}</h3>
+											<a href="#" class="btn-link"><i class="fa fa-envelope"></i> ${user.strEmail}</a>
+											<p class="text-muted mar-btm f-s-17">
+												<c:forEach items="${user.role}" var="rol"> 
+							                        ${rol.strRoleName}
+							                    </c:forEach>
+											</p>
 										</div>
 										<div class="col-lg-5 t-a-right">
-											<button class="btn btn-sm btn-primary">Add Friend</button>
-											<button class="btn btn-sm btn-mint btn-icon fa fa-envelope icon-lg"></button>
+						                      <a class="btn btn-default light no-loader btn-update" title="Edit Project">
+						                        <i class="fa fa-edit"></i>
+						                      </a>
+						                      <a class="btn btn-default light no-loader" title="Delete Project">
+						                        <i class="fa fa-trash"></i>
+						                      </a>											
+											<button class="btn btn-sm btn-primary">Add New User</button>
 										</div>
 									</div>
 								</div>
@@ -107,7 +117,7 @@
                 				<spring:url value="/security/user/new" var="url_alt"/>
                 			</c:otherwise>
                 		</c:choose>
-							<div class="mpxd theme-primary mw1000 center-block">
+							<div class="mpxd theme-primary mw1000 center-block" style="${!empty(strUserName)? 'display: none;' :  'view-port'}" id="${!empty(strUserName)? 'update-port' :  'view-port'}">
 								<form:form method="post" action="${url_alt}" id="user-form" modelAttribute="user">
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
@@ -358,5 +368,8 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/user.js"></script>	  
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	  jQuery(document).ready(function() {"use strict"; _toggleUpdate.init(); });
+	  </script>
 	</body>
 </html>

@@ -24637,3 +24637,12 @@ span.forum-item-title {
 .b-none{
 	border: none;
 }
+.text-upper{
+	text-transform: uppercase;
+}
+.f-s-17{
+	font-size: 17px;
+}
+.f-w-600{
+	font-weight: 600;
+}
