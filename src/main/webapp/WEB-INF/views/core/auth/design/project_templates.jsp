@@ -90,7 +90,7 @@
 	             <div class="panel panel-visible bt-green" id="spy1"> 
 	                <div class="panel-body">
 		                <spring:url value="/design/templates" var="url"/>
-		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true" data-iDisplayLength="50">
 		                    <thead>
 		                      <tr>
 		                        <th width="5%">No</th>
@@ -106,7 +106,7 @@
 							<c:forEach items="${projectList}" var="project" varStatus="counter">
 							 	<tr>
 									<td>${counter.index+1}</td>
-									<td><a href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}">${project.projectName}</a></td>
+									<td><i class="fa fa-caret-right"></i> <a class="a-redocorated t-t-capt" href="${url}/${fn:replace(fn:toLowerCase(project.projectName),' ', '-')}">${project.projectName}</a></td>
 									<td>${project.user.strFirstName} ${project.user.strLastName}</td>
 									<td><fmt:formatDate value="${project.startDate}" pattern="dd-MMM-YYYY" /></td>
 									<td><fmt:formatDate value="${project.endDate}" pattern="dd-MMM-YYYY" /></td>
@@ -138,7 +138,7 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
-	  jQuery(document).ready(function() { "use strict"; _dataTable.init(); _confirm.init(); });
+	  jQuery(document).ready(function() { "use strict"; _dataTable.init({"searchType":"Projects"}); _confirm.init(); });
 	  </script>
 	</body>
 </html>

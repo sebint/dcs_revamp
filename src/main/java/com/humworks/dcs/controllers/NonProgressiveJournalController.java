@@ -30,7 +30,7 @@ import com.humworks.dcs.service.UserService;
 import com.humworks.dcs.validators.NonProgressiveJournalValidators;
 
 @Controller
-@RequestMapping("/design/non-progressive/")
+@RequestMapping("/design/non-progressive")
 public class NonProgressiveJournalController {
 	
 	private final String page = "auth/design/non_progressive_journal";
@@ -59,7 +59,7 @@ public class NonProgressiveJournalController {
 	private NonProgressiveJournalValidators nonJournalValidators;
 	
 	
-	@GetMapping(value={"/","list"})
+	@GetMapping(value={"","/","list"})
 	public String list(Model model){
 		model.addAttribute("nonProgressiveList", nonProgressiveService.selectAll());
 		return page;
@@ -78,6 +78,7 @@ public class NonProgressiveJournalController {
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
+		System.out.println(journal);
 		model.addAttribute("nonprogressive", journal);
 		model.addAttribute("journalName",journalName);
 		return add;

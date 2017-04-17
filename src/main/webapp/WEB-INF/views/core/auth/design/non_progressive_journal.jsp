@@ -91,14 +91,13 @@
 	             <div class="panel panel-visible bt-blue" id="spy1"> 
 	                <div class="panel-body">
 		                <spring:url value="/design/non-progressive" var="url"/>
-		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+		                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true" data-iDisplayLength="50">
 		                    <thead>
 		                      <tr>
 		                        <th width="5%">No</th>
-		                        <th>Project Name</th>
 		                        <th>Journal Name</th>
+		                        <th>Project Name</th>		                        
 		                        <th>Owner</th>
-		                        <th width="5%">Edit</th>
 		                        <th width="5%">Design</th>
 		                        <th width="5%">Delete</th>
 		                      </tr>
@@ -106,13 +105,12 @@
 		                    <tbody>
 			                    <c:if test="${fn:length(nonProgressiveList) gt 0}">
 				                    <c:forEach items="${nonProgressiveList}" var="nonList" varStatus="counter">
+				                      <c:set var="rand" value="${100+random.nextInt(1000-(100+1))}"/>
 				                      <tr>
 				                        <td>${counter.index+1}</td>
-				                        <td class="t-t-capt">${nonList.project.projectName}</td>
-				                        <td class="t-t-capt">${nonList.journalName}</td>           
+				                        <td class="t-t-capt"><i class="fa fa-caret-right text-primary"></i> <a class="a-redocorated" href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}">${nonList.journalName}</a></td>
+				                        <td class="t-t-capt">${nonList.project.projectName}</td>				                                   
 				                        <td class="t-t-capt">${nonList.user.strFirstName} ${nonList.user.strLastName}</td>
-				                        <c:set var="rand" value="${100+random.nextInt(1000-(100+1))}"/>
-				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}"><span class="glyphicon glyphicon-edit"></span></a></td>
 				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}/design"><span class="glyphicon glyphicon-edit txt-red"></span></a></td>
 				                        <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${nonList.journalName}</code></b> permanantly .Continue deleting?" data-title="Delete Non Progressive Journal" href="<spring:url value="/design/non-progressive/delete"/>/${rand}${nonList.nonProgressiveMasterId}"><span class="glyphicon glyphicon-trash"></span></a></td>
 				                      </tr>  
@@ -143,5 +141,8 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	  jQuery(document).ready(function() { "use strict"; _dataTable.init({"searchType":"Journals"}); _confirm.init(); });
+	  </script>
 	</body>
 </html>

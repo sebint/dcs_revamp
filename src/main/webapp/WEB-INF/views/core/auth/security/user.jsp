@@ -87,17 +87,16 @@
                 <div class="panel-body">
                  <spring:url value="/security/user" var="url"/>
                  <spring:url value="/security/user/password/reset" var="urlReset"/>
-                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+                  <table class="table table-striped table-hover" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true" data-iDisplayLength="50">
                     <thead>
                       <tr>
-                      	<th>No</th>
+                      	<th width="4%">No</th>
                         <th>User Full Name</th>
                         <th>Role</th>
                         <th>Email</th>
                         <th>Username</th>
-                        <th>Password</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th width="5%">Password</th>
+                        <th width="3%">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -108,12 +107,11 @@
                        	</c:forEach>   
                      <tr>
                       	<td>${counter.index+1}</td>
-                        <td>${user.strFirstName} ${user.strLastName}</td>  
+                        <td><i class="fa fa-caret-right"></i> <a class="a-redocorated t-t-capt" href="${url}/${user.strUserName}">${user.strFirstName} ${user.strLastName}</a></td>  
                         <td>${roleName}</td>          
                         <td>${user.strEmail}</td>
                         <td>${user.strUserName}</td>
                         <td><a href="#" class="td-none sr-reset" data-toggle="modal" data-target="#password_reset_modal" data-value="${user.intUserId}"><i class="fa fa-unlock-alt"></i> Reset</a></td>
-                        <td><a href="${url}/${user.strUserName}" class="sr-update"><span class="glyphicon glyphicon-edit"></span></a></td>
                         <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${user.strUserName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete User" href="<spring:url value="/security/user/delete"/>/${user.strUserName}"><span class="glyphicon glyphicon-trash">&nbsp;</span></a></td>
                       </tr>
                     </c:forEach>               
@@ -220,5 +218,8 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/user.js"></script>	  
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	  jQuery(document).ready(function() { "use strict"; _dataTable.init({"searchType":"Users"}); _confirm.init(); });
+	  </script>
 	</body>
 </html>

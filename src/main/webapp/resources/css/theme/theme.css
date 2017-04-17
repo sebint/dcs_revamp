@@ -6372,7 +6372,7 @@ html {
 }
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.49;
   color: #666666;
@@ -24645,4 +24645,23 @@ span.forum-item-title {
 }
 .f-w-600{
 	font-weight: 600;
+}
+.m-b-0{
+	margin-bottom: 0px;
+}
+.well-edit{
+	background: rgb(242, 242, 242) none repeat scroll 0% 0%;
+	border: 1px solid rgb(219, 219, 219);
+}
+.well-edit .desc_text{
+	background: rgb(242, 242, 242) none repeat scroll 0% 0% !important;
+}
+.a-redocorated{
+	color : inherit;
+}
+.b-left-none{
+	border-left: none;
+}
+.b-right-none{
+	border-right: none;
 }

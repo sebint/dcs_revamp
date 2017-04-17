@@ -22,15 +22,27 @@ var _sn = function(options) {
 			$('form').submit(function() {
 				Splash.fadeIn('slow');
 			})
+//			$(document).keydown(function(event){
+//			    if(event.which=="17")
+//			        cntrlIsPressed = true;
+//			});
+//			
+//			$(document).keyup(function(){
+//			    cntrlIsPressed = false;
+//			});
 			$('a').click(function() {
 				if (($(this).attr('href') != '#')) {
 					if (!$(this).hasClass('no-loader')) {
-						Splash.fadeIn('slow');
+//						if(!cntrlIsPressed){
+							Splash.fadeIn('slow');
+//						}
 					}
 				}
 			})
 			$(document).on("click", ".add-loader", function(){
+//				if(!cntrlIsPressed){
 					Splash.fadeIn('slow');
+//				}
 			})
 			Window.bind("load", function() {
 				// Remove splash screen after load
@@ -253,14 +265,16 @@ var _datePicker = function(options) {
 var _toggleUpdate = function(options) {
 		var showedit = function() {
 			$(".btn-update").on("click", function(){
-				$("#view-port").fadeOut("fast");
-				$("#update-port").fadeIn("fast");
+				/*$("#view-port").fadeOut("slow");*/
+//				$("#update-port").fadeIn("slow");
+				 $("#update-port").show();
+				 $('html, body').animate({scrollTop: $("#update-port").offset().top}, 100);
 			});
 		}
 		var showview = function(){
 			$(".btn-cancel").on("click",function(){
-				$("#update-port").fadeOut("fast");
-				$("#view-port").fadeIn("fast");
+				$("#update-port").hide();
+				$('html, body').animate({scrollTop: $("#view-port").offset().top}, 100);
 			});
 		}
 	return {
@@ -290,7 +304,7 @@ var _dataTable = function(options){
 		        }],
 		        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
 		        language: {
-		            search: '<span>Filter:</span> _INPUT_',
+		            search: '<span> Search From '+options.searchType +':</span> _INPUT_',
 		            lengthMenu: '<span>Show:</span> _MENU_',
 		            paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
 		        },
@@ -309,15 +323,16 @@ var _dataTable = function(options){
 		    $('#datatable').DataTable({
 		    	"bFilter": ck('bFilter'),
 		    	"bSort": ck('bSort'),
-		    	"bLengthChange": ck('bLengthChange')
+		    	"bLengthChange": ck('bLengthChange'),
+		    	"iDisplayLength": ck('iDisplayLength'),
 		    });
 		    // Alternative pagination
-		    $('.datatable-pagination').DataTable({
-		        pagingType: "simple",
-		        language: {
-		            paginate: {'next': 'Next &rarr;', 'previous': '&larr; Prev'}
-		        }
-		    });
+//		    $('.datatable-pagination').DataTable({
+//		        pagingType: "simple",
+//		        language: {
+//		            paginate: {'next': 'Next &rarr;', 'previous': '&larr; Prev'}
+//		        }
+//		    });
 
 
 		    // Datatable with saving state
@@ -338,7 +353,7 @@ var _dataTable = function(options){
 		    // ------------------------------
 
 		    // Add placeholder to the datatable filter option
-		    $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
+		    $('.dataTables_filter input[type=search]').attr('placeholder','Type to Search...');
 
 		    // Enable Select2 select for the length option
 //		    $('.dataTables_length select').select2({
@@ -347,7 +362,7 @@ var _dataTable = function(options){
 	   }
 	return {
 	   init: function(options) {
-		   runDataTables();
+		   runDataTables(options);
 	   }
 	}
 }();

@@ -116,7 +116,7 @@
 						                      <a class="btn btn-default light no-loader btn-update" title="Edit Project">
 						                        <i class="fa fa-edit"></i>
 						                      </a>
-						                      <a class="btn btn-default light no-loader" title="Delete Project">
+						                      <a class="btn btn-default light dr-confirm no-loader" title="Delete Project" data-content= "This will remove <b><code>${project.projectName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete Project" href="<spring:url value="/design/templates/delete"/>/${project.projectMasterId}">
 						                        <i class="fa fa-trash"></i>
 						                      </a>
 						                      <a class="btn btn-default light dropdown-toggle ph8 no-loader" data-toggle="dropdown" aria-expanded="false">
@@ -135,7 +135,7 @@
 								                  </li>
 						                          <li class="divider"></li>
 						                          <li>
-						                            <a href="#">
+						                            <a href="<spring:url value="/design/templates/new" />">
 						                              <span class="fa fa-plus pr5"></span> Create New</a>
 						                          </li>
 						                        </ul>
@@ -179,7 +179,7 @@
 						                  </div>
 						                </div>
 									</div>
-									<ul class="result-meta mt10 pull-right">
+									<ul class="result-meta mt25 pull-right">
 			                          <li><i class="glyphicon glyphicon-time"></i> Last Modified on <code><fmt:formatDate value="${project.dtDateModified}" pattern="dd-MMM-YYYY" /></code> by <code>${project.modifiedUser.strFirstName} ${project.modifiedUser.strLastName}</code></li>
 			                       </ul>
 			                    </div>
@@ -288,21 +288,25 @@
 					                <td class="text-right fw600">March 11</td>
 					              </tr> -->
 <!-- 					            </tbody>
-					          </table>	 -->				
+					          </table>	 -->	
+					       <hr class="short alt">			
 	                  	</div>
+	                  <div class="well-box ${!empty(projectName)? 'well-edit' :  ''}" style="${!empty(projectName)? 'display: none;' :  ''}" id="${!empty(projectName)? 'update-port' :  'view-port'}">
                 	 		<c:choose>
 	                			<c:when test="${!empty(projectName)}">
+	                				<c:set var="prj_sub_info"><spring:message code="prj.update.info"/></c:set>
 	                				<spring:url value="/design/templates/${projectName}" var="url_alt"/>
 	                			</c:when>
 	                			<c:otherwise>
+	                				<c:set var="prj_sub_info"><spring:message code="prj.new.info"/></c:set>
 	                				<spring:url value="/design/templates/new" var="url_alt"/>
 	                			</c:otherwise>
 	                		</c:choose>
-							<div class="mpxd theme-primary mw1000 center-block" style="${!empty(projectName)? 'display: none;' :  'view-port'}" id="${!empty(projectName)? 'update-port' :  'view-port'}">								
+							<div class="mpxd theme-primary mw1000 center-block">								
 								<form:form method="post" action="${url_alt}" id="project-form" modelAttribute="project">
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
-											<span class="desc_text"> <spring:message code="prj.new.info"/> </span>
+											<span class="desc_text">${prj_sub_info}</span>
 										</div>
 										<form:hidden path="projectMasterId" />					
 										<!-- .section-divider -->
@@ -437,6 +441,7 @@
 									<!-- end .form-footer section -->
 								</form:form>
 							</div>
+							</div>
 						</div>
 					</div>
 	          </div>
@@ -455,9 +460,10 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-datepicker/jquery-ui-datepicker.min.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
-	  jQuery(document).ready(function() {"use strict";  _datePicker.init(); _toggleUpdate.init(); });
+	  jQuery(document).ready(function() {"use strict";  _datePicker.init(); _toggleUpdate.init(); _confirm.init(); });
 	  </script>
 	</body>
 </html>

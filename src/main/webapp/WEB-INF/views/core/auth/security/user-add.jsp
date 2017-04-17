@@ -85,13 +85,13 @@
 									<img src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" class="panel-media-img img-circle img-border-light" alt="Profile Picture">
 									<div class="row">
 										<div class="col-lg-7">
-											<h3 class="panel-media-heading text-upper">${fullName}</h3>
-											<a href="#" class="btn-link"><i class="fa fa-envelope"></i> ${user.strEmail}</a>
-											<p class="text-muted mar-btm f-s-17">
+											<h3 class="panel-media-heading text-upper">${fullName}</h3>											
+											<p class="text-muted m-b-0 f-s-17">
 												<c:forEach items="${user.role}" var="rol"> 
 							                        ${rol.strRoleName}
 							                    </c:forEach>
 											</p>
+											<a href="#" class="btn-link"><i class="fa fa-envelope"></i> ${user.strEmail}</a>
 										</div>
 										<div class="col-lg-5 t-a-right">
 						                      <a class="btn btn-default light no-loader btn-update" title="Edit Project">
@@ -100,15 +100,136 @@
 						                      <a class="btn btn-default light no-loader" title="Delete Project">
 						                        <i class="fa fa-trash"></i>
 						                      </a>											
-											<button class="btn btn-sm btn-primary">Add New User</button>
+											  <a class="btn btn-default light dropdown-toggle ph8 no-loader" data-toggle="dropdown" aria-expanded="false">
+						                          <span class="glyphicon glyphicon-cog"></span>
+						                          <span class="caret ml5"></span>
+						                      </a>
+						                       <ul class="dropdown-menu pull-right" role="menu">
+								                  <li>
+										              <a href="javascript:window.print()" class="no-loader">
+										                <i class="fa fa-print fs13"></i> Print
+										              </a>
+								                  </li>
+								                  <li>
+								                    <a>
+								                      <i class="fa fa-envelope-o"></i> Message </a>
+								                  </li>
+						                          <li class="divider"></li>
+						                          <li>
+						                            <a href="<spring:url value="/security/user/new" />">
+						                              <span class="fa fa-plus pr5"></span> Create New</a>
+						                          </li>
+						                        </ul>
 										</div>
+									</div>								
+								</div>
+ 								<div class="panel-body b-right-none b-left-none">
+			                       <div class="row">
+										<div class="bg-light">
+						                  <div class="col-xs-12 col-lg-6">
+						                  	<div class="table-responsive">
+												<table class="table table-striped table-view">
+								                  <tbody>
+								                    <tr>
+								                      <td  width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Username <span class="pull-right">:</span></strong></td>
+								                      <td>${user.strUserName}</td>
+								                    </tr>
+								                    <tr>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Department <span class="pull-right">:</span></strong></td>
+								                      <td>${user.strDeptName}</td>
+								                    </tr>
+								                  </tbody>
+								                </table>
+							                </div>
+						                  </div>
+						                  <div class="col-xs-12 col-lg-6 br-l">
+						                  	<div class="table-responsive">
+												<table class="table table-striped table-view">
+								                  <tbody>
+								                    <tr>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Registered On <span class="pull-right">:</span></strong></td>
+								                      <td>${user.dtDateCreated}</td>
+								                    </tr>
+								                  </tbody>
+								                </table>
+							                </div>
+						                  </div>
+						                </div>
 									</div>
+			               <hr>
+			               <spring:url value="/design/non-progressive/new" var="journal_add"/>
+			               <h5>PROJECTS OWNED</h5>
+							<div class="panel b-none">
+							  <div class="panel-body b-none">
+						        <div class="row">
+						        <spring:url value="/design/non-progressive/new" var="journal_add"/>
+									<div class="table-responsive">
+						                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+						               		<thead>
+						               			<tr class="bg-light">
+						               				<th>Journal Name</th>
+						               				<th>Start Date</th>
+						               				<th>End Date</th>
+						               				<th>Status</th>
+						               			</tr>
+						               		</thead>
+								            <tbody>
+						            			<tr>
+						            				<td colspan="5" class="text-center">No Projects found.Click <a href="${journal_add}">Here</a> to Add.</td>
+						            			</tr>
+						                  </tbody>
+						                </table>
+						              </div>							        
+						        </div>
+							  </div>
+							</div>	
+							<hr class="short alt">
+							<h5>JOURNALS INVOLVED</h5>			               
+							<div class="panel b-none">
+							  <div class="panel-heading">
+							    <ul class="nav panel-tabs-border panel-tabs panel-tabs-left tab-mpxd">
+							      <li class="active">
+							        <a href="#tab2_1" class="no-loader" data-toggle="tab" aria-expanded="true"><span class="glyphicon glyphicon-equalizer"></span> Non Progressive</a>
+							      </li>
+							      <li class="">
+							        <a href="#tab2_2" class="no-loader" data-toggle="tab" aria-expanded="false"><span class="glyphicon glyphicon-modal-window"></span> Progressive</a>
+							      </li>
+							    </ul>
+							  </div>
+							  <div class="panel-body b-none">
+							    <div class="tab-content pn br-n">
+							      <div id="tab2_1" class="tab-pane active">
+							        <div class="row">
+										<div class="table-responsive">
+							                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+							               		<thead>
+							               			<tr class="bg-light">
+							               				<th>Journal Name</th>
+							               				<th>Journal Owner</th>
+							               				<th>Data Entry</th>
+							               				<th>Validator</th>
+							               				<th>Status</th>
+							               			</tr>
+							               		</thead>
+									            <tbody>
+							            			<tr>
+							            				<td colspan="5" class="text-center">No Journals found.Click <a href="${journal_add}">Here</a> to Add.</td>
+							            			</tr>
+							                  </tbody>
+							                </table>
+							              </div>							        
+							        </div>
+							      </div>
+							      <div id="tab2_2" class="tab-pane">
+							        <div class="row">
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+							</div>	
 								</div>
-								<div class="panel-body">
-									<h4>Consectetur adipisicing</h4>
-									Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-								</div>
-							</div>                	
+							</div>   
+					<div class="well-box ${!empty(strUserName)? 'well-edit' :  ''}" style="${!empty(strUserName)? 'display: none;' :  'view-port'}" id="${!empty(strUserName)? 'update-port' :  'view-port'}">             	
                 		<c:choose>
                 			<c:when test="${!empty(strUserName)}">
                 				<spring:url value="/security/user/${strUserName}" var="url_alt"/>
@@ -117,7 +238,7 @@
                 				<spring:url value="/security/user/new" var="url_alt"/>
                 			</c:otherwise>
                 		</c:choose>
-							<div class="mpxd theme-primary mw1000 center-block" style="${!empty(strUserName)? 'display: none;' :  'view-port'}" id="${!empty(strUserName)? 'update-port' :  'view-port'}">
+							<div class="mpxd theme-primary mw1000 center-block">
 								<form:form method="post" action="${url_alt}" id="user-form" modelAttribute="user">
 									<div class="panel-body pt0">
 										<div class="section-divider mv40" id="spy4">
@@ -340,12 +461,14 @@
 											<span class="btn-text">Save</span></button>
 										<button type="submit" name="mode" value="save_continue" class="button btn-primary br3"><i class="fa fa-check"></i> 
 											<span class="btn-text">Save and Continue</span></button>
-										<a href="<spring:url value="/security/user/"/>" class="button br3">
+											<spring:url value="/security/user" var="list_url"></spring:url>
+										<a href="${!empty(strUserName)? '#' :  list_url}" class="button br3 btn-cancel">
 											<i class="fa fa-close"></i> Cancel
 									   </a>
 									</div>
 									<!-- end .form-footer section -->
 								</form:form>
+							</div>
 							</div>
 						</div>
 					</div>

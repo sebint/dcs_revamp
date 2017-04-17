@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +78,136 @@
 	          <div class="col-md-12">
 	            <div class="panel panel-visible" id="spy1">
                 	<div class="panel-body">
+	                	<div class="well-box" id="${!empty(journalUrl)? 'view-port' :  'update-port'}" style="${empty(journalUrl)? 'display: none;' :  ''}">
+							<div id="search" class="tab-pane active search-results-page">					
+			                    <!-- Begin Search Result Entries -->
+			                    <div class="search-result">
+			                    <jsp:useBean id="now" class="java.util.Date" scope="request"/>
+			                    <fmt:parseNumber value="${ now.time / (1000*60*60*24) }" integerOnly="true" var="nowDays" scope="request"/>
+			                    <fmt:parseNumber value="${ nonprogressive.dtDateCreated.time / (1000*60*60*24) }" integerOnly="true" var="otherDays" scope="page"/>
+			                    <c:set value="${nowDays - otherDays}" var="dateDiff"/>
+				                    <div class="view-header">
+										<div class="media">
+					                      <a class="pull-left" href="#"> <img class="media-object mn thumbnail thumbnail-sm rounded mw50" src="${pageContext.request.contextPath}/resources/img/head-logo/journal.png" alt="..."> </a>
+					                      <div class="media-body mb5">
+					                        <h5 class="media-heading view-title">${nonprogressive.journalName}
+					                          <small class="view-sub-title"> - Created <a title="<fmt:formatDate value="${nonprogressive.dtDateCreated}" pattern="dd-MMM-YYYY hh:mm:ss" />">
+					                          <c:choose>
+												    <c:when test="${dateDiff eq 0}">today</c:when>
+												    <c:when test="${dateDiff eq 1}">yesterday</c:when>
+												    <c:otherwise>${dateDiff} day(s) ago</c:otherwise>
+											  </c:choose></a> by <a href='<spring:url value="/security/user/${nonprogressive.createdUser.strUserName}"/>' class="t-t-capt">${nonprogressive.createdUser.strFirstName} ${nonprogressive.createdUser.strLastName}</a></small>
+					                        </h5>
+					                        <p>Project : <a href="#"><i class="fa fa fa-caret-right"></i> ${nonprogressive.project.projectName}</a></p>
+					                      </div>
+					                    </div>		
+					                    <c:set var="rand" value="${100+random.nextInt(1000-(100+1))}"/>		                    
+				                    	<div class="panel-header-menu pull-right mt-45">
+				                    		<div class="btn-group mb10">
+						                      <a class="btn btn-default light no-loader btn-update" title="Edit Journal">
+						                        <i class="fa fa-edit"></i>
+						                      </a>
+						                      <a class="btn btn-default light dr-confirm no-loader" title="Delete Journal" data-content= "This will remove <b><code>${nonprogressive.journalName}</code></b> permanantly .Continue deleting?" data-title="Delete Non Progressive Journal" href="<spring:url value="/design/non-progressive/delete"/>/${rand}${nonprogressive.nonProgressiveMasterId}">
+						                        <i class="fa fa-trash"></i>
+						                      </a>
+						                      <a class="btn btn-default light dropdown-toggle ph8 no-loader" data-toggle="dropdown" aria-expanded="false">
+						                          <span class="glyphicon glyphicon-cog"></span>
+						                          <span class="caret ml5"></span>
+						                      </a>
+						                       <ul class="dropdown-menu pull-right" role="menu">
+								                  <li>
+										              <a href="javascript:window.print()" class="no-loader">
+										                <i class="fa fa-print fs13"></i> Print
+										              </a>
+								                  </li>
+								                  <li>
+								                    <a>
+								                      <i class="fa fa-envelope-o"></i> Message </a>
+								                  </li>
+						                          <li class="divider"></li>
+						                          <li>
+						                            <a href="<spring:url value="design/non-progressive/new" />">
+						                              <span class="fa fa-plus pr5"></span> Create New</a>
+						                          </li>
+						                        </ul>
+						                    </div>
+							            </div>
+				                    </div>
+			                       <hr class="short alt">
+			                       <div class="row">
+										<div class="bg-light">
+						                  <div class="col-xs-12 col-lg-6">
+						                  	<div class="table-responsive">
+												<table class="table table-striped table-view">
+								                  <tbody>
+								                    <tr>
+								                      <td  width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Journal Owner <span class="pull-right">:</span></strong></td>
+								                      <td>${nonprogressive.user.strFirstName} ${nonprogressive.user.strLastName}</td>
+								                    </tr>
+								                    <tr>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Validator <span class="pull-right">:</span></strong></td>
+								                      <td>${nonprogressive.validator.strFirstName} ${nonprogressive.validator.strLastName}</td>
+								                    </tr>
+								                  </tbody>
+								                </table>
+							                </div>
+						                  </div>
+						                  <div class="col-xs-12 col-lg-6 br-l">
+						                  	<div class="table-responsive">
+												<table class="table table-striped table-view">
+								                  <tbody>
+								                    <tr>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Data Entry <span class="pull-right">:</span></strong></td>
+								                      <td>${nonprogressive.dataentry.strFirstName} ${nonprogressive.dataentry.strLastName}</td>
+								                    </tr>
+								                    <tr>
+								                      <td width="40%"><i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <strong>Created On <span class="pull-right">:</span></strong></td>
+								                      <td><fmt:formatDate value="${nonprogressive.dtDateCreated}" pattern="dd-MMM-YYYY" /></td>
+								                    </tr>
+								                  </tbody>
+								                </table>
+							                </div>
+						                  </div>
+						                </div>
+									</div>
+									<ul class="result-meta mt25 pull-right">
+			                          <li><i class="glyphicon glyphicon-time"></i> Last Modified on <code><fmt:formatDate value="${nonprogressive.dtDateModified}" pattern="dd-MMM-YYYY" /></code> by <code>${nonprogressive.modifiedUser.strFirstName} ${nonprogressive.modifiedUser.strLastName}</code></li>
+			                       </ul>
+			                    </div>
+			                </div>	
+			               <hr>
+			               <h5>DATA HISTORY</h5>
+							<div class="panel b-none">
+							  <div class="panel-body b-none">
+							    <div class="tab-content pn br-n">
+							      <div id="tab2_1" class="tab-pane active">
+							        <div class="row">
+							        <spring:url value="/design/non-progressive" var="journal_design"/>
+										<div class="table-responsive">
+							                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+							               		<thead>
+							               			<tr class="bg-light">
+							               				<th>Data Date</th>
+							               				<th>Data Entry</th>
+							               				<th>Validated(Yes/No)</th>
+							               				<th>Status</th>
+							               			</tr>
+							               		</thead>
+									            <tbody>
+							            			<tr>
+							            				<td colspan="5" class="text-center">No Data History found.Click <a href="${journal_design}/${fn:replace(fn:toLowerCase(nonprogressive.journalName),' ', '-')}-${rand}${nonprogressive.project.projectMasterId}/design">Here</a> to Add New Data.</td>
+							            			</tr>
+							                  </tbody>
+							                </table>
+							              </div>							        
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+							</div>							
+					       <hr class="short alt">			
+	                  	</div>     
+	                  	<div class="well-box ${!empty(journalUrl)? 'well-edit' :  ''}" style="${!empty(journalUrl)? 'display: none;' :  ''}" id="${!empty(journalUrl)? 'update-port' :  'view-port'}">           	
 	                       	<c:choose>
 	                			<c:when test="${!empty(journalUrl)}">
 	                				<spring:url value="/design/non-progressive/${journalUrl}" var="url_alt"/>
@@ -245,13 +376,15 @@
 											<span class="btn-text">Save</span></button>
 										<button type="submit" name="mode" value="save_continue" class="button btn-primary br3"><i class="fa fa-check"></i> 
 											<span class="btn-text">Save and Continue</span></button>
-										<a href="<spring:url value="/design/non-progressive/"/>" class="button br3">
+											<spring:url value="/design/non-progressive" var="list_url"></spring:url>
+										<a href="${!empty(journalUrl)? '#' :  list_url}" class="button br3 btn-cancel">
 											<i class="fa fa-close"></i> Cancel
 									   </a>
 									</div>
 									<!-- end .form-footer section -->
 								</form:form>
 							</div>
+						  </div>	
 						</div>
 					</div>
 	          </div>
@@ -271,7 +404,10 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/user.js"></script>	  
+<%-- 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/user.js"></script>	  --%> 
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	  jQuery(document).ready(function() {"use strict"; _toggleUpdate.init(); _confirm.init(); });
+	  </script>	  
 	</body>
 </html>
