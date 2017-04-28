@@ -1,5 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 	    <!-- Start: Sidebar -->
 	    <aside id="sidebar_left" class="p-fixed">
 	
@@ -8,8 +9,44 @@
 	
 	        <!-- Start: Sidebar Menu -->
 	        <ul class="nav sidebar-menu">
-	
-	          <li class="active">
+				<c:forEach items="${menuList}" var="menu">
+					<li>
+						<c:choose>
+							<c:when test="${menu.strUrlPath ne '#'}">
+								<spring:url value="/${menu.strUrlPath}" var="menuUrl"/>
+							</c:when>
+							<c:otherwise>
+								<c:set value="#" var="menuUrl"/>
+							</c:otherwise>
+						</c:choose>
+			            <a class="${(fn:length(menu.subMenu) gt 0)? 'accordion-toggle': ''}" href="${menuUrl}">
+			              <span class="${menu.strUrlIcon }"></span>
+			              <span class="sidebar-title">${menu.strMenuName}</span>
+			              <span class="caret"></span>
+			            </a> 
+						<c:if test="${fn:length(menu.subMenu) gt 0}">							
+				            <ul class="nav sub-nav">
+					            <c:forEach items="${menu.subMenu}" var="submenu">
+					                  <li>
+					                  	<c:choose>
+											<c:when test="${submenu.strUrlPath ne '#'}">
+												<spring:url value="/${submenu.strUrlPath}" var="submenuUrl"/>
+											</c:when>
+											<c:otherwise>
+												<c:set value="#" var="submenuUrl"/>
+											</c:otherwise>
+										</c:choose>
+					                    <a href='${submenuUrl}'>
+					                    	<span class="fa fa-hourglass-half"></span>
+					                      	${submenu.strMenuName}
+					                    </a>
+					                  </li>
+				          	 	</c:forEach>					                  
+				          	 </ul>  
+			          	 </c:if>  
+			          </li>
+				</c:forEach>
+<%-- 	          <li class="active">
 	            <a class="menu-open" href='<spring:url value="/dashboard"/>'>
 	              <span class="glyphicon glyphicon-home"></span>
 	              <span class="sidebar-title">Dashboard</span>
@@ -47,35 +84,35 @@
 	                <a href='<spring:url value="/assessment/journal-entry/"/>'>
 	                  <span class="fa fa fa-arrows-h"></span>
 	                  	Journal Data Entry
-<%-- 	                  <span class="caret"></span> --%>
+	                  <span class="caret"></span>
 	                </a>
 	              </li>
 	              <li>
 	               <a href='<spring:url value="/assessment/progressive-validate/"/>'>
 	                  <span class="fa fa-arrows-v"></span>
 	                  Journal Validation - Progressive
-<%-- 	                  <span class="caret"></span> --%>
+	                  <span class="caret"></span>
 	                </a>
 	              </li>
 	              <li>
 	                 <a href='<spring:url value="/assessment/nonproressive-validate/"/>'>
 	                  <span class="fa fa-hand-o-up"></span>
 	                  Journal Validation - Non Progressive
-<%-- 	                  <span class="caret"></span> --%>
+	                  <span class="caret"></span>
 	                </a>
 	              </li>
 	              <li>
 	              	<a href='<spring:url value="/assessment/change-log/"/>'>
 	                  <span class="fa fa-arrows-v"></span>
 	                  Audit Data Change Log
-<%-- 	                  <span class="caret"></span> --%>
+	                  <span class="caret"></span>
 	                </a>	         
 	              </li>
 	              <li>
 	                <a href='<spring:url value="/assessment/pending-entry/"/>'>
 	                  <span class="fa fa-pause"></span>
 	                  Pending Journal Data Entry
-<%-- 	                  <span class="caret"></span> --%>
+	                  <span class="caret"></span>
 	                </a>
 	             </li>
 	            </ul>
@@ -188,11 +225,11 @@
 	              <li>
 	                <a href='<spring:url value="/report/photo/"/>'>
 	                  <span class="glyphicon glyphicon-shopping-cart"></span> Photo Report 
-	                  <span class="label label-xs bg-primary">${menuList}</span>
+	                  <span class="label label-xs bg-primary">New</span>
 	                </a>
 	              </li>
 	             </ul>
-	          </li>
+	          </li> --%>
 	
 	        </ul>
 	        <!-- End: Sidebar Menu -->

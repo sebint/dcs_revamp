@@ -5,11 +5,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.humworks.dcs.service.ObjectService;
+import com.humworks.dcs.service.impl.ObjectServiceImpl;
 
+@Component
 public class MenuListInterceptor extends HandlerInterceptorAdapter {
+
 
 	@Autowired
 	private ObjectService objectService;
@@ -17,8 +23,13 @@ public class MenuListInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		if(false){
-			request.setAttribute("menuList", objectService.selectAll());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		try{
+			if(authentication !=null){
+				request.setAttribute("menuList", objectService.findParentMenu());
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
 		return super.preHandle(request, response, handler);
 	}

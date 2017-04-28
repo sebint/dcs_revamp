@@ -70,13 +70,16 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 		sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
 		return sessionLocaleResolver;
 	}
-	
+	@Bean
+	public MenuListInterceptor menuListInterceptor() {
+	    return new MenuListInterceptor();
+	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("locale");
 		registry.addInterceptor(localeChangeInterceptor);
-		registry.addInterceptor(new MenuListInterceptor());
+		registry.addInterceptor(menuListInterceptor()).addPathPatterns("/**");
 	}
 	
 	// Config UTF-8 Encoding.

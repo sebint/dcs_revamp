@@ -10,4 +10,5 @@ public interface ObjectsDao {
 	ArrayList<Objects> selectAll();
 	
 	ArrayList<ObjectsMaster> getParentMenu();
+	
 }

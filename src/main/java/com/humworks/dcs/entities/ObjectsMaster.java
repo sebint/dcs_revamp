@@ -2,12 +2,16 @@ package com.humworks.dcs.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,6 +70,9 @@ public class ObjectsMaster implements Serializable {
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
+	
+	@OneToMany(mappedBy = "menu", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private Set<Objects> subMenu;
 
 	public Integer getIntMenuMasterId() {
 		return intMenuMasterId;
@@ -105,6 +112,10 @@ public class ObjectsMaster implements Serializable {
 
 	public Date getDtDateModified() {
 		return dtDateModified;
+	}
+
+	public Set<Objects> getSubMenu() {
+		return subMenu;
 	}
 
 	public void setIntMenuMasterId(Integer intMenuMasterId) {
@@ -147,12 +158,17 @@ public class ObjectsMaster implements Serializable {
 		this.dtDateModified = dtDateModified;
 	}
 
+	public void setSubMenu(Set<Objects> subMenu) {
+		this.subMenu = subMenu;
+	}
+
 	@Override
 	public String toString() {
 		return "ObjectsMaster [intMenuMasterId=" + intMenuMasterId + ", strMenuName=" + strMenuName + ", strUrlPath="
 				+ strUrlPath + ", strUrlIcon=" + strUrlIcon + ", intSeqNo=" + intSeqNo + ", intIsEnabled="
 				+ intIsEnabled + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated
-				+ ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + ", subMenu=" + subMenu
+				+ "]";
 	}
 
 	@Override
@@ -169,6 +185,7 @@ public class ObjectsMaster implements Serializable {
 		result = prime * result + ((strMenuName == null) ? 0 : strMenuName.hashCode());
 		result = prime * result + ((strUrlIcon == null) ? 0 : strUrlIcon.hashCode());
 		result = prime * result + ((strUrlPath == null) ? 0 : strUrlPath.hashCode());
+		result = prime * result + ((subMenu == null) ? 0 : subMenu.hashCode());
 		return result;
 	}
 
@@ -231,9 +248,12 @@ public class ObjectsMaster implements Serializable {
 				return false;
 		} else if (!strUrlPath.equals(other.strUrlPath))
 			return false;
+		if (subMenu == null) {
+			if (other.subMenu != null)
+				return false;
+		} else if (!subMenu.equals(other.subMenu))
+			return false;
 		return true;
 	}
-	
-	
 	
 }
