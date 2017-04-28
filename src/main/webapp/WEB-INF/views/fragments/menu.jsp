@@ -1,4 +1,5 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	    <!-- Start: Sidebar -->
 	    <aside id="sidebar_left" class="p-fixed">
 	
@@ -186,8 +187,8 @@
 	            <ul class="nav sub-nav">
 	              <li>
 	                <a href='<spring:url value="/report/photo/"/>'>
-	                  <span class="glyphicon glyphicon-shopping-cart"></span> Photo Report
-	                  <span class="label label-xs bg-primary">New</span>
+	                  <span class="glyphicon glyphicon-shopping-cart"></span> Photo Report 
+	                  <span class="label label-xs bg-primary">${menuList}</span>
 	                </a>
 	              </li>
 	             </ul>

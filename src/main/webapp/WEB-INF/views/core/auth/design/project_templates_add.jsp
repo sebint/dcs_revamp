@@ -116,7 +116,7 @@
 						                      <a class="btn btn-default light no-loader btn-update" title="Edit Project">
 						                        <i class="fa fa-edit"></i>
 						                      </a>
-						                      <a class="btn btn-default light dr-confirm no-loader" title="Delete Project" data-content= "This will remove <b><code>${project.projectName}</code></b> from the users permanantly .Continue deleting?" data-title="Delete Project" href="<spring:url value="/design/templates/delete"/>/${project.projectMasterId}">
+						                      <a class="btn btn-default light dr-confirm no-loader" title="Delete Project" data-content= "This will remove <b><code>${project.projectName}</code></b> from the Projects permanantly .Continue deleting?" data-title="Delete Project" href="<spring:url value="/design/templates/delete"/>/${project.projectMasterId}">
 						                        <i class="fa fa-trash"></i>
 						                      </a>
 						                      <a class="btn btn-default light dropdown-toggle ph8 no-loader" data-toggle="dropdown" aria-expanded="false">

@@ -137,7 +137,7 @@
 	  </div>
 	  <!-- End: Main -->
 	  <!-- Model -->
-	 <div class="modal fade column_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	 <div class="modal fade column_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header gradient-2">

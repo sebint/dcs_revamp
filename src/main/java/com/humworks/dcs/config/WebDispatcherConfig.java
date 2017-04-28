@@ -25,6 +25,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.humworks.dcs.interceptors.MenuListInterceptor;
+
 @Configuration 
 @EnableWebMvc
 @ComponentScan(basePackages = "com.humworks.dcs")
@@ -74,6 +76,7 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("locale");
 		registry.addInterceptor(localeChangeInterceptor);
+		registry.addInterceptor(new MenuListInterceptor());
 	}
 	
 	// Config UTF-8 Encoding.

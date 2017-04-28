@@ -68,7 +68,7 @@
 					<div class="drop-down-wrapper ps-container">
 						<div class="no-margin">
 							 <a class="media list-group-item" href="#">
-								 <img src="${pageContext.request.contextPath}/resources/img/avatars/1.jpg" alt="avatar" class="mw60 br64 m066p">
+								 <img src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" alt="avatar" class="mw60 br64 m066p">
 										<span class="media-body ta-center block no-margin ln-hgt"><small class="p5 block text-grey"><security:authentication property="principal.username"/></small><small class="text-yellow"><security:authentication property="principal.email"/></small></span>
 							</a>
 						</div>

@@ -188,5 +188,8 @@
 	  <script type="text/javascript" src="<spring:url value='../../resources/js/_sn.js'/>"></script>
 	  <script type="text/javascript" src="<spring:url value='../../resources/js/pages/object.js'/>"></script>
 	  <!-- END: PAGE SCRIPTS -->
+	  <script type="text/javascript">
+	  jQuery(document).ready(function() { "use strict"; _dataTable.init({"searchType":"Objects"});});
+	  </script>
 	</body>
 </html>
