@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/assessment/journal-entry/")
+@RequestMapping("/assessment/journal-entry")
 public class JournalDataEntryController {
 
 	private final String page = "auth/assessment/journal_data_entry";
 
-	@GetMapping(value={"/","list","index","home"})
+	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		return page;
 	}

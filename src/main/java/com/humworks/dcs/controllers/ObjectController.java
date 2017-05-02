@@ -17,7 +17,7 @@ import com.humworks.dcs.entities.ObjectsMaster;
 import com.humworks.dcs.service.ObjectService;
 
 @Controller
-@RequestMapping("/security/object/")
+@RequestMapping("/security/object")
 public class ObjectController {
 
 	private final String page = "auth/security/object";
@@ -25,7 +25,7 @@ public class ObjectController {
 	@Autowired
 	private ObjectService objectService;
 
-	@GetMapping(value={"/","list","index","home"})
+	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		return page;
 	}

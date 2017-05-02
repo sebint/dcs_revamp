@@ -6,8 +6,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.humworks.dcs.dao.AbstractDao;
@@ -34,9 +32,20 @@ public class RoleDaoImpl extends AbstractDao<Integer, Role> implements RoleDao {
 
 	@Override
 	public Role findByType(String type) {
-		 Criteria crit = createEntityCriteria();
-	     crit.add(Restrictions.eq("strRoleName", type));
-	     return (Role) crit.uniqueResult();
+		
+		try{
+			CriteriaBuilder cb = createCriteriaQuery();
+			CriteriaQuery<Role> cq = cb.createQuery(Role.class);
+			Root<Role> root = cq.from(Role.class);
+			cq.where(cb.equal(cb.lower(root.get("strRoleName")), type));
+	        return (Role) getSession().createQuery(cq).getSingleResult();
+		}catch(javax.persistence.NoResultException nr){
+			return null;
+		}catch(java.lang.NullPointerException np){
+			return null;
+		}catch(Exception ex){
+			return null;
+		}
 	}
 
 	@Override

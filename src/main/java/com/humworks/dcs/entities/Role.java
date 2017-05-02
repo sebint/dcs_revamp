@@ -12,103 +12,122 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.SelectBeforeUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name="tbl_role_master")
-@DynamicUpdate(true)
+@DynamicInsert
+@DynamicUpdate
+@SelectBeforeUpdate
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1439614899111669639L;
 	
-	private Integer intRoleId;
-	private String strRoleName;
-	private String strRoleDesc;
-	private Integer intRoleHome;
-	private Integer intCreatedBy;
-	private Date strDateCreated;
-	private Integer intModifiedBy;
-	private Date strDateModified;
-	
 	@Id
-	@Column(name = "role_master_id", unique=true, nullable=false)
+	@Column(name = "ROLE_MASTER_ID", unique=true, nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer intRoleId;
+	
+	@Column(name = "ROLE_NAME", nullable = false, unique = true)
+	private String strRoleName;
+	
+	@Column(name = "ROLE_DESC", nullable = false)
+	private String strRoleDesc;
+	
+	@Column(name = "HOME_PAGE_URL", nullable = false)
+	private Integer intRoleHome;
+	
+	@Column(name = "CREATED_BY", updatable = false)
+	private Integer intCreatedBy;
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATED_DATE", updatable = false)
+	private Date dtDateCreated;
+	
+	@Column(name="MODIFIED_BY")
+	private Integer intModifiedBy;
+	
+	@UpdateTimestamp
+	@Column(name = "MODIFIED_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dtDateModified;
+	
+
 	public Integer getIntRoleId() {
 		return intRoleId;
 	}
 	public void setIntRoleId(Integer intRoleId) {
 		this.intRoleId = intRoleId;
 	}
-	@Column(name = "role_name", nullable = false, unique = true)
+	
 	public String getStrRoleName() {
 		return strRoleName;
 	}
 	public void setStrRoleName(String strRoleName) {
 		this.strRoleName = strRoleName;
 	}
-	@Column(name = "role_desc", nullable = false)
 	public String getStrRoleDesc() {
 		return strRoleDesc;
 	}
 	public void setStrRoleDesc(String strRoleDesc) {
 		this.strRoleDesc = strRoleDesc;
 	}
-	@Column(name = "home_page_url", nullable = false)
+
 	public Integer getIntRoleHome() {
 		return intRoleHome;
 	}
 	public void setIntRoleHome(Integer intRoleHome) {
 		this.intRoleHome = intRoleHome;
 	}
-	@Column(name = "created_by", updatable = false)
+
 	public Integer getIntCreatedBy() {
 		return intCreatedBy;
 	}
 	public void setIntCreatedBy(Integer intCreatedBy) {
 		this.intCreatedBy = intCreatedBy;
 	}
-	@Column(name = "created_date", updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
-	public Date getStrDateCreated() {
-		return strDateCreated;
-	}
-	public void setStrDateCreated(Date strDateCreated) {
-		this.strDateCreated = strDateCreated;
-	}
-	@Column(name="modified_by")
 	public Integer getIntModifiedBy() {
 		return intModifiedBy;
 	}
 	public void setIntModifiedBy(Integer intModifiedBy) {
 		this.intModifiedBy = intModifiedBy;
 	}
-	@Column(name = "modified_date")
-	@Temporal(TemporalType.TIMESTAMP)
-	@org.hibernate.annotations.Generated(value = GenerationTime.ALWAYS)
-	public Date getStrDateModified() {
-		return strDateModified;
+
+	public Date getDtDateCreated() {
+		return dtDateCreated;
 	}
-	public void setStrDateModified(Date strDateModified) {
-		this.strDateModified = strDateModified;
+
+	public Date getDtDateModified() {
+		return dtDateModified;
 	}
+	public void setDtDateCreated(Date dtDateCreated) {
+		this.dtDateCreated = dtDateCreated;
+	}
+	public void setDtDateModified(Date dtDateModified) {
+		this.dtDateModified = dtDateModified;
+	}
+	
 	@Override
 	public String toString() {
 		return "Role [intRoleId=" + intRoleId + ", strRoleName=" + strRoleName + ", strRoleDesc=" + strRoleDesc
-				+ ", intRoleHome=" + intRoleHome + ", intCreatedBy=" + intCreatedBy + ", strDateCreated="
-				+ strDateCreated + ", intModifiedBy=" + intModifiedBy + ", strDateModified=" + strDateModified + "]";
+				+ ", intRoleHome=" + intRoleHome + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated
+				+ ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
+		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
 		result = prime * result + ((intCreatedBy == null) ? 0 : intCreatedBy.hashCode());
 		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
 		result = prime * result + ((intRoleHome == null) ? 0 : intRoleHome.hashCode());
 		result = prime * result + ((intRoleId == null) ? 0 : intRoleId.hashCode());
-		result = prime * result + ((strDateCreated == null) ? 0 : strDateCreated.hashCode());
-		result = prime * result + ((strDateModified == null) ? 0 : strDateModified.hashCode());
 		result = prime * result + ((strRoleDesc == null) ? 0 : strRoleDesc.hashCode());
 		result = prime * result + ((strRoleName == null) ? 0 : strRoleName.hashCode());
 		return result;
@@ -122,6 +141,16 @@ public class Role implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Role other = (Role) obj;
+		if (dtDateCreated == null) {
+			if (other.dtDateCreated != null)
+				return false;
+		} else if (!dtDateCreated.equals(other.dtDateCreated))
+			return false;
+		if (dtDateModified == null) {
+			if (other.dtDateModified != null)
+				return false;
+		} else if (!dtDateModified.equals(other.dtDateModified))
+			return false;
 		if (intCreatedBy == null) {
 			if (other.intCreatedBy != null)
 				return false;
@@ -141,16 +170,6 @@ public class Role implements Serializable {
 			if (other.intRoleId != null)
 				return false;
 		} else if (!intRoleId.equals(other.intRoleId))
-			return false;
-		if (strDateCreated == null) {
-			if (other.strDateCreated != null)
-				return false;
-		} else if (!strDateCreated.equals(other.strDateCreated))
-			return false;
-		if (strDateModified == null) {
-			if (other.strDateModified != null)
-				return false;
-		} else if (!strDateModified.equals(other.strDateModified))
 			return false;
 		if (strRoleDesc == null) {
 			if (other.strRoleDesc != null)

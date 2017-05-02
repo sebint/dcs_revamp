@@ -18,7 +18,7 @@ import com.humworks.dcs.entities.UnitMeasure;
 import com.humworks.dcs.service.UnitMeasureService;
 
 @Controller
-@RequestMapping("/manage/unit-measure/")
+@RequestMapping("/manage/unit-measure")
 public class UnitOfMeasureController {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class UnitOfMeasureController {
 
 	private final String page = "auth/administrator/unit_of_measure";
 
-	@GetMapping(value={"/","list"})
+	@GetMapping(value={"","/","list"})
 	public String list(Model model){
 		return page;
 	}

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.humworks.dcs.service.ObjectService;
-import com.humworks.dcs.service.impl.ObjectServiceImpl;
 
 @Component
 public class MenuListInterceptor extends HandlerInterceptorAdapter {

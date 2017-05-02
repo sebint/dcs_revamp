@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/assessment/progressive-validate/")
+@RequestMapping("/assessment/progressive-validate")
 public class ProgressiveJournalValidationController {
 
 	private final String page = "auth/assessment/journal_validation_progressive";
 
-	@GetMapping(value={"/","list","index","home"})
+	@GetMapping(value={"","/","list"})
 	public String list(Model model){
 		return page;
 	}

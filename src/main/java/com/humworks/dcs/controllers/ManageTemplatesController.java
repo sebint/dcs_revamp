@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/design/manage-template/")
+@RequestMapping("/design/manage-template")
 public class ManageTemplatesController {
 
 	private final String page = "auth/design/manage_templates";
 
-	@GetMapping(value={"/","list","index","home"})
+	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		return page;
 	}

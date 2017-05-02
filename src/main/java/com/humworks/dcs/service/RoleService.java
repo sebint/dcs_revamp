@@ -13,4 +13,5 @@ public interface RoleService {
 	Role findByType(String type);
      
 	Role findById(Integer id);
+
 }

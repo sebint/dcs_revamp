@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/design/progressive/")
+@RequestMapping("/design/progressive")
 public class ProgressiveJournalController {
 	
 	private final String page = "auth/design/progressive_journal";
 
-	@GetMapping(value={"/","list","index","home"})
+	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		return page;
 	}

@@ -37,7 +37,7 @@
 											</c:otherwise>
 										</c:choose>
 					                    <a href='${submenuUrl}'>
-					                    	<span class="fa fa-hourglass-half"></span>
+					                    	<span class="${submenu.strUrlIcon }"></span>
 					                      	${submenu.strMenuName}
 					                    </a>
 					                  </li>

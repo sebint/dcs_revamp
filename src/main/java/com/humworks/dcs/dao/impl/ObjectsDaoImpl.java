@@ -32,7 +32,8 @@ public class ObjectsDaoImpl extends AbstractDao<Objects, Integer> implements Obj
 		CriteriaQuery<ObjectsMaster> cq = cb.createQuery(ObjectsMaster.class);
 		Root<ObjectsMaster> root = cq.from(ObjectsMaster.class);
 		cq.select(root);
-		cq.orderBy(cb.asc(root.get("intMenuMasterId")));
+		cq.orderBy(cb.asc(root.get("intSeqNo")));
 		return (ArrayList<ObjectsMaster>) getSession().createQuery(cq).getResultList();
+		
 	}
 }

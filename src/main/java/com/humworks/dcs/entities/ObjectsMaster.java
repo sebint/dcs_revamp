@@ -2,6 +2,7 @@ package com.humworks.dcs.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,8 +73,9 @@ public class ObjectsMaster implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
 	
-	@OneToMany(mappedBy = "menu", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	private Set<Objects> subMenu;
+	@OneToMany(mappedBy = "menu", targetEntity=Objects.class, fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OrderBy("intSeqNo")
+	private Set<Objects> subMenu =  new HashSet<Objects>();
 
 	public Integer getIntMenuMasterId() {
 		return intMenuMasterId;

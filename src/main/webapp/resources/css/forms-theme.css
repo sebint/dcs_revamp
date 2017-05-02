@@ -520,7 +520,7 @@
   font-weight: bold;
   line-height: 20px;
   text-align: center;
-  background: #D7D7D7;
+  background: #5F5D5D;
   border: 2px solid #D7D7D7;
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
@@ -568,7 +568,7 @@
 .mpxd .switch > input:focus + label {
   color: #fff;
   border-color: #C7C7C7;
-  background: #C7C7C7;
+  background: #5F5D5D;
 }
 .mpxd .switch > input:focus + label:after {
   background: #fff;

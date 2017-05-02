@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/manage/data-attribute/")
+@RequestMapping("/manage/data-attribute")
 public class ProgressiveDataAttributesController {
 
 	private final String page = "auth/administrator/progressive_data_attributes";
 
-	@GetMapping(value={"/","list","index","home"})
+	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		return page;
 	}

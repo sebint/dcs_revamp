@@ -284,7 +284,22 @@ var _toggleUpdate = function(options) {
 	   }
 	}
 }();
-
+var _slimScroll = function(options) {
+	var initialize = function() {
+		$('.scroller').slimScroll({
+			color: 'rgb(27, 134, 183)',
+		    alwaysVisible: false,
+		    railVisible: false,
+		    height: '500px',
+		    opacity: 0.8
+		});
+	}
+return {
+	   init: function(options) {
+		   initialize();
+   }
+}
+}();
 var _dataTable = function(options){
 	   var runDataTables = function(options){
 

@@ -25,6 +25,7 @@ public class ObjectServiceImpl implements ObjectService {
 
 	@Override
 	public ArrayList<ObjectsMaster> findParentMenu() {
+//		System.out.println(objectDao.getParentMenu());
 		return objectDao.getParentMenu();
 	}
 

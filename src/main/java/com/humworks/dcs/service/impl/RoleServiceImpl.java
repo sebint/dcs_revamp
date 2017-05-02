@@ -13,7 +13,7 @@ import com.humworks.dcs.service.RoleService;
 @Service("roleService")
 @Transactional
 public class RoleServiceImpl implements RoleService {
-	
+
 	@Autowired
 	RoleDao roleDao;
 
@@ -24,7 +24,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Role findByType(String type) {
-		return roleDao.findByType(type);
+		return roleDao.findByType(type.replace('-', ' ').toLowerCase());
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class UserController {
 	@Autowired
 	private PasswordResetValidators resetValidators;
 	
-	@GetMapping(value={"/","list"})
+	@GetMapping(value={"","/","list"})
 	public String getUser(Model model){
 		return page;
 	}
@@ -220,15 +220,5 @@ public class UserController {
 	@ModelAttribute("userList")
 	public List<User> userList(){
 		return userService.selectAll();
-	}
-	
-	/*-------------------------------------------------------
-	 * 	To Avoid invalid url 
-	 * ------------------------------------------------------
-	 * */
-	
-	@GetMapping(value={"","new/**"})
-	public String get(){
-		return "redirect:/security/user/";
 	}
 }
