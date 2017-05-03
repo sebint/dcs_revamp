@@ -126,7 +126,7 @@
 								                  </li>
 						                          <li class="divider"></li>
 						                          <li>
-						                            <a href="<spring:url value="design/non-progressive/new" />">
+						                            <a href="<spring:url value="/design/non-progressive/new" />">
 						                              <span class="fa fa-plus pr5"></span> Create New</a>
 						                          </li>
 						                        </ul>
@@ -174,37 +174,40 @@
 			                          <li><i class="glyphicon glyphicon-time"></i> Last Modified on <code><fmt:formatDate value="${nonprogressive.dtDateModified}" pattern="dd-MMM-YYYY" /></code> by <code>${nonprogressive.modifiedUser.strFirstName} ${nonprogressive.modifiedUser.strLastName}</code></li>
 			                       </ul>
 			                    </div>
+			                   
 			                </div>	
 			               <hr>
 			               <h5>DATA HISTORY</h5>
-							<div class="panel b-none">
-							  <div class="panel-body b-none">
-							    <div class="tab-content pn br-n">
-							      <div id="tab2_1" class="tab-pane active">
-							        <div class="row">
-							        <spring:url value="/design/non-progressive" var="journal_design"/>
-										<div class="table-responsive">
-							                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
-							               		<thead>
-							               			<tr class="bg-light">
-							               				<th>Data Date</th>
-							               				<th>Data Entry</th>
-							               				<th>Validated(Yes/No)</th>
-							               				<th>Status</th>
-							               			</tr>
-							               		</thead>
-									            <tbody>
-							            			<tr>
-							            				<td colspan="5" class="text-center">No Data History found.Click <a href="${journal_design}/${fn:replace(fn:toLowerCase(nonprogressive.journalName),' ', '-')}-${rand}${nonprogressive.project.projectMasterId}/design">Here</a> to Add New Data.</td>
-							            			</tr>
-							                  </tbody>
-							                </table>
-							              </div>							        
-							        </div>
-							      </div>
-							    </div>
-							  </div>
-							</div>							
+			                <figure class="highlight">
+								<div class="panel b-none">
+								  <div class="panel-body b-none">
+								    <div class="tab-content pn br-n">
+								      <div id="tab2_1" class="tab-pane active">
+								        <div class="row">
+								        <spring:url value="/design/non-progressive" var="journal_design"/>
+											<div class="table-responsive">
+								                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
+								               		<thead>
+								               			<tr class="bg-light">
+								               				<th>Data Date</th>
+								               				<th>Data Entry</th>
+								               				<th>Validated(Yes/No)</th>
+								               				<th>Status</th>
+								               			</tr>
+								               		</thead>
+										            <tbody>
+								            			<tr>
+								            				<td colspan="5" class="text-center">No Data History found.Click <a href="${journal_design}/${fn:replace(fn:toLowerCase(nonprogressive.journalName),' ', '-')}-${rand}${nonprogressive.project.projectMasterId}/design">Here</a> to Add New Data.</td>
+								            			</tr>
+								                  </tbody>
+								                </table>
+								              </div>							        
+								        </div>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</figure>							
 					       <hr class="short alt">			
 	                  	</div>     
 	                  	<div class="well-box ${!empty(journalUrl)? 'well-edit' :  ''}" style="${!empty(journalUrl)? 'display: none;' :  ''}" id="${!empty(journalUrl)? 'update-port' :  'view-port'}">           	

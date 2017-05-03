@@ -159,7 +159,7 @@
 																	<th></th>
 																	<th>
 																		<label class="block switch switch-primary">
-																		<form:checkbox path="tools" id="view_opt" value="all"/>
+																		<form:checkbox path="strRoleName" id="view_opt" value="all"/>
 												                          <!-- <input type="checkbox" name="tools" id="view_opt" value="admin"> -->
 												                          <label for="view_opt" data-on="YES" data-off="NO"></label>
 												                        </label>		                              			

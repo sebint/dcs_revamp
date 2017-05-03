@@ -185,7 +185,8 @@
 			                    </div>
 			                </div>	
 			               <hr>
-			               <h5>Referenced Journals</h5>
+			               <h5>REFERENCED JOURNALS</h5>
+			               <figure class="highlight">
 							<div class="panel b-none">
 							  <div class="panel-heading">
 							    <ul class="nav panel-tabs-border panel-tabs panel-tabs-left tab-mpxd">
@@ -243,7 +244,8 @@
 							      </div>
 							    </div>
 							  </div>
-							</div>							
+							</div>	
+							</figure>						
 <%-- 			               <table id="message-table" class="table tc-checkbox-1 mpxd theme-warning br-t b-1-s-grey">
 			               		<thead>
 			               			<tr>

@@ -38,7 +38,7 @@
 	              <a href='<spring:url value="/design/non-progressive/"/>'>Non-Progressive Journal</a>
 	            </li>
 	            <li class="crumb-link">
-	              <a class="t-t-capt" href='<spring:url value="/design/non-progressive/${journalUrl}"/>'>${fn:replace(journalName,'-',' ')}</a>
+	              <a id="crumblink" class="t-t-capt" href='<spring:url value="/design/non-progressive/${journalUrl}"/>'>${fn:replace(journalName,'-',' ')}</a>
 	            </li>
 	             <li class="crumb-trail">Design</li>
 	          </ol>
@@ -53,7 +53,8 @@
 	
 	      <!-- Begin: Content -->
 	      <section id="content" class="animated fadeIn">
-	
+			<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
+			<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 	       <div class="row">
 	       	<c:if test="${ not empty error}">
 	        	<div class="col-md-12">	
@@ -123,6 +124,15 @@
 								<div id="scroll_container" style="overflow:hidden;">
 									<div id="hottable_container" style="margin-bottom:15px"></div>									
 								</div>
+							</div>
+							<div class="col-md-12">
+								<div id="ctlSave" class="text-right">
+									<button id="savedata" type="button" class="button btn-success br3"><i class="fa fa-save"></i> 
+										<span class="btn-text">Save Design</span></button>
+									<a href='<spring:url value="/design/non-progressive"/>' class="button br3 dr-confirm no-loader" title="Cancel Design" data-content= "This will cancel the design built for <b><code>${nonprogressive.journalName }</code></b>. Continue?" data-title="Cancel Design">
+										<i class="fa fa-close"></i> Cancel
+								   </a>
+							   </div>
 							</div>
 						</div>
 	                </div>
@@ -235,6 +245,7 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery-ui.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-confirm/jquery-confirm.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.full.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/moment/moment.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/pikaday/pikaday.js"></script>
@@ -245,6 +256,55 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
+	  jQuery(document).ready(function() {"use strict"; _confirm.init(); });
+	  
+	  function hot_save_config(callback) {
+			var c = hot_object.raw_config;
+			var isReadonlyExist = false;
+			for (var i = 0; i < c.length; i++) {
+				if (c[i]["readonly"]) { isReadonlyExist = true; break; }
+			}
+			
+			// Invalid data detected. Dont save
+			if (isReadonlyExist) {
+				if ($('.htInvalid').length > 0) { alert("Data is invalid. Please rectify the highlighted cells"); return false; }
+			}
+			/* showloader(); */
+			var raw_config = hot_object.raw_config;
+			var url = $("#crumblink").attr("href");;
+			var token = $('#csrfToken').val();
+			var header = $('#csrfHeader').val();
+			$.ajax({
+			    type : 'POST',
+			    url : url + '/design',
+			    data: {"name":"Sebin"},
+			    dataType : 'application/json',
+			    beforeSend: function(xhr) {
+			        xhr.setRequestHeader("Accept", "application/json");
+			        xhr.setRequestHeader("Content-Type", "application/json");
+			        xhr.setRequestHeader(header, token);
+			    },
+			    success : function(data) {
+			    	console.log("SUCCESS: ", data);
+			    },
+			    error : function(e) {
+			    	console.log("ERROR: ", e);
+			    }
+			});
+			
+/* 			$.post(url+'/design', {config:$.toJSON(raw_config)}).always(function(data){
+					console.log(data);
+					var d = hot_object.hot_serialize_data();
+					var data = $.toJSON(d); */
+					//console.log(data);
+					console.log("Saving read only data..");
+/* 					$.post("<?php echo $this->config->base_url().'index.php/'.$cpagename; ?>/save_data?jid=<?php echo $details->journal_no; ?>&publish=false", {data:data}).always(function(data){
+						console.log(data);
+					}); */
+				if (typeof callback == "function") { callback(); }
+				
+/* 			}); */
+		}
 	  
 	  function initialize_hot() {
 			if ((typeof hot_object == "undefined") || (hot_object == null)) {
@@ -310,6 +370,8 @@
 		}
 	  
 	  $(function(){
+		  //Hide the Save Design and cancel buttons on load.
+		  $("#ctlSave").hide();
 			var formhandler = function() {
 				var title = $.trim($('#column_title').val());
 				var type = $('#column_type').val();
@@ -327,9 +389,16 @@
 				
 				console.log(extra);
 				add_new_column(title,type,uom,extra);
+				
 				$('.column_modal').modal('toggle');
 				$('#column_title').val('');
+				
+				//Show the Save Design and cancel buttons onces a single header is created.
+				$("#ctlSave").show();
 			}
+			$('#savedata').on('click', function(){
+				hot_save_config();
+			});
 			$('#add_new_column').on('click', function(){
 				formhandler();
 			}); 

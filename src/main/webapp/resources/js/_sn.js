@@ -340,6 +340,7 @@ var _dataTable = function(options){
 		    	"bSort": ck('bSort'),
 		    	"bLengthChange": ck('bLengthChange'),
 		    	"iDisplayLength": ck('iDisplayLength'),
+		    	"aLengthMenu": [[50, 100, 150, 200, 250, 300, 350, 400, 450, 500, -1], [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, "All"]],
 		    });
 		    // Alternative pagination
 //		    $('.datatable-pagination').DataTable({
