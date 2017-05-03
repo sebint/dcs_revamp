@@ -1,8 +1,8 @@
 package com.humworks.dcs.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.humworks.dcs.entities.JsonDesignRequest;
+import com.humworks.dcs.entities.NonProgressiveJournalDesign;
 import com.humworks.dcs.entities.NonProgressiveJournalMaster;
 import com.humworks.dcs.entities.ProjectMaster;
 import com.humworks.dcs.entities.RemainderFrequency;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.exception.ResourceNotFoundException;
 import com.humworks.dcs.service.CommonService;
+import com.humworks.dcs.service.NonProgressiveJournalDesignService;
 import com.humworks.dcs.service.NonProgressiveJournalService;
 import com.humworks.dcs.service.ProjectService;
 import com.humworks.dcs.service.RemainderFrequencyService;
@@ -62,6 +68,9 @@ public class NonProgressiveJournalController {
 	
 	@Autowired
 	private NonProgressiveJournalValidators nonJournalValidators;
+	
+	@Autowired
+	private NonProgressiveJournalDesignService nonProgressiveJournalDesignService;
 	
 	
 	@GetMapping(value={"","/","list"})
@@ -103,10 +112,36 @@ public class NonProgressiveJournalController {
 		return design;
 	}
 	
-	@RequestMapping(value="{journalUrl}/design", method=RequestMethod.POST)
-	public @ResponseBody String getDesign(@PathVariable("journalUrl") String journalUrl, @RequestBody String name){
-		
-		return "success";
+	@ResponseBody 
+	@RequestMapping(value="{journalUrl}/design", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public JsonDesignRequest[] getDesign(@PathVariable("journalUrl") String journalUrl, @RequestBody JsonDesignRequest[] jsonDesignRequest ){
+		try{		
+			NonProgressiveJournalDesign nonPrgvDesign = new NonProgressiveJournalDesign();
+			nonPrgvDesign.setIsValidPending(0);
+			nonPrgvDesign.setNonProgressiveMasterId(1);
+			for(JsonDesignRequest design : jsonDesignRequest) {
+				nonPrgvDesign.setNonProgressiveMasterId(design.getJournalId());
+				nonPrgvDesign.setColHeaderText(design.getHeader());
+				nonPrgvDesign.setColHeaderWidth(design.getWidth());
+				nonPrgvDesign.setColOrder(design.getOrder());
+				nonPrgvDesign.setColType(design.getType());
+				nonPrgvDesign.setNonPrgvLinkId(design.getNon_progressive_link());
+				nonPrgvDesign.setPrgvLinkId(design.getProgressive_link());
+				nonPrgvDesign.setUomId(design.getUom());
+				nonPrgvDesign.setLookupMasterId(design.getLookup_id());
+				if(design.isReadonly()){
+					nonPrgvDesign.setIsReadOnly(1);
+				}else{
+					nonPrgvDesign.setIsReadOnly(0);
+				}
+				nonProgressiveJournalDesignService.save(nonPrgvDesign);
+				
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return jsonDesignRequest;
+		}
+		return jsonDesignRequest;
 	}
 	
 	@PostMapping("{journalUrl}")

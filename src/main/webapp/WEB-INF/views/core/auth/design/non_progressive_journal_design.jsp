@@ -55,6 +55,7 @@
 	      <section id="content" class="animated fadeIn">
 			<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 			<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
+			<input type="hidden" id="jounlId" value="${nonprogressive.nonProgressiveMasterId}"/>
 	       <div class="row">
 	       	<c:if test="${ not empty error}">
 	        	<div class="col-md-12">	
@@ -271,19 +272,22 @@
 			}
 			/* showloader(); */
 			var raw_config = hot_object.raw_config;
-			var url = $("#crumblink").attr("href");;
+			var url = $("#crumblink").attr("href");
 			var token = $('#csrfToken').val();
 			var header = $('#csrfHeader').val();
-			$.ajax({
+			var jId = $("#jounlId").val();
+			for(x = 0; x < raw_config.length; x++){
+				raw_config[x]["journalId"] = parseInt(jId); 
+			}
+			$.ajax({				
 			    type : 'POST',
+			    contentType : "application/json",
 			    url : url + '/design',
-			    data: {"name":"Sebin"},
-			    dataType : 'application/json',
-			    beforeSend: function(xhr) {
-			        xhr.setRequestHeader("Accept", "application/json");
-			        xhr.setRequestHeader("Content-Type", "application/json");
-			        xhr.setRequestHeader(header, token);
-			    },
+			    data: JSON.stringify(raw_config),
+			    dataType : 'json',			    
+			    beforeSend: function(xhr) { 
+			        xhr.setRequestHeader(header, token); 
+ 			    }, 
 			    success : function(data) {
 			    	console.log("SUCCESS: ", data);
 			    },
