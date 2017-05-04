@@ -66,6 +66,7 @@
 								<span>${error}</span>
 						</div>
 					</div>
+					
 				</div>        
 	        </c:if>
 	        <c:if test="${ not empty message}">
@@ -142,7 +143,6 @@
 	        </div>	       	
 	      </section>
 	      <!-- End: Content -->
-	
 	    </section>
 		<jsp:include page="../../../fragments/footer.jsp"></jsp:include>
 	  </div>
@@ -408,6 +408,8 @@
 			}); 
 			
 			raw_config = [];
+			//JSON.stringify(<c:out value="${nonprogressive}"/>);
+			console.log(raw_config);
 	  });
 	  </script>
 	</body>
