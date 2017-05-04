@@ -24644,11 +24644,20 @@ span.forum-item-title {
 .f-s-17{
 	font-size: 17px;
 }
+.f-s-12{
+	font-size: 12px;
+}
 .f-w-600{
 	font-weight: 600;
 }
 .m-b-0{
 	margin-bottom: 0px;
+}
+.m-0--15{
+	margin: 0px -15px !important;
+}
+.m-h-65vh{
+	min-height: 65vh;
 }
 .well-edit{
 	background: rgb(242, 242, 242) none repeat scroll 0% 0%;
@@ -24672,4 +24681,8 @@ span.forum-item-title {
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;
     border-radius: 4px;
+}
+ul.tray-nav li a span.label {
+    line-height: inherit;
+    padding: .1em .6em .2em;
 }

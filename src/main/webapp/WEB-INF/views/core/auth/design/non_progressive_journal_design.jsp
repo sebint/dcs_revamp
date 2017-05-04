@@ -128,12 +128,21 @@
 								</div>
 							</div>
 							<div class="col-md-12">
-								<div id="ctlSave" class="text-right">
-									<button id="savedata" type="button" class="button btn-success br3"><i class="fa fa-save"></i> 
-										<span class="btn-text">Save Design</span></button>
-									<a href='<spring:url value="/design/non-progressive"/>' class="button br3 dr-confirm no-loader" title="Cancel Design" data-content= "This will cancel the design built for <b><code>${nonprogressive.journalName }</code></b>. Continue?" data-title="Cancel Design">
-										<i class="fa fa-close"></i> Cancel
-								   </a>
+								<div id="ctlSave" >
+									<div class="col-md-6">
+										<span >NOTE :</span>
+										<blockquote class="blockquote-rounded m-b-0 f-s-12">
+						                    <p class="text-danger m-b-0">* You are only allowed to design the journal.</p>
+						                    <p class="text-danger m-b-0">* Click <a href="#">here</a> to add Data.</p>
+						                  </blockquote>
+									</div>
+									<div class="text-right col-md-6">
+										<button id="savedata" type="button" class="btn btn-success br3 btn-sm"><i class="fa fa-save"></i> 
+											<span class="btn-text">Save Design</span></button>
+										<a href='<spring:url value="/design/non-progressive"/>' class="btn btn-default br3 btn-sm dr-confirm no-loader" title="Cancel Design" data-content= "This will cancel the design built for <b><code>${nonprogressive.journalName }</code></b>. Continue?" data-title="Cancel Design">
+											<i class="fa fa-close"></i> Cancel
+									   </a>
+								   </div>
 							   </div>
 							</div>
 						</div>
@@ -323,6 +332,7 @@
 	  function add_new_column(title,type,uom,extra) {
 			initialize_hot();
 			hot_object.add_new_column(title,type,uom,extra);
+			lockTable();
 			if (type == "progressive_link") {
 				load_progressive_link(hot_object.raw_config[hot_object.raw_config.length-1]);
 				//refresh_progressive_links();
@@ -372,6 +382,134 @@
 		function edit_callback(object) {
 			console.log(object);
 		}
+		
+		function lockTable() {
+			hot_object.lock_table();
+		}
+		
+		function lockCells(){
+			hot_object.lock_cells();
+		}
+		
+
+		// Function to generate edit modal on the fly, so that hopefully you dont have to maintain 2 modals
+		function generate_edit_modal() {
+			$edit_modal = $('.column_modal').clone();
+			
+			$edit_modal.find('#column_title').attr('id','column_title_edit').attr('name','column_title_edit');
+			$edit_modal.find('#column_type').attr('id','column_type_edit').attr('name','column_type_edit').on('change',function(e){
+				//console.log('change',e);
+				$t = $(this);
+				var val = $t.val();
+				
+				if (val != "date") {
+					$edit_modal.find('#uom_edit').val('12').removeAttr('disabled');
+				}
+				if (val != "lookup") {
+					$edit_modal.find('#lookup_content_edit').appendTo($('#hiddenstuff_edit'));
+				}
+				if (val != "progressive_link") {
+					$edit_modal.find('#link_content_edit').appendTo($('#hiddenstuff_edit'));
+					$edit_modal.find('#uom_edit').removeAttr('disabled');
+					$edit_modal.find('#readonly_edit').removeAttr('disabled').attr('checked',false);
+				}
+				if (val != "non_progressive_link") {
+					$edit_modal.find('#nonp_link_content_edit').appendTo($('#hiddenstuff_edit'));
+					$edit_modal.find('#uom_edit').removeAttr('disabled');
+					$edit_modal.find('#readonly_edit').removeAttr('disabled').attr('checked',false);
+				}
+				if (val != "formula") {
+					$edit_modal.find('#formula_content_edit').appendTo($('#hiddenstuff_edit'));
+					//$edit_modal.find('#uom_edit').removeAttr('disabled');
+					//$edit_modal.find('#readonly_edit').removeAttr('disabled').attr('checked',false);
+				}
+				
+				
+				
+				switch(val) {
+					case "date":
+						$edit_modal.find('#uom_edit').val('3').attr('disabled','true');
+						break;
+					case "lookup":
+						$edit_modal.find('#lookup_content_edit').appendTo($('#lookup_container_edit'));
+						break;
+					case "progressive_link":
+						$edit_modal.find('#link_content_edit').appendTo($('#link_container_edit'));
+						$edit_modal.find('#uom_edit').attr('disabled','disabled');
+						$edit_modal.find('#readonly_edit').attr('disabled','disabled').attr('checked',true);
+						break;
+					case "non_progressive_link":
+						$edit_modal.find('#nonp_link_content_edit').appendTo($('#nonp_link_container_edit'));
+						$edit_modal.find('#uom_edit').attr('disabled','disabled');
+						$edit_modal.find('#readonly_edit').attr('disabled','disabled').attr('checked',true);
+						break;
+					case "formula":
+						$edit_modal.find('#formula_content_edit').appendTo($('#formula_container_edit'));
+						//$edit_modal.find('#uom_edit').attr('disabled','disabled');
+						//$edit_modal.find('#readonly_edit').attr('disabled','disabled').attr('checked',true);
+						break;
+						
+				}
+				
+				/*
+				if (val == "date") {
+					$edit_modal.find('#uom_edit').val('3').attr('disabled','true'); /* Date *
+				} else {
+					$edit_modal.find('#uom_edit').val('12').removeAttr('disabled'); /* Not selected *
+				}
+				
+				if (val == 'lookup') {
+					$edit_modal.find('#lookup_content_edit').appendTo($('#lookup_container_edit'));
+				} else {
+					$edit_modal.find('#lookup_content_edit').appendTo($('#hiddenstuff_edit'));
+				}
+				
+				if (val == 'progressive_link') {
+					$edit_modal.find('#link_content_edit').appendTo($('#link_container_edit'));
+					$edit_modal.find('#uom_edit').attr('disabled','disabled');
+					$edit_modal.find('#readonly_edit').attr('disabled','disabled');
+				} else {
+					$edit_modal.find('#link_content_edit').appendTo($('#hiddenstuff_edit'));
+					$edit_modal.find('#uom_edit').removeAttr('disabled');
+					$edit_modal.find('#readonly_edit').removeAttr('disabled');
+				}*/
+				
+				$edit_modal.find('#column_type').data('previous',val);
+			});
+			$edit_modal.find('#uom').attr('id','uom_edit').attr('name','uom_edit');
+			$edit_modal.find('#readonly').attr('id','readonly_edit').attr('name','readonly_edit');
+			$edit_modal.find('#hiddenstuff').attr('id','hiddenstuff_edit').attr('name','hiddenstuff_edit');
+			$edit_modal.find('#lookup').attr('id','lookup_edit').attr('name','lookup_edit');
+			$edit_modal.find('#lookup_content').attr('id','lookup_content_edit').attr('name','lookup_content_edit');
+			$edit_modal.find('#lookup_container').attr('id','lookup_container_edit').attr('name','lookup_container_edit');
+			
+			$edit_modal.find('#link_jid').attr('id','link_jid_edit').attr('name','link_jid_edit');
+			$edit_modal.find('#link_content').attr('id','link_content_edit').attr('name','link_content_edit');
+			$edit_modal.find('#link_container').attr('id','link_container_edit').attr('name','link_container_edit');
+			
+			$edit_modal.find('#nonp_link_jid').attr('id','nonp_link_jid_edit').attr('name','nonp_link_jid_edit');
+			$edit_modal.find('#nonp_link_content').attr('id','nonp_link_content_edit').attr('name','nonp_link_content_edit');
+			$edit_modal.find('#nonp_link_container').attr('id','nonp_link_container_edit').attr('name','nonp_link_container_edit');
+			$edit_modal.find('#nonp_link_column').attr('id','nonp_link_column_edit').attr('name','nonp_link_column_edit');
+			
+			$edit_modal.find('#formula_content').attr('id','formula_content_edit').attr('name','formula_content_edit');
+			$edit_modal.find('#formula_container').attr('id','formula_container_edit').attr('name','formula_container_edit');
+			$edit_modal.find('#formula').attr('id','formula_edit').attr('name','formula_edit');
+			
+			
+			$edit_modal.find('.modal-title').text('Edit Column');
+			$edit_modal.find('#add_new_column').attr('id','edit_column').text('Confirm Edit').on('click', function(){
+				edit_column_click();
+			})
+			
+			$edit_modal.append('<input type="hidden" id="original_title" value=""/>')
+			
+			$edit_modal.find('#nonp_link_jid_edit').on('change',function() {
+				var $t = $(this);
+				var val = $t.val();
+				populate_nonp_columns($('#nonp_link_column_edit'), val);
+			});
+		}
 	  
 	  $(function(){
 		  //Hide the Save Design and cancel buttons on load.
@@ -405,11 +543,24 @@
 			});
 			$('#add_new_column').on('click', function(){
 				formhandler();
-			}); 
-			
-			raw_config = [];
-			//JSON.stringify(<c:out value="${nonprogressive}"/>);
-			console.log(raw_config);
+			}); 			
+			raw_config = ${design};
+			data =  ${journalData};
+			lookupdata = ${lookup};
+			hot_lock = ${hotLock};
+			hot_object = null;			
+			if (raw_config.length > 0) {
+				hot_object = new HOT(Handsontable, raw_config,data,'design');
+				if (hot_lock) { $('#modaladd').attr('disabled','disabled'); $('#savedata').attr('disabled','disabled'); }
+				hot_object.register_edit_callback(edit_callback)
+				refresh_progressive_links();
+				refresh_non_progressive_links();
+				lockCells();
+				$("#ctlSave").show();
+			}
+			else { 
+				//initialize_hot(); 
+			}
 	  });
 	  </script>
 	</body>

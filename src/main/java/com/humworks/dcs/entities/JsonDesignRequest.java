@@ -21,6 +21,8 @@ public class JsonDesignRequest implements Serializable {
 	private boolean readonly; 
 	private String formula;
 	private Integer journalId;
+	private Integer validate_pending;
+	private Integer validate_revision;
 	
 
 	public String getFormula() {
@@ -118,5 +120,23 @@ public class JsonDesignRequest implements Serializable {
 	public void setJournalId(Integer journalId) {
 		this.journalId = journalId;
 	}
+
+	public Integer getValidate_pending() {
+		return validate_pending;
+	}
+
+	public Integer getValidate_revision() {
+		return validate_revision;
+	}
+
+	public void setValidate_pending(Integer validate_pending) {
+		this.validate_pending = validate_pending;
+	}
+
+	public void setValidate_revision(Integer validate_revision) {
+		this.validate_revision = validate_revision;
+	}
+	
+	
 
 }

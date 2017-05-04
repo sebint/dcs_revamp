@@ -56,14 +56,18 @@ public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJou
 
 	@Override
 	public ArrayList<NonProgressiveJournalDesign> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return nonProgressiveDesignDao.selectAll();
+	}
+	
+	@Override
+	public ArrayList<Long> selectUnique(){
+		return nonProgressiveDesignDao.selectUnique();
 	}
 
 	@Override
-	public ArrayList<NonProgressiveJournalDesign> findByProjectId(Integer projectMasterId) {
+	public ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer journalMasterId) {
 		// TODO Auto-generated method stub
-		return null;
+		return nonProgressiveDesignDao.findByJournalId(journalMasterId);
 	}
 
 }

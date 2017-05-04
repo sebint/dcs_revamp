@@ -18,5 +18,7 @@ public interface NonProgressiveJournalDesignService {
     
     ArrayList<NonProgressiveJournalDesign> selectAll();
 
-    ArrayList<NonProgressiveJournalDesign> findByProjectId(Integer projectMasterId);
+    ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer projectMasterId);
+
+	ArrayList<Long> selectUnique();
 }

@@ -950,8 +950,18 @@ function HOT(Handsontable, raw_config, data, type, pre_data) {
 		this.hot_config = this.hot_finalize_config();
 		this.hot_instance.updateSettings(this.hot_config);
 	}
-	
-	
+	//Added By Sebin
+	this.lock_cells = function(){
+		this.hot_instance.updateSettings({
+		    cells: function (row, col, prop) {
+		      var cellProperties = {};
+		      cellProperties.editor = false;
+		      return cellProperties;
+		    }
+		  })
+	}
+	//Ends Here
+	//Added by sebin
 	this.hot_serialize_data = function() {
 		var d = [];
 		var collength = this.hot_instance.countCols()

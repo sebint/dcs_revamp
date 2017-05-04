@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -92,6 +94,19 @@ public class NonProgressiveJournalDesign implements Serializable {
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
+	
+	@ManyToOne
+    @JoinColumn(name="NON_PGRV_JRNL_MASTER_ID", insertable = false, updatable = false)
+    private NonProgressiveJournalMaster nonProgressive;
+	
+	public NonProgressiveJournalDesign(){	
+	}
+
+	public NonProgressiveJournalDesign(Integer nonProgressiveMasterId, NonProgressiveJournalMaster nonProgressive) {
+		super();
+		this.nonProgressiveMasterId = nonProgressiveMasterId;
+		this.nonProgressive = nonProgressive;
+	}
 
 	public Integer getNonPrgvDesignId() {
 		return nonPrgvDesignId;
@@ -243,6 +258,14 @@ public class NonProgressiveJournalDesign implements Serializable {
 
 	public void setDtDateModified(Date dtDateModified) {
 		this.dtDateModified = dtDateModified;
+	}
+	
+	public NonProgressiveJournalMaster getNonProgressive() {
+		return nonProgressive;
+	}
+
+	public void setNonProgressive(NonProgressiveJournalMaster nonProgressive) {
+		this.nonProgressive = nonProgressive;
 	}
 
 	@Override

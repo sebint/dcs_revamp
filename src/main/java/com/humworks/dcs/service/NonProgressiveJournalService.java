@@ -13,6 +13,8 @@ public interface NonProgressiveJournalService {
 	void delete(NonProgressiveJournalMaster nonProgressive);
 	
 	NonProgressiveJournalMaster findById(Integer id);
+	
+	ArrayList<NonProgressiveJournalMaster> findByIds(ArrayList<Long> idx);
     
 	NonProgressiveJournalMaster findByName(String projectName, Integer projectMasterId);
     

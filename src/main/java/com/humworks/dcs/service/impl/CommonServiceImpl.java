@@ -1,8 +1,15 @@
 package com.humworks.dcs.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.humworks.dcs.entities.JsonDesignRequest;
+import com.humworks.dcs.entities.NonProgressiveJournalDesign;
 import com.humworks.dcs.service.CommonService;
 
 @Service("commonService")
@@ -35,6 +42,15 @@ public class CommonServiceImpl implements CommonService {
 		}catch(Exception ex){
 			return 0;
 		}
+	}
+
+	@Override
+	public String arrayListtoJson(ArrayList<JsonDesignRequest> list) throws JsonProcessingException {
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		//Set pretty printing of json
+    	objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		return objectMapper.writeValueAsString(list);
 	}
 
 }

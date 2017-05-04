@@ -8,9 +8,9 @@ public interface NonProgressiveJournalDesignDao {
 
 	Integer saveNonProgressive(NonProgressiveJournalDesign nonProgressive);
 	
-	Integer updateNonProgressive(NonProgressiveJournalDesign nonProgressive);
+	Integer updateDesign(NonProgressiveJournalDesign nonProgressive);
 		
-	void deleteNonProgressive(NonProgressiveJournalDesign nonProgressive);
+	void deleteDesign(NonProgressiveJournalDesign nonProgressive);
 	
 	NonProgressiveJournalDesign findById(Integer npid);
      
@@ -18,7 +18,9 @@ public interface NonProgressiveJournalDesignDao {
     
     ArrayList<NonProgressiveJournalDesign> selectAll();
     
-    ArrayList<NonProgressiveJournalDesign> findByProjectId(Integer projectMasterId);
+    ArrayList<Long> selectUnique();
+    
+    ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer projectMasterId);
     
     void transactionRollback();
 }

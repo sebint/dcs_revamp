@@ -73,4 +73,9 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 		return nonProgressiveDao.findByProjectId(projectMasterId);
 	}
 
+	@Override
+	public ArrayList<NonProgressiveJournalMaster> findByIds(ArrayList<Long> idx) {
+		return nonProgressiveDao.findByIds(idx);
+	}
+
 }

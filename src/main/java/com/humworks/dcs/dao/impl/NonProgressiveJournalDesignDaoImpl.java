@@ -2,6 +2,10 @@ package com.humworks.dcs.dao.impl;
 
 import java.util.ArrayList;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 
 import com.humworks.dcs.dao.AbstractDao;
@@ -18,15 +22,15 @@ public class NonProgressiveJournalDesignDaoImpl extends AbstractDao<Integer, Non
 	}
 
 	@Override
-	public Integer updateNonProgressive(NonProgressiveJournalDesign nonProgressive) {
+	public Integer updateDesign(NonProgressiveJournalDesign nonProgressive) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deleteNonProgressive(NonProgressiveJournalDesign nonProgressive) {
+	public void deleteDesign(NonProgressiveJournalDesign nonProgressive) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -43,20 +47,43 @@ public class NonProgressiveJournalDesignDaoImpl extends AbstractDao<Integer, Non
 
 	@Override
 	public ArrayList<NonProgressiveJournalDesign> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<NonProgressiveJournalDesign> cq = cb.createQuery(NonProgressiveJournalDesign.class);
+		Root<NonProgressiveJournalDesign> root = cq.from(NonProgressiveJournalDesign.class);
+		cq.select(root);
+		cq.where(cb.equal(root.get("status"),1));
+//		1:Active
+//		2.Deleted
+		cq.orderBy(cb.asc(root.get("colOrder")));
+		return (ArrayList<NonProgressiveJournalDesign>) getSession().createQuery(cq).getResultList();
 	}
 
 	@Override
-	public ArrayList<NonProgressiveJournalDesign> findByProjectId(Integer projectMasterId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer journalMasterId) {
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<NonProgressiveJournalDesign> cq = cb.createQuery(NonProgressiveJournalDesign.class);
+		Root<NonProgressiveJournalDesign> root = cq.from(NonProgressiveJournalDesign.class);
+		cq.select(root);
+		cq.where(cb.equal(root.get("status"),1),
+				 cb.equal(root.get("nonProgressiveMasterId"),journalMasterId));
+		cq.orderBy(cb.asc(root.get("colOrder")));
+		return (ArrayList<NonProgressiveJournalDesign>) getSession().createQuery(cq).getResultList();
+	}
+	
+	@Override
+	public ArrayList<Long> selectUnique(){
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+		Root<NonProgressiveJournalDesign> root = cq.from(NonProgressiveJournalDesign.class);
+		cq.select(root.get("nonProgressiveMasterId")).distinct(true);
+		cq.where(cb.equal(root.get("status"),1));
+		return (ArrayList<Long>) getSession().createQuery(cq).getResultList();
 	}
 
 	@Override
 	public void transactionRollback() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.humworks.dcs.controllers;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.humworks.dcs.entities.JsonDesignRequest;
 import com.humworks.dcs.entities.NonProgressiveJournalDesign;
 import com.humworks.dcs.entities.NonProgressiveJournalMaster;
@@ -92,7 +89,6 @@ public class NonProgressiveJournalController {
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
-		System.out.println(journal);
 		model.addAttribute("nonprogressive", journal);
 		model.addAttribute("journalName",journalName);
 		return add;
@@ -106,6 +102,33 @@ public class NonProgressiveJournalController {
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
+		final ArrayList<NonProgressiveJournalDesign> listDesign = nonProgressiveJournalDesignService.findByJournalId(journal.getNonProgressiveMasterId());
+		ArrayList<JsonDesignRequest> jsonDesignRequest = new ArrayList<JsonDesignRequest>();
+		for(NonProgressiveJournalDesign list : listDesign) {
+			JsonDesignRequest jdr = new JsonDesignRequest();
+			jdr.setConfig_no(list.getNonPrgvDesignId());
+			jdr.setFormula(list.getFormula());
+			jdr.setHeader(list.getColHeaderText());
+			jdr.setLookup_id(list.getLookupMasterId());
+			jdr.setNon_progressive_link(list.getNonPrgvLinkId());
+			jdr.setOrder(list.getColOrder());
+			jdr.setProgressive_link(list.getPrgvLinkId());
+			jdr.setReadonly((list.getIsReadOnly()==1)? true : false);
+			jdr.setType(list.getColType());
+			jdr.setUom(list.getUomId());
+			jdr.setValidate_pending(list.getIsValidPending());
+			jdr.setValidate_revision(list.getValidRevision());
+			jdr.setWidth(list.getColHeaderWidth());
+			jsonDesignRequest.add(jdr);
+		}
+		//Used for Handson table
+		model.addAttribute("design", commonService.arrayListtoJson(jsonDesignRequest));
+		model.addAttribute("journalData", "[]");
+		model.addAttribute("lookup", "[]");
+		model.addAttribute("hotLock", false);
+		model.addAttribute("hotObject", null);
+		//
+		
 		model.addAttribute("nonprogressive", journal);
 		model.addAttribute("unitMeasure",unitMeasureService.selectAll());
 		model.addAttribute("journalName",journalName);

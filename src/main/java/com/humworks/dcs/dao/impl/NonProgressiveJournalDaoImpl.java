@@ -3,6 +3,7 @@ package com.humworks.dcs.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -94,6 +95,20 @@ public class NonProgressiveJournalDaoImpl extends AbstractDao<Integer, NonProgre
 		cq.where(cb.equal(root.get("projectMasterId"),projectMasterId));
 		cq.orderBy(cb.desc(root.get("projectMasterId")));
 		return (ArrayList<NonProgressiveJournalMaster>) getSession().createQuery(cq).getResultList();
+	}
+
+	@Override
+	public ArrayList<NonProgressiveJournalMaster> findByIds(ArrayList<Long> idx) {
+//		String hql = "FROM NonProgressiveJournalMaster nonprgv WHERE nonprgv.nonProgressiveMasterId IN (:idx)";
+//		Query query = getSession().createQuery(hql).setParameterList("idx", idx);
+//		return (ArrayList<NonProgressiveJournalMaster>) query.getResultList();
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<NonProgressiveJournalMaster> cq = cb.createQuery(NonProgressiveJournalMaster.class);
+		Root<NonProgressiveJournalMaster> root = cq.from(NonProgressiveJournalMaster.class);
+		cq.select(root).where(root.get("nonProgressiveMasterId").in(idx));
+		cq.orderBy(cb.desc(root.get("projectMasterId")));
+		return (ArrayList<NonProgressiveJournalMaster>) getSession().createQuery(cq).getResultList();
+		
 	}
 
 }
