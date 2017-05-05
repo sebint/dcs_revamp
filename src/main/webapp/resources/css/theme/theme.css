@@ -24645,7 +24645,7 @@ span.forum-item-title {
 	font-size: 17px;
 }
 .f-s-12{
-	font-size: 12px;
+	font-size: 12px !important;
 }
 .f-w-600{
 	font-weight: 600;

@@ -82,7 +82,7 @@
         	 		</div>
         	 	</div>
 	        </div>		        
-	          <div class="col-md-2">
+	          <div class="col-md-3">
 	            <div class="panel bt-green">
 	             	<div class="panel-heading">
 	                   <span class="panel-icon"></span>
@@ -104,7 +104,7 @@
 	                </div>
 	            </div>
 	          </div>
-	          <div class="col-md-10">
+	          <div class="col-md-9">
 	             <div class="panel panel-visible bt-blue" id="spy1"> 
 	                <div class="panel-body">
 		                <spring:url value="/assessment/journal-entry" var="url"/>
@@ -127,7 +127,7 @@
 				                        <td class="t-t-capt"><i class="fa fa-caret-right text-primary"></i> <a class="a-redocorated" href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}">${nonList.journalName}</a></td>
 				                        <td class="t-t-capt">${nonList.project.projectName}</td>				                                   
 				                        <td class="t-t-capt">${nonList.user.strFirstName} ${nonList.user.strLastName}</td>
-				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.nonProgressiveMasterId}" class="btn btn-hover btn-default btn-sm">Update</a></td>
+				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(nonList.journalName),' ', '-')}-${rand}${nonList.project.projectMasterId}" class="btn btn-hover btn-default btn-sm">Update</a></td>
 				                      </tr>  
 				                      </c:forEach>	
 			                      </c:if>	                      		                      

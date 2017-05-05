@@ -33,14 +33,13 @@
 	                <span class="glyphicon glyphicon-home"></span>
 	              </a>
 	            </li>
-	            <li class="crumb-trail">Design</li>
+	            <li class="crumb-trail">Assessment</li>
 	            <li class="crumb-link">
-	              <a href='<spring:url value="/design/non-progressive/"/>'>Non-Progressive Journal</a>
+	              <a href='<spring:url value="/assessment/journal-entry"/>'>Journal Data Entry</a>
 	            </li>
 	            <li class="crumb-link">
 	              <a id="crumblink" class="t-t-capt" href='<spring:url value="/design/non-progressive/${journalUrl}"/>'>${fn:replace(journalName,'-',' ')}</a>
 	            </li>
-	             <li class="crumb-trail">Design</li>
 	          </ol>
 	        </div>
 	        <div class="topbar-right mt-5">
@@ -88,7 +87,7 @@
                                     <i class="glyphicon glyphicon-equalizer"></i>
                                  </div>
                                  <span class="forum-item-title"><span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></span>
-                                 <div class="forum-sub-title">Data Entry  <span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></div>
+                                 <div class="forum-sub-title">Data Entry - <span class="t-t-capt">${fn:replace(journalName,'-',' ')}</span></div>
                             </div>	
         	 		</div>
         	 	</div>
@@ -101,7 +100,7 @@
 								<div class="section-divider mb40" id="spy1">
 			                      <span>Journal Information</span>
 			                    </div>
-			                    <ul class="icon-list">
+<%-- 			                    <ul class="icon-list">
 						          <li>
 						            <i class="fa fa-exclamation-circle text-warning fa-lg pr10"></i>
 						            <b> Project Name :</b> ${nonprogressive.project.projectName }
@@ -114,9 +113,54 @@
 						            <i class="fa fa-exclamation-circle text-warning fa-lg pr10"></i>
 						            <b> Owner :</b> ${nonprogressive.user.strFirstName} ${nonprogressive.user.strLastName}		         
 						          </li>
-						        </ul>
+						        </ul> --%>
+							<div class="table-layout bg-light">
+				                  <div class="col-xs-4">
+				                    <ul class="fs15 list-divide-items">
+				                      <li>
+				                        <span class="link-unstyled">
+				                          <i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <b> Project Name :</b> ${nonprogressive.project.projectName }</span>
+				                      </li>
+				                      <li>
+				                        <span class="link-unstyled">
+				                          <i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <b> Journal Name :</b> ${nonprogressive.journalName }</span>
+				                      </li>
+				                    </ul>
+				                  </div>
+				                  <div class="col-xs-4 br-l">
+				                    <ul class="fs15 list-divide-items">
+				                      <li>
+				                       <span class="link-unstyled">
+				                          <i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> <b> Owner :</b> ${nonprogressive.user.strFirstName} ${nonprogressive.user.strLastName}</span>
+				                      </li>
+				                      <li>
+				                        <span class="link-unstyled">
+				                          <i class="fa fa-exclamation-circle text-primary fa-lg pr10"></i> How do I track a subdomain?</span>
+				                      </li>
+				                    </ul>
+				                  </div>
+				                 <div class="col-xs-4 br-l">
+				                    <ul class="fs15 list-divide-items">
+				                      <li>
+				                      <span><b>Data Date: </b></span>
+										<div class="input-group section" style="width:65%;">
+											<input id="data_date" type="text" class="gui-input" readonly="readonly">
+											<span class="input-group-btn">
+												<button type="button" id="data_date_button" class="btn btn-default f-s-12">
+													<i class="fa fa-calendar-o"></i>
+												</button>
+											</span>
+											<span class="input-group-btn">
+												<button type="button" id="today_button" class="btn btn-primary f-s-12">Today</button>
+											</span>
+										</div>
+				                      </li>
+				                    </ul>
+				                  </div>
+				                </div>						        
 						        <hr class="short alt">
 							</div>
+							
 						</div>
 	               		<div class="row">
 	               			<div class="col-md-12">

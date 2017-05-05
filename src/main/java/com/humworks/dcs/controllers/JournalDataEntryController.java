@@ -22,7 +22,7 @@ import com.humworks.dcs.service.NonProgressiveJournalService;
 public class JournalDataEntryController {
 
 	private final String page = "auth/assessment/journal_data_entry";
-	private final String entry = "auth/assessment/journal_data_entry_page";
+	private final String entry = "auth/assessment/journal_data_entry_nonprgv";
 	
 	@Autowired
 	private NonProgressiveJournalService nonProgressiveService;
@@ -44,9 +44,9 @@ public class JournalDataEntryController {
 	
 	@GetMapping("{journalUrl}")
 	public String design(@PathVariable("journalUrl") String journalUrl, Model model)throws Exception{
-		Integer journalMasterId = commonService.getIdFromUrl(journalUrl);
+		Integer projectMasterId = commonService.getIdFromUrl(journalUrl);
 		String journalName = commonService.getNameFromUrl(journalUrl);
-		final NonProgressiveJournalMaster journal = nonProgressiveService.findById(journalMasterId);
+		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName, projectMasterId);
 		if(journal==null){
 			throw new ResourceNotFoundException(journalName);
 		}
