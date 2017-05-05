@@ -45,7 +45,7 @@
 	        </div>
 	        <div class="topbar-right mt-5">
 	          <div class="ib topbar-dropdown">
-	            <label for="topbar-multiple" class="control-label pr10 fs20 text-muted">Non-Progressive Journal</label>
+	            <label for="topbar-multiple" class="control-label pr10 fs20 text-muted"><span class="t-t-capt">${(fn:replace(fn:toLowerCase(journalName),'-', ' '))}</span></label>
 	          </div>
 	        </div>
 	      </header>

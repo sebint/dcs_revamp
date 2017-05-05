@@ -224,11 +224,36 @@ var _confirm = function(options) {
 	var deleteConfirm = function() {
 		$('.dr-confirm').confirm({
 			icon : "fa fa-question-circle",
-			confirmButton : "Delete",
-			confirmButtonClass : "btn-info add-loader",
-			cancelButton : "Cancel",
+			type: 'blue',
 			autoClose : 'cancel|8000',
+            buttons: {
+                confirm: {
+                    btnClass: 'btn-info add-loader',
+                    text: 'Delete'
+                },
+                cancel: {
+                    text: 'Cancel'
+                }
+            },
 			keyboardEnabled : true,
+		});
+		
+		$('.dr-confirm-cancel').confirm({
+			autoClose: 'cancel|8000',
+            escapeKey: 'cancel',
+            type: 'red',
+            buttons: {
+                confirm: {
+                    btnClass: 'btn-red add-loader',
+                    text: 'Cancel'
+                },
+                cancel: {
+                    text: 'Close'
+                },
+                confirm: function(){
+                	location.href = this.$target.attr('href');
+                }               
+            }
 		});
 	}
 	return {

@@ -44,7 +44,7 @@
 	        </div>
 	        <div class="topbar-right mt-5">
 	          <div class="ib topbar-dropdown">
-	            <label for="topbar-multiple" class="control-label pr10 fs20 text-muted">Non-Progressive Journal</label>
+	            <label for="topbar-multiple" class="control-label pr10 fs20 text-muted"><span class="t-t-capt">${(fn:replace(fn:toLowerCase(journalName),'-', ' '))}</span></label>
 	          </div>
 	        </div>
 	      </header>
@@ -79,7 +79,7 @@
 					</div>
 				</div>	        
 	        </c:if>	
-	        <div class="col-md-12">
+<%-- 	        <div class="col-md-12">
         	 	<div class="panel panel-visible bt-gray" id="spy1">
         	 		<div class="panel-body">
         	 			<div class="col-xs-12 col-sm-9 col-md-9">
@@ -91,7 +91,7 @@
                             </div>	
         	 		</div>
         	 	</div>
-	        </div>
+	        </div> --%>
 	          <div class="col-md-12">
 	             <div class="panel panel-visible bt-blue" id="spy1"> 
 	                <div class="panel-body mpxd">
@@ -175,7 +175,7 @@
 											<span class="btn-text">Publish</span></button>
 										<button id="savedata" type="button" class="btn btn-primary br3 btn-sm"><i class="fa fa-save"></i> 
 											<span class="btn-text">Save</span></button>
-										<a href='<spring:url value="/assessment/journal-entry"/>' class="btn btn-danger br3 btn-sm dr-confirm no-loader" title="Cancel Data Entry" data-content= "This will cancel current entry for <b><code>${nonprogressive.journalName }</code></b>. Continue?" data-title="Cancel Data Entry">
+										<a href='<spring:url value="/assessment/journal-entry"/>' class="btn btn-danger br3 btn-sm dr-confirm-cancel no-loader" title="Cancel Data Entry" data-content= "This will cancel current entry for <b><code>${nonprogressive.journalName }</code></b>. Continue?" data-title="Cancel Data Entry">
 											<i class="fa fa-close"></i> Cancel
 									   </a>
 								   </div>
