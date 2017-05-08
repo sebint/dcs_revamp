@@ -241,18 +241,18 @@ var _confirm = function(options) {
 		$('.dr-confirm-cancel').confirm({
 			autoClose: 'cancel|8000',
             escapeKey: 'cancel',
-            type: 'red',
+            icon : "fa fa-question-circle",
             buttons: {
                 confirm: {
-                    btnClass: 'btn-red add-loader',
-                    text: 'Cancel'
+                    btnClass: 'btn-primary add-loader',
+                    text: 'Confirm',
+                    action: function(){
+                    	location.href = this.$target.attr('href');
+                    }
                 },
                 cancel: {
                     text: 'Close'
-                },
-                confirm: function(){
-                	location.href = this.$target.attr('href');
-                }               
+                }              
             }
 		});
 	}

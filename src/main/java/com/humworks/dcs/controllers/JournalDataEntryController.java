@@ -69,7 +69,7 @@ public class JournalDataEntryController {
 			jdr.setWidth(list.getColHeaderWidth());
 			jsonDesignRequest.add(jdr);
 		}
-		//Used for Handson table
+		//data for Handson table data population
 		model.addAttribute("design", commonService.arrayListtoJson(jsonDesignRequest));
 		model.addAttribute("journalData", "[]");
 		model.addAttribute("lookup", "[]");
