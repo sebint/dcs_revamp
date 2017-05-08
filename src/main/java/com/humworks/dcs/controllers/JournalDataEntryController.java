@@ -3,13 +3,19 @@ package com.humworks.dcs.controllers;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.humworks.dcs.entities.JsonDesignRequest;
+import com.humworks.dcs.entities.JsonEntryRequest;
 import com.humworks.dcs.entities.NonProgressiveJournalDesign;
 import com.humworks.dcs.entities.NonProgressiveJournalMaster;
 import com.humworks.dcs.exception.ResourceNotFoundException;
@@ -80,6 +86,13 @@ public class JournalDataEntryController {
 		model.addAttribute("nonprogressive", journal);
 		model.addAttribute("journalName",journalName);
 		return entry;
+	}
+	
+	@ResponseBody 
+	@RequestMapping(value="{journalUrl}/entry", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getEntry(@PathVariable("journalUrl") String journalUrl, @RequestBody JsonEntryRequest jsonEntryRequest){
+		
+		return "success";
 	}
 	
 

@@ -38,7 +38,7 @@
 	              <a href='<spring:url value="/assessment/journal-entry"/>'>Journal Data Entry</a>
 	            </li>
 	            <li class="crumb-link">
-	              <a id="crumblink" class="t-t-capt" href='<spring:url value="/design/non-progressive/${journalUrl}"/>'>${fn:replace(journalName,'-',' ')}</a>
+	              <a id="crumblink" class="t-t-capt" href='<spring:url value="/assessment/journal-entry/${journalUrl}"/>'>${fn:replace(journalName,'-',' ')}</a>
 	            </li>
 	          </ol>
 	        </div>
@@ -159,8 +159,7 @@
 				                  </div>
 				                </div>						        
 						        <hr class="short alt">
-							</div>
-							
+							</div> <input type="hidden" id="csrfToken" value="${_csrf.token}"/> <input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/> <input type="hidden" id="jounlId" value="${nonprogressive.nonProgressiveMasterId}"/>
 						</div>
 	               		<div class="row">
 	               			<div class="col-md-12">
@@ -302,13 +301,30 @@
 			var d = hot_object.hot_serialize_data();
 			var d = remove_read_only(d);
 			var p = ((typeof publish == "boolean") && (publish));
+			var url = $("#crumblink").attr("href");
+			var token = $('#csrfToken').val();
+			var header = $('#csrfHeader').val();
+			var jId = $("#jounlId").val();
+			var data ={"journalId":jId,"isPublish":p,"dataDate":p_data_date.toString(),"data":d};
+			//console.log(data);
 
-			var data = $.toJSON(d);
-			
-			console.log(data);
-			showloader();
-			//console.log(<?php echo $details->journal_no; ?>);
-			$.post("<?php echo $this->config->base_url().'index.php/'.$cpagename; ?>/save_data?jid=<?php echo $details->journal_no; ?>&publish="+p.toString(), {data:data, data_date:p_data_date.toString()}).always(function(data){
+ 			$.ajax({				
+			    type : 'POST',
+			    contentType : "application/json",
+			    url : url + '/entry',
+			    data: JSON.stringify(data),
+			    dataType : 'json',			    
+			    beforeSend: function(xhr) { 
+			        xhr.setRequestHeader(header, token); 
+ 			    }, 
+			    success : function(data) {
+			    	console.log("SUCCESS: ", data);
+			    },
+			    error : function(e) {
+			    	console.log("ERROR: ", e);
+			    }
+			});
+ 			/*			$.post("<?php echo $this->config->base_url().'index.php/'.$cpagename; ?>/save_data?jid=<?php echo $details->journal_no; ?>&publish="+p.toString(), {data:data, data_date:p_data_date.toString()}).always(function(data){
 				console.log(data);
 				if ((data == 1) && (p)) {
 					// Published! Now we should lock the table
@@ -321,12 +337,7 @@
 					hideloader();
 				}
 				if (typeof callback == "function") callback();
-			});
-			/*var form = $('<form action="'+location.href+'" method="post"style="display:none;"><input type="hidden" name="data" id="data"/></form>')
-			form.children('input#data').attr('value',data);
-			form.appendTo($('body'));
-			console.log(form.html());
-			form.submit();*/
+			}); */
 		}
 		
 		function hot_publish_data() {
