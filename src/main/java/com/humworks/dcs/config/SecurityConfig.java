@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return authenticationProvider;
 	}
 	
+	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()

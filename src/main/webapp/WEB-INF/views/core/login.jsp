@@ -46,7 +46,7 @@
 						<spring:url value="login" var="formUrl"/>
 						<form:form action="${formUrl}" method="POST" id="mpxd-login" cssClass="form-toggle" modelAttribute="login">
 							<div class="panel-body bg-light p25 pb15 pt0">
-							 <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+							   <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 									<div class="section animated fadeIn">
 										<div class="alert alert-danger alert-dismissable mt10">
 										  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -54,7 +54,16 @@
 											<span>${SPRING_SECURITY_LAST_EXCEPTION.message}</span>
 										</div>
 									</div>
-								</c:if>	
+								</c:if>
+								<c:if test="${r eq 'is'}">
+									<div class="section animated fadeIn">
+										<div class="alert alert-info alert-dismissable mt10">
+										  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										  <i class="fa fa-times-circle fa-2x pr10 va-middle"></i>					  
+											<span>Session Time Out!. Please Login again.</span>
+										</div>
+									</div>
+								</c:if>		
 								<div class="section">
 									<h3><spring:message code="login.request"/></h3>
 									<p>Please enter your <code>username</code> and <code>password</code> to log in.</p>

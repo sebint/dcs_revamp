@@ -24,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.mvc.WebContentInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.humworks.dcs.interceptors.MenuListInterceptor;
@@ -75,12 +76,21 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 	public MenuListInterceptor menuListInterceptor() {
 	    return new MenuListInterceptor();
 	}
+	
+	//prevents the form to redirect to previous page after logout
+	@Bean
+	public WebContentInterceptor webContentInterceptor() {
+        WebContentInterceptor interceptor = new WebContentInterceptor();
+        interceptor.setCacheSeconds(0);
+        return interceptor;
+    }
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("locale");
 		registry.addInterceptor(localeChangeInterceptor);
 		registry.addInterceptor(menuListInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(webContentInterceptor());
 	}
 	
 	// Config UTF-8 Encoding.
