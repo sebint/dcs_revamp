@@ -159,44 +159,44 @@
 																	<th></th>
 																	<th>
 																		<label class="block switch switch-primary">
-																		<form:checkbox path="strRoleName" id="view_opt" value="all"/>
-												                          <!-- <input type="checkbox" name="tools" id="view_opt" value="admin"> -->
+<%-- 																		<form:checkbox path="strRoleName" id="view_opt" value="all"/> --%>
+												                          <input type="checkbox" name="tools" class="checkall" id="view_opt" data-corr="viewp" value="admin" checked="checked">
 												                          <label for="view_opt" data-on="YES" data-off="NO"></label>
 												                        </label>		                              			
 																	</th>
 																	<th>
 																		<label class="block switch switch-primary">
-												                          <input type="checkbox" name="tools" id="add_opt" value="admin">
+												                          <input type="checkbox" name="tools" class="checkall" id="add_opt" data-corr="addp" value="admin">
 												                          <label for="add_opt" data-on="YES" data-off="NO"></label>
 												                        </label>
 																	</th>
 																	<th>
 																		<label class="block switch switch-primary">
-												                          <input type="checkbox" name="tools" id="edit_opt" value="admin">
+												                          <input type="checkbox" name="tools" class="checkall" id="edit_opt" data-corr="editp" value="admin">
 												                          <label for="edit_opt" data-on="YES" data-off="NO"></label>
 												                        </label>
 																	</th>
 																	<th>
 																		<label class="block switch switch-primary">
-												                          <input type="checkbox" name="tools" id="delete_opt" value="admin">
+												                          <input type="checkbox" name="tools" class="checkall" id="delete_opt" data-corr="deletep" value="admin">
 												                          <label for="delete_opt" data-on="YES" data-off="NO"></label>
 												                        </label>
 																	</th>
 																	<th>
 																		<label class="block switch switch-primary">
-												                          <input type="checkbox" name="tools" id="export_opt" value="admin">
+												                          <input type="checkbox" name="tools" class="checkall" id="export_opt" data-corr="exportp" value="admin">
 												                          <label for="export_opt" data-on="YES" data-off="NO"></label>
 												                        </label>
 																	</th>
 																	<th>
 																		<label class="block switch switch-primary">
-												                          <input type="checkbox" name="tools" id="print_opt" value="admin">
+												                          <input type="checkbox" name="tools" class="checkall" id="print_opt" data-corr="printp" value="admin">
 												                          <label for="print_opt" data-on="YES" data-off="NO"></label>
 												                        </label>
 																	</th>
 																	<th>
 																		<label class="block switch switch-primary">
-												                          <input type="checkbox" name="tools" id="email_opt" value="admin">
+												                          <input type="checkbox" name="tools" class="checkall" id="email_opt" data-corr="emailp" value="admin">
 												                          <label for="email_opt" data-on="YES" data-off="NO"></label>
 												                        </label>
 																	</th>																	
@@ -216,43 +216,43 @@
 <!-- 																							<input type="checkbox" name="1_1" id="1_1" value="1">  -->
 <!-- 																					</label>					 -->
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="view_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="view_${menuCounter.index+1}${subMenuCounter.index+1}" class="viewp s_m" data-corr="view_opt" value="admin">
 															                          <label for="view_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>	
 																				</td>
 																				<td>
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="add_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="add_${menuCounter.index+1}${subMenuCounter.index+1}" class="addp s_m" data-corr="add_opt" value="admin">
 															                          <label for="add_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>									
 																				</td>
 																				<td>
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="edit_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="edit_${menuCounter.index+1}${subMenuCounter.index+1}" class="editp s_m" data-corr="edit_opt" value="admin">
 															                          <label for="edit_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>									
 																				</td>
 																				<td>
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="delete_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="delete_${menuCounter.index+1}${subMenuCounter.index+1}" class="deletep s_m" data-corr="delete_opt" value="admin">
 															                          <label for="delete_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>									
 																				</td>
 																				<td>
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="export_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="export_${menuCounter.index+1}${subMenuCounter.index+1}" class="exportp s_m" data-corr="export_opt" value="admin">
 															                          <label for="export_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>								
 																			    </td>
 																				<td>
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="print_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="print_${menuCounter.index+1}${subMenuCounter.index+1}" class="printp s_m" data-corr="print_opt" value="admin">
 															                          <label for="print_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>
 																				</td>
 																				<td>
 																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="email_${menuCounter.index+1}${subMenuCounter.index+1}" value="admin">
+															                          <input type="checkbox" name="tools" id="email_${menuCounter.index+1}${subMenuCounter.index+1}" class="emailp s_m" data-corr="email_opt" value="admin">
 															                          <label for="email_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
 															                        </label>																													
 																				</td>
@@ -409,6 +409,35 @@
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">
 	  jQuery(document).ready(function() {"use strict";  _datePicker.init(); _toggleUpdate.init(); _confirm.init(); });
+	  $('.checkall').click(function(event){ //on click
+		  var $corr = $(this).data("corr");			
+		    if(this.checked){ 
+		        // check select status
+				$('.'+$corr).each(function(){ //loop through each checkbox
+					this.checked = true;  //select all checkboxes with class "checkbox1"
+		        });
+			}else{
+				$('.'+$corr).each(function(){ //loop through each checkbox
+					this.checked = false; //deselect all checkboxes with class "checkbox1"
+		        });
+			}
+		 });
+	   $('.s_m').click(function(event){
+		   var $corr = $(this).data("corr");
+		   var $first = $(this).attr('class').split(" ")[0];
+		   var numItems = $('.'+$first).length;
+		   var count = 0;
+			$('.'+$first).each(function(){ //loop through each checkbox
+				if($(this).is(":checked")){
+					count++;
+				}
+	        });
+			if(numItems == count){
+				$('#'+$corr).prop('checked', true);
+			}else{
+				$('#'+$corr).prop('checked', false);
+			}
+	   });
 	  </script>
 	</body>
 </html>
