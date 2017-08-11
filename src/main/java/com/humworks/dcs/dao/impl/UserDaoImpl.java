@@ -114,5 +114,15 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return strPassword;
 		
 	}
+
+	@Override
+	public ArrayList<User> findByRoleId(ArrayList<Integer> roleMasterId) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder cb = createCriteriaQuery();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> root = cq.from(User.class);
+		cq.select(root).where(root.get("intUserId").in(roleMasterId));
+		return (ArrayList<User>) getSession().createQuery(cq).getResultList();
+	}
 	
 }

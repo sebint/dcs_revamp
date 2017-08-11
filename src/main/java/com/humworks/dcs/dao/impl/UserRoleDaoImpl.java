@@ -1,11 +1,11 @@
 package com.humworks.dcs.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.Query;
-
+import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
-
 import com.humworks.dcs.dao.AbstractDao;
 import com.humworks.dcs.dao.UserRoleDao;
 import com.humworks.dcs.entities.UserRole;
@@ -34,6 +34,20 @@ public class UserRoleDaoImpl extends AbstractDao<Integer, UserRole> implements U
 	@Override
 	public UserRole findById(Integer urid) {
 		return getByKey(urid);
+	}
+
+	@Override
+	public ArrayList<Integer> findByRole(Integer roleMasterId) {	
+				
+		String hql = "SELECT intUserId FROM UserRole WHERE intRoleId =:intRoleId";
+		@SuppressWarnings("unchecked")
+		TypedQuery<Integer> query = getSession().createQuery(hql).setParameter("intRoleId", roleMasterId);
+		ArrayList<Integer> uids = (ArrayList<Integer>) query.getResultList();
+		if(uids != null){
+			return uids;
+		}
+		return null;
+		
 	}
 
 }

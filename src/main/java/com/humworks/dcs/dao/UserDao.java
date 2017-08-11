@@ -21,6 +21,8 @@ public interface UserDao {
      
     User findByUsername(String username);
     
+    ArrayList<User> findByRoleId(ArrayList<Integer> roleMasterId);
+    
     ArrayList<User> selectAll();
     
     String checkPassword(Integer uid);

@@ -138,10 +138,12 @@
 							            </div>
 				                    </div>
 			                       <hr class="short alt">
-			                       <div class="row">
+			                       <spring:url value="/security/role/${strRoleName}" var="url"/>
+			                       <div class="row mpxd">
+			                       	  <form:form method="post" action="${url}" id="role-perm-form">
 										<div class="bg-light">
 										 <figure class="highlight">
-										       <div class="mpxd" style="max-height: 400px; overflow-y: scroll; ">
+										       <div style="max-height: 400px; overflow-y: scroll; ">
 										       <div class="table-responsive">
 										      	<table class="table table-striped table-hover margin-t-b15">
 															<thead>
@@ -160,7 +162,7 @@
 																	<th>
 																		<label class="block switch switch-primary">
 <%-- 																		<form:checkbox path="strRoleName" id="view_opt" value="all"/> --%>
-												                          <input type="checkbox" name="tools" class="checkall" id="view_opt" data-corr="viewp" value="admin" checked="checked">
+												                          <input type="checkbox" name="tools" class="checkall" id="view_opt" data-corr="viewp" value="admin">
 												                          <label for="view_opt" data-on="YES" data-off="NO"></label>
 												                        </label>		                              			
 																	</th>
@@ -209,54 +211,54 @@
 																	</tr>
 																		<c:if test="${fn:length(menu.subMenu) gt 0}">
 																			 <c:forEach items="${menu.subMenu}" var="submenu" varStatus="subMenuCounter">
-																			<tr>
-																				<td>${submenu.strMenuName}</td>
-																				<td>
-<!-- 																					<label for="1_1"> -->
-<!-- 																							<input type="checkbox" name="1_1" id="1_1" value="1">  -->
-<!-- 																					</label>					 -->
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="view_${menuCounter.index+1}${subMenuCounter.index+1}" class="viewp s_m" data-corr="view_opt" value="admin">
-															                          <label for="view_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>	
-																				</td>
-																				<td>
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="add_${menuCounter.index+1}${subMenuCounter.index+1}" class="addp s_m" data-corr="add_opt" value="admin">
-															                          <label for="add_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>									
-																				</td>
-																				<td>
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="edit_${menuCounter.index+1}${subMenuCounter.index+1}" class="editp s_m" data-corr="edit_opt" value="admin">
-															                          <label for="edit_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>									
-																				</td>
-																				<td>
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="delete_${menuCounter.index+1}${subMenuCounter.index+1}" class="deletep s_m" data-corr="delete_opt" value="admin">
-															                          <label for="delete_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>									
-																				</td>
-																				<td>
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="export_${menuCounter.index+1}${subMenuCounter.index+1}" class="exportp s_m" data-corr="export_opt" value="admin">
-															                          <label for="export_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>								
-																			    </td>
-																				<td>
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="print_${menuCounter.index+1}${subMenuCounter.index+1}" class="printp s_m" data-corr="print_opt" value="admin">
-															                          <label for="print_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>
-																				</td>
-																				<td>
-																					<label class="block switch switch-primary">
-															                          <input type="checkbox" name="tools" id="email_${menuCounter.index+1}${subMenuCounter.index+1}" class="emailp s_m" data-corr="email_opt" value="admin">
-															                          <label for="email_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
-															                        </label>																													
-																				</td>
-																			</tr>
+																				<tr>
+																					<td>${submenu.strMenuName}</td>
+																					<td>
+	<!-- 																					<label for="1_1"> -->
+	<!-- 																							<input type="checkbox" name="1_1" id="1_1" value="1">  -->
+	<!-- 																					</label>					 -->
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="view_${menuCounter.index+1}${subMenuCounter.index+1}" class="viewp s_m" data-corr="view_opt" value="admin">
+																                          <label for="view_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>	
+																					</td>
+																					<td>
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="add_${menuCounter.index+1}${subMenuCounter.index+1}" class="addp s_m" data-corr="add_opt" value="admin">
+																                          <label for="add_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>									
+																					</td>
+																					<td>
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="edit_${menuCounter.index+1}${subMenuCounter.index+1}" class="editp s_m" data-corr="edit_opt" value="admin">
+																                          <label for="edit_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>									
+																					</td>
+																					<td>
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="delete_${menuCounter.index+1}${subMenuCounter.index+1}" class="deletep s_m" data-corr="delete_opt" value="admin">
+																                          <label for="delete_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>									
+																					</td>
+																					<td>
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="export_${menuCounter.index+1}${subMenuCounter.index+1}" class="exportp s_m" data-corr="export_opt" value="admin">
+																                          <label for="export_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>								
+																				    </td>
+																					<td>
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="print_${menuCounter.index+1}${subMenuCounter.index+1}" class="printp s_m" data-corr="print_opt" value="admin">
+																                          <label for="print_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>
+																					</td>
+																					<td>
+																						<label class="block switch switch-primary">
+																                          <input type="checkbox" name="tools" id="email_${menuCounter.index+1}${subMenuCounter.index+1}" class="emailp s_m" data-corr="email_opt" value="admin">
+																                          <label for="email_${menuCounter.index+1}${subMenuCounter.index+1}" data-on="YES" data-off="NO"></label>
+																                        </label>																													
+																					</td>
+																				</tr>
 																			</c:forEach>
 																	</c:if>
 																</c:forEach>								
@@ -265,7 +267,15 @@
 													  </div>	
 											     </div>										 
 										 </figure>
+											<div class="text-right">
+												<button type="submit" class="btn btn-sm btn-primary br3"><i class="fa fa-check"></i> 
+													<span class="btn-text">Save</span></button>
+												<a href="/dcs/security/role" class="btn btn-sm btn-default br3 btn-cancel">
+													<i class="fa fa-close"></i> Cancel
+									   			</a>
+											</div>
 						                </div>
+						                </form:form>
 									</div>
 			                    </div>
 			                </div>	
@@ -411,8 +421,7 @@
 	  jQuery(document).ready(function() {"use strict";  _datePicker.init(); _toggleUpdate.init(); _confirm.init(); });
 	  $('.checkall').click(function(event){ //on click
 		  var $corr = $(this).data("corr");			
-		    if(this.checked){ 
-		        // check select status
+		    if(this.checked){ // check select status
 				$('.'+$corr).each(function(){ //loop through each checkbox
 					this.checked = true;  //select all checkboxes with class "checkbox1"
 		        });
