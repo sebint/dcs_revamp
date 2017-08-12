@@ -21,6 +21,8 @@ public interface UserService {
     
     User findByUsername(String username);
     
+    ArrayList<User> findByRoleId(Integer roleMasterId);
+    
     Boolean checkPassword(Integer uid, String password);
     
     ArrayList<User> selectAll();

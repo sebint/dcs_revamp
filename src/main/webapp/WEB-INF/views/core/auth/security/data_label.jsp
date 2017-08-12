@@ -178,10 +178,10 @@
 	  <!-- jQuery -->
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery2.2.4.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery/jquery-ui.min.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js'/>"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/dataTables/jquery.dataTables.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
-	   <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/pages/label.js"></script>
+	   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pages/label.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	</body>
 </html>

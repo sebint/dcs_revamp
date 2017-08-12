@@ -26,8 +26,26 @@
 		<section id="content_wrapper">
 			<section id="content">
 				<div class="center-block mt50 mw800">
-          			<h1 class="error-title">${errorCode}!</h1>
-          			<h2 class="error-subtitle">${errorMessage}</h2>
+          			<h1 class="error-title">
+          				<c:choose>
+          					<c:when test="${not empty errorCode}">
+          						${errorCode}!
+          					</c:when>
+							<c:otherwise>
+								404!
+							</c:otherwise>
+          				</c:choose>       				
+          			</h1>
+          			<h2 class="error-subtitle">
+          				  <c:choose>
+          					<c:when test="${not empty errorMessage}">
+          						${errorMessage}
+          					</c:when>
+							<c:otherwise>
+								Oops, an error has occurred. Page not found!
+							</c:otherwise>
+						  </c:choose>
+          			</h2>
           			<div class="row mlmr100">
 						<div class="col-sm-6">
 							<a href="<spring:url value='/dashboard'/>" class="btn btn-primary btn-block content-group">

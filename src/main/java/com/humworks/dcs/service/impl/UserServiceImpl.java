@@ -117,4 +117,9 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	@Override
+	public ArrayList<User> findByRoleId(Integer roleMasterId) {		
+		return userDao.findByRoleId(userRoleDao.findByRole(roleMasterId));
+	}
+
 }
