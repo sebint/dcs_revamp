@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -75,7 +77,11 @@ public class Permission implements Serializable
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
-
+	// Check begin
+		@ManyToOne
+	    @JoinColumn(name="MENU_SUB_ID", nullable = false, insertable = false, updatable = false)
+		private Objects menuName;
+	// Check end
 	public Integer getPmsionMasterId() {
 		return pmsionMasterId;
 	}
@@ -178,6 +184,15 @@ public class Permission implements Serializable
 
 	public void setDtDateModified(Date dtDateModified) {
 		this.dtDateModified = dtDateModified;
+	}
+	
+
+	public Objects getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(Objects menuName) {
+		this.menuName = menuName;
 	}
 
 	@Override

@@ -18,9 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.humworks.dcs.entities.Objects;
 import com.humworks.dcs.entities.ObjectsMaster;
+import com.humworks.dcs.entities.Permission;
 import com.humworks.dcs.entities.Role;
 import com.humworks.dcs.exception.ResourceNotFoundException;
 import com.humworks.dcs.service.ObjectService;
+import com.humworks.dcs.service.PermissionService;
 import com.humworks.dcs.service.RoleService;
 import com.humworks.dcs.service.UserService;
 
@@ -40,6 +42,10 @@ public class RoleController {
 	@Autowired
 	private ObjectService objectService;
 	
+	@Autowired
+	private PermissionService permissionService;
+	
+	
 	@GetMapping(value={"","/","list"})
 	public String listRoles(Model model){
 		return page;
@@ -50,12 +56,13 @@ public class RoleController {
 		final Role role = roleService.findByType(strRoleName);
 		if(role==null){
 			throw new ResourceNotFoundException(strRoleName);
-		}
+		}		
 		final ArrayList<ObjectsMaster> object = objectService.findParentMenu();
 		model.addAttribute("role", role);		
-		//userService.findByRoleId(role.getIntRoleId());
 		model.addAttribute("users",userService.findByRoleId(role.getIntRoleId()));
 		model.addAttribute("object", object);
+		System.out.println(object);
+		//permissionService.ListPermission(role.getIntRoleId());
 		return view;
 	}
 	

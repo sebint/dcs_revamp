@@ -286,36 +286,37 @@
 							  <div class="panel-body b-none">
 							        <div class="row">
 							        <spring:url value="/design/non-progressive/new" var="journal_add"/>
+							        <spring:url value="/security/user" var="url_user"/>
 										<div class="table-responsive">
 							                <table class="table table-striped table-hover table-bordered" id="datatable" data-bLengthChange="true" data-bSort="true" data-bFilter="true">
 							               		<thead>
 							               			<tr class="bg-light">
-							               				<th>Journal Name</th>
-							               				<th>Journal Owner</th>
-							               				<th>Data Entry</th>
-							               				<th>Validator</th>
-							               				<th>Status</th>
+								                      	<th width="4%">No</th>
+								                        <th>User Full Name</th>
+								                        <th>Email</th>
+								                        <th>Username</th>
+								                        <th>Department Name</th>
 							               			</tr>
 							               		</thead>
 									            <tbody>
-<%-- 									            	<c:choose>
-									            		<c:when test="${fn:length(nonProgressiveList) gt 0}">
-											              <c:forEach items="${journal}" var="journal" varStatus="counter">
+									            	<c:choose>
+									            		<c:when test="${fn:length(users) gt 0}">
+											              <c:forEach items="${users}" var="user" varStatus="counter">
 												              <tr class="message-unread">
-												                <td>${journal.journalName}</td>
-												                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
-												                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
-												                <td>${journal.user.strFirstName} ${journal.user.strLastName}</td>
-												                <td><span class="label label-success">IN PROGRESS</span></td>
+												              	<td>${counter.index+1}</td>
+												                <td><i class="fa fa-caret-right"></i> <a class="a-redocorated t-t-capt" href="${url_user}/${user.strUserName}">${user.strFirstName} ${user.strLastName}</a></td>
+												                <td>${user.strEmail}</td>
+												                <td>${user.strUserName}</td>
+												                <td>${user.strDeptName}</td>
 												              </tr>
 											              </c:forEach>									            		
 									            		</c:when>
 									            		<c:otherwise>
 									            			<tr>
-									            				<td colspan="5" class="text-center">No Journals found.Click <a href="${journal_add}">Here</a> to Add.</td>
+									            				<td colspan="5" class="text-center">No Users found.Click <a href="<spring:url value="/security/user/new"/>">Here</a> to Add.</td>
 									            			</tr>
 									            		</c:otherwise>
-									            	</c:choose> --%>
+									            	</c:choose>
 							                  </tbody>
 							                </table>
 							              </div>							        
@@ -389,9 +390,12 @@
 									<div class="panel-footer text-right">
 										<button type="submit" class="button btn-primary br3"><i class="fa fa-check"></i> 
 											<span class="btn-text">Add Role</span></button>
-										<button type="reset" data-dismiss="modal" class="button br3">
+<!-- 										<button type="reset" data-dismiss="modal" class="button br3">
 											<i class="fa fa-close"></i> Cancel
-									   </button>
+									   </button> -->
+									   <a href="#" class="button br3 btn-cancel">
+											<i class="fa fa-close"></i> Cancel
+									   </a>
 									</div>
 									<!-- end .form-footer section -->
 								</form:form>
