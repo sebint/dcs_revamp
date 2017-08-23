@@ -61,7 +61,7 @@ public class RoleController {
 		model.addAttribute("role", role);		
 		model.addAttribute("users",userService.findByRoleId(role.getIntRoleId()));
 		model.addAttribute("object", object);
-		System.out.println(object);
+		//System.out.println(object);
 		//permissionService.ListPermission(role.getIntRoleId());
 		return view;
 	}

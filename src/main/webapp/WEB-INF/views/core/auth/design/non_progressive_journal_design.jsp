@@ -11,10 +11,11 @@
 		<title>MPXD Data Capture System</title>
 		<link rel="shortcut icon" type="image/ico" href="${pageContext.request.contextPath}/resources/img/fav.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/theme/theme.css">
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/forms-theme.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.full.min.css"></link>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/lib/handsontable/pikaday/pikaday.css"></link>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/theme/theme.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/forms-theme.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.full.min.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lib/handsontable/pikaday/pikaday.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/lib/fancy-box/jquery.fancybox.min.css"/>
 	</head>
 	<body class="sb-top sb-top-sm">
 	  <!-- Start: Main -->
@@ -263,6 +264,7 @@
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/rulejs/ruleJS.all.full.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.formula.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/handsontable/handsontable.config.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/fancy-box/jquery.fancybox.min.js"></script>
 	  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/_sn.js"></script>
 	  <!-- END: PAGE SCRIPTS -->
 	  <script type="text/javascript">

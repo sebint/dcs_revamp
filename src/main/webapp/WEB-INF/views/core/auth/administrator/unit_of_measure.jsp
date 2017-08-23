@@ -108,7 +108,7 @@
 				                        <td class="t-t-capt">${unit.uomLabel}</td>           
 				                        <td class="t-t-capt">${unit.uomDesc}</td>
 				                        <c:set var="rand" value="${100+random.nextInt(1000-(100+1))}"/>
-				                        <td><a href="${url}/${fn:replace(fn:toLowerCase(unit.uomLabel),' ', '-')}"><span class="glyphicon glyphicon-edit"></span></a></td>
+				                        <td><a href="${url}/${fn:replace(fn:replace(fn:replace(fn:toLowerCase(unit.uomLabel),'/','||'),'-','&&'),' ', '-')}"><span class="glyphicon glyphicon-edit"></span></a></td>
 				                        <td><a class="dr-confirm no-loader" data-content= "This will remove <b><code>${unit.uomLabel}</code></b> permanantly .Continue deleting?" data-title="Delete Unit of Measure" href="<spring:url value="/manage/unit-measure/delete"/>/${rand}${unit.uomId}"><span class="glyphicon glyphicon-trash"></span></a></td>
 				                      </tr>  
 				                      </c:forEach>	

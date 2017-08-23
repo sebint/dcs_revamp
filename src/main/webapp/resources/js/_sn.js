@@ -53,7 +53,7 @@ var _sn = function(options) {
 				Splash.fadeOut('slow');
 			});
 			
-	   }	   
+	   }
 
 	   var runSideMenu = function(options) {
 		   
@@ -192,7 +192,6 @@ var _sn = function(options) {
 		   init: function(options) {
 			   runCustom();
 			   runSideMenu();
-
 	   }
 	}
 }();

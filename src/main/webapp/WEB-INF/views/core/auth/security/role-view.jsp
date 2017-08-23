@@ -282,8 +282,11 @@
 			               <hr>
 			               <figure class="highlight">
 			               <h5>Users with <span class="t-t-capt">${fn:replace(fn:toLowerCase(strRoleName),'-', ' ')}</span> Privilege</h5>
+			               <a class="no-loader" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							  <i class="fa fa-minus" aria-hidden="true"></i>
+							</a>
 							<div class="panel b-none">
-							  <div class="panel-body b-none">
+							  <div class="panel-body b-none collapse" id="collapseExample">
 							        <div class="row">
 							        <spring:url value="/design/non-progressive/new" var="journal_add"/>
 							        <spring:url value="/security/user" var="url_user"/>
