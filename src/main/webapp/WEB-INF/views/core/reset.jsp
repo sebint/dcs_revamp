@@ -42,13 +42,13 @@
 	
 	            <div class="col-xs-6 va-b pr5">
 	              <div class="login-links text-right">
-	                <a href="#" class="" title="False Credentials">Not Michael Rowls?</a>
+	                <a href='<spring:url value="/logout"/>' class="" title="False Credentials">Not <security:authentication property="principal.firstName"/> <security:authentication property="principal.lastName"/>?</a>
 	              </div>
 	
 	            </div>
 	
 	          </div>
-	          <form method="post" action="http://admindesigns.com/" id="contact">
+	          <form method="post" action="#" id="contact">
 	          <div class="panel">	
 	            <!-- end .form-header section -->
 	              <div class="panel-body bg-light pn">	

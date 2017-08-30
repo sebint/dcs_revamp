@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,15 +48,23 @@
 						  </c:choose>
           			</h2>
           			<div class="row mlmr100">
-						<div class="col-sm-6">
-							<a href="<spring:url value='/dashboard'/>" class="btn btn-primary btn-block content-group">
-								<i class="fa fa-home"></i> Go to dashboard
-							</a>
-							<!-- Check Session and Enable this  -->
-<!-- 							<a href="#" class="btn btn-primary btn-block content-group">
-								<i class="icon-circle-left2 position-left"></i> Go to Login Page
-							</a> -->
-						</div>
+          				
+							<div class="col-sm-6">
+								<security:authorize access="!hasRole('ROLE_CHANGE_PASSWORD')">
+									<a href="<spring:url value='/dashboard'/>" class="btn btn-primary btn-block content-group">
+										<i class="fa fa-home"></i> Go to dashboard
+									</a>
+								</security:authorize>
+								<security:authorize access="hasRole('ROLE_CHANGE_PASSWORD')">
+									<a href="<spring:url value='/reset'/>" class="btn btn-primary btn-block content-group">
+										<i class="fa fa-unlock"></i> Go to Reset Password
+									</a>
+								</security:authorize>
+								<!-- Check Session and Enable this  -->
+	<!-- 							<a href="#" class="btn btn-primary btn-block content-group">
+									<i class="icon-circle-left2 position-left"></i> Go to Login Page
+								</a> -->
+							</div>
 						<div class="col-sm-6">
 							<a href="#" class="btn btn-default btn-block content-group" onclick="history.go(-1);">
 								<i class="fa fa-history"></i> Go to Previous Page

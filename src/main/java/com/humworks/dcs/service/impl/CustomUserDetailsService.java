@@ -42,6 +42,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 */
 	private List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		//BoolPwdChange = 1 - Requires to change password after Login(New Role Assigned 'ROLE_CHANGE_PASSWORD') - Can only access the password change page only.
+		//BoolPwdChange = 0 - Continue with the login process
 		if(user.getBoolPwdChange()==0){
 			for (Role role : user.getRole()) {
 				authorities.add(new SimpleGrantedAuthority("ROLE_" + roleStringConvertion(role.getStrRoleName())));
