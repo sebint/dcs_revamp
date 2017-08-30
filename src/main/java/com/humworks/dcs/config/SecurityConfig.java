@@ -43,6 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return authenticationProvider;
 	}
 	
+	@Autowired
+	CustomAuthSuccessHandler customAuthSuccessHandler;
+	
+	@Autowired
+	CustomAuthFailureHandler customAuthFailureHandler;
+	
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -58,12 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  	.cacheControl();
 	  
       http.authorizeRequests()
-	        .antMatchers("/", "/login", "/logout").permitAll()
+	        .antMatchers("/", "/login", "/logout", "/reset").permitAll()
 	        .antMatchers("/dashboard").hasAnyRole("ADMIN","GK","IM","PDO")
 	        .antMatchers("/security/**","/design/**","/manage/**").hasRole("ADMIN")
 	        .antMatchers("/timeline/**","/assessment/**","/report/**","/security/user/account/**").hasAnyRole("ADMIN","GK")
 	        .antMatchers("/assessment/journal-entry/**","/assessment/change-log/**").hasRole("IM")
-        .and().formLogin().loginPage("/login").failureUrl("/login").defaultSuccessUrl("/dashboard")
+        .and().formLogin().loginPage("/login").successHandler(customAuthSuccessHandler).failureHandler(customAuthFailureHandler)
         	.usernameParameter("strUserName").passwordParameter("strPassword")
         .and().csrf()
         .and().exceptionHandling().accessDeniedPage("/404");
