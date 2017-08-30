@@ -36,7 +36,7 @@
 	
 	            <div class="col-xs-6 pln">
 	              <a href="dashboard.html" title="Return to Dashboard">
-	                <img src="assets/img/logos/logo.png" title="AdminDesigns Logo" class="img-responsive w250">
+	                <img src="${pageContext.request.contextPath}/resources/img/logo.png" title="AdminDesigns Logo" class="img-responsive w150">
 	              </a>
 	            </div>
 	
@@ -48,41 +48,47 @@
 	            </div>
 	
 	          </div>
-	          <div class="panel">
-	
+	          <form method="post" action="http://admindesigns.com/" id="contact">
+	          <div class="panel">	
 	            <!-- end .form-header section -->
-	            <form method="post" action="http://admindesigns.com/" id="contact">
-	              <div class="panel-body bg-light pn">
-	
+	              <div class="panel-body bg-light pn">	
 	                <div class="row table-layout">
 	                  <div class="col-xs-3 p20 pv15 va-m br-r bg-light">
-	                    <img class="br-a bw4 br-grey img-responsive center-block" src="assets/img/avatars/3.jpg" title="AdminDesigns Logo">
+	                    <img class="br-a bw4 br-grey img-responsive center-block" src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" title="AdminDesigns Logo">
 	                  </div>
 	                  <div class="col-xs-9 p20 pv15 va-m bg-light">
-	                    <h3 class="mb5"> Michael Rowls
-	                      <small> - logged out for
-	                        <b> 5 hours </b>
-	                    </h3>
-	                    <p class="text-muted">michaelrowls@company.com</p>
+	                    <div class="section">
+							<div class="form-group">
+								<span class="input-icon"> 
+									<input id="strUserName" name="strUserName" class="form-control" placeholder="New Password" value="" type="text">
+									<i class="fa fa-lock"></i>
+								</span> 
+							</div>
+						</div>
 	
-	                    <div class="section mt25">
-	                      <label for="password" class="field prepend-icon">
-	                        <input type="text" name="password" id="password" class="gui-input" placeholder="Enter password">
-	                        <label for="password" class="field-icon">
-	                          <i class="fa fa-lock"></i>
-	                        </label>
-	                      </label>
-	                    </div>
+	                    <div class="section">
+							<div class="form-group">
+								<span class="input-icon"> 
+									<input id="strUserName" name="strUserName" class="form-control" placeholder="Confirm Password" value="" type="text">
+									<i class="fa fa-lock"></i>
+								</span> 
+							</div>
+						</div>
 	                    <!-- end section -->
 	
 	                  </div>
 	                </div>
 	              </div>
 	              <!-- end .form-body section -->
-	
-	            </form>
 	          </div>
-	          <button type="submit" class="button btn-info pull-right">Unlock</button>
+				<div class="section">
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary pull-right m10 submit" data-toggle=".toggle-loading">
+							<span class="fa fa-unlock"></span> Change Password
+						</button>
+					</div>
+				</div>
+			 </form>	
 	        </div>
 	
 	      </section>

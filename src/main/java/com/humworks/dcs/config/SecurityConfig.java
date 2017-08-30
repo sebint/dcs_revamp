@@ -46,8 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	CustomAuthSuccessHandler customAuthSuccessHandler;
 	
-	@Autowired
-	CustomAuthFailureHandler customAuthFailureHandler;
+	//@Autowired
+	//CustomAuthFailureHandler customAuthFailureHandler;
 	
 	
 	@Override
@@ -64,12 +64,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  	.cacheControl();
 	  
       http.authorizeRequests()
-	        .antMatchers("/", "/login", "/logout", "/reset").permitAll()
+	        .antMatchers("/", "/login", "/logout").permitAll()
+	        .antMatchers("/reset").hasRole("CHANGE_PASSWORD")
 	        .antMatchers("/dashboard").hasAnyRole("ADMIN","GK","IM","PDO")
 	        .antMatchers("/security/**","/design/**","/manage/**").hasRole("ADMIN")
 	        .antMatchers("/timeline/**","/assessment/**","/report/**","/security/user/account/**").hasAnyRole("ADMIN","GK")
 	        .antMatchers("/assessment/journal-entry/**","/assessment/change-log/**").hasRole("IM")
-        .and().formLogin().loginPage("/login").successHandler(customAuthSuccessHandler).failureHandler(customAuthFailureHandler)
+        .and().formLogin().loginPage("/login").successHandler(customAuthSuccessHandler).failureUrl("/login")
         	.usernameParameter("strUserName").passwordParameter("strPassword")
         .and().csrf()
         .and().exceptionHandling().accessDeniedPage("/404");

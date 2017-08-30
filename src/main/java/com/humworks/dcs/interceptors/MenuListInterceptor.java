@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.humworks.dcs.entities.SpringUser;
 import com.humworks.dcs.service.ObjectService;
 
 @Component
@@ -23,8 +24,13 @@ public class MenuListInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		try{
 			if(authentication !=null){
+				Object authUserDetails = authentication.getPrincipal();
+				if (authUserDetails instanceof SpringUser) {
+					//SpringUser user = (SpringUser) authUserDetails;    
+				}
 				request.setAttribute("menuList", objectService.findParentMenu());
 			}
 		}catch(Exception ex){

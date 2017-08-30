@@ -15,7 +15,9 @@
 
 <!-- Redirect to default login success URL -->
 <security:authorize access="isAuthenticated()">
-    <% response.sendRedirect("dashboard"); %>
+	<security:authorize access="!hasRole('ROLE_CHANGE_PASSWORD')">
+    	<% response.sendRedirect("dashboard"); %>
+    </security:authorize>
 </security:authorize>
 
 <link rel="stylesheet" type="text/css" href="<spring:url value='resources/css/theme/theme.css'/>">

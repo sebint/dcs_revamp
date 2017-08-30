@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,8 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		User user = userService.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username + "Not Found!");
-		}else if(user.getBoolPwdChange()==1){
-			throw new DisabledException("Password change enforced");
 		}
 		return new SpringUser(user.getStrUserName(), user.getStrPassword(),
 				user.getStrStatus().equals("ACTIVE"), true, true, true, getGrantedAuthorities(user), user.getIntUserId(),user.getStrFirstName(),user.getStrLastName(),user.getStrEmail());
@@ -45,9 +42,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 */
 	private List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-		for (Role role : user.getRole()) {
-			authorities.add(new SimpleGrantedAuthority("ROLE_" + roleStringConvertion(role.getStrRoleName())));
+		if(user.getBoolPwdChange()==0){
+			for (Role role : user.getRole()) {
+				authorities.add(new SimpleGrantedAuthority("ROLE_" + roleStringConvertion(role.getStrRoleName())));
+			}
+		}else{
+			authorities.add(new SimpleGrantedAuthority("ROLE_CHANGE_PASSWORD"));
 		}
 		return authorities;
 	}
