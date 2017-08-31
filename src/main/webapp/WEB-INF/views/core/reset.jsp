@@ -36,7 +36,7 @@
 	
 	            <div class="col-xs-6 pln">
 	              <a href="dashboard.html" title="Return to Dashboard">
-	                <img src="${pageContext.request.contextPath}/resources/img/logo.png" title="AdminDesigns Logo" class="img-responsive w150">
+	                <img src="${pageContext.request.contextPath}/resources/img/logo.png" title="AdminDesigns Logo" class="img-responsive w125">
 	              </a>
 	            </div>
 	
@@ -48,7 +48,7 @@
 	            </div>
 	
 	          </div>
-	          <form method="post" action="#" id="contact">
+	          <form:form method="post" action="#" modelAttribute="reset" id="password-change-form">
 	          <div class="panel">	
 	            <!-- end .form-header section -->
 	              <div class="panel-body bg-light pn">	
@@ -57,23 +57,47 @@
 	                    <img class="br-a bw4 br-grey img-responsive center-block" src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" title="AdminDesigns Logo">
 	                  </div>
 	                  <div class="col-xs-9 p20 pv15 va-m bg-light">
-	                    <div class="section">
-							<div class="form-group">
-								<span class="input-icon"> 
-									<input id="strUserName" name="strUserName" class="form-control" placeholder="New Password" value="" type="text">
-									<i class="fa fa-lock"></i>
-								</span> 
-							</div>
-						</div>
-	
-	                    <div class="section">
-							<div class="form-group">
-								<span class="input-icon"> 
-									<input id="strUserName" name="strUserName" class="form-control" placeholder="Confirm Password" value="" type="text">
-									<i class="fa fa-lock"></i>
-								</span> 
-							</div>
-						</div>
+		                 <spring:bind path="strPassword">
+						   <c:if test="${status.error}">
+						   		<span class="field-error">
+									<form:errors path="strPassword" />
+								</span>
+						   </c:if>
+						   <c:if test="${not status.error}">
+								<span class="field-alt fw600">
+									New Password <div class="ico-help" title="New Password for your account."><i class="fa fa-question-circle"></i></div>
+								</span>		
+							</c:if>				                 				
+			                    <div class="section">
+			                      <label for="strPassword" class="field prepend-icon">
+			                       	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="New Password"/>
+			                        <label for="strPassword" class="field-icon">
+			                          <i class="fa fa-lock"></i>
+			                        </label>
+			                      </label>
+			                    </div>
+	                    </spring:bind>
+
+					 	<spring:bind path="strConfirmPassword">
+						   <c:if test="${status.error}">
+						   		<span class="field-error">
+									<form:errors path="strConfirmPassword" />
+								</span>
+						   </c:if>
+						   <c:if test="${not status.error}">	
+								<span class="field-alt fw600">
+									Confirm Password <div class="ico-help" title="Confirm the given new password."><i class="fa fa-question-circle"></i></div>
+								</span>		
+							</c:if>								 
+		                    <div class="section">
+		                      <label for="strConfirmPassword" class="field prepend-icon">
+		                       <form:password path="strConfirmPassword" id="strConfirmPassword" cssClass="gui-input br5" placeholder="Confirm Password"/>
+		                        <label for="strRePassword" class="field-icon">
+		                          <i class="fa fa-unlock-alt"></i>
+		                        </label>
+		                      </label>
+		                    </div>
+		                 </spring:bind>
 	                    <!-- end section -->
 	
 	                  </div>
@@ -88,7 +112,7 @@
 						</button>
 					</div>
 				</div>
-			 </form>	
+			 </form:form>	
 	        </div>
 	
 	      </section>
