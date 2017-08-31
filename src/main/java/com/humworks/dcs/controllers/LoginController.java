@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.service.UserService;
@@ -64,9 +65,27 @@ public class LoginController {
 	}
 	
 	@GetMapping("reset")
-	public String resetPassword(){
+	public String getResetPassword(){
 		return "reset";
 	}
+	
+	@PostMapping("reset")
+	public String postResetPassword(final RedirectAttributes redirectAttributes, @ModelAttribute("reset") Login reset, BindingResult result){
+		try{
+			if (result.hasErrors()) {
+				return "reset";
+			}
+			if(userService.resetPassword(reset)>0){
+				redirectAttributes.addFlashAttribute("message", "Password Changed Successfully.");
+			}else{
+				redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
+		}
+		return "login";
+	}	
 
 //	private String getPrincipal() {
 //		String userName = null;
