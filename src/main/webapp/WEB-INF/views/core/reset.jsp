@@ -52,7 +52,7 @@
 	          <div class="panel">	
 	            <!-- end .form-header section -->
 	              <div class="panel-body bg-light pn">	
-	                <div class="row table-layout">
+	                <div class="row table-layout h207">
 	                  <div class="col-xs-3 p20 pv15 va-m br-r bg-light">
 	                    <img class="br-a bw4 br-grey img-responsive center-block" src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" title="AdminDesigns Logo">
 	                  </div>
