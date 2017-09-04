@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.service.UserService;
+import com.humworks.dcs.validators.PasswordResetValidators;
 
 @Controller
 @RequestMapping("/")
@@ -26,6 +27,9 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	private PasswordResetValidators resetValidators;
 
 	@GetMapping(value={"/","/login"})
 	public String index(Model model) {
@@ -56,27 +60,39 @@ public class LoginController {
 	}
 	
 	@GetMapping("logout")
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logout(final RedirectAttributes redirectAttributes,HttpServletRequest request, HttpServletResponse response) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(authentication !=null){
 			new SecurityContextLogoutHandler().logout(request, response, authentication);
 		}
+		redirectAttributes.addFlashAttribute("message", "You have successfully logged out.");
+		return "redirect:/login";
+	}
+	
+	@GetMapping("invalid-session")
+	public String invalidSession(final RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("info", "Your login session expired.");
 		return "redirect:/login";
 	}
 	
 	@GetMapping("reset")
-	public String getResetPassword(){
+	public String getResetPassword(Model model){
+		model.addAttribute("reset", new Login());;
 		return "reset";
 	}
 	
 	@PostMapping("reset")
-	public String postResetPassword(final RedirectAttributes redirectAttributes, @ModelAttribute("reset") Login reset, BindingResult result){
+	public String postResetPassword(final RedirectAttributes redirectAttributes,@ModelAttribute("reset") Login reset, BindingResult result){
 		try{
+			resetValidators.validate(reset, result);
 			if (result.hasErrors()) {
 				return "reset";
 			}
 			if(userService.resetPassword(reset)>0){
-				redirectAttributes.addFlashAttribute("message", "Password Changed Successfully.");
+				if(userService.updateStatus("boolPwdChange", 0, reset.getIntUserId())>0) {
+					redirectAttributes.addFlashAttribute("message", "Password Changed Successfully.Click <a href='logout' class='txt-red'>here</a> to login again!");
+					return "redirect:/dashboard";
+				}
 			}else{
 				redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
 			}
@@ -84,7 +100,7 @@ public class LoginController {
 			ex.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
 		}
-		return "login";
+		return "redirect:/reset";
 	}	
 
 //	private String getPrincipal() {

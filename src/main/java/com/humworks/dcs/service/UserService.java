@@ -19,6 +19,8 @@ public interface UserService {
     
     Integer findUid(String username);
     
+    Integer updateStatus(String field, Integer value, Integer userId);
+    
     User findByUsername(String username);
     
     ArrayList<User> findByRoleId(Integer roleMasterId);

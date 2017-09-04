@@ -48,56 +48,49 @@
 	            </div>
 	
 	          </div>
-	          <form:form method="post" action="#" modelAttribute="reset" id="password-change-form">
+	          <form:form method="post" action="reset" modelAttribute="reset" id="password-change-form">
 	          <div class="panel">	
 	            <!-- end .form-header section -->
 	              <div class="panel-body bg-light pn">	
-	                <div class="row table-layout h207">
+	                <div class="row table-layout">
 	                  <div class="col-xs-3 p20 pv15 va-m br-r bg-light">
 	                    <img class="br-a bw4 br-grey img-responsive center-block" src="${pageContext.request.contextPath}/resources/img/avatars/av1.png" title="AdminDesigns Logo">
 	                  </div>
 	                  <div class="col-xs-9 p20 pv15 va-m bg-light">
-		                 <spring:bind path="strPassword">
-						   <c:if test="${status.error}">
-						   		<span class="field-error">
-									<form:errors path="strPassword" />
-								</span>
-						   </c:if>
-						   <c:if test="${not status.error}">
-								<span class="field-alt fw600">
-									New Password <div class="ico-help" title="New Password for your account."><i class="fa fa-question-circle"></i></div>
-								</span>		
-							</c:if>				                 				
-			                    <div class="section">
-			                      <label for="strPassword" class="field prepend-icon">
-			                       	<form:password path="strPassword" id="strPassword" cssClass="gui-input br5" placeholder="New Password"/>
-			                        <label for="strPassword" class="field-icon">
-			                          <i class="fa fa-lock"></i>
-			                        </label>
-			                      </label>
-			                    </div>
-	                    </spring:bind>
-
-					 	<spring:bind path="strConfirmPassword">
-						   <c:if test="${status.error}">
-						   		<span class="field-error">
-									<form:errors path="strConfirmPassword" />
-								</span>
-						   </c:if>
-						   <c:if test="${not status.error}">	
-								<span class="field-alt fw600">
-									Confirm Password <div class="ico-help" title="Confirm the given new password."><i class="fa fa-question-circle"></i></div>
-								</span>		
-							</c:if>								 
-		                    <div class="section">
-		                      <label for="strConfirmPassword" class="field prepend-icon">
-		                       <form:password path="strConfirmPassword" id="strConfirmPassword" cssClass="gui-input br5" placeholder="Confirm Password"/>
-		                        <label for="strRePassword" class="field-icon">
-		                          <i class="fa fa-unlock-alt"></i>
-		                        </label>
-		                      </label>
-		                    </div>
-		                 </spring:bind>
+	                    <div class="section">
+	                    <h4 class="text-muted">Change your password</h4>
+						 	<spring:bind path="strPassword">
+							   <c:if test="${status.error}">
+							   		<span class="field-error">
+										<form:errors path="strPassword" />
+									</span>
+							   </c:if>
+								<div class="form-group">
+									<span class="input-icon"> 
+										<form:password path="strPassword" id="strPassword" cssClass="form-control" placeholder="New Password"/>
+										<i class="fa fa-lock"></i>
+									</span> 
+								</div>
+							</spring:bind>
+							<security:authentication property="principal.userId" var="a_uid"/>
+			                  <form:hidden path="intUserId" value="${a_uid}"/>
+						</div>
+	
+	                    <div class="section">
+	                    <spring:bind path="strConfirmPassword">
+							   <c:if test="${status.error}">
+							   		<span class="field-error">
+										<form:errors path="strConfirmPassword" />
+									</span>
+							   </c:if>
+							<div class="form-group">
+								<span class="input-icon"> 
+									 <form:password path="strConfirmPassword" id="strConfirmPassword" cssClass="form-control" placeholder="Confirm Password"/>
+									<i class="fa fa-lock"></i>
+								</span> 
+							</div>
+							</spring:bind>
+						</div>
 	                    <!-- end section -->
 	
 	                  </div>
@@ -105,13 +98,36 @@
 	              </div>
 	              <!-- end .form-body section -->
 	          </div>
-				<div class="section">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary pull-right m10 submit" data-toggle=".toggle-loading">
+	          <div class="row">
+	          	<div class="col-md-12 col-sm-12">
+				    <c:if test="${ not empty error}">
+						<div class="section animated fadeIn">
+							<div class="alert alert-danger mt10">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+									<span>${error}</span>
+							</div>
+						</div>   
+			        </c:if>
+			        <c:if test="${ not empty message}">	
+						<div class="section animated fadeIn">
+							<div class="alert alert-success mt10">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<i class="fa fa-check-circle fa-2x pr10 va-middle"></i>	
+									<span>${message}</span>
+							</div>
+						</div>
+			        </c:if>	
+			     </div>   
+	          	<div class="btn-group  pull-right mr15">
+						<button type="submit" class="btn btn-primary submit" data-toggle=".toggle-loading">
 							<span class="fa fa-unlock"></span> Change Password
 						</button>
-					</div>
+						<a href='<spring:url value="/logout"/>' class="btn btn-default btn-cancel">
+							<i class="fa fa-power-off"></i> Logout
+						</a>
 				</div>
+			</div>	
 			 </form:form>	
 	        </div>
 	

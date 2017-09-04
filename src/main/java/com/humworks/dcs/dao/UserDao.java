@@ -14,6 +14,8 @@ public interface UserDao {
 	Integer resetPassword(Login reset);
 	
 	void deleteUser(User user);
+	
+	Integer updateStatusField(String field, Integer value, Integer uid);
     
 	Integer findUid(String username);
 	

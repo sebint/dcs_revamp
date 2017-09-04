@@ -124,5 +124,12 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		cq.select(root).where(root.get("intUserId").in(roleMasterId));
 		return (ArrayList<User>) getSession().createQuery(cq).getResultList();
 	}
+
+	@Override
+	public Integer updateStatusField(String field, Integer value,Integer uid) {
+		String hql = "UPDATE User SET "+field +"="+value+" WHERE intUserId =:intUserId";
+		Query query = getSession().createQuery(hql).setParameter("intUserId", uid);
+		return query(query);		
+	}
 	
 }

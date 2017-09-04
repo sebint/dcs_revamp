@@ -10494,6 +10494,9 @@ a.thumbnail.active {
   color: #FFF;
   opacity: 0.3;
 }
+.alert-info .close {
+  color: #614BAB !important;
+}
 .alert-dismissable .close:hover,
 .alert-dismissible .close:hover {
   color: #FFF;
@@ -21954,7 +21957,7 @@ blockquote.blockquote-dark {
 /* 	background-color: #ddfbf3;
 	border-color: #bafbdc;
 	color: #1d9d74; */
-	background-color: #31b064;
+	background-color: #31b064b3;
 	border-color: #0e9957;
 	color: #DDE4E1;
 }
@@ -24054,4 +24057,7 @@ span.forum-item-title {
 ul.tray-nav li a span.label {
     line-height: inherit;
     padding: .1em .6em .2em;
+}
+.b0{
+	border: 0px !important;
 }

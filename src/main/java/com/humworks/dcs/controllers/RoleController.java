@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.humworks.dcs.entities.Objects;
 import com.humworks.dcs.entities.ObjectsMaster;
-import com.humworks.dcs.entities.Permission;
 import com.humworks.dcs.entities.Role;
 import com.humworks.dcs.exception.ResourceNotFoundException;
 import com.humworks.dcs.service.ObjectService;

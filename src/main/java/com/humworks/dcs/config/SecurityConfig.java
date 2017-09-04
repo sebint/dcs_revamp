@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -28,12 +29,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
 		auth.authenticationProvider(authenticationProvider());
+		/*Application Events
+		 * this must me set to get the application events to work */
+		auth.authenticationEventPublisher(defaultAuthenticationEventPublisher());
 	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	/*Application Events
+	 * this must me set to get the application events to work */
+	@Bean
+	public DefaultAuthenticationEventPublisher defaultAuthenticationEventPublisher() {
+		return new DefaultAuthenticationEventPublisher();
+	}
+	//To manage concurrent sessions
+/*	@Bean
+	public HttpSessionEventPublisher httpSessionEventPublisher() {
+		return new HttpSessionEventPublisher();
+	}*/
+	
+/*	@Bean
+	public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+	    return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
+	}*/
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -45,9 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	CustomAuthSuccessHandler customAuthSuccessHandler;
-	
-	//@Autowired
-	//CustomAuthFailureHandler customAuthFailureHandler;
 	
 	
 	@Override
@@ -64,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  	.cacheControl();
 	  
       http.authorizeRequests()
-	        .antMatchers("/", "/login", "/logout").permitAll()
+	        .antMatchers("/", "/login", "/logout","/invalid-session").permitAll()
 	        .antMatchers("/reset").hasRole("CHANGE_PASSWORD")
 	        .antMatchers("/dashboard").hasAnyRole("ADMIN","GK","IM","PDO")
 	        .antMatchers("/security/**","/design/**","/manage/**").hasRole("ADMIN")
@@ -77,8 +95,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       
       http.sessionManagement()
 //      .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) Default
-      		.invalidSessionUrl("/login?r=is&expired")     		
+      		.invalidSessionUrl("/invalid-session")     		
       		.maximumSessions(1).expiredUrl("/login?r=ms&expired")
+      		.maxSessionsPreventsLogin(true)
       	.and().sessionFixation().migrateSession();
       
       http.logout()

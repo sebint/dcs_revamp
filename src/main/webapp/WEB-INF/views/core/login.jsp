@@ -52,20 +52,38 @@
 									<div class="section animated fadeIn">
 										<div class="alert alert-danger alert-dismissable mt10">
 										  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-										  <i class="fa fa-times-circle fa-2x pr10 va-middle"></i>					  
+										  <i class="fa fa-frown-o fa-2x pr10 va-middle"></i>					  
 											<span>${SPRING_SECURITY_LAST_EXCEPTION.message}</span>
 										</div>
 									</div>
 								</c:if>
-								<c:if test="${r eq 'is'}">
+							    <c:if test="${ not empty error}">
 									<div class="section animated fadeIn">
-										<div class="alert alert-info alert-dismissable mt10">
-										  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-										  <i class="fa fa-times-circle fa-2x pr10 va-middle"></i>					  
-											<span>Session Time Out!. Please Login again.</span>
+										<div class="alert alert-danger alert-dismissable mt10">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+											<i class="fa fa-frown-o fa-2x pr10 va-middle"></i>	
+												<span>${error}</span>
+										</div>
+									</div>   
+						        </c:if>
+						        <c:if test="${ not empty message}">	
+									<div class="section animated fadeIn">
+										<div class="alert alert-success alert-dismissable mt10">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+											<i class="fa fa-smile-o fa-2x pr10 va-middle"></i>	
+												<span>${message}</span>
 										</div>
 									</div>
-								</c:if>		
+						        </c:if>	
+						        <c:if test="${ not empty info}">	
+									<div class="section animated fadeIn">
+										<div class="alert alert-info alert-dismissable mt10">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+											<i class="fa fa-frown-o fa-2x pr10 va-middle"></i>	
+												<span>${info}</span>
+										</div>
+									</div>
+						        </c:if>								        	
 								<div class="section">
 									<h3><spring:message code="login.request"/></h3>
 									<p>Please enter your <code>username</code> and <code>password</code> to log in.</p>
@@ -148,7 +166,7 @@
 					</div>
 				</div>
 				<div class="admin-form theme-info mw500 toggle-loading" id="loading" style="display: none;">
-					<div class="panel mt20p mb25 bc-transparent">
+					<div class="panel mt20p mb25 bc-transparent b0">
 						<div class="panel-body b-none">
 						  <div class="loading">
 								<div class="overlay"><span id="l-status">Authenticating...</span></div>

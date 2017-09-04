@@ -122,4 +122,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.findByRoleId(userRoleDao.findByRole(roleMasterId));
 	}
 
+	@Override
+	public Integer updateStatus(String field, Integer value, Integer userId) {
+		return userDao.updateStatusField(field, value, userId) ;
+	}
+
 }

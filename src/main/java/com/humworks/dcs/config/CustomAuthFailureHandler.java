@@ -11,6 +11,7 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -27,16 +28,19 @@ public class CustomAuthFailureHandler implements AuthenticationFailureHandler {
 			throws IOException, ServletException {
 		response.setStatus(HttpServletResponse.SC_OK);
 		
-		if (authException.getCause() instanceof BadCredentialsException) {
-			response.sendRedirect("login");
+		if (authException instanceof BadCredentialsException) {
+			//response.sendRedirect("login");
+			
         } else if (authException.getCause() instanceof CredentialsExpiredException) {
-        	response.sendRedirect("login");
+        	//response.sendRedirect("login");
         } else if (authException.getCause() instanceof DisabledException) {
-        	response.sendRedirect("reset");
+        	//response.sendRedirect("reset");
         } else if (authException.getCause() instanceof LockedException) {
-        	response.sendRedirect("login");
-        }else{
-        	response.sendRedirect("login");
-        }	
+        	//response.sendRedirect("login");
+        } else if (authException.getCause() instanceof UsernameNotFoundException) {
+        	//response.sendRedirect("login");
+        }
+		
+		response.sendRedirect("login");
 	}
 }

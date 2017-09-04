@@ -3,6 +3,8 @@ package com.humworks.dcs.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.humworks.dcs.entities.Role;
 import com.humworks.dcs.entities.SpringUser;
 import com.humworks.dcs.entities.User;
+import com.humworks.dcs.service.LoginAttemptService;
 import com.humworks.dcs.service.UserService;
 
 @Service("customUserDetailsService")
@@ -23,10 +26,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserService userService;	
+	
+	@Autowired
+    private LoginAttemptService loginAttemptService;
+	
+	@Autowired
+	private HttpServletRequest request;
 
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+/*		String ip = getClientIP();
+		if(loginAttemptService.isBlocked(ip)) {
+			throw new RuntimeException("Account Locked");
+		}*/
 		User user = userService.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username + "Not Found!");
@@ -62,6 +75,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 */
 	private String roleStringConvertion(String role){
 		return ("Administrator".equals(role))?"ADMIN":((("Gate Keeper".equals(role))?"GK":("Information Manager".equals(role)?"IM":("PDO".equals(role)?"PDO":role))));
+	}
+	
+	private String getClientIP() {
+	    String xfHeader = request.getHeader("X-Forwarded-For");
+	    if (xfHeader == null){
+	        return request.getRemoteAddr();
+	    }
+	    return xfHeader.split(",")[0];
 	}
 	
 

@@ -202,9 +202,9 @@ jQuery(document).ready(function() {
     
  });
 
-$(".alert").fadeTo(4000, 1500).slideUp(1000, function(){
+/*$(".alert").fadeTo(4000, 1500).slideUp(1000, function(){
     $(".alert").slideUp(1000);
-});
+});*/
 
 $.fn.toggleDiv = function(){
 	$($(this).data("toggle")).each(function(){
