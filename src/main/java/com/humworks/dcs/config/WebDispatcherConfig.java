@@ -4,18 +4,23 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -32,12 +37,16 @@ import com.humworks.dcs.interceptors.MenuListInterceptor;
 @Configuration 
 @EnableWebMvc
 @ComponentScan(basePackages = "com.humworks.dcs")
+@PropertySource(value={"classpath:application.properties"})
 public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 	
 	private static final Charset UTF8 = Charset.forName("UTF-8");
 	
 	@Autowired
 	RoleIdToRoleConverter roleIdToRoleConverter;
+	
+	@Autowired
+	private Environment environment;
 	
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewresolver(){
@@ -84,6 +93,24 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
         interceptor.setCacheSeconds(0);
         return interceptor;
     }
+	
+	@Bean
+	public JavaMailSender getJavaMailSender(){
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost(environment.getRequiredProperty("mail.host"));
+		mailSender.setPort(Integer.parseInt(environment.getRequiredProperty("mail.port")));
+		mailSender.setUsername(environment.getRequiredProperty("mail.sender"));
+		mailSender.setPassword("");
+		
+		Properties javaMailProperties = new Properties();
+		javaMailProperties.put("mail.smtp.starttls.enable", environment.getRequiredProperty("mail.smtp.starttls.enable"));
+		javaMailProperties.put("mail.smtp.auth", environment.getRequiredProperty("mail.amtp.auth"));
+		javaMailProperties.put("mail.transport.protocol", environment.getRequiredProperty("mail.transport.protocol"));
+		javaMailProperties.put("mail.debug", environment.getRequiredProperty("mail.debug"));
+		
+		mailSender.setJavaMailProperties(javaMailProperties);
+		return mailSender;
+	}
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();

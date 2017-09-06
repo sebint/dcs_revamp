@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.humworks.dcs.entities.Login;
+import com.humworks.dcs.service.MailService;
 import com.humworks.dcs.service.UserService;
 import com.humworks.dcs.validators.PasswordResetValidators;
 
@@ -40,6 +41,9 @@ public class LoginController {
 		return "login";
 	}
 	
+	@Autowired
+    private MailService mailService;
+	
 
 //	@GetMapping("login")
 //	public String login(Model model) {
@@ -59,6 +63,9 @@ public class LoginController {
 	@GetMapping("dashboard")
 	public String dashboard() {	       
         //System.out.println(requestMappingHandlerMapping.getHandlerMethods().keySet());
+/*		Object object = new Object();
+		System.out.println("In");
+		mailService.sentMail(object);*/
 		return "auth/dashboard";
 	}
 	
