@@ -7,6 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="UTF-8">
+		<meta http-equiv="refresh" content="<%=session.getMaxInactiveInterval()%>;url=logout"/>
 		<title>MPXD Data Capture System</title>
 		<link rel="shortcut icon" type="image/ico" href="${pageContext.request.contextPath}/resources/img/fav.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
@@ -449,7 +450,7 @@
 <%-- 		                              			<c:if test="${user.intPwdAttempt eq 0 }">
 		                              			
 		                              			</c:if> --%>
-		                              			<form:input path="intPwdAttempt" id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="${not empty(user.intPwdAttempt)? user.intPwdAttempt : 5}" maxlength="1"></form:input>
+		                              			<form:input path="intPwdAttempt"  id="intPwdAttempt" cssClass="gui-input br5 mt-10 w55" value="${not empty(user.intPwdAttempt)? user.intPwdAttempt : 5}" maxlength="1"></form:input>
 		                              			<span><spring:message code="user.new.request.activate2"/></span>	
 		                              		</div>
 										</div>

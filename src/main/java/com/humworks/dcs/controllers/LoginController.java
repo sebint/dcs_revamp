@@ -28,6 +28,9 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 	
+/*	@Autowired
+	private RequestMappingHandlerMapping requestMappingHandlerMapping;*/
+	
 	@Autowired
 	private PasswordResetValidators resetValidators;
 
@@ -52,19 +55,16 @@ public class LoginController {
 		}
 		return "redirect:/dashboard";
 	}
-	
 
 	@GetMapping("dashboard")
-	public String dashboard() {	
+	public String dashboard() {	       
+        //System.out.println(requestMappingHandlerMapping.getHandlerMethods().keySet());
 		return "auth/dashboard";
 	}
 	
 	@GetMapping("logout")
 	public String logout(final RedirectAttributes redirectAttributes,HttpServletRequest request, HttpServletResponse response) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication !=null){
-			new SecurityContextLogoutHandler().logout(request, response, authentication);
-		}
+		logoutProcess(request,response);
 		redirectAttributes.addFlashAttribute("message", "You have successfully logged out.");
 		return "redirect:/login";
 	}
@@ -82,7 +82,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("reset")
-	public String postResetPassword(final RedirectAttributes redirectAttributes,@ModelAttribute("reset") Login reset, BindingResult result){
+	public String postResetPassword(final RedirectAttributes redirectAttributes,@ModelAttribute("reset") Login reset, BindingResult result, HttpServletRequest request, HttpServletResponse response){
 		try{
 			resetValidators.validate(reset, result);
 			if (result.hasErrors()) {
@@ -90,8 +90,9 @@ public class LoginController {
 			}
 			if(userService.resetPassword(reset)>0){
 				if(userService.updateStatus("boolPwdChange", 0, reset.getIntUserId())>0) {
-					redirectAttributes.addFlashAttribute("message", "Password Changed Successfully.Click <a href='logout' class='txt-red'>here</a> to login again!");
-					return "redirect:/dashboard";
+					logoutProcess(request,response);
+					redirectAttributes.addFlashAttribute("info", "Password changed successfully.");
+					return "redirect:/login";
 				}
 			}else{
 				redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
@@ -101,7 +102,14 @@ public class LoginController {
 			redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
 		}
 		return "redirect:/reset";
-	}	
+	}
+	
+	private void logoutProcess(HttpServletRequest request, HttpServletResponse response){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication !=null){
+			new SecurityContextLogoutHandler().logout(request, response, authentication);
+		}
+	}
 
 //	private String getPrincipal() {
 //		String userName = null;

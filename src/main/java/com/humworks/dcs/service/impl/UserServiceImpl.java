@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.humworks.dcs.dao.UserDao;
 import com.humworks.dcs.dao.UserRoleDao;
+import com.humworks.dcs.dao.UserStatusDao;
 import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 import com.humworks.dcs.entities.UserRole;
+import com.humworks.dcs.entities.UserStatus;
 import com.humworks.dcs.service.SessionService;
 import com.humworks.dcs.service.UserService;
 
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private UserStatusDao userStatusDao;
 	
 	@Autowired
 	private UserRoleDao userRoleDao;
@@ -45,12 +50,15 @@ public class UserServiceImpl implements UserService {
 	       user.setIntModifiedBy(currentUser);
 	       Integer uid = userDao.saveUser(user);
 	       if(uid!=null){
+	    	   //User Role Info
 		       UserRole userRole = new UserRole();
 		       userRole.setIntUserId(uid);
 		       userRole.setIntRoleId(user.getIntRoleId());
 		       userRole.setIntCreatedBy(currentUser);
 		       userRole.setIntModifiedBy(currentUser);
 		       userRoleDao.saveUserRole(userRole);
+		       //User Status Info
+		       userStatusDao.saveStatus(new UserStatus(uid, 1, 1, 1, 0, currentUser, currentUser));		   
 	       }	       
 	}
 

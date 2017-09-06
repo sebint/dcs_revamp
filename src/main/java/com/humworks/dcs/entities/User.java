@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -86,9 +87,10 @@ public class User implements Serializable {
 
 	@Column(name = "PWD_ATTEMPT_COUNT")
 	private Integer intPwdAttempt;
-
-	@Column(name = "STATUS")
-	private String strStatus;
+	
+	@OneToOne
+    @JoinColumn(name="USER_MASTER_ID")
+    private UserStatus userStatus;
 
 	@Column(name = "CREATED_BY", updatable = false)
 	private Integer intCreatedBy;
@@ -195,13 +197,13 @@ public class User implements Serializable {
 	public void setIntPwdAttempt(Integer intPwdAttempt) {
 		this.intPwdAttempt = intPwdAttempt;
 	}
-
-	public String getStrStatus() {
-		return strStatus;
+	
+	public UserStatus getUserStatus() {
+		return userStatus;
 	}
 
-	public void setStrStatus(String strStatus) {
-		this.strStatus = strStatus;
+	public void setUserStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
 	}
 
 	public Integer getIntCreatedBy() {
@@ -266,7 +268,7 @@ public class User implements Serializable {
 		return "User [intUserId=" + intUserId + ", strFirstName=" + strFirstName + ", strLastName=" + strLastName
 				+ ", strUserName=" + strUserName + ", strPassword=" + strPassword + ", strEmail=" + strEmail + ", role="
 				+ role + ", strDeptName=" + strDeptName + ", boolPwdChange=" + boolPwdChange + ", boolLockPwd="
-				+ boolLockPwd + ", intPwdAttempt=" + intPwdAttempt + ", strStatus=" + strStatus + ", intCreatedBy="
+				+ boolLockPwd + ", intPwdAttempt=" + intPwdAttempt + ", userStatus=" + userStatus + ", intCreatedBy="
 				+ intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy=" + intModifiedBy
 				+ ", dtDateModified=" + dtDateModified + ", strRePassword=" + strRePassword + ", intRoleId=" + intRoleId
 				+ "]";
@@ -292,8 +294,8 @@ public class User implements Serializable {
 		result = prime * result + ((strLastName == null) ? 0 : strLastName.hashCode());
 		result = prime * result + ((strPassword == null) ? 0 : strPassword.hashCode());
 		result = prime * result + ((strRePassword == null) ? 0 : strRePassword.hashCode());
-		result = prime * result + ((strStatus == null) ? 0 : strStatus.hashCode());
 		result = prime * result + ((strUserName == null) ? 0 : strUserName.hashCode());
+		result = prime * result + ((userStatus == null) ? 0 : userStatus.hashCode());
 		return result;
 	}
 
@@ -386,15 +388,15 @@ public class User implements Serializable {
 				return false;
 		} else if (!strRePassword.equals(other.strRePassword))
 			return false;
-		if (strStatus == null) {
-			if (other.strStatus != null)
-				return false;
-		} else if (!strStatus.equals(other.strStatus))
-			return false;
 		if (strUserName == null) {
 			if (other.strUserName != null)
 				return false;
 		} else if (!strUserName.equals(other.strUserName))
+			return false;
+		if (userStatus == null) {
+			if (other.userStatus != null)
+				return false;
+		} else if (!userStatus.equals(other.userStatus))
 			return false;
 		return true;
 	}

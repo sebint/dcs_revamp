@@ -25,65 +25,74 @@ import com.humworks.dcs.service.UserService;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserService userService;	
-	
+	private UserService userService;
+
 	@Autowired
-    private LoginAttemptService loginAttemptService;
-	
+	private LoginAttemptService loginAttemptService;
+
 	@Autowired
 	private HttpServletRequest request;
 
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-/*		String ip = getClientIP();
-		if(loginAttemptService.isBlocked(ip)) {
-			throw new RuntimeException("Account Locked");
-		}*/
+		/*
+		 * String ip = getClientIP(); if(loginAttemptService.isBlocked(ip)) {
+		 * throw new RuntimeException("Account Locked"); }
+		 */
 		User user = userService.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException(username + "Not Found!");
 		}
 		return new SpringUser(user.getStrUserName(), user.getStrPassword(),
-				user.getStrStatus().equals("ACTIVE"), true, true, true, getGrantedAuthorities(user), user.getIntUserId(),user.getStrFirstName(),user.getStrLastName(),user.getStrEmail());
+				user.getUserStatus().getIsEnabled().equals(1), user.getUserStatus().getIsAccountNonExpired().equals(1),
+				user.getUserStatus().getIsCredentialsNonExpired().equals(1),
+				user.getUserStatus().getIsAccountLocked().equals(0), getGrantedAuthorities(user), user.getIntUserId(),
+				user.getStrFirstName(), user.getStrLastName(), user.getStrEmail());
 	}
 
 	/**
-	 * @Desc 
+	 * @Desc
 	 * @param user
 	 * @return ArrayList<GrantedAuthority>
 	 */
 	private List<GrantedAuthority> getGrantedAuthorities(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		//BoolPwdChange = 1 - Requires to change password after Login(New Role Assigned 'ROLE_CHANGE_PASSWORD') - Can only access the password change page only.
-		//BoolPwdChange = 0 - Continue with the login process
-		if(user.getBoolPwdChange()==0){
+		// BoolPwdChange = 1 - Requires to change password after Login(New Role
+		// Assigned 'ROLE_CHANGE_PASSWORD') - Can only access the password
+		// change page only.
+		// BoolPwdChange = 0 - Continue with the login process
+		if (user.getBoolPwdChange() == 0) {
 			for (Role role : user.getRole()) {
 				authorities.add(new SimpleGrantedAuthority("ROLE_" + roleStringConvertion(role.getStrRoleName())));
 			}
-		}else{
+		} else {
 			authorities.add(new SimpleGrantedAuthority("ROLE_CHANGE_PASSWORD"));
 		}
 		return authorities;
 	}
+
 	/**
 	 * @author Sebin Thomas
-	 * @desc Based on the given role returns the application defined role name.["Administator":"ADMIN","Gate Keeper":"GK","Information Manager":"IM","PDO":"PDO"]
-	 * 		 Add and modify the method if new Role is added.
+	 * @desc Based on the given role returns the application defined role
+	 *       name.["Administator":"ADMIN","Gate Keeper":"GK","Information
+	 *       Manager":"IM","PDO":"PDO"] Add and modify the method if new Role is
+	 *       added.
 	 * @param role
 	 * @return String
 	 */
-	private String roleStringConvertion(String role){
-		return ("Administrator".equals(role))?"ADMIN":((("Gate Keeper".equals(role))?"GK":("Information Manager".equals(role)?"IM":("PDO".equals(role)?"PDO":role))));
+	private String roleStringConvertion(String role) {
+		return ("Administrator".equals(role)) ? "ADMIN"
+				: ((("Gate Keeper".equals(role)) ? "GK"
+						: ("Information Manager".equals(role) ? "IM" : ("PDO".equals(role) ? "PDO" : role))));
 	}
-	
+
 	private String getClientIP() {
-	    String xfHeader = request.getHeader("X-Forwarded-For");
-	    if (xfHeader == null){
-	        return request.getRemoteAddr();
-	    }
-	    return xfHeader.split(",")[0];
+		String xfHeader = request.getHeader("X-Forwarded-For");
+		if (xfHeader == null) {
+			return request.getRemoteAddr();
+		}
+		return xfHeader.split(",")[0];
 	}
-	
 
 }
