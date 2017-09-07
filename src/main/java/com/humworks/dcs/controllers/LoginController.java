@@ -65,7 +65,7 @@ public class LoginController {
         //System.out.println(requestMappingHandlerMapping.getHandlerMethods().keySet());
 /*		Object object = new Object();
 		System.out.println("In");
-		mailService.sentMail(object);*/
+		mailService.sentMail(object)*/;
 		return "auth/dashboard";
 	}
 	
