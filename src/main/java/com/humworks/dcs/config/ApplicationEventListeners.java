@@ -1,6 +1,7 @@
 package com.humworks.dcs.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.core.Authentication;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.humworks.dcs.service.LoginAttemptService;
 
 @Component
-public class AuthenticationFailureListener{
+public class ApplicationEventListeners{
 
 	@Autowired
 	private LoginAttemptService loginAttemptService;
@@ -20,6 +21,12 @@ public class AuthenticationFailureListener{
 		Authentication auth = e.getAuthentication();
 		WebAuthenticationDetails details = (WebAuthenticationDetails) auth.getDetails();
 		loginAttemptService.saveOrUpdate(auth.getName(), details.getRemoteAddress());
+	}
+	
+	//@EventListener
+	public void onContextRefreshedEvent(ContextRefreshedEvent e) {
+		//logic at start up;
+		//after all bean has been initialized.
 	}
 
 }

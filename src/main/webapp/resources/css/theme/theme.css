@@ -24061,3 +24061,7 @@ ul.tray-nav li a span.label {
 .b0{
 	border: 0px !important;
 }
+.free-text {
+    width: 100% !important;
+    padding: 10px 60px 0px;
+}

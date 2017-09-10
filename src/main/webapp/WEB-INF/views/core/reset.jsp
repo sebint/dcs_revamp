@@ -142,7 +142,6 @@
 	<script type="text/javascript" src="<spring:url value='resources/lib/jquery/jquery-ui.min.js'/>"></script>
 	<script type="text/javascript" src="<spring:url value='resources/js/util.js'/>"></script>
 	<script type="text/javascript" src="<spring:url value='resources/js/_sn.js'/>"></script>
-	<script type="text/javascript" src="<spring:url value='resources/js/pages/login.js'/>"></script>
 	<!-- END: PAGE SCRIPTS -->
 </body>
 </html>

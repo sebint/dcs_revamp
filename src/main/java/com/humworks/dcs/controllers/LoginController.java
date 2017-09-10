@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +64,7 @@ public class LoginController {
 
 	@GetMapping("dashboard")
 	public String dashboard() {	       
-        System.out.println(requestMappingHandlerMapping.getHandlerMethods().keySet());
+        //System.out.println(requestMappingHandlerMapping.getHandlerMethods().keySet());
 /*		Object object = new Object();
 		System.out.println("In");
 		mailService.sentMail(object)*/;
@@ -90,7 +91,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("reset")
-	public String postResetPassword(final RedirectAttributes redirectAttributes,@ModelAttribute("reset") Login reset, BindingResult result, HttpServletRequest request, HttpServletResponse response){
+	public String postResetPassword(Model model,final RedirectAttributes redirectAttributes,@ModelAttribute("reset") Login reset, BindingResult result, HttpServletRequest request, HttpServletResponse response){
 		try{
 			resetValidators.validate(reset, result);
 			if (result.hasErrors()) {
@@ -99,8 +100,10 @@ public class LoginController {
 			if(userService.resetPassword(reset)>0){
 				if(userService.updateStatus("boolPwdChange", 0, reset.getIntUserId())>0) {
 					logoutProcess(request,response);
-					redirectAttributes.addFlashAttribute("info", "Password changed successfully.");
-					return "redirect:/login";
+					model.addAttribute("headerText", "Your <b class=\"text-primary\">Password</b> has been reset successfully!");
+					model.addAttribute("subText", "Please click below to login again.");
+					model.addAttribute("redirectUrl", "/login");
+					return "message";
 				}
 			}else{
 				redirectAttributes.addFlashAttribute("error", "Unable to Change Password. Try again later.");
