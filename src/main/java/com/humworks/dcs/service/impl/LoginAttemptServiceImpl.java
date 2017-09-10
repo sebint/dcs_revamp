@@ -62,9 +62,9 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 	}
 
 	@Override
-	public Integer countAttempts() {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer countAttempts(String key) {	
+		LoginAttempt loginAttempt = loginAttemptDao.checkExists(key);
+		return (loginAttempt != null) ? loginAttempt.getUserAtmptCount() : 0 ;
 	}
 
 	@Override

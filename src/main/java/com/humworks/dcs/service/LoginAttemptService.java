@@ -7,6 +7,6 @@ public interface LoginAttemptService {
 	void loginSucceed(String key);
 	void loginFailed(String key);
 	boolean isBlocked(String key);
-	Integer countAttempts();
+	Integer countAttempts(String key);
 	void saveOrUpdate(String key1, String key2);
 }
