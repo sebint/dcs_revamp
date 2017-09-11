@@ -1,11 +1,14 @@
 package com.humworks.dcs.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.encoding.LdapShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,10 +18,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -33,6 +37,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 * this must me set to get the application events to work */
 		auth.authenticationEventPublisher(defaultAuthenticationEventPublisher());
 	}
+	
+	//LDAP Authentication Starts here...(Not Tested)
+	
+	/*@Autowired
+	public void configureGlobalSecurityLdap(AuthenticationManagerBuilder auth) throws Exception {
+		auth.ldapAuthentication()
+			.userSearchFilter("(uid={0})")
+			.userSearchBase("ou=users")
+			.groupSearchFilter("(uniqueMember={0})")
+			.groupSearchBase("ou=groups")
+			.groupRoleAttribute("cn")
+			.rolePrefix("ROLE_")
+			.contextSource(contextSource())
+			.passwordCompare()
+				.passwordEncoder(new LdapShaPasswordEncoder())
+				.passwordAttribute("strPassword");
+	}
+	
+	@Bean
+	public DefaultSpringSecurityContextSource contextSource() {
+		return  new DefaultSpringSecurityContextSource(Arrays.asList("ldap://localhost:8389/"), "dc=springframework,dc=org");
+	}*/
+	
+	
+	//LDAP Authentication Ends here..
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
