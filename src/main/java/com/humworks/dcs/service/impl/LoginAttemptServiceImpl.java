@@ -11,6 +11,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.humworks.dcs.dao.LoginAttemptDao;
+import com.humworks.dcs.dao.UserStatusDao;
 import com.humworks.dcs.entities.LoginAttempt;
 import com.humworks.dcs.service.LoginAttemptService;
 
@@ -20,6 +21,9 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 	
 	@Autowired
 	private LoginAttemptDao loginAttemptDao;
+	
+	@Autowired
+	private UserStatusDao userStatusDao;
 	
 	private LoadingCache<String, Integer> attemptsCache;
 	
@@ -85,6 +89,11 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 			loginAttemptDao.saveUpdate(new LoginAttempt(1,key1,key2,0));
 		}
 		
+	}
+
+	@Override
+	public Integer updateStatus(String field, Integer value, Integer userId) {
+		return userStatusDao.updateStatus(field, value, userId);
 	}
 
 }

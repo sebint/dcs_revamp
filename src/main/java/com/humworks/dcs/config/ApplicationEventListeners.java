@@ -34,14 +34,18 @@ public class ApplicationEventListeners{
 			if(user.getBoolLockPwd().equals(1)) {
 				Integer attempts = user.getIntPwdAttempt()-loginAttemptService.countAttempts(auth.getName());
 				if(attempts <= 0) {
-					throw new LockedException("Account locked due to too many recent failed login attempts.");
+					if(loginAttemptService.updateStatus("isAccountNonLocked", 0, user.getIntUserId())>0){
+						throw new LockedException("Account locked due to too many recent failed login attempts.");
+					}else{
+						throw new LockedException("Account locked due to too many recent failed login attempts.");
+					}
 				}else {
 					error = "Invalid Credentials."+attempts+" attempts remaining!.";
 				}
 			}else {
 				error = "Invalid Credentials.";
 			}
-		}else {
+		}else {			
 			error = "Invalid Credentials.";
 		}				
 		throw new BadCredentialsException(error);
