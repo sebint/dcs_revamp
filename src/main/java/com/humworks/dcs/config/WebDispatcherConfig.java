@@ -111,6 +111,7 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 		mailSender.setJavaMailProperties(javaMailProperties);
 		return mailSender;
 	}
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();

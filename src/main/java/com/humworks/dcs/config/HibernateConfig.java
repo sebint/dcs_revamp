@@ -17,6 +17,8 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import liquibase.integration.spring.SpringLiquibase;
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({"com.humworks.dcs.config"})
@@ -54,6 +56,14 @@ public class HibernateConfig {
 		properties.put("cache.provider_class", environment.getRequiredProperty("cache.provider_class"));
 //		properties.put("format_sql", environment.getRequiredProperty("format_sql"));
 		return properties;
+	}
+	
+	@Bean
+	public SpringLiquibase liquibase() {
+	    SpringLiquibase liquibase = new SpringLiquibase();
+	    liquibase.setChangeLog("classpath:liquibase/liquibase-changeLog.xml");
+	    liquibase.setDataSource(dataSource());
+	    return liquibase;
 	}
 	
 	@Bean
