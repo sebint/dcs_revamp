@@ -9,7 +9,6 @@ import com.humworks.dcs.entities.SpringUser;
 import com.humworks.dcs.service.SessionService;
 
 @Service("sessionService")
-@Transactional
 public class SessionServiceImpl implements SessionService {
 
 	@Override

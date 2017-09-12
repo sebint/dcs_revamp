@@ -12,7 +12,6 @@ import com.humworks.dcs.service.SessionService;
 import com.humworks.dcs.service.UnitMeasureService;
 
 @Service("unitMeasureService")
-@Transactional
 public class UnitMeasureImpl implements UnitMeasureService {
 	
 	@Autowired
@@ -21,7 +20,16 @@ public class UnitMeasureImpl implements UnitMeasureService {
 	@Autowired
 	private SessionService sessionService;
 
+	public void setUnitMeasureDao(UnitMeasureDao unitMeasureDao) {
+		this.unitMeasureDao = unitMeasureDao;
+	}
+
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
 	@Override
+	@Transactional
 	public Integer save(UnitMeasure uom) {
 		Integer currentUser = sessionService.getActiveUid();
 		uom.setIntCreatedBy(currentUser);
@@ -32,30 +40,35 @@ public class UnitMeasureImpl implements UnitMeasureService {
 	}
 
 	@Override
+	@Transactional
 	public Integer update(UnitMeasure uom) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional
 	public void delete(UnitMeasure uom) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public UnitMeasure findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public UnitMeasure findByName(String uomLabel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<UnitMeasure> selectAll() {
 		return unitMeasureDao.selectAll();
 	}

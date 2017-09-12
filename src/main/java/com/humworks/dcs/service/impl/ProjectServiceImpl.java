@@ -12,7 +12,6 @@ import com.humworks.dcs.service.ProjectService;
 import com.humworks.dcs.service.SessionService;
 
 @Service("projectService")
-@Transactional
 public class ProjectServiceImpl implements ProjectService {
 	
 	@Autowired
@@ -21,7 +20,16 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	private SessionService sessionService;	
 
+	public void setProjectDao(ProjectDao projectDao) {
+		this.projectDao = projectDao;
+	}
+
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
 	@Override
+	@Transactional
 	public Integer save(ProjectMaster project) {
 		Integer currentUser = sessionService.getActiveUid();
 		project.setIntCreatedBy(currentUser);
@@ -30,6 +38,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	@Transactional
 	public Integer update(ProjectMaster project) {
 		try{
 			   Integer currentUser = sessionService.getActiveUid();
@@ -46,24 +55,28 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(ProjectMaster project) {
 		projectDao.deleteProject(project);
 
 	}
 
 	@Override
+	@Transactional(readOnly= true)
 	public ProjectMaster findById(Integer id) {
 		// TODO Auto-generated method stub
 		return projectDao.findById(id);
 	}
 
 	@Override
+	@Transactional(readOnly= true)
 	public ProjectMaster findByName(String projectName) {
 		// TODO Auto-generated method stub
 		return projectDao.findByName(projectName.replace('-', ' ').toLowerCase());
 	}
 
 	@Override
+	@Transactional(readOnly= true)
 	public ArrayList<ProjectMaster> selectAll() {
 		return projectDao.selectAll();
 	}

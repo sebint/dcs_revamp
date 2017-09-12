@@ -10,7 +10,6 @@ import com.humworks.dcs.service.LogLoginService;
 import com.humworks.dcs.service.SessionService;
 
 @Service("logLoginService")
-@Transactional
 public class LogLoginServiceImpl implements LogLoginService {
 
 	@Autowired
@@ -18,8 +17,17 @@ public class LogLoginServiceImpl implements LogLoginService {
 	
 	@Autowired
 	private SessionService sessionService;
-	
+		
+	public void setLogLoginDao(LogLoginDao logLoginDao) {
+		this.logLoginDao = logLoginDao;
+	}
+
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
 	@Override
+	@Transactional
 	public void createLog(LogLogin log) {
 		log.setUserId(sessionService.getActiveUid());
 		logLoginDao.createNewLog(log);

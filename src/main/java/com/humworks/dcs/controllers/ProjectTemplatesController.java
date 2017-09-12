@@ -44,6 +44,22 @@ public class ProjectTemplatesController {
 	@Autowired
 	private NonProgressiveJournalService nonProgressiveService; 
 	
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public void setProjectValidator(ProjectValidators projectValidator) {
+		this.projectValidator = projectValidator;
+	}
+
+	public void setNonProgressiveService(NonProgressiveJournalService nonProgressiveService) {
+		this.nonProgressiveService = nonProgressiveService;
+	}
+
 	@GetMapping(value={"","/","list"})
 	public String list(Model model){
 		return page;

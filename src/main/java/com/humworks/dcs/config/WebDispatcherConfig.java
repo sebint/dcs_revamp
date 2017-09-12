@@ -48,6 +48,14 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	private Environment environment;
 	
+	public void setRoleIdToRoleConverter(RoleIdToRoleConverter roleIdToRoleConverter) {
+		this.roleIdToRoleConverter = roleIdToRoleConverter;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewresolver(){
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

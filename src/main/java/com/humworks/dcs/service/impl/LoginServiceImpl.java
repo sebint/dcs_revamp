@@ -8,13 +8,17 @@ import com.humworks.dcs.dao.LoginDao;
 import com.humworks.dcs.service.LoginService;
 
 @Service("loginService")
-@Transactional
 public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private LoginDao loginDao;
-
+	
+	public void setLoginDao(LoginDao loginDao) {
+		this.loginDao = loginDao;
+	}
+	
 	@Override
+	@Transactional(readOnly = true)
 	public Boolean userAuthenticate(String userName, String password) {
 		if(loginDao.checkUser(userName, password)>0){
 			return true;

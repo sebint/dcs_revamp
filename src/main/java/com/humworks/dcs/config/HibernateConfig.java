@@ -28,6 +28,9 @@ public class HibernateConfig {
 	@Autowired
 	private Environment environment;
 	
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
 	@Bean
 	public LocalSessionFactoryBean sessionFactory(){
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();

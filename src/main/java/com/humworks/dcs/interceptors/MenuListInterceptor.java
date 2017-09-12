@@ -20,6 +20,10 @@ public class MenuListInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	private ObjectService objectService;
 	
+	public void setObjectService(ObjectService objectService) {
+		this.objectService = objectService;
+	}
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

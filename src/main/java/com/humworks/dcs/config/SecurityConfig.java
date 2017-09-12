@@ -25,6 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("customUserDetailsService")
 	UserDetailsService userDetailsService;
 
+	public void setUserDetailsService(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
+
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
@@ -93,6 +97,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	CustomAuthSuccessHandler customAuthSuccessHandler;
 	
 	
+	public void setCustomAuthSuccessHandler(CustomAuthSuccessHandler customAuthSuccessHandler) {
+		this.customAuthSuccessHandler = customAuthSuccessHandler;
+	}
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()

@@ -23,6 +23,14 @@ public class ApplicationEventListeners{
 	@Autowired
 	private UserService userService;
 	
+	public void setLoginAttemptService(LoginAttemptService loginAttemptService) {
+		this.loginAttemptService = loginAttemptService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	@EventListener
 	public void onAuthenticationFailureEvent(AuthenticationFailureBadCredentialsEvent e) {
 		String error;		

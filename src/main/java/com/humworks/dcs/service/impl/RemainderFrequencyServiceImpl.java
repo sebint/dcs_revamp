@@ -11,13 +11,17 @@ import com.humworks.dcs.entities.RemainderFrequency;
 import com.humworks.dcs.service.RemainderFrequencyService;
 
 @Service("frequencyService")
-@Transactional
 public class RemainderFrequencyServiceImpl implements RemainderFrequencyService {
 
 	@Autowired
 	private RemainderFrequecyDao frequencyDao;
 	
+	public void setFrequencyDao(RemainderFrequecyDao frequencyDao) {
+		this.frequencyDao = frequencyDao;
+	}
+
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<RemainderFrequency> selectAll() {
 		return frequencyDao.selectAll();
 	}

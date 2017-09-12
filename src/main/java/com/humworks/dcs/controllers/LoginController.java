@@ -36,6 +36,18 @@ public class LoginController {
 	@Autowired
 	private PasswordResetValidators resetValidators;
 
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setResetValidators(PasswordResetValidators resetValidators) {
+		this.resetValidators = resetValidators;
+	}
+
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
+	}
+
 	@GetMapping(value={"/","/login"})
 	public String index(Model model) {
 		model.addAttribute("login", new Login());

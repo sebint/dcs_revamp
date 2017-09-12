@@ -16,7 +16,6 @@ import com.humworks.dcs.entities.LoginAttempt;
 import com.humworks.dcs.service.LoginAttemptService;
 
 @Service("loginAttemptService")
-@Transactional
 public class LoginAttemptServiceImpl implements LoginAttemptService {
 	
 	@Autowired
@@ -25,6 +24,15 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 	@Autowired
 	private UserStatusDao userStatusDao;
 	
+	
+	public void setLoginAttemptDao(LoginAttemptDao loginAttemptDao) {
+		this.loginAttemptDao = loginAttemptDao;
+	}
+
+	public void setUserStatusDao(UserStatusDao userStatusDao) {
+		this.userStatusDao = userStatusDao;
+	}
+
 	private LoadingCache<String, Integer> attemptsCache;
 	
 	public LoginAttemptServiceImpl() {
@@ -66,12 +74,14 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Integer countAttempts(String key) {	
 		LoginAttempt loginAttempt = loginAttemptDao.checkExists(key);
 		return (loginAttempt != null) ? loginAttempt.getUserAtmptCount() : 0 ;
 	}
 
 	@Override
+	@Transactional
 	public void saveOrUpdate(String key1, String key2) {
 		LoginAttempt loginAttempt = loginAttemptDao.checkExists(key1);
 		if(loginAttempt != null) {
@@ -92,6 +102,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 	}
 
 	@Override
+	@Transactional
 	public Integer updateStatus(String field, Integer value, Integer userId) {
 		return userStatusDao.updateStatus(field, value, userId);
 	}
