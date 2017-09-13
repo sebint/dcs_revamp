@@ -58,6 +58,8 @@ public class HibernateConfig {
 		return properties;
 	}
 	
+	//Liquibase
+	
 	@Bean
 	public SpringLiquibase liquibase() {
 	    SpringLiquibase liquibase = new SpringLiquibase();
