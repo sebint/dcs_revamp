@@ -12,10 +12,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.mchange.v2.c3p0.DriverManagerDataSource;
 
 import liquibase.integration.spring.SpringLiquibase;
 
@@ -41,10 +42,16 @@ public class HibernateConfig {
 	}
 	@Bean
 	public DataSource dataSource(){
-		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+/*		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName(environment.getRequiredProperty("connection.driver_class"));
 		driverManagerDataSource.setUrl(environment.getRequiredProperty("connection.url"));
 		driverManagerDataSource.setUsername(environment.getRequiredProperty("connection.username"));
+		driverManagerDataSource.setPassword(environment.getRequiredProperty("connection.password"));
+		return driverManagerDataSource;*/
+		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setDriverClass(environment.getRequiredProperty("connection.driver_class"));
+		driverManagerDataSource.setJdbcUrl(environment.getRequiredProperty("connection.url"));
+		driverManagerDataSource.setUser(environment.getRequiredProperty("connection.username"));
 		driverManagerDataSource.setPassword(environment.getRequiredProperty("connection.password"));
 		return driverManagerDataSource;
 	}
@@ -58,6 +65,12 @@ public class HibernateConfig {
 		properties.put("show_sql", environment.getRequiredProperty("show_sql"));
 		properties.put("cache.provider_class", environment.getRequiredProperty("cache.provider_class"));
 //		properties.put("format_sql", environment.getRequiredProperty("format_sql"));
+				
+		properties.put("hibernate.c3p0.min_size", environment.getRequiredProperty("c3p0.minPoolSize"));
+		properties.put("hibernate.c3p0.max_size", environment.getRequiredProperty("c3p0.maxPoolSize"));
+		properties.put("hibernate.c3p0.timeout", environment.getRequiredProperty("c3p0.maxIdleTime"));
+		properties.put("hibernate.c3p0.max_statements", environment.getRequiredProperty("c3p0.maxStatements"));
+		properties.put("hibernate.c3p0.idle_test_period", environment.getRequiredProperty("c3p0.idleConnectionTestPeriod"));
 		return properties;
 	}
 	
