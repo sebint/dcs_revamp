@@ -12,18 +12,23 @@ import com.humworks.dcs.entities.ObjectsMaster;
 import com.humworks.dcs.service.ObjectService;
 
 @Service("objectService")
-@Transactional
 public class ObjectServiceImpl implements ObjectService {
 
 	@Autowired
-	private ObjectsDao objectDao;
+	private ObjectsDao objectDao;	
 	
+	public void setObjectDao(ObjectsDao objectDao) {
+		this.objectDao = objectDao;
+	}
+
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<Objects> selectAll() {			
 		 return objectDao.selectAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<ObjectsMaster> findParentMenu() {
 //		System.out.println(objectDao.getParentMenu());
 		return objectDao.getParentMenu();

@@ -29,6 +29,10 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
 	@Autowired
 	private LogLoginService logLoginService;
 	
+	public void setLogLoginService(LogLoginService logLoginService) {
+		this.logLoginService = logLoginService;
+	}
+
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override

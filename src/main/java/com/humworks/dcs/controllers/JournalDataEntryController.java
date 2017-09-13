@@ -38,6 +38,19 @@ public class JournalDataEntryController {
 	@Autowired
 	private NonProgressiveJournalDesignService nonProgressiveJournalDesignService;
 
+	public void setNonProgressiveService(NonProgressiveJournalService nonProgressiveService) {
+		this.nonProgressiveService = nonProgressiveService;
+	}
+
+	public void setCommonService(CommonService commonService) {
+		this.commonService = commonService;
+	}
+
+	public void setNonProgressiveJournalDesignService(
+			NonProgressiveJournalDesignService nonProgressiveJournalDesignService) {
+		this.nonProgressiveJournalDesignService = nonProgressiveJournalDesignService;
+	}
+
 	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		ArrayList<Long> ids = nonProgressiveJournalDesignService.selectUnique();

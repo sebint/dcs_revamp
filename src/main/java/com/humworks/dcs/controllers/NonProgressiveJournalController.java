@@ -70,6 +70,39 @@ public class NonProgressiveJournalController {
 	private NonProgressiveJournalDesignService nonProgressiveJournalDesignService;
 	
 	
+	public void setNonProgressiveService(NonProgressiveJournalService nonProgressiveService) {
+		this.nonProgressiveService = nonProgressiveService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
+	}
+
+	public void setCommonService(CommonService commonService) {
+		this.commonService = commonService;
+	}
+
+	public void setFrequencyService(RemainderFrequencyService frequencyService) {
+		this.frequencyService = frequencyService;
+	}
+
+	public void setUnitMeasureService(UnitMeasureService unitMeasureService) {
+		this.unitMeasureService = unitMeasureService;
+	}
+
+	public void setNonJournalValidators(NonProgressiveJournalValidators nonJournalValidators) {
+		this.nonJournalValidators = nonJournalValidators;
+	}
+
+	public void setNonProgressiveJournalDesignService(
+			NonProgressiveJournalDesignService nonProgressiveJournalDesignService) {
+		this.nonProgressiveJournalDesignService = nonProgressiveJournalDesignService;
+	}
+
 	@GetMapping(value={"","/","list"})
 	public String list(Model model){
 		model.addAttribute("nonProgressiveList", nonProgressiveService.selectAll());

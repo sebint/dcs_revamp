@@ -27,6 +27,14 @@ public class MailServerImpl implements MailService {
 	@Autowired
 	private Environment environment;
 
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
 	@Override
 	public void sentMail(Object object) {
 		// TODO Auto-generated method stub

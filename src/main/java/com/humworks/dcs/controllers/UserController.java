@@ -45,6 +45,22 @@ public class UserController {
 	@Autowired
 	private PasswordResetValidators resetValidators;
 	
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
+	public void setUserValidators(UserValidators userValidators) {
+		this.userValidators = userValidators;
+	}
+
+	public void setResetValidators(PasswordResetValidators resetValidators) {
+		this.resetValidators = resetValidators;
+	}
+
 	@GetMapping(value={"","/","list"})
 	public String getUser(Model model){
 		return page;

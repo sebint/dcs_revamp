@@ -12,7 +12,6 @@ import com.humworks.dcs.service.NonProgressiveJournalService;
 import com.humworks.dcs.service.SessionService;
 
 @Service("nonProgressiveService")
-@Transactional
 public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalService {
 	
 	@Autowired
@@ -21,7 +20,16 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 	@Autowired
 	private SessionService sessionService;
 
+	public void setNonProgressiveDao(NonProgressiveJournalDao nonProgressiveDao) {
+		this.nonProgressiveDao = nonProgressiveDao;
+	}
+
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
 	@Override
+	@Transactional
 	public Integer save(NonProgressiveJournalMaster nonProgressive) {
 		Integer currentUser = sessionService.getActiveUid();
 		nonProgressive.setIntCreatedBy(currentUser);
@@ -31,6 +39,7 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 	}
 
 	@Override
+	@Transactional
 	public Integer update(NonProgressiveJournalMaster nonProgressive) {
 		try{
 			   Integer currentUser = sessionService.getActiveUid();
@@ -48,32 +57,38 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 	}
 
 	@Override
+	@Transactional
 	public void delete(NonProgressiveJournalMaster nonProgressive) {
 		nonProgressiveDao.deleteNonProgressive(nonProgressive);
 
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public NonProgressiveJournalMaster findById(Integer id) {
 		return nonProgressiveDao.findById(id); 
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public NonProgressiveJournalMaster findByName(String journalName, Integer projectMasterId) {
 		return nonProgressiveDao.findByName(journalName.replace('-', ' ').toLowerCase(), projectMasterId);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<NonProgressiveJournalMaster> selectAll() {
 		return nonProgressiveDao.selectAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId) {
 		return nonProgressiveDao.findByProjectId(projectMasterId);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<NonProgressiveJournalMaster> findByIds(ArrayList<Long> idx) {
 		return nonProgressiveDao.findByIds(idx);
 	}

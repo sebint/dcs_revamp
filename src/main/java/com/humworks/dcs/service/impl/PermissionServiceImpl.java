@@ -11,13 +11,17 @@ import com.humworks.dcs.entities.Permission;
 import com.humworks.dcs.service.PermissionService;
 
 @Service("permissionService")
-@Transactional
 public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
 	private PermissionDao permissionDao; 
 	
+	public void setPermissionDao(PermissionDao permissionDao) {
+		this.permissionDao = permissionDao;
+	}
+
 	@Override
+	@Transactional(readOnly = true)
 	public List<Permission> ListPermission(Integer roleMasterId) {
 		return permissionDao.FindPermissionByRole(roleMasterId);
 	}

@@ -24,6 +24,10 @@ public class UnitOfMeasureController {
 	@Autowired
 	private UnitMeasureService unitMeasureService;
 
+	public void setUnitMeasureService(UnitMeasureService unitMeasureService) {
+		this.unitMeasureService = unitMeasureService;
+	}
+
 	private final String page = "auth/administrator/unit_of_measure";
 
 	@GetMapping(value={"","/","list"})

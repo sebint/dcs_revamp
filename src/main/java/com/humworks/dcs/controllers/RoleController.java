@@ -45,6 +45,22 @@ public class RoleController {
 	private PermissionService permissionService;
 	
 	
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setObjectService(ObjectService objectService) {
+		this.objectService = objectService;
+	}
+
+	public void setPermissionService(PermissionService permissionService) {
+		this.permissionService = permissionService;
+	}
+
 	@GetMapping(value={"","/","list"})
 	public String listRoles(Model model){
 		return page;

@@ -32,6 +32,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private HttpServletRequest request;
+	
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public void setLoginAttemptService(LoginAttemptService loginAttemptService) {
+		this.loginAttemptService = loginAttemptService;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
 
 	@Override
 	@Transactional(readOnly = true)

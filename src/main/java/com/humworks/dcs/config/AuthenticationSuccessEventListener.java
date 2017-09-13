@@ -14,6 +14,10 @@ public class AuthenticationSuccessEventListener
 	@Autowired
     private LoginAttemptService loginAttemptService;
 
+	public void setLoginAttemptService(LoginAttemptService loginAttemptService) {
+		this.loginAttemptService = loginAttemptService;
+	}
+
 	@Override
 	public void onApplicationEvent(AuthenticationSuccessEvent e) {
 		 WebAuthenticationDetails auth = (WebAuthenticationDetails) 

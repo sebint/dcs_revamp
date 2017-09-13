@@ -20,7 +20,6 @@ import com.humworks.dcs.service.SessionService;
 import com.humworks.dcs.service.UserService;
 
 @Service("userService")
-@Transactional
 @PropertySource(value={"classpath:constants.properties"})
 public class UserServiceImpl implements UserService {
 
@@ -42,7 +41,32 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SessionService sessionService;	
 	
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public void setUserStatusDao(UserStatusDao userStatusDao) {
+		this.userStatusDao = userStatusDao;
+	}
+
+	public void setUserRoleDao(UserRoleDao userRoleDao) {
+		this.userRoleDao = userRoleDao;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
 	@Override
+	@Transactional
 	public void save(User user) {
 		   Integer currentUser = sessionService.getActiveUid();
 	       user.setStrPassword(passwordEncoder.encode(environment.getProperty("default_password")));	     
@@ -63,21 +87,25 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public User findById(Integer id) {
 		return userDao.findById(id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public User findByUsername(String username) {
 		 return userDao.findByUsername(username);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<User> selectAll() {	
 		return userDao.selectAll();
 	}
 
 	@Override
+	@Transactional
 	public Integer update(User user) {
 		try{
 		   Integer currentUser = sessionService.getActiveUid();
@@ -101,17 +129,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(User user) {
 		userDao.deleteUser(user);
 		
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Integer findUid(String username) {		
 		return userDao.findUid(username);
 	}
 
 	@Override
+	@Transactional
 	public Integer resetPassword(Login reset) {
 		reset.setStrPassword(passwordEncoder.encode(reset.getStrPassword()));
 		return userDao.resetPassword(reset);
@@ -126,11 +157,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<User> findByRoleId(Integer roleMasterId) {		
 		return userDao.findByRoleId(userRoleDao.findByRole(roleMasterId));
 	}
 
 	@Override
+	@Transactional
 	public Integer updateStatus(String field, Integer value, Integer userId) {
 		return userDao.updateStatusField(field, value, userId) ;
 	}

@@ -3,7 +3,6 @@ package com.humworks.dcs.service.impl;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +11,6 @@ import com.humworks.dcs.entities.JsonDesignRequest;
 import com.humworks.dcs.service.CommonService;
 
 @Service("commonService")
-@Transactional
 public class CommonServiceImpl implements CommonService {
 
 	@Override

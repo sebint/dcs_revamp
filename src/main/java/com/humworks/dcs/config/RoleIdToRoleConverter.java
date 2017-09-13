@@ -13,6 +13,10 @@ public class RoleIdToRoleConverter implements Converter<Object, Role> {
 	@Autowired
 	RoleService roleService;
 
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
 	@Override
 	public Role convert(Object obj) {
 		Integer id = Integer.parseInt((String)obj);

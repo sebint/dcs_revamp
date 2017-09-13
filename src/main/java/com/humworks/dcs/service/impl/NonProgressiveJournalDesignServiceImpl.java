@@ -12,7 +12,6 @@ import com.humworks.dcs.service.NonProgressiveJournalDesignService;
 import com.humworks.dcs.service.SessionService;
 
 @Service("nonProgressiveJournalDesignService")
-@Transactional
 public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJournalDesignService {
 
 	@Autowired
@@ -21,7 +20,16 @@ public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJou
 	@Autowired
 	private NonProgressiveJournalDesignDao nonProgressiveDesignDao;
 	
+	public void setSessionService(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
+
+	public void setNonProgressiveDesignDao(NonProgressiveJournalDesignDao nonProgressiveDesignDao) {
+		this.nonProgressiveDesignDao = nonProgressiveDesignDao;
+	}
+
 	@Override
+	@Transactional
 	public Integer save(NonProgressiveJournalDesign nonProgressive) {
 		Integer currentUser = sessionService.getActiveUid();
 		nonProgressive.setIntCreatedBy(currentUser);
@@ -31,40 +39,47 @@ public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJou
 	}
 
 	@Override
+	@Transactional
 	public Integer update(NonProgressiveJournalDesign nonProgressive) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional
 	public void delete(NonProgressiveJournalDesign nonProgressive) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public NonProgressiveJournalDesign findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public NonProgressiveJournalDesign findByName(String projectName, Integer projectMasterId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<NonProgressiveJournalDesign> selectAll() {
 		return nonProgressiveDesignDao.selectAll();
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<Long> selectUnique(){
 		return nonProgressiveDesignDao.selectUnique();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer journalMasterId) {
 		// TODO Auto-generated method stub
 		return nonProgressiveDesignDao.findByJournalId(journalMasterId);

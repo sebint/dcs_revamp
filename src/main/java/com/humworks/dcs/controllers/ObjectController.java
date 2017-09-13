@@ -25,6 +25,10 @@ public class ObjectController {
 	@Autowired
 	private ObjectService objectService;
 
+	public void setObjectService(ObjectService objectService) {
+		this.objectService = objectService;
+	}
+
 	@GetMapping(value={"/","list",""})
 	public String list(Model model){
 		return page;
