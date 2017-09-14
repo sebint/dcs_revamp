@@ -63,7 +63,10 @@ public class HibernateConfig {
 		properties.put("connection.useUnicode", environment.getRequiredProperty("useUnicode"));
 		properties.put("dialect", environment.getRequiredProperty("dialect"));
 		properties.put("show_sql", environment.getRequiredProperty("show_sql"));
-		properties.put("cache.provider_class", environment.getRequiredProperty("cache.provider_class"));
+		properties.put("hibernate.cache.use_query_cache", environment.getRequiredProperty("cache.use_query_cache"));
+		properties.put("hibernate.cache.use_second_level_cache", environment.getRequiredProperty("cache.use_second_level_cache"));
+		properties.put("hibernate.cache.region.factory_class", environment.getRequiredProperty("hibernate.cache.region.factory_class"));
+//		properties.put("cache.provider_class", environment.getRequiredProperty("cache.provider_class"));
 //		properties.put("format_sql", environment.getRequiredProperty("format_sql"));
 				
 		properties.put("hibernate.c3p0.min_size", environment.getRequiredProperty("c3p0.minPoolSize"));
