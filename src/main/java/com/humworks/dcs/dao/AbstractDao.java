@@ -3,6 +3,7 @@ package com.humworks.dcs.dao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -27,6 +28,10 @@ public abstract class AbstractDao<PrimaryKey extends Serializable, T> {
 	protected Session getSession(){
 		return sessionFactory.getCurrentSession();
 	}
+	
+/*	public Optional<T> getByKey(PrimaryKey key){
+		return Optional.of((T) getSession().get(persistentClass, key));
+	}*/
 	
 	public T getByKey(PrimaryKey key){
 		return (T) getSession().get(persistentClass, key);

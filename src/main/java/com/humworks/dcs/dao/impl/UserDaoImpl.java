@@ -2,6 +2,7 @@ package com.humworks.dcs.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -23,6 +24,12 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		 return save(user);
 	}
 
+/*	@Override
+	public Optional<User> findById(Integer uid) {
+		return Optional.of(getByKey(uid)).map(user->{
+			return user;
+		});
+	}*/
 	@Override
 	public User findById(Integer uid) {
 		return getByKey(uid);

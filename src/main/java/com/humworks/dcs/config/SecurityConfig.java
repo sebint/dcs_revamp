@@ -111,16 +111,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 		
 	  http.headers()
+	  	.frameOptions()
+	  	.disable()
 	  	.defaultsDisabled()
 	  	.cacheControl();
 	  
       http.authorizeRequests()
 	        .antMatchers("/", "/login", "/logout","/invalid-session").permitAll()
-	        .antMatchers("/reset").hasRole("CHANGE_PASSWORD")
-	        .antMatchers("/dashboard").hasAnyRole("ADMIN","GK","IM","PDO")
-	        .antMatchers("/security/**","/design/**","/manage/**").hasRole("ADMIN")
-	        .antMatchers("/timeline/**","/assessment/**","/report/**","/security/user/account/**").hasAnyRole("ADMIN","GK")
-	        .antMatchers("/assessment/journal-entry/**","/assessment/change-log/**").hasRole("IM")
+	        .antMatchers("/reset").hasRole(AuthoritiesConstants.CHANGEPASSWORD)
+	        .antMatchers("/dashboard").hasAnyRole(AuthoritiesConstants.ADMIN,AuthoritiesConstants.GATEKEEPER,AuthoritiesConstants.INFOMANAGER,AuthoritiesConstants.PDO)
+	        .antMatchers("/security/**","/design/**","/manage/**").hasRole(AuthoritiesConstants.ADMIN)
+	        .antMatchers("/timeline/**","/assessment/**","/report/**","/security/user/account/**").hasAnyRole(AuthoritiesConstants.ADMIN,AuthoritiesConstants.GATEKEEPER)
+	        .antMatchers("/assessment/journal-entry/**","/assessment/change-log/**").hasRole(AuthoritiesConstants.INFOMANAGER)
         .and().formLogin().loginPage("/login").successHandler(customAuthSuccessHandler).failureUrl("/login")
         	.usernameParameter("strUserName").passwordParameter("strPassword")
         .and().csrf()
@@ -136,7 +138,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       http.logout()
 		.logoutSuccessUrl("/logout")
 		.invalidateHttpSession(true)
-		.deleteCookies("JSESSIONID")
+		.deleteCookies("JSESSIONID","CSRF-TOKEN")
 		.and().csrf();
     }
 }

@@ -3,6 +3,7 @@ package com.humworks.dcs.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.Cacheable;
@@ -34,7 +35,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "tbl_user_master")
 @DynamicInsert
 @DynamicUpdate
@@ -152,7 +153,7 @@ public class User implements Serializable {
 	}
 
 	public void setStrUserName(String strUserName) {
-		this.strUserName = strUserName;
+		this.strUserName = strUserName.toLowerCase(Locale.ENGLISH);
 	}
 
 	public String getStrPassword() {

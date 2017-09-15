@@ -1,6 +1,7 @@
 package com.humworks.dcs.entities;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,7 +57,7 @@ public class Login implements Serializable {
 	}
 
 	public void setStrUserName(String strUserName) {
-		this.strUserName = strUserName;
+		this.strUserName = strUserName.toLowerCase(Locale.ENGLISH);
 	}
 
 	public String getStrPassword() {

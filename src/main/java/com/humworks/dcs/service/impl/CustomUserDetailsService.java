@@ -1,7 +1,10 @@
 package com.humworks.dcs.service.impl;
 
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,7 +56,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		 * String ip = getClientIP(); if(loginAttemptService.isBlocked(ip)) {
 		 * throw new RuntimeException("Account Locked"); }
 		 */
-		User user = userService.findByUsername(username);
+		User user = userService.findByUsername(username.toLowerCase(Locale.ENGLISH));
 		if (user == null) {
 			throw new UsernameNotFoundException(username + "Not Found!");
 		}
