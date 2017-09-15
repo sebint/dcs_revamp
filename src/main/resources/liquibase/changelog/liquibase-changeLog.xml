@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	Document Name : liguibase-changeLog.xml
+	Created On : 15/09/2017
+	Author : Sebin Thomas
+	Decription : Purpose of the document follows
+
+ -->
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   
+   <property name="now" value="now()" dbms="mysql,h2"/>
+   <property name="now" value="current_timestamp" dbms="postgresql"/>
+   <property name="now" value="sysdate" dbms="oracle"/>
+
+   <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+   
+   <changeSet id="00000000000000" author="jhipster" dbms="postgresql,oracle">
+        <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="1"/>
+    </changeSet>
+     
+    <changeSet author="sebin" id="435682356456791467356892">
+    </changeSet>
+ </databaseChangeLog>

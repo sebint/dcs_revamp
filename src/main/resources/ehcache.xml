@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Document Name : ehcache.xml
+	Created On : 14/09/2017
+	Author : Sebin Thomas
+	Decription : Purpose of the document follows
+
+ -->
+<ehcache>
+    <diskStore path="user.home/ehcache"/>
+
+    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
+           eternal="false"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300" timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
+    </cache>
+
+    <cache name="org.hibernate.cache.internal.StandardQueryCache"
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
+           eternal="false"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300" timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
+    </cache>
+
+    <!--For spring-->
+    <cache name="clients"
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
+           eternal="false"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300" timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
+    </cache>
+
+    <defaultCache maxElementsInMemory="100" eternal="false"
+                  timeToIdleSeconds="10000" timeToLiveSeconds="60000" overflowToDisk="false" />
+                  
+    <cache name="com.humworks.dcs.entities.ObjectsMaster" maxElementsInMemory="100"/>
+    <cache name="com.humworks.dcs.entities.User" maxElementsInMemory="100"/>                  
+</ehcache>
