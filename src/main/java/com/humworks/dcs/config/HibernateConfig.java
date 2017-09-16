@@ -1,5 +1,6 @@
 package com.humworks.dcs.config;
 
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -16,6 +17,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.DriverManagerDataSource;
 
 import liquibase.integration.spring.SpringLiquibase;
@@ -47,13 +49,22 @@ public class HibernateConfig {
 		driverManagerDataSource.setUrl(environment.getRequiredProperty("connection.url"));
 		driverManagerDataSource.setUsername(environment.getRequiredProperty("connection.username"));
 		driverManagerDataSource.setPassword(environment.getRequiredProperty("connection.password"));
-		return driverManagerDataSource;*/
-		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-		driverManagerDataSource.setDriverClass(environment.getRequiredProperty("connection.driver_class"));
-		driverManagerDataSource.setJdbcUrl(environment.getRequiredProperty("connection.url"));
-		driverManagerDataSource.setUser(environment.getRequiredProperty("connection.username"));
-		driverManagerDataSource.setPassword(environment.getRequiredProperty("connection.password"));
-		return driverManagerDataSource;
+		return driverManagerDataSource;*/				
+		try {
+			ComboPooledDataSource driverManagerDataSource = new ComboPooledDataSource();
+			driverManagerDataSource.setDriverClass(environment.getRequiredProperty("connection.driver_class"));
+			driverManagerDataSource.setJdbcUrl(environment.getRequiredProperty("connection.url"));
+			driverManagerDataSource.setUser(environment.getRequiredProperty("connection.username"));
+			driverManagerDataSource.setPassword(environment.getRequiredProperty("connection.password"));
+			return driverManagerDataSource;
+		} catch (Exception e) {
+			DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+			driverManagerDataSource.setDriverClass(environment.getRequiredProperty("connection.driver_class"));
+			driverManagerDataSource.setJdbcUrl(environment.getRequiredProperty("connection.url"));
+			driverManagerDataSource.setUser(environment.getRequiredProperty("connection.username"));
+			driverManagerDataSource.setPassword(environment.getRequiredProperty("connection.password"));
+			return driverManagerDataSource;
+		} 
 	}
 	
 	private Properties hibernateProperties(){
@@ -63,6 +74,9 @@ public class HibernateConfig {
 		properties.put("connection.useUnicode", environment.getRequiredProperty("useUnicode"));
 		properties.put("dialect", environment.getRequiredProperty("dialect"));
 		properties.put("show_sql", environment.getRequiredProperty("show_sql"));
+		properties.put("hibernate.jdbc.batch_size", environment.getRequiredProperty("hibernate.jdbc.batch_size"));
+		properties.put("hibernate.order_inserts", environment.getRequiredProperty("hibernate.order_inserts"));
+		properties.put("hibernate.order_updates", environment.getRequiredProperty("hibernate.order_updates"));
 		properties.put("hibernate.cache.use_query_cache", environment.getRequiredProperty("cache.use_query_cache"));
 		properties.put("hibernate.cache.use_second_level_cache", environment.getRequiredProperty("cache.use_second_level_cache"));
 		properties.put("hibernate.cache.provider_class", environment.getRequiredProperty("cache.provider_class"));

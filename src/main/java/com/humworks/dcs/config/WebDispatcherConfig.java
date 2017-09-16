@@ -21,6 +21,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -139,6 +140,14 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
        converters.add(stringConverter);
  
        // Add other converters ...
+   }
+   
+   //File Upload
+   @Bean(name = "multipartResolver")
+   public CommonsMultipartResolver multipartResolver() {
+       CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+       multipartResolver.setMaxUploadSize(100000);
+       return new CommonsMultipartResolver();
    }
    
    /*

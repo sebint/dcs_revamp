@@ -35,6 +35,8 @@
         <jsp-api>2.3.1</jsp-api>
         <javax-mail>1.4.7</javax-mail>
         <guava>23.0</guava>
+        <commons-fileupload>1.3.3</commons-fileupload>
+        <passay>1.3.0</passay>
     </properties>
 	
 	<dependencies>
@@ -217,6 +219,19 @@
 		    <artifactId>guava</artifactId>
 		    <version>${guava}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>${commons-fileupload}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.passay/passay -->
+		<dependency>
+		    <groupId>org.passay</groupId>
+		    <artifactId>passay</artifactId>
+		    <version>${passay}</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>dcs</finalName>
