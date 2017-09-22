@@ -35,13 +35,13 @@ public class NonProgressiveJournalDesign implements Serializable {
 	@Id
 	@Column(name = "NON_PGRV_JRNL_DESIGN_ID", updatable = false, unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer nonPrgvDesignId;
+	private Long nonPrgvDesignId;
 	
 	@Column(name = "NON_PGRV_JRNL_MASTER_ID")
-	private Integer nonProgressiveMasterId;
+	private Long nonProgressiveMasterId;
 	
 	@Column(name = "UOM_MASTER_ID")
-	private Integer uomId;
+	private Long uomId;
 	
 	@Column(name = "COL_HEAD_TEXT")
 	private String colHeaderText;
@@ -62,7 +62,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 	private Integer validRevision;
 	
 	@Column(name = "LOOKUP_MASTER_ID")
-	private Integer lookupMasterId;
+	private Long lookupMasterId;
 	
 	@Column(name = "IS_READ_ONLY")
 	private Integer isReadOnly;
@@ -80,7 +80,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 	private Integer status;
 
 	@Column(name = "CREATED_BY", updatable = false)
-	private Integer intCreatedBy;
+	private Long intCreatedBy;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -88,7 +88,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 	private Date dtDateCreated;
 
 	@Column(name = "MODIFIED_BY")
-	private Integer intModifiedBy;
+	private Long intModifiedBy;
 
 	@UpdateTimestamp
 	@Column(name = "MODIFIED_DATE")
@@ -102,21 +102,21 @@ public class NonProgressiveJournalDesign implements Serializable {
 	public NonProgressiveJournalDesign(){	
 	}
 
-	public NonProgressiveJournalDesign(Integer nonProgressiveMasterId, NonProgressiveJournalMaster nonProgressive) {
+	public NonProgressiveJournalDesign(Long nonProgressiveMasterId, NonProgressiveJournalMaster nonProgressive) {
 		super();
 		this.nonProgressiveMasterId = nonProgressiveMasterId;
 		this.nonProgressive = nonProgressive;
 	}
 
-	public Integer getNonPrgvDesignId() {
+	public Long getNonPrgvDesignId() {
 		return nonPrgvDesignId;
 	}
 
-	public Integer getNonProgressiveMasterId() {
+	public Long getNonProgressiveMasterId() {
 		return nonProgressiveMasterId;
 	}
 
-	public Integer getUomId() {
+	public Long getUomId() {
 		return uomId;
 	}
 
@@ -144,7 +144,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		return validRevision;
 	}
 
-	public Integer getLookupMasterId() {
+	public Long getLookupMasterId() {
 		return lookupMasterId;
 	}
 
@@ -168,7 +168,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		return status;
 	}
 
-	public Integer getIntCreatedBy() {
+	public Long getIntCreatedBy() {
 		return intCreatedBy;
 	}
 
@@ -176,7 +176,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		return dtDateCreated;
 	}
 
-	public Integer getIntModifiedBy() {
+	public Long getIntModifiedBy() {
 		return intModifiedBy;
 	}
 

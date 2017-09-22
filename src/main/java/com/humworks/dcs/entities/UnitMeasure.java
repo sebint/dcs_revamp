@@ -30,7 +30,7 @@ public class UnitMeasure implements Serializable {
 	@Id
 	@Column(name = "UOM_MASTER_ID", updatable = false, unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer uomId;
+	private Long uomId;
 	
 	@Column(name = "UOM_LABEL")
 	private String uomLabel;
@@ -42,7 +42,7 @@ public class UnitMeasure implements Serializable {
 	private Integer status;
 
 	@Column(name = "CREATED_BY", updatable = false)
-	private Integer intCreatedBy;
+	private Long intCreatedBy;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -50,14 +50,14 @@ public class UnitMeasure implements Serializable {
 	private Date dtDateCreated;
 
 	@Column(name = "MODIFIED_BY")
-	private Integer intModifiedBy;
+	private Long intModifiedBy;
 
 	@UpdateTimestamp
 	@Column(name = "MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtDateModified;
 
-	public Integer getUomId() {
+	public Long getUomId() {
 		return uomId;
 	}
 
@@ -73,7 +73,7 @@ public class UnitMeasure implements Serializable {
 		return status;
 	}
 
-	public Integer getIntCreatedBy() {
+	public Long getIntCreatedBy() {
 		return intCreatedBy;
 	}
 
@@ -81,7 +81,7 @@ public class UnitMeasure implements Serializable {
 		return dtDateCreated;
 	}
 
-	public Integer getIntModifiedBy() {
+	public Long getIntModifiedBy() {
 		return intModifiedBy;
 	}
 
@@ -89,7 +89,7 @@ public class UnitMeasure implements Serializable {
 		return dtDateModified;
 	}
 
-	public void setUomId(Integer uomId) {
+	public void setUomId(Long uomId) {
 		this.uomId = uomId;
 	}
 
@@ -105,7 +105,7 @@ public class UnitMeasure implements Serializable {
 		this.status = status;
 	}
 
-	public void setIntCreatedBy(Integer intCreatedBy) {
+	public void setIntCreatedBy(Long intCreatedBy) {
 		this.intCreatedBy = intCreatedBy;
 	}
 
@@ -113,7 +113,7 @@ public class UnitMeasure implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(Integer intModifiedBy) {
+	public void setIntModifiedBy(Long intModifiedBy) {
 		this.intModifiedBy = intModifiedBy;
 	}
 

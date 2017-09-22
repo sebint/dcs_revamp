@@ -12,7 +12,7 @@ import com.humworks.dcs.service.SessionService;
 public class SessionServiceImpl implements SessionService {
 
 	@Override
-	public Integer getActiveUid() {
+	public Long getActiveUid() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		SpringUser currentUser = (SpringUser) authentication.getPrincipal();
 		return currentUser.getUserId();

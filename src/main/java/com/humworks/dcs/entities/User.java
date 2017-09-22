@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,7 +37,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Table(name = "tbl_user_master")
+@Table(name = "TBL_USER_MASTER")
 @DynamicInsert
 @DynamicUpdate
 @SelectBeforeUpdate
@@ -46,8 +47,11 @@ public class User implements Serializable {
 
 	@Id
 	@Column(name = "USER_MASTER_ID", updatable = false, unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer intUserId;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY) --Use this for MySQL DB
+	//This will improve the Performance of the Hibernate -- Use this for Sequence generator DBs like Postgres, Oracle etc.
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_master_seq")
+	@SequenceGenerator(name="user_master_seq", sequenceName="tbl_user_master_user_master_id_seq")
+	private Long intUserId;
 
 	@NotEmpty
 	@Pattern(regexp="[^0-9<>'\"/;`%~@#$^*()_+={}|\\,.?: -]*")
@@ -99,7 +103,7 @@ public class User implements Serializable {
     private UserStatus userStatus;
 
 	@Column(name = "CREATED_BY", updatable = false)
-	private Integer intCreatedBy;
+	private Long intCreatedBy;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -107,7 +111,7 @@ public class User implements Serializable {
 	private Date dtDateCreated;
 
 	@Column(name = "MODIFIED_BY")
-	private Integer intModifiedBy;
+	private Long intModifiedBy;
 
 	@UpdateTimestamp
 	@Column(name = "MODIFIED_DATE")
@@ -124,11 +128,11 @@ public class User implements Serializable {
 		// this form used by Hibernate
 	}
 
-	public Integer getIntUserId() {
+	public Long getIntUserId() {
 		return intUserId;
 	}
 
-	public void setIntUserId(Integer intUserId) {
+	public void setIntUserId(Long intUserId) {
 		this.intUserId = intUserId;
 	}
 
@@ -212,11 +216,11 @@ public class User implements Serializable {
 		this.userStatus = userStatus;
 	}
 
-	public Integer getIntCreatedBy() {
+	public Long getIntCreatedBy() {
 		return intCreatedBy;
 	}
 
-	public void setIntCreatedBy(Integer intCreatedBy) {
+	public void setIntCreatedBy(Long intCreatedBy) {
 		this.intCreatedBy = intCreatedBy;
 	}
 
@@ -228,11 +232,11 @@ public class User implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public Integer getIntModifiedBy() {
+	public Long getIntModifiedBy() {
 		return intModifiedBy;
 	}
 
-	public void setIntModifiedBy(Integer intModifiedBy) {
+	public void setIntModifiedBy(Long intModifiedBy) {
 		this.intModifiedBy = intModifiedBy;
 	}
 

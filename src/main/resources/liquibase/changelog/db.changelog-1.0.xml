@@ -1,0 +1,1283 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<!-- NOTE -->
+<!-- Generate a changeLog from an existing Database -->
+<!-- Run Maven : liquibase:generateChangeLog -->
+<!-- Refer : http://www.baeldung.com/liquibase-refactor-schema-of-java-app -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-2">
+        <createTable remarks="For data attribute type details" tableName="tbl_attr_data_type_master">
+            <column autoIncrement="true" name="data_type_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_attr_data_type_master_pkey"/>
+            </column>
+            <column name="data_type_label" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="data_type_opt" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-3">
+        <createTable remarks="For input Category details" tableName="tbl_category_master">
+            <column autoIncrement="true" name="input_category_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_category_master_pkey"/>
+            </column>
+            <column name="input_category_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="input_desc" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="input_code_op" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-4">
+        <createTable remarks="For data attribute group details" tableName="tbl_data_attr_group_master">
+            <column autoIncrement="true" name="data_attr_group_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_data_attr_group_master_pkey"/>
+            </column>
+            <column name="data_group_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-5">
+        <createTable remarks="For frequency details" tableName="tbl_frequency_master">
+            <column autoIncrement="true" name="frequency_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_frequency_master_pkey"/>
+            </column>
+            <column name="frequency_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="frequency_start_day" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="frequency_end_day" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="frequency_cutoff_day" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-6">
+        <createTable tableName="tbl_image_jrnl_sub">
+            <column autoIncrement="true" name="image_jrnl_sub_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_image_jrnl_sub_pkey"/>
+            </column>
+            <column name="image_path" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pgrv_jrnl_master_id" type="INT"/>
+            <column name="status" type="SMALLINT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-7">
+        <createTable remarks="For journal transaction details" tableName="tbl_jrnl_trans_master">
+            <column autoIncrement="true" name="jrnl_trans_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_jrnl_trans_master_pkey"/>
+            </column>
+            <column name="jrnl_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jrnl_attr_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trans_value" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-8">
+        <createTable tableName="tbl_jrnl_type">
+            <column autoIncrement="true" name="jrnl_type_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_jrnl_type_pkey"/>
+            </column>
+            <column name="jrnl_type_name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-9">
+        <createTable tableName="tbl_label_master">
+            <column autoIncrement="true" name="label_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_label_master_pkey"/>
+            </column>
+            <column name="label_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label_desc" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="menu_sub_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-10">
+        <createTable remarks="For look up details" tableName="tbl_lookup_master">
+            <column autoIncrement="true" name="lookup_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_lookup_master_pkey"/>
+            </column>
+            <column name="lookup_code" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lookup_desc" type="VARCHAR(100)"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-11">
+        <createTable remarks="For look up details" tableName="tbl_lookup_sub">
+            <column autoIncrement="true" name="lookup_sub_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_lookup_sub_pkey"/>
+            </column>
+            <column name="lookup_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lookup_data" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lookup_value" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-12">
+        <createTable tableName="tbl_mail_master">
+            <column autoIncrement="true" name="mail_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_mail_master_pkey"/>
+            </column>
+            <column name="mail_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mail_source_id" type="VARCHAR(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mail_target_id" type="VARCHAR(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="mail_status" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-13">
+        <createTable tableName="tbl_menu_master">
+            <column autoIncrement="true" name="menu_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_menu_master_pkey"/>
+            </column>
+            <column name="menu_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url_path" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url_icon" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="seq_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="is_enabled" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-14">
+        <createTable remarks="For Menu Details(Sub of tbl_menu_master)" tableName="tbl_menu_sub">
+            <column autoIncrement="true" name="menu_sub_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_menu_sub_pkey"/>
+            </column>
+            <column name="menu_sub_label" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="menu_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url_path" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url_icon" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="seq_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="true" name="is_type_screen" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-15">
+        <createTable tableName="tbl_non_pgrv_data_entries">
+            <column autoIncrement="true" name="data_entry_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_non_pgrv_data_entries_pkey"/>
+            </column>
+            <column name="data" type="TEXT"/>
+            <column name="non_pgrv_data_attr_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-16">
+        <createTable tableName="tbl_non_pgrv_jrnl_data_entry">
+            <column autoIncrement="true" name="non_pgrv_jrnl_data_entry_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_non_pgrv_jrnl_data_entry_pkey"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="SMALLINT"/>
+            <column name="value" type="INT"/>
+            <column name="non_pgrv_jrnl_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-17">
+        <createTable tableName="tbl_non_pgrv_jrnl_data_map">
+            <column autoIncrement="true" name="non_pgrv_jrnl_data_map_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_non_pgrv_jrnl_data_map_pkey"/>
+            </column>
+            <column name="non_pgrv_jrnl_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validator_id" type="INT"/>
+            <column defaultValueComputed="(0)::smallint" name="validate_status" type="SMALLINT"/>
+            <column name="validate_comment" type="TEXT"/>
+            <column name="data_date" type="VARCHAR(11)"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-18">
+        <createTable tableName="tbl_non_pgrv_jrnl_design">
+            <column autoIncrement="true" name="non_pgrv_jrnl_design_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_non_pgrv_jrnl_design_pkey"/>
+            </column>
+            <column name="non_pgrv_jrnl_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uom_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="col_head_text" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="col_head_width" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="col_type" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="col_order" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_validate_pending" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validate_revision" type="INT"/>
+            <column name="lookup_master_id" type="INT"/>
+            <column name="is_read_only" type="SMALLINT"/>
+            <column name="pgrv_link_id" type="INT"/>
+            <column name="non_prgv_link_ids" type="VARCHAR"/>
+            <column name="formula_applied" type="VARCHAR(200)"/>
+            <column name="status" type="SMALLINT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-19">
+        <createTable remarks="For the non progressive journal information stored" tableName="tbl_non_pgrv_jrnl_master">
+            <column autoIncrement="true" name="non_pgrv_jrnl_master_id" remarks="Primary Key" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_non_pgrv_jrnl_master_pkey"/>
+            </column>
+            <column name="pjct_template_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jrnl_name" remarks="its a unique value, journal name" type="VARCHAR(50)"/>
+            <column name="owner" type="INT"/>
+            <column name="frequency" type="TEXT"/>
+            <column name="val_id" type="INT"/>
+            <column name="dtetr_operator_id" type="INT"/>
+            <column name="status" type="SMALLINT"/>
+            <column name="remainder_frequency" type="TEXT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-20">
+        <createTable tableName="tbl_non_pgrv_jrnl_validation">
+            <column autoIncrement="true" name="pgrv_non_jrnl_validation_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_non_pgrv_jrnl_validation_pkey"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="SMALLINT"/>
+            <column name="description" type="TEXT"/>
+            <column name="non_pgrv_jrnl_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-21">
+        <createTable tableName="tbl_notification_master">
+            <column autoIncrement="true" name="notification_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_notification_master_pkey"/>
+            </column>
+            <column name="user_master_id" type="TEXT"/>
+            <column name="notification_type_id" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-22">
+        <createTable tableName="tbl_notification_type">
+            <column autoIncrement="true" name="notification_type_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_notification_type_pkey"/>
+            </column>
+            <column name="notification_type_name" type="TEXT"/>
+            <column name="description" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-23">
+        <createTable tableName="tbl_permission_master">
+            <column autoIncrement="true" name="permission_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_permission_master_pkey"/>
+            </column>
+            <column name="role_master_id" type="INT"/>
+            <column name="menu_sub_id" type="INT"/>
+            <column name="view" type="SMALLINT"/>
+            <column name="add" type="SMALLINT"/>
+            <column name="delete" type="SMALLINT"/>
+            <column name="export" type="SMALLINT"/>
+            <column name="print" type="SMALLINT"/>
+            <column name="email" type="SMALLINT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-24">
+        <createTable remarks="For data attribute details" tableName="tbl_pgrv_data_attr">
+            <column autoIncrement="true" name="pgrv_data_attr_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_data_attr_pkey"/>
+            </column>
+            <column name="data_label" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="input_category_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_attr_group_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_type_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uom_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-25">
+        <createTable tableName="tbl_pgrv_jrnl_data_entries">
+            <column autoIncrement="true" name="pgrv_jrnl_data_entries_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_data_entries_pkey"/>
+            </column>
+            <column name="pgrv_jrnl_sub_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pgrv_jrnl_data_values" type="INT"/>
+            <column name="pgrv_jrnl_data_comment" type="VARCHAR"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-26">
+        <createTable tableName="tbl_pgrv_jrnl_data_entry">
+            <column autoIncrement="true" name="pgrv_jrnl_data_entry_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_data_entry_pkey"/>
+            </column>
+            <column name="user_id" type="INT"/>
+            <column name="status" type="SMALLINT"/>
+            <column name="value" type="INT"/>
+            <column name="pgrv_jrnl_data_entry_details_id" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-27">
+        <createTable tableName="tbl_pgrv_jrnl_data_entry_details">
+            <column autoIncrement="true" name="pgrv_jrnl_dtetr_details_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_data_entry_details_pkey"/>
+            </column>
+            <column name="pgrv_jrnl_master_id" type="INT"/>
+            <column name="user_id" type="INT"/>
+            <column name="is_owner" type="BOOLEAN"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-28">
+        <createTable remarks="For Progressive journl details" tableName="tbl_pgrv_jrnl_master">
+            <column autoIncrement="true" name="pgrv_jrnl_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_master_pkey"/>
+            </column>
+            <column name="pjct_template_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jrnl_name" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jrnl_property" type="VARCHAR(80)"/>
+            <column name="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jrnl_status" type="SMALLINT"/>
+            <column name="remind_freq_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pgrv_jrnl_type_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="album_name" type="VARCHAR(80)"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-29">
+        <createTable tableName="tbl_pgrv_jrnl_sub">
+            <column autoIncrement="true" name="pgrv_jrnl_sub_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_sub_pkey"/>
+            </column>
+            <column name="pgrv_jrnl_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pgrv_data_attr_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_value" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_value" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priority" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weekly_max" type="INT"/>
+            <column name="dependency" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-30">
+        <createTable remarks="For Journal Type details" tableName="tbl_pgrv_jrnl_type_master">
+            <column autoIncrement="true" name="pgrv_jrnl_type_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_type_master_pkey"/>
+            </column>
+            <column name="pgrv_jrnl_type_label" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-31">
+        <createTable tableName="tbl_pgrv_jrnl_val_details">
+            <column autoIncrement="true" name="pgrv_jrnl_val_details_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_val_details_pkey"/>
+            </column>
+            <column name="pgrv_jrnl_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT"/>
+            <column name="level_no" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-32">
+        <createTable tableName="tbl_pgrv_jrnl_validation">
+            <column autoIncrement="true" name="pgrv_jrnl_validation_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pgrv_jrnl_validation_pkey"/>
+            </column>
+            <column name="pgrv_jrnl_val_details_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-33">
+        <createTable tableName="tbl_photo_report_master">
+            <column autoIncrement="true" name="photo_report_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_photo_report_master_pkey"/>
+            </column>
+            <column name="pjct_template_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="level" type="INT"/>
+            <column name="sub_level" type="INT"/>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-34">
+        <createTable remarks="For project template details" tableName="tbl_pjct_template_master">
+            <column autoIncrement="true" name="pjct_template_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_pjct_template_master_pkey"/>
+            </column>
+            <column name="pjct_name" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pjct_desc" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-35">
+        <createTable remarks="For reminder frequency details" tableName="tbl_reminder_freq_master">
+            <column autoIncrement="true" name="remind_freq_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_reminder_freq_master_pkey"/>
+            </column>
+            <column name="remind_freq_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-36">
+        <createTable remarks="Table for categorising the user specific roles" tableName="tbl_role_master">
+            <column autoIncrement="true" name="role_master_id" remarks="Table Primary Key Column" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_role_master_pkey"/>
+            </column>
+            <column name="role_name" remarks="User Specific role" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_desc" remarks="Role Description" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" remarks="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" remarks="Datetime Created" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" remarks="Date modified" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" remarks="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="home_page_url" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-37">
+        <createTable tableName="tbl_session_master">
+            <column name="user_master_id" type="INT"/>
+            <column name="ip_address" type="VARCHAR"/>
+            <column name="end_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="create_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column autoIncrement="true" name="session_master_id" type="SERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-38">
+        <createTable remarks="For status details" tableName="tbl_status_master">
+            <column autoIncrement="true" name="status_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_status_master_pkey"/>
+            </column>
+            <column name="status_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-39">
+        <createTable remarks="For UOM (Unit of Measure) details" tableName="tbl_uom_master">
+            <column autoIncrement="true" name="uom_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_uom_master_pkey"/>
+            </column>
+            <column name="uom_label" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uom_desc" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-40">
+        <createTable tableName="tbl_user_login_log">
+            <column autoIncrement="true" name="user_login_log_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_user_login_log_pkey"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login_timestamp" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="login_ip" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ismobile" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_agent" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-41">
+        <createTable tableName="tbl_user_login_monitor">
+            <column autoIncrement="true" name="user_attempt_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_user_login_monitor_pkey"/>
+            </column>
+            <column name="user_attempt_count" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login_ip" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="atmp_start_timestamp" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="atmp_stop_timestamp" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="ishistory" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-42">
+        <createTable remarks="For the user details" tableName="tbl_user_master">
+            <column autoIncrement="true" name="user_master_id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_user_master_pkey"/>
+            </column>
+            <column name="first_name" remarks="User First Name: Limited to 80 characters" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(80)"/>
+            <column name="user_name" remarks="User Name for the purpose of Authentication" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_pass" remarks="Password for the authentication" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_dept_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="next_login_pwd_chng" remarks="Whether to force the user to  change password on next login" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="pwd_lock_status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="5" name="pwd_attempt_count" remarks="How many attempts that given to a user for typing the wrong password" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(160)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" remarks="By whom the paricualr row is modified" type="VARCHAR(160)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-43">
+        <createTable remarks="For the user and its roles" tableName="tbl_user_role_master">
+            <column autoIncrement="true" name="user_role_master_id" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="tbl_user_role_master_pkey"/>
+            </column>
+            <column name="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-44">
+        <createTable tableName="tbl_user_status">
+            <column name="user_master_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enabled" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_account_non_expired" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_credentials_non_expired" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_account_non_locked" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-45">
+        <addUniqueConstraint columnNames="data_type_label" constraintName="tbl_attr_data_type_master_data_type_label_key" tableName="tbl_attr_data_type_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-46">
+        <addUniqueConstraint columnNames="input_category_name" constraintName="tbl_category_master_input_category_name_key" tableName="tbl_category_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-47">
+        <addUniqueConstraint columnNames="data_group_name" constraintName="tbl_data_attr_group_master_data_group_name_key" tableName="tbl_data_attr_group_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-48">
+        <addUniqueConstraint columnNames="frequency_name" constraintName="tbl_frequency_master_frequency_name_key" tableName="tbl_frequency_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-49">
+        <addUniqueConstraint columnNames="label_name" constraintName="tbl_label_master_label_name_key" tableName="tbl_label_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-50">
+        <addUniqueConstraint columnNames="lookup_code" constraintName="tbl_lookup_master_lookup_code_key" tableName="tbl_lookup_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-51">
+        <addUniqueConstraint columnNames="lookup_data" constraintName="tbl_lookup_sub_lookup_data_key" tableName="tbl_lookup_sub"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-52">
+        <addUniqueConstraint columnNames="lookup_value" constraintName="tbl_lookup_sub_lookup_value_key" tableName="tbl_lookup_sub"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-53">
+        <addUniqueConstraint columnNames="menu_name" constraintName="tbl_menu_master_menu_name_key" tableName="tbl_menu_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-54">
+        <addUniqueConstraint columnNames="menu_sub_label" constraintName="tbl_menu_sub_menu_sub_label_key" tableName="tbl_menu_sub"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-55">
+        <addUniqueConstraint columnNames="data_label" constraintName="tbl_pgrv_data_attr_data_label_key" tableName="tbl_pgrv_data_attr"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-56">
+        <addUniqueConstraint columnNames="jrnl_name" constraintName="tbl_pgrv_jrnl_master_jrnl_name_key" tableName="tbl_pgrv_jrnl_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-57">
+        <addUniqueConstraint columnNames="pgrv_jrnl_type_label" constraintName="tbl_pgrv_jrnl_type_master_pgrv_jrnl_type_label_key" tableName="tbl_pgrv_jrnl_type_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-58">
+        <addUniqueConstraint columnNames="pjct_name" constraintName="tbl_pjct_template_master_pjct_name_key" tableName="tbl_pjct_template_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-59">
+        <addUniqueConstraint columnNames="remind_freq_name" constraintName="tbl_reminder_freq_master_remind_freq_name_key" tableName="tbl_reminder_freq_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-60">
+        <addUniqueConstraint columnNames="status_name" constraintName="tbl_status_master_status_name_key" tableName="tbl_status_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-61">
+        <addUniqueConstraint columnNames="uom_label" constraintName="tbl_uom_master_uom_label_key" tableName="tbl_uom_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-62">
+        <addUniqueConstraint columnNames="email" constraintName="tbl_user_master_email_key" tableName="tbl_user_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-63">
+        <addUniqueConstraint columnNames="user_name" constraintName="tbl_user_master_user_name_key" tableName="tbl_user_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-64">
+        <addUniqueConstraint columnNames="role_name" constraintName="unique_role_name" tableName="tbl_role_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-65">
+        <addForeignKeyConstraint baseColumnNames="menu_master_id" baseTableName="tbl_menu_sub" constraintName="tbl_menu_sub_topmenu_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="menu_master_id" referencedTableName="tbl_menu_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-66">
+        <addForeignKeyConstraint baseColumnNames="non_pgrv_jrnl_master_id" baseTableName="tbl_non_pgrv_jrnl_design" constraintName="tbl_non_pgrv_jrnl_design_npm_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="non_pgrv_jrnl_master_id" referencedTableName="tbl_non_pgrv_jrnl_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-67">
+        <addForeignKeyConstraint baseColumnNames="pjct_template_master_id" baseTableName="tbl_non_pgrv_jrnl_master" constraintName="tbl_non_prgv_jrnl_master_tem_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="pjct_template_master_id" referencedTableName="tbl_pjct_template_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-68">
+        <addForeignKeyConstraint baseColumnNames="owner" baseTableName="tbl_non_pgrv_jrnl_master" constraintName="tbl_non_prgv_jrnl_master_user_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_master_id" referencedTableName="tbl_user_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-69">
+        <addForeignKeyConstraint baseColumnNames="user_master_id" baseTableName="tbl_pjct_template_master" constraintName="tbl_pjct_template_master_owner_fkey" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="user_master_id" referencedTableName="tbl_user_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-70">
+        <addForeignKeyConstraint baseColumnNames="role_master_id" baseTableName="tbl_user_role_master" constraintName="tbl_user_role_master_role_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="role_master_id" referencedTableName="tbl_role_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-71">
+        <addForeignKeyConstraint baseColumnNames="user_master_id" baseTableName="tbl_user_role_master" constraintName="tbl_user_role_master_user_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="user_master_id" referencedTableName="tbl_user_master"/>
+    </changeSet>
+    <changeSet author="Sebin Thomas (generated)" id="1506062439009-72">
+        <addForeignKeyConstraint baseColumnNames="user_master_id" baseTableName="tbl_user_status" constraintName="tbl_user_status_user_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="user_master_id" referencedTableName="tbl_user_master"/>
+    </changeSet>
+</databaseChangeLog>

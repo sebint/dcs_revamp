@@ -8,14 +8,14 @@ public class SpringUser extends org.springframework.security.core.userdetails.Us
 
 	private static final long serialVersionUID = -4024628574542273425L;
 
-	private final Integer userId;
+	private final Long userId;
 	private final String firstName;
 	private final String lastName;
 	private final String email;
 
 	public SpringUser(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities,
-			Integer userId, String firstName, String lastName, String email) {
+			Long userId, String firstName, String lastName, String email) {
 		
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 
@@ -25,7 +25,7 @@ public class SpringUser extends org.springframework.security.core.userdetails.Us
 		this.email = email;
 	}
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 

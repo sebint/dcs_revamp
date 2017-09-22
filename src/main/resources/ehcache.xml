@@ -49,4 +49,4 @@
                   
     <cache name="com.humworks.dcs.entities.ObjectsMaster" maxElementsInMemory="100"/>
     <cache name="com.humworks.dcs.entities.User" maxElementsInMemory="100"/>                  
-</ehcache>
+</ehcache> 

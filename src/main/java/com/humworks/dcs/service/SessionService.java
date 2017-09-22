@@ -2,7 +2,7 @@ package com.humworks.dcs.service;
 
 public interface SessionService {
 
-	Integer getActiveUid();
+	Long getActiveUid();
 	
 	String getActiveUsername();
 }

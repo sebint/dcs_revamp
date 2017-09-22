@@ -20,11 +20,22 @@
    <property name="now" value="sysdate" dbms="oracle"/>
 
    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
-   
-   <changeSet id="00000000000000" author="jhipster" dbms="postgresql,oracle">
-        <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="1"/>
-    </changeSet>
      
-    <changeSet author="sebin" id="435682356456791467356892">
+    <changeSet author="Sebin Thomas" id="2209201712363000-01">
+		 <insert tableName="StudentClassMap">
+	        <column name="first_name" value="DCS"/>
+	        <column name="last_name" value="Administrator"/>
+	        <column name="user_name" value="administrator" />
+	        <column name="user_pass" value=""/>
+	        <column name="email" value="McSc. 1st Year"/>
+	        <column name="user_dept_name" value="McSc. 1st Year"/>
+	        <column name="next_login_pwd_chng" value="McSc. 1st Year"/>
+	        <column name="pwd_lock_status" value="McSc. 1st Year"/>
+	        <column name="pwd_attempt_count" value="McSc. 1st Year"/>
+	        <column name="created_by" value="McSc. 1st Year"/>
+	        <column name="created_date" value="McSc. 1st Year"/>
+	        <column name="modified_by" value="McSc. 1st Year"/>
+	        <column name="modified_date" value="McSc. 1st Year"/>
+	    </insert>
     </changeSet>
  </databaseChangeLog>

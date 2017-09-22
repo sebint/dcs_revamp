@@ -32,10 +32,10 @@ public class LogLogin implements Serializable{
 	@Id
 	@Column(name = "USER_LOGIN_LOG_ID", updatable = false, unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userLogId;
+	private Long userLogId;
 	
 	@Column(name = "USER_ID", updatable = false, nullable = false)
-	private Integer userId;
+	private Long userId;
 	
 	@Column(name = "SESSION_ID", nullable = false)
 	private String sessionId;
@@ -54,19 +54,19 @@ public class LogLogin implements Serializable{
 	@Column(name = "USER_AGENT", nullable= false)
 	private String userAgent;
 
-	public Integer getUserLogId() {
+	public Long getUserLogId() {
 		return userLogId;
 	}
 
-	public void setUserLogId(Integer userLogId) {
+	public void setUserLogId(Long userLogId) {
 		this.userLogId = userLogId;
 	}
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
