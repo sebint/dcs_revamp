@@ -126,7 +126,7 @@ public class WebDispatcherConfig extends WebMvcConfigurerAdapter {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("locale");
 		registry.addInterceptor(localeChangeInterceptor);
-		registry.addInterceptor(menuListInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(menuListInterceptor()).addPathPatterns("/**").excludePathPatterns("/login","/","/reset","/logout","/invalid-session");
 		registry.addInterceptor(webContentInterceptor());
 	}
 	
