@@ -32,8 +32,8 @@ public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJou
 	@Transactional
 	public Long save(NonProgressiveJournalDesign nonProgressive) {
 		String currentUser = sessionService.getActiveFullName();
-		nonProgressive.setIntCreatedBy(currentUser);
-		nonProgressive.setIntModifiedBy(currentUser);
+		nonProgressive.setStrCreatedBy(currentUser);
+		nonProgressive.setStrModifiedBy(currentUser);
 		nonProgressive.setStatus(1);
 		return nonProgressiveDesignDao.saveNonProgressive(nonProgressive);
 	}

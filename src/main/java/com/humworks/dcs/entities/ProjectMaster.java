@@ -11,16 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -100,16 +96,16 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 		return endDate;
 	}
 
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
 		return dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -152,16 +148,16 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public void setDtDateCreated(Date dtDateCreated) {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public void setDtDateModified(Date dtDateModified) {
@@ -184,9 +180,9 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 	public String toString() {
 		return "ProjectMaster [projectMasterId=" + projectMasterId + ", projectName=" + projectName + ", projectDesc="
 				+ projectDesc + ", userMasterId=" + userMasterId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", user=" + user + ", modifiedUser="
-				+ modifiedUser + ", createdUser=" + createdUser + "]";
+				+ ", user=" + user + ", modifiedUser=" + modifiedUser + ", createdUser=" + createdUser
+				+ ", strCreatedBy=" + strCreatedBy + ", dtDateCreated=" + dtDateCreated + ", strModifiedBy="
+				+ strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -197,8 +193,8 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
 		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + ((intCreatedBy == null) ? 0 : intCreatedBy.hashCode());
-		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
+		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
+		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
 		result = prime * result + ((modifiedUser == null) ? 0 : modifiedUser.hashCode());
 		result = prime * result + ((projectDesc == null) ? 0 : projectDesc.hashCode());
 		result = prime * result + ((projectMasterId == null) ? 0 : projectMasterId.hashCode());
@@ -238,15 +234,15 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
-		if (intCreatedBy == null) {
-			if (other.intCreatedBy != null)
+		if (strCreatedBy == null) {
+			if (other.strCreatedBy != null)
 				return false;
-		} else if (!intCreatedBy.equals(other.intCreatedBy))
+		} else if (!strCreatedBy.equals(other.strCreatedBy))
 			return false;
-		if (intModifiedBy == null) {
-			if (other.intModifiedBy != null)
+		if (strModifiedBy == null) {
+			if (other.strModifiedBy != null)
 				return false;
-		} else if (!intModifiedBy.equals(other.intModifiedBy))
+		} else if (!strModifiedBy.equals(other.strModifiedBy))
 			return false;
 		if (modifiedUser == null) {
 			if (other.modifiedUser != null)

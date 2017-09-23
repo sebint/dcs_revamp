@@ -14,7 +14,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class AuditMaster {
 
 	@Column(name = "CREATED_BY", updatable = false)
-	protected String intCreatedBy;
+	protected String strCreatedBy;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -22,7 +22,7 @@ public class AuditMaster {
 	protected Date dtDateCreated;
 
 	@Column(name = "MODIFIED_BY")
-	protected String intModifiedBy;
+	protected String strModifiedBy;
 
 	@UpdateTimestamp
 	@Column(name = "MODIFIED_DATE")

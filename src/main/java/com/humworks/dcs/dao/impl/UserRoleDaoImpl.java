@@ -20,12 +20,12 @@ public class UserRoleDaoImpl extends AbstractDao<Long, UserRole> implements User
 
 	@Override
 	public Long updateUserRole(UserRole userRole) {
-		String hql = "UPDATE UserRole SET intRoleId = :intRoleId, intModifiedBy =:intModifiedBy,"
+		String hql = "UPDATE UserRole SET intRoleId = :intRoleId, strModifiedBy =:strModifiedBy,"
 				+ " dtDateModified =:dtDateModified"
 				+ " WHERE intUserId = :intUserId";
 	Query query = getSession().createQuery(hql);
 	query.setParameter("intRoleId", userRole.getIntRoleId());
-	query.setParameter("intModifiedBy", userRole.getIntModifiedBy());
+	query.setParameter("strModifiedBy", userRole.getStrModifiedBy());
 	query.setParameter("dtDateModified", new Date());
 	query.setParameter("intUserId", userRole.getIntUserId());
 	return query(query);		

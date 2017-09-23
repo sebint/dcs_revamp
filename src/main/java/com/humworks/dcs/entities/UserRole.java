@@ -63,12 +63,12 @@ public class UserRole extends AuditMaster implements Serializable {
 		this.intRoleId = intRoleId;
 	}
 	
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
@@ -79,12 +79,12 @@ public class UserRole extends AuditMaster implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -94,12 +94,11 @@ public class UserRole extends AuditMaster implements Serializable {
 	public void setDtDateModified(Date dtDateModified) {
 		this.dtDateModified = dtDateModified;
 	}
-
 	@Override
 	public String toString() {
 		return "UserRole [intUserRoleId=" + intUserRoleId + ", intUserId=" + intUserId + ", intRoleId=" + intRoleId
-				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ ", strCreatedBy=" + strCreatedBy + ", dtDateCreated=" + dtDateCreated + ", strModifiedBy="
+				+ strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -109,6 +108,10 @@ public class UserRole extends AuditMaster implements Serializable {
 		result = prime * result + ((intRoleId == null) ? 0 : intRoleId.hashCode());
 		result = prime * result + ((intUserId == null) ? 0 : intUserId.hashCode());
 		result = prime * result + ((intUserRoleId == null) ? 0 : intUserRoleId.hashCode());
+		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
+		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
+		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
+		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
 		return result;
 	}
 
@@ -121,6 +124,26 @@ public class UserRole extends AuditMaster implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		UserRole other = (UserRole) obj;
+		if (dtDateCreated == null) {
+			if (other.dtDateCreated != null)
+				return false;
+		} else if (!dtDateCreated.equals(other.dtDateCreated))
+			return false;
+		if (dtDateModified == null) {
+			if (other.dtDateModified != null)
+				return false;
+		} else if (!dtDateModified.equals(other.dtDateModified))
+			return false;
+		if (strCreatedBy == null) {
+			if (other.strCreatedBy != null)
+				return false;
+		} else if (!strCreatedBy.equals(other.strCreatedBy))
+			return false;
+		if (strModifiedBy == null) {
+			if (other.strModifiedBy != null)
+				return false;
+		} else if (!strModifiedBy.equals(other.strModifiedBy))
+			return false;
 		if (intRoleId == null) {
 			if (other.intRoleId != null)
 				return false;

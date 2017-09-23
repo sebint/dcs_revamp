@@ -32,8 +32,8 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 	@Transactional
 	public Long save(NonProgressiveJournalMaster nonProgressive) {
 		String currentUser = sessionService.getActiveFullName();
-		nonProgressive.setIntCreatedBy(currentUser);
-		nonProgressive.setIntModifiedBy(currentUser);
+		nonProgressive.setStrCreatedBy(currentUser);
+		nonProgressive.setStrModifiedBy(currentUser);
 		nonProgressive.setStatus(1);
 		return nonProgressiveDao.saveNonProgressive(nonProgressive);
 	}
@@ -43,7 +43,7 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 	public Integer update(NonProgressiveJournalMaster nonProgressive) {
 		try{
 			   String currentUser = sessionService.getActiveFullName();
-			   nonProgressive.setIntModifiedBy(currentUser);
+			   nonProgressive.setStrModifiedBy(currentUser);
 			   nonProgressive.setStatus(1);
 			   if(nonProgressiveDao.updateNonProgressive(nonProgressive)>0){
 			    	   return 1;

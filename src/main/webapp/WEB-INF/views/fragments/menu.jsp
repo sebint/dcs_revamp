@@ -22,7 +22,7 @@
 			            <a class="${(fn:length(menu.subMenu) gt 0)? 'accordion-toggle': ''}" href="${menuUrl}">
 			              <span class="${menu.strUrlIcon }"></span>
 			              <span class="sidebar-title">${menu.strMenuName}</span>
-			              <span class="caret"></span>
+			              <span class="${(fn:length(menu.subMenu) gt 0)? 'caret' : ''}"></span>
 			            </a> 
 						<c:if test="${fn:length(menu.subMenu) gt 0}">							
 				            <ul class="nav sub-nav">

@@ -215,12 +215,12 @@ public class User extends AuditMaster implements Serializable {
 		this.intRoleId = intRoleId;
 	}
 	
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
@@ -231,12 +231,12 @@ public class User extends AuditMaster implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -253,8 +253,8 @@ public class User extends AuditMaster implements Serializable {
 				+ ", strUserName=" + strUserName + ", strPassword=" + strPassword + ", strEmail=" + strEmail + ", role="
 				+ role + ", strDeptName=" + strDeptName + ", boolPwdChange=" + boolPwdChange + ", boolLockPwd="
 				+ boolLockPwd + ", intPwdAttempt=" + intPwdAttempt + ", userStatus=" + userStatus + ", strRePassword="
-				+ strRePassword + ", intRoleId=" + intRoleId + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated="
-				+ dtDateCreated + ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ strRePassword + ", intRoleId=" + intRoleId + ", strCreatedBy=" + strCreatedBy + ", dtDateCreated="
+				+ dtDateCreated + ", strModifiedBy=" + strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -275,6 +275,10 @@ public class User extends AuditMaster implements Serializable {
 		result = prime * result + ((strRePassword == null) ? 0 : strRePassword.hashCode());
 		result = prime * result + ((strUserName == null) ? 0 : strUserName.hashCode());
 		result = prime * result + ((userStatus == null) ? 0 : userStatus.hashCode());
+		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
+		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
+		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
+		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
 		return result;
 	}
 
@@ -287,6 +291,26 @@ public class User extends AuditMaster implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (dtDateCreated == null) {
+			if (other.dtDateCreated != null)
+				return false;
+		} else if (!dtDateCreated.equals(other.dtDateCreated))
+			return false;
+		if (dtDateModified == null) {
+			if (other.dtDateModified != null)
+				return false;
+		} else if (!dtDateModified.equals(other.dtDateModified))
+			return false;
+		if (strCreatedBy == null) {
+			if (other.strCreatedBy != null)
+				return false;
+		} else if (!strCreatedBy.equals(other.strCreatedBy))
+			return false;
+		if (strModifiedBy == null) {
+			if (other.strModifiedBy != null)
+				return false;
+		} else if (!strModifiedBy.equals(other.strModifiedBy))
+			return false;
 		if (boolLockPwd == null) {
 			if (other.boolLockPwd != null)
 				return false;

@@ -117,16 +117,16 @@ public class NonProgressiveJournalMaster extends  AuditMaster implements Seriali
 		return reminderFreq;
 	}
 
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
 		return dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -189,16 +189,16 @@ public class NonProgressiveJournalMaster extends  AuditMaster implements Seriali
 		this.reminderFreq = reminderFreq;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public void setDtDateCreated(Date dtDateCreated) {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public void setDtDateModified(Date dtDateModified) {
@@ -234,10 +234,10 @@ public class NonProgressiveJournalMaster extends  AuditMaster implements Seriali
 		return "NonProgressiveJournalMaster [nonProgressiveMasterId=" + nonProgressiveMasterId + ", projectMasterId="
 				+ projectMasterId + ", journalName=" + journalName + ", jounralOwner=" + jounralOwner + ", validatorId="
 				+ validatorId + ", dataEntryId=" + dataEntryId + ", status=" + status + ", reminderFreq=" + reminderFreq
-				+ ", intCreatedBy=" + intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy="
-				+ intModifiedBy + ", dtDateModified=" + dtDateModified + ", project=" + project + ", user=" + user
-				+ ", validator=" + validator + ", dataentry=" + dataentry + ", createdUser=" + createdUser
-				+ ", modifiedUser=" + modifiedUser + "]";
+				+ ", project=" + project + ", user=" + user + ", validator=" + validator + ", dataentry=" + dataentry
+				+ ", createdUser=" + createdUser + ", modifiedUser=" + modifiedUser + ", strCreatedBy=" + strCreatedBy
+				+ ", dtDateCreated=" + dtDateCreated + ", strModifiedBy=" + strModifiedBy + ", dtDateModified="
+				+ dtDateModified + "]";
 	}
 
 	@Override
@@ -249,8 +249,8 @@ public class NonProgressiveJournalMaster extends  AuditMaster implements Seriali
 		result = prime * result + ((dataentry == null) ? 0 : dataentry.hashCode());
 		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
 		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
-		result = prime * result + ((intCreatedBy == null) ? 0 : intCreatedBy.hashCode());
-		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
+		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
+		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
 		result = prime * result + ((jounralOwner == null) ? 0 : jounralOwner.hashCode());
 		result = prime * result + ((journalName == null) ? 0 : journalName.hashCode());
 		result = prime * result + ((modifiedUser == null) ? 0 : modifiedUser.hashCode());
@@ -299,15 +299,15 @@ public class NonProgressiveJournalMaster extends  AuditMaster implements Seriali
 				return false;
 		} else if (!dtDateModified.equals(other.dtDateModified))
 			return false;
-		if (intCreatedBy == null) {
-			if (other.intCreatedBy != null)
+		if (strCreatedBy == null) {
+			if (other.strCreatedBy != null)
 				return false;
-		} else if (!intCreatedBy.equals(other.intCreatedBy))
+		} else if (!strCreatedBy.equals(other.strCreatedBy))
 			return false;
-		if (intModifiedBy == null) {
-			if (other.intModifiedBy != null)
+		if (strModifiedBy == null) {
+			if (other.strModifiedBy != null)
 				return false;
-		} else if (!intModifiedBy.equals(other.intModifiedBy))
+		} else if (!strModifiedBy.equals(other.strModifiedBy))
 			return false;
 		if (jounralOwner == null) {
 			if (other.jounralOwner != null)
@@ -366,7 +366,4 @@ public class NonProgressiveJournalMaster extends  AuditMaster implements Seriali
 			return false;
 		return true;
 	}
-	
-	
-	
 }

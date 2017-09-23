@@ -119,13 +119,13 @@ public class ObjectsMaster extends AuditMaster implements Serializable {
 	public void setSubMenu(Set<Objects> subMenu) {
 		this.subMenu = subMenu;
 	}
-
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
@@ -136,12 +136,12 @@ public class ObjectsMaster extends AuditMaster implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -156,14 +156,14 @@ public class ObjectsMaster extends AuditMaster implements Serializable {
 	public String toString() {
 		return "ObjectsMaster [intMenuMasterId=" + intMenuMasterId + ", strMenuName=" + strMenuName + ", strUrlPath="
 				+ strUrlPath + ", strUrlIcon=" + strUrlIcon + ", intSeqNo=" + intSeqNo + ", intIsEnabled="
-				+ intIsEnabled + ", subMenu=" + subMenu + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated="
-				+ dtDateCreated + ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ intIsEnabled + ", subMenu=" + subMenu + ", strCreatedBy=" + strCreatedBy + ", dtDateCreated="
+				+ dtDateCreated + ", strModifiedBy=" + strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((intIsEnabled == null) ? 0 : intIsEnabled.hashCode());
 		result = prime * result + ((intMenuMasterId == null) ? 0 : intMenuMasterId.hashCode());
 		result = prime * result + ((intSeqNo == null) ? 0 : intSeqNo.hashCode());
@@ -171,6 +171,10 @@ public class ObjectsMaster extends AuditMaster implements Serializable {
 		result = prime * result + ((strUrlIcon == null) ? 0 : strUrlIcon.hashCode());
 		result = prime * result + ((strUrlPath == null) ? 0 : strUrlPath.hashCode());
 		result = prime * result + ((subMenu == null) ? 0 : subMenu.hashCode());
+		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
+		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
+		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
+		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
 		return result;
 	}
 
@@ -183,6 +187,26 @@ public class ObjectsMaster extends AuditMaster implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ObjectsMaster other = (ObjectsMaster) obj;
+		if (dtDateCreated == null) {
+			if (other.dtDateCreated != null)
+				return false;
+		} else if (!dtDateCreated.equals(other.dtDateCreated))
+			return false;
+		if (dtDateModified == null) {
+			if (other.dtDateModified != null)
+				return false;
+		} else if (!dtDateModified.equals(other.dtDateModified))
+			return false;
+		if (strCreatedBy == null) {
+			if (other.strCreatedBy != null)
+				return false;
+		} else if (!strCreatedBy.equals(other.strCreatedBy))
+			return false;
+		if (strModifiedBy == null) {
+			if (other.strModifiedBy != null)
+				return false;
+		} else if (!strModifiedBy.equals(other.strModifiedBy))
+			return false;
 		if (intIsEnabled == null) {
 			if (other.intIsEnabled != null)
 				return false;
@@ -220,4 +244,6 @@ public class ObjectsMaster extends AuditMaster implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 }

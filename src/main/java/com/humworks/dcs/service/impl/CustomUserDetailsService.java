@@ -63,7 +63,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		return new SpringUser(user.getStrUserName(), user.getStrPassword(),
 				user.getUserStatus().getIsEnabled().equals(1), user.getUserStatus().getIsAccountNonExpired().equals(1),
 				user.getUserStatus().getIsCredentialsNonExpired().equals(1),
-				user.getUserStatus().getIsAccountLocked().equals(1), getGrantedAuthorities(user), user.getIntUserId(),
+				user.getUserStatus().getIsAccountNonLocked().equals(1), getGrantedAuthorities(user), user.getIntUserId(),
 				user.getStrFirstName(), user.getStrLastName(), user.getStrEmail());
 	}
 

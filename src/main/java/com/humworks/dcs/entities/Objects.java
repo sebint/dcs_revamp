@@ -133,12 +133,12 @@ public class Objects extends AuditMaster implements Serializable {
 		this.menu = menu;
 	}
 	
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
@@ -149,12 +149,12 @@ public class Objects extends AuditMaster implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -169,8 +169,7 @@ public class Objects extends AuditMaster implements Serializable {
 	public String toString() {
 		return "Objects [intMenuSubId=" + intMenuSubId + ", strMenuName=" + strMenuName + ", strUrlPath=" + strUrlPath
 				+ ", strUrlIcon=" + strUrlIcon + ", intSeqNo=" + intSeqNo + ", isEnabled=" + isEnabled + ", isScreen="
-				+ isScreen + ", intMenuMasterId=" + intMenuMasterId + ", intCreatedBy=" + intCreatedBy
-				+ ", dtDateCreated=" + dtDateCreated + ", intModifiedBy=" + intModifiedBy + ", dtDateModified="
-				+ dtDateModified + "]";
+				+ isScreen + "]";
 	}
+	
 }

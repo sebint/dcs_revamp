@@ -148,16 +148,16 @@ public class NonProgressiveJournalDesign extends AuditMaster implements Serializ
 		return status;
 	}
 
-	public String getIntCreatedBy() {
-		return intCreatedBy;
+	public String getStrCreatedBy() {
+		return strCreatedBy;
 	}
 
 	public Date getDtDateCreated() {
 		return dtDateCreated;
 	}
 
-	public String getIntModifiedBy() {
-		return intModifiedBy;
+	public String getStrModifiedBy() {
+		return strModifiedBy;
 	}
 
 	public Date getDtDateModified() {
@@ -224,16 +224,16 @@ public class NonProgressiveJournalDesign extends AuditMaster implements Serializ
 		this.status = status;
 	}
 
-	public void setIntCreatedBy(String intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
+	public void setStrCreatedBy(String strCreatedBy) {
+		this.strCreatedBy = strCreatedBy;
 	}
 
 	public void setDtDateCreated(Date dtDateCreated) {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(String intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
+	public void setStrModifiedBy(String strModifiedBy) {
+		this.strModifiedBy = strModifiedBy;
 	}
 
 	public void setDtDateModified(Date dtDateModified) {
@@ -255,8 +255,9 @@ public class NonProgressiveJournalDesign extends AuditMaster implements Serializ
 				+ colHeaderWidth + ", colType=" + colType + ", colOrder=" + colOrder + ", isValidPending="
 				+ isValidPending + ", validRevision=" + validRevision + ", lookupMasterId=" + lookupMasterId
 				+ ", isReadOnly=" + isReadOnly + ", prgvLinkId=" + prgvLinkId + ", nonPrgvLinkId=" + nonPrgvLinkId
-				+ ", formula=" + formula + ", status=" + status + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated="
-				+ dtDateCreated + ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ ", formula=" + formula + ", status=" + status + ", nonProgressive=" + nonProgressive
+				+ ", strCreatedBy=" + strCreatedBy + ", dtDateCreated=" + dtDateCreated + ", strModifiedBy="
+				+ strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -270,8 +271,8 @@ public class NonProgressiveJournalDesign extends AuditMaster implements Serializ
 		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
 		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
 		result = prime * result + ((formula == null) ? 0 : formula.hashCode());
-		result = prime * result + ((intCreatedBy == null) ? 0 : intCreatedBy.hashCode());
-		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
+		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
+		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
 		result = prime * result + ((isReadOnly == null) ? 0 : isReadOnly.hashCode());
 		result = prime * result + ((isValidPending == null) ? 0 : isValidPending.hashCode());
 		result = prime * result + ((lookupMasterId == null) ? 0 : lookupMasterId.hashCode());
@@ -329,15 +330,15 @@ public class NonProgressiveJournalDesign extends AuditMaster implements Serializ
 				return false;
 		} else if (!formula.equals(other.formula))
 			return false;
-		if (intCreatedBy == null) {
-			if (other.intCreatedBy != null)
+		if (strCreatedBy == null) {
+			if (other.strCreatedBy != null)
 				return false;
-		} else if (!intCreatedBy.equals(other.intCreatedBy))
+		} else if (!strCreatedBy.equals(other.strCreatedBy))
 			return false;
-		if (intModifiedBy == null) {
-			if (other.intModifiedBy != null)
+		if (strModifiedBy == null) {
+			if (other.strModifiedBy != null)
 				return false;
-		} else if (!intModifiedBy.equals(other.intModifiedBy))
+		} else if (!strModifiedBy.equals(other.strModifiedBy))
 			return false;
 		if (isReadOnly == null) {
 			if (other.isReadOnly != null)

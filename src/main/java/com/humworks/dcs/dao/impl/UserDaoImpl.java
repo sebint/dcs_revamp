@@ -66,7 +66,7 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 		String hql = "UPDATE User SET strFirstName = :strFirstName,strLastName =:strLastName, "
 					+ "strEmail = :strEmail, strDeptName= :strDeptName, "
 					+ "boolPwdChange =:boolPwdChange, boolLockPwd =:boolLockPwd, "
-					+ "intPwdAttempt =:intPwdAttempt, intModifiedBy =:intModifiedBy, dtDateModified =:dtDateModified "
+					+ "intPwdAttempt =:intPwdAttempt, strModifiedBy =:strModifiedBy, dtDateModified =:dtDateModified "
 					+ "WHERE intUserId = :intUserId";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("strFirstName", user.getStrFirstName());
@@ -76,7 +76,7 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 		query.setParameter("boolPwdChange", user.getBoolPwdChange());
 		query.setParameter("boolLockPwd", user.getBoolLockPwd());
 		query.setParameter("intPwdAttempt", user.getIntPwdAttempt());
-		query.setParameter("intModifiedBy", user.getIntModifiedBy());
+		query.setParameter("strModifiedBy", user.getStrModifiedBy());
 		query.setParameter("dtDateModified", new Date());
 		query.setParameter("intUserId", user.getIntUserId());
 		return query(query);		

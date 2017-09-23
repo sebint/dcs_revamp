@@ -70,16 +70,16 @@ public class UserServiceImpl implements UserService {
 	public void save(User user) {
 		   String currentUser = sessionService.getActiveFullName();
 	       user.setStrPassword(passwordEncoder.encode(environment.getProperty("default_password")));	     
-	       user.setIntCreatedBy(currentUser);
-	       user.setIntModifiedBy(currentUser);
+	       user.setStrCreatedBy(currentUser);
+	       user.setStrModifiedBy(currentUser);
 	       Long uid = userDao.saveUser(user);
 	       if(uid!=null){
 	    	   //User Role Info
 		       UserRole userRole = new UserRole();
 		       userRole.setIntUserId(uid);
 		       userRole.setIntRoleId(user.getIntRoleId());
-		       userRole.setIntCreatedBy(currentUser);
-		       userRole.setIntModifiedBy(currentUser);
+		       userRole.setStrCreatedBy(currentUser);
+		       userRole.setStrModifiedBy(currentUser);
 		       userRoleDao.saveUserRole(userRole);
 		       //User Status Info
 		       userStatusDao.saveStatus(new UserStatus(uid, 1, 1, 1, 0, currentUser, currentUser));		   
@@ -109,12 +109,12 @@ public class UserServiceImpl implements UserService {
 	public Integer update(User user) {
 		try{
 		   String currentUser = sessionService.getActiveFullName();
-		   user.setIntModifiedBy(currentUser);
+		   user.setStrModifiedBy(currentUser);
 		   if(userDao.updateUser(user)>0){
 		       UserRole userRole = new UserRole();
 		       userRole.setIntUserId(user.getIntUserId());
 		       userRole.setIntRoleId(user.getIntRoleId());
-		       userRole.setIntModifiedBy(currentUser);
+		       userRole.setStrModifiedBy(currentUser);
 		       if(userRoleDao.updateUserRole(userRole)>0){
 		    	   return 1;
 		       }

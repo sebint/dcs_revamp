@@ -32,8 +32,8 @@ public class ProjectServiceImpl implements ProjectService {
 	@Transactional
 	public Long save(ProjectMaster project) {
 		String currentUser = sessionService.getActiveFullName();
-		project.setIntCreatedBy(currentUser);
-		project.setIntModifiedBy(currentUser);
+		project.setStrCreatedBy(currentUser);
+		project.setStrModifiedBy(currentUser);
 	    return projectDao.saveProject(project);
 	}
 
@@ -42,7 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public Integer update(ProjectMaster project) {
 		try{
 			   String currentUser = sessionService.getActiveFullName();
-			   project.setIntModifiedBy(currentUser);
+			   project.setStrModifiedBy(currentUser);
 			   if(projectDao.updateProject(project)>0){
 			    	   return 1;
 			   }
