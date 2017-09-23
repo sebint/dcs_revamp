@@ -6,21 +6,21 @@ import com.humworks.dcs.entities.NonProgressiveJournalDesign;
 
 public interface NonProgressiveJournalDesignDao {
 
-	Integer saveNonProgressive(NonProgressiveJournalDesign nonProgressive);
+	Long saveNonProgressive(NonProgressiveJournalDesign nonProgressive);
 	
 	Integer updateDesign(NonProgressiveJournalDesign nonProgressive);
 		
 	void deleteDesign(NonProgressiveJournalDesign nonProgressive);
 	
-	NonProgressiveJournalDesign findById(Integer npid);
+	NonProgressiveJournalDesign findById(Long npid);
      
-	NonProgressiveJournalDesign findByName(String nonProgressiveName, Integer projrctMasterId);
+	NonProgressiveJournalDesign findByName(String nonProgressiveName, Long projrctMasterId);
     
     ArrayList<NonProgressiveJournalDesign> selectAll();
     
     ArrayList<Long> selectUnique();
     
-    ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer projectMasterId);
+    ArrayList<NonProgressiveJournalDesign> findByJournalId(Long projectMasterId);
     
     void transactionRollback();
 }

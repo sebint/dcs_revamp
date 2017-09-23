@@ -14,12 +14,12 @@ import com.humworks.dcs.service.CommonService;
 public class CommonServiceImpl implements CommonService {
 
 	@Override
-	public Integer getIdFromUrl(String url) {
+	public Long getIdFromUrl(String url) {
 		try{
 			String fProc = url.substring(url.lastIndexOf("-") + 1).trim();
-			return Integer.parseInt(fProc.substring(3, fProc.length()));
+			return Long.parseLong(fProc.substring(3, fProc.length()));
 		}catch(Exception ex){
-			return 0;
+			return 0L;
 		}
 	}
 
@@ -33,11 +33,11 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public Integer getPatternFromUrl(String pattern) {
+	public Long getPatternFromUrl(String pattern) {
 		try{
-			return Integer.parseInt(pattern.substring(3, pattern.length()));
+			return Long.parseLong(pattern.substring(3, pattern.length()));
 		}catch(Exception ex){
-			return 0;
+			return 0L;
 		}
 	}
 

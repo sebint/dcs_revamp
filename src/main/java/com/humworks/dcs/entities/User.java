@@ -19,18 +19,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -41,7 +37,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @DynamicInsert
 @DynamicUpdate
 @SelectBeforeUpdate
-public class User implements Serializable {
+public class User extends AuditMaster implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -75,10 +71,6 @@ public class User implements Serializable {
 	@Column(name = "EMAIL")
 	private String strEmail;
 
-	// @ManyToOne(optional = false)
-	// @JoinColumn(name="ROLE_MASTER_ID")
-	// private Role roles;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tbl_user_role_master", joinColumns = { @JoinColumn(name = "USER_MASTER_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "ROLE_MASTER_ID") })
@@ -102,30 +94,13 @@ public class User implements Serializable {
     @JoinColumn(name="USER_MASTER_ID")
     private UserStatus userStatus;
 
-	@Column(name = "CREATED_BY", updatable = false)
-	private Long intCreatedBy;
-
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATED_DATE", updatable = false)
-	private Date dtDateCreated;
-
-	@Column(name = "MODIFIED_BY")
-	private Long intModifiedBy;
-
-	@UpdateTimestamp
-	@Column(name = "MODIFIED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtDateModified;
-
 	@Transient
 	private String strRePassword;
 	
 	@Transient
-	private Integer intRoleId;
+	private Long intRoleId;
 
 	public User() {
-		// this form used by Hibernate
 	}
 
 	public Long getIntUserId() {
@@ -216,38 +191,6 @@ public class User implements Serializable {
 		this.userStatus = userStatus;
 	}
 
-	public Long getIntCreatedBy() {
-		return intCreatedBy;
-	}
-
-	public void setIntCreatedBy(Long intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
-	}
-
-	public Date getDtDateCreated() {
-		return dtDateCreated;
-	}
-
-	public void setDtDateCreated(Date dtDateCreated) {
-		this.dtDateCreated = dtDateCreated;
-	}
-
-	public Long getIntModifiedBy() {
-		return intModifiedBy;
-	}
-
-	public void setIntModifiedBy(Long intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
-	}
-
-	public Date getDtDateModified() {
-		return dtDateModified;
-	}
-
-	public void setDtDateModified(Date dtDateModified) {
-		this.dtDateModified = dtDateModified;
-	}
-
 	public String getStrRePassword() {
 		return strRePassword;
 	}
@@ -264,13 +207,44 @@ public class User implements Serializable {
 		this.role = role;
 	}
 	
-
-	public Integer getIntRoleId() {
+	public Long getIntRoleId() {
 		return intRoleId;
 	}
 
-	public void setIntRoleId(Integer intRoleId) {
+	public void setIntRoleId(Long intRoleId) {
 		this.intRoleId = intRoleId;
+	}
+	
+	public String getIntCreatedBy() {
+		return intCreatedBy;
+	}
+
+	public void setIntCreatedBy(String intCreatedBy) {
+		this.intCreatedBy = intCreatedBy;
+	}
+
+	public Date getDtDateCreated() {
+		return dtDateCreated;
+	}
+
+	public void setDtDateCreated(Date dtDateCreated) {
+		this.dtDateCreated = dtDateCreated;
+	}
+
+	public String getIntModifiedBy() {
+		return intModifiedBy;
+	}
+
+	public void setIntModifiedBy(String intModifiedBy) {
+		this.intModifiedBy = intModifiedBy;
+	}
+
+	public Date getDtDateModified() {
+		return dtDateModified;
+	}
+
+	public void setDtDateModified(Date dtDateModified) {
+		this.dtDateModified = dtDateModified;
 	}
 
 	@Override
@@ -278,10 +252,9 @@ public class User implements Serializable {
 		return "User [intUserId=" + intUserId + ", strFirstName=" + strFirstName + ", strLastName=" + strLastName
 				+ ", strUserName=" + strUserName + ", strPassword=" + strPassword + ", strEmail=" + strEmail + ", role="
 				+ role + ", strDeptName=" + strDeptName + ", boolPwdChange=" + boolPwdChange + ", boolLockPwd="
-				+ boolLockPwd + ", intPwdAttempt=" + intPwdAttempt + ", userStatus=" + userStatus + ", intCreatedBy="
-				+ intCreatedBy + ", dtDateCreated=" + dtDateCreated + ", intModifiedBy=" + intModifiedBy
-				+ ", dtDateModified=" + dtDateModified + ", strRePassword=" + strRePassword + ", intRoleId=" + intRoleId
-				+ "]";
+				+ boolLockPwd + ", intPwdAttempt=" + intPwdAttempt + ", userStatus=" + userStatus + ", strRePassword="
+				+ strRePassword + ", intRoleId=" + intRoleId + ", intCreatedBy=" + intCreatedBy + ", dtDateCreated="
+				+ dtDateCreated + ", intModifiedBy=" + intModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
@@ -290,10 +263,6 @@ public class User implements Serializable {
 		int result = 1;
 		result = prime * result + ((boolLockPwd == null) ? 0 : boolLockPwd.hashCode());
 		result = prime * result + ((boolPwdChange == null) ? 0 : boolPwdChange.hashCode());
-		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
-		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
-		result = prime * result + ((intCreatedBy == null) ? 0 : intCreatedBy.hashCode());
-		result = prime * result + ((intModifiedBy == null) ? 0 : intModifiedBy.hashCode());
 		result = prime * result + ((intPwdAttempt == null) ? 0 : intPwdAttempt.hashCode());
 		result = prime * result + ((intRoleId == null) ? 0 : intRoleId.hashCode());
 		result = prime * result + ((intUserId == null) ? 0 : intUserId.hashCode());
@@ -327,26 +296,6 @@ public class User implements Serializable {
 			if (other.boolPwdChange != null)
 				return false;
 		} else if (!boolPwdChange.equals(other.boolPwdChange))
-			return false;
-		if (dtDateCreated == null) {
-			if (other.dtDateCreated != null)
-				return false;
-		} else if (!dtDateCreated.equals(other.dtDateCreated))
-			return false;
-		if (dtDateModified == null) {
-			if (other.dtDateModified != null)
-				return false;
-		} else if (!dtDateModified.equals(other.dtDateModified))
-			return false;
-		if (intCreatedBy == null) {
-			if (other.intCreatedBy != null)
-				return false;
-		} else if (!intCreatedBy.equals(other.intCreatedBy))
-			return false;
-		if (intModifiedBy == null) {
-			if (other.intModifiedBy != null)
-				return false;
-		} else if (!intModifiedBy.equals(other.intModifiedBy))
 			return false;
 		if (intPwdAttempt == null) {
 			if (other.intPwdAttempt != null)

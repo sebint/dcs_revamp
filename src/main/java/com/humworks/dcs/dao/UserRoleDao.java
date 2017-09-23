@@ -6,12 +6,12 @@ import com.humworks.dcs.entities.UserRole;
 
 public interface UserRoleDao {
 
-	Integer saveUserRole(UserRole userRole);
+	Long saveUserRole(UserRole userRole);
 	
-	Integer updateUserRole(UserRole userRole);
+	Long updateUserRole(UserRole userRole);
 	
-	ArrayList<Integer> findByRole(Integer roleMasterId);
+	ArrayList<Long> findByRole(Long roleMasterId);
 	
-	UserRole findById(Integer urid);
+	UserRole findById(Long urid);
 	
 }

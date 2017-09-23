@@ -10,23 +10,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tbl_menu_sub")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 @SelectBeforeUpdate(true)
-public class Objects implements Serializable {
+public class Objects extends AuditMaster implements Serializable {
 
 	/**
 	 * 
@@ -35,8 +32,9 @@ public class Objects implements Serializable {
 	
 	@Id
 	@Column(name = "MENU_SUB_ID", updatable = false, unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer intMenuSubId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="menu_sub_seq")
+	@SequenceGenerator(name="menu_sub_seq", sequenceName="tbl_menu_sub_menu_sub_id_seq")
+	private Long intMenuSubId;
 	
 	@Column(name = "MENU_SUB_LABEL", unique = true, nullable = false)
 	private String strMenuName;
@@ -51,136 +49,128 @@ public class Objects implements Serializable {
 	private Integer intSeqNo;
 	
 	@Column(name = "IS_ENABLED", nullable = false)
-	private Boolean boolIsEnabled;
+	private Integer isEnabled;
 	
 	@Column(name = "IS_TYPE_SCREEN", nullable = false)
-	private Boolean boolIsScreen;
+	private Integer isScreen;
 	
 	@Transient
-	private Integer intMenuMasterId;
-	
-	@Column(name = "CREATED_BY", updatable = false)
-	private Integer intCreatedBy;
-
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATED_DATE", updatable = false)
-	private Date dtDateCreated;
-
-	@Column(name = "MODIFIED_BY")
-	private Integer intModifiedBy;
-
-	@UpdateTimestamp
-	@Column(name = "MODIFIED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtDateModified;
+	private Long intMenuMasterId;
 	
 	@ManyToOne
     @JoinColumn(name="MENU_MASTER_ID", nullable = false, insertable = false, updatable = false)
     private ObjectsMaster menu;
 
-	public Integer getIntMenuSubId() {
+	public Long getIntMenuSubId() {
 		return intMenuSubId;
+	}
+
+	public void setIntMenuSubId(Long intMenuSubId) {
+		this.intMenuSubId = intMenuSubId;
 	}
 
 	public String getStrMenuName() {
 		return strMenuName;
 	}
 
-	public String getStrUrlPath() {
-		return strUrlPath;
-	}
-
-	public String getStrUrlIcon() {
-		return strUrlIcon;
-	}
-
-	public Integer getIntSeqNo() {
-		return intSeqNo;
-	}
-
-	public Boolean getBoolIsEnabled() {
-		return boolIsEnabled;
-	}
-
-	public Boolean getBoolIsScreen() {
-		return boolIsScreen;
-	}
-
-	public Integer getIntMenuMasterId() {
-		return intMenuMasterId;
-	}
-
-	public Integer getIntCreatedBy() {
-		return intCreatedBy;
-	}
-
-	public Date getDtDateCreated() {
-		return dtDateCreated;
-	}
-
-	public Integer getIntModifiedBy() {
-		return intModifiedBy;
-	}
-
-	public Date getDtDateModified() {
-		return dtDateModified;
-	}
-
-	public ObjectsMaster getMenu() {
-		return menu;
-	}
-
-	public void setIntMenuSubId(Integer intMenuSubId) {
-		this.intMenuSubId = intMenuSubId;
-	}
-
 	public void setStrMenuName(String strMenuName) {
 		this.strMenuName = strMenuName;
+	}
+
+	public String getStrUrlPath() {
+		return strUrlPath;
 	}
 
 	public void setStrUrlPath(String strUrlPath) {
 		this.strUrlPath = strUrlPath;
 	}
 
+	public String getStrUrlIcon() {
+		return strUrlIcon;
+	}
+
 	public void setStrUrlIcon(String strUrlIcon) {
 		this.strUrlIcon = strUrlIcon;
+	}
+
+	public Integer getIntSeqNo() {
+		return intSeqNo;
 	}
 
 	public void setIntSeqNo(Integer intSeqNo) {
 		this.intSeqNo = intSeqNo;
 	}
 
-	public void setBoolIsEnabled(Boolean boolIsEnabled) {
-		this.boolIsEnabled = boolIsEnabled;
+	public Integer getIsEnabled() {
+		return isEnabled;
 	}
 
-	public void setBoolIsScreen(Boolean boolIsScreen) {
-		this.boolIsScreen = boolIsScreen;
+	public void setIsEnabled(Integer isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 
-	public void setIntMenuMasterId(Integer intMenuMasterId) {
+	public Integer getIsScreen() {
+		return isScreen;
+	}
+
+	public void setIsScreen(Integer isScreen) {
+		this.isScreen = isScreen;
+	}
+
+	public Long getIntMenuMasterId() {
+		return intMenuMasterId;
+	}
+
+	public void setIntMenuMasterId(Long intMenuMasterId) {
 		this.intMenuMasterId = intMenuMasterId;
 	}
 
-	public void setIntCreatedBy(Integer intCreatedBy) {
-		this.intCreatedBy = intCreatedBy;
-	}
-
-	public void setDtDateCreated(Date dtDateCreated) {
-		this.dtDateCreated = dtDateCreated;
-	}
-
-	public void setIntModifiedBy(Integer intModifiedBy) {
-		this.intModifiedBy = intModifiedBy;
-	}
-
-	public void setDtDateModified(Date dtDateModified) {
-		this.dtDateModified = dtDateModified;
+	public ObjectsMaster getMenu() {
+		return menu;
 	}
 
 	public void setMenu(ObjectsMaster menu) {
 		this.menu = menu;
 	}
 	
+	public String getIntCreatedBy() {
+		return intCreatedBy;
+	}
+
+	public void setIntCreatedBy(String intCreatedBy) {
+		this.intCreatedBy = intCreatedBy;
+	}
+
+	public Date getDtDateCreated() {
+		return dtDateCreated;
+	}
+
+	public void setDtDateCreated(Date dtDateCreated) {
+		this.dtDateCreated = dtDateCreated;
+	}
+
+	public String getIntModifiedBy() {
+		return intModifiedBy;
+	}
+
+	public void setIntModifiedBy(String intModifiedBy) {
+		this.intModifiedBy = intModifiedBy;
+	}
+
+	public Date getDtDateModified() {
+		return dtDateModified;
+	}
+
+	public void setDtDateModified(Date dtDateModified) {
+		this.dtDateModified = dtDateModified;
+	}
+
+	@Override
+	public String toString() {
+		return "Objects [intMenuSubId=" + intMenuSubId + ", strMenuName=" + strMenuName + ", strUrlPath=" + strUrlPath
+				+ ", strUrlIcon=" + strUrlIcon + ", intSeqNo=" + intSeqNo + ", isEnabled=" + isEnabled + ", isScreen="
+				+ isScreen + ", intMenuMasterId=" + intMenuMasterId + ", intCreatedBy=" + intCreatedBy
+				+ ", dtDateCreated=" + dtDateCreated + ", intModifiedBy=" + intModifiedBy + ", dtDateModified="
+				+ dtDateModified + "]";
+	}
 }

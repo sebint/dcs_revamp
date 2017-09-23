@@ -3,7 +3,6 @@ package com.humworks.dcs.dao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -49,16 +48,16 @@ public abstract class AbstractDao<PrimaryKey extends Serializable, T> {
 		getSession().saveOrUpdate(entity);
 	}
 	
-	public Integer save(T entity){
-		return (Integer) getSession().save(entity);
+	public Long save(T entity){
+		return (Long) getSession().save(entity);
 	}
 	
 	public void delete(T entity){
 		getSession().delete(entity);
 	}
 	
-	public Integer query(Query query){
-		return query.executeUpdate();
+	public Long query(Query query){
+		return (long) query.executeUpdate();
 	}
 	
 	public ArrayList<T> listAllByQuery(String query){

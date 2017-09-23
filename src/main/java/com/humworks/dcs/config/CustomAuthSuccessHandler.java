@@ -54,6 +54,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
 			log.setUserAgent(request.getHeader("User-Agent"));
 			logLoginService.createLog(log);
 		}catch(Exception ex){
+			ex.printStackTrace();
 			logger.error("Unable to register user log");
 		}
 	}

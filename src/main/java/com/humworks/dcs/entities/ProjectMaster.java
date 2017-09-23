@@ -29,7 +29,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @DynamicInsert
 @DynamicUpdate
 @SelectBeforeUpdate
-public class ProjectMaster implements Serializable {
+public class ProjectMaster extends AuditMaster implements Serializable {
 
 	/**
 	 * 
@@ -39,7 +39,7 @@ public class ProjectMaster implements Serializable {
 	@Id
 	@Column(name = "PJCT_TEMPLATE_MASTER_ID", updatable = false, unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer projectMasterId;
+	private Long projectMasterId;
 	
 	@NotEmpty
 	@Size(min = 2, max = 50)
@@ -53,7 +53,7 @@ public class ProjectMaster implements Serializable {
 	
 	@NotNull
 	@Column(name = "USER_MASTER_ID", nullable = false)
-	private Integer userMasterId;
+	private Long userMasterId;
 	
 	@NotNull
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -63,22 +63,6 @@ public class ProjectMaster implements Serializable {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "END_DATE")
 	private Date endDate;
-	
-	@Column(name = "CREATED_BY", updatable = false)
-	private Integer intCreatedBy;
-
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATED_DATE", updatable = false)
-	private Date dtDateCreated;
-
-	@Column(name = "MODIFIED_BY")
-	private Integer intModifiedBy;
-
-	@UpdateTimestamp
-	@Column(name = "MODIFIED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtDateModified;
 	
 	@ManyToOne
     @JoinColumn(name="USER_MASTER_ID", insertable = false, updatable = false)
@@ -92,7 +76,7 @@ public class ProjectMaster implements Serializable {
     @JoinColumn(name="CREATED_BY", insertable = false, updatable = false)
     private User createdUser;
 
-	public Integer getProjectMasterId() {
+	public Long getProjectMasterId() {
 		return projectMasterId;
 	}
 
@@ -104,7 +88,7 @@ public class ProjectMaster implements Serializable {
 		return projectDesc;
 	}
 
-	public Integer getUserMasterId() {
+	public Long getUserMasterId() {
 		return userMasterId;
 	}
 
@@ -116,7 +100,7 @@ public class ProjectMaster implements Serializable {
 		return endDate;
 	}
 
-	public Integer getIntCreatedBy() {
+	public String getIntCreatedBy() {
 		return intCreatedBy;
 	}
 
@@ -124,7 +108,7 @@ public class ProjectMaster implements Serializable {
 		return dtDateCreated;
 	}
 
-	public Integer getIntModifiedBy() {
+	public String getIntModifiedBy() {
 		return intModifiedBy;
 	}
 
@@ -144,7 +128,7 @@ public class ProjectMaster implements Serializable {
 		return createdUser;
 	}
 
-	public void setProjectMasterId(Integer projectMasterId) {
+	public void setProjectMasterId(Long projectMasterId) {
 		this.projectMasterId = projectMasterId;
 	}
 
@@ -156,7 +140,7 @@ public class ProjectMaster implements Serializable {
 		this.projectDesc = projectDesc;
 	}
 
-	public void setUserMasterId(Integer userMasterId) {
+	public void setUserMasterId(Long userMasterId) {
 		this.userMasterId = userMasterId;
 	}
 
@@ -168,7 +152,7 @@ public class ProjectMaster implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public void setIntCreatedBy(Integer intCreatedBy) {
+	public void setIntCreatedBy(String intCreatedBy) {
 		this.intCreatedBy = intCreatedBy;
 	}
 
@@ -176,7 +160,7 @@ public class ProjectMaster implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(Integer intModifiedBy) {
+	public void setIntModifiedBy(String intModifiedBy) {
 		this.intModifiedBy = intModifiedBy;
 	}
 

@@ -11,21 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "tbl_non_pgrv_jrnl_design")
 @DynamicInsert
 @DynamicUpdate
 @SelectBeforeUpdate
-public class NonProgressiveJournalDesign implements Serializable {
+public class NonProgressiveJournalDesign extends AuditMaster implements Serializable {
 
 	/**
 	 * 
@@ -78,22 +74,6 @@ public class NonProgressiveJournalDesign implements Serializable {
 	
 	@Column(name = "STATUS")
 	private Integer status;
-
-	@Column(name = "CREATED_BY", updatable = false)
-	private Long intCreatedBy;
-
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATED_DATE", updatable = false)
-	private Date dtDateCreated;
-
-	@Column(name = "MODIFIED_BY")
-	private Long intModifiedBy;
-
-	@UpdateTimestamp
-	@Column(name = "MODIFIED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtDateModified;
 	
 	@ManyToOne
     @JoinColumn(name="NON_PGRV_JRNL_MASTER_ID", insertable = false, updatable = false)
@@ -168,7 +148,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		return status;
 	}
 
-	public Long getIntCreatedBy() {
+	public String getIntCreatedBy() {
 		return intCreatedBy;
 	}
 
@@ -176,7 +156,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		return dtDateCreated;
 	}
 
-	public Long getIntModifiedBy() {
+	public String getIntModifiedBy() {
 		return intModifiedBy;
 	}
 
@@ -184,15 +164,15 @@ public class NonProgressiveJournalDesign implements Serializable {
 		return dtDateModified;
 	}
 
-	public void setNonPrgvDesignId(Integer nonPrgvDesignId) {
+	public void setNonPrgvDesignId(Long nonPrgvDesignId) {
 		this.nonPrgvDesignId = nonPrgvDesignId;
 	}
 
-	public void setNonProgressiveMasterId(Integer nonProgressiveMasterId) {
+	public void setNonProgressiveMasterId(Long nonProgressiveMasterId) {
 		this.nonProgressiveMasterId = nonProgressiveMasterId;
 	}
 
-	public void setUomId(Integer uomId) {
+	public void setUomId(Long uomId) {
 		this.uomId = uomId;
 	}
 
@@ -220,7 +200,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		this.validRevision = validRevision;
 	}
 
-	public void setLookupMasterId(Integer lookupMasterId) {
+	public void setLookupMasterId(Long lookupMasterId) {
 		this.lookupMasterId = lookupMasterId;
 	}
 
@@ -244,7 +224,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		this.status = status;
 	}
 
-	public void setIntCreatedBy(Integer intCreatedBy) {
+	public void setIntCreatedBy(String intCreatedBy) {
 		this.intCreatedBy = intCreatedBy;
 	}
 
@@ -252,7 +232,7 @@ public class NonProgressiveJournalDesign implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(Integer intModifiedBy) {
+	public void setIntModifiedBy(String intModifiedBy) {
 		this.intModifiedBy = intModifiedBy;
 	}
 

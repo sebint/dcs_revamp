@@ -9,18 +9,18 @@ public class JsonDesignRequest implements Serializable {
 	 */
 	private static final long serialVersionUID = -2238635605329001343L;
 	
-	private Integer config_no;
+	private Long config_no;
 	private String header;
 	private String type;
-	private Integer uom;
+	private Long uom;
 	private Integer width;
 	private Integer order;
-	private Integer lookup_id;
+	private Long lookup_id;
 	private Integer progressive_link;
 	private String non_progressive_link;
 	private boolean readonly; 
 	private String formula;
-	private Integer journalId;
+	private Long journalId;
 	private Integer validate_pending;
 	private Integer validate_revision;
 	
@@ -33,11 +33,11 @@ public class JsonDesignRequest implements Serializable {
 		this.formula = formula;
 	}
 
-	public Integer getConfig_no() {
+	public Long getConfig_no() {
 		return config_no;
 	}
 
-	public void setConfig_no(Integer config_no) {
+	public void setConfig_no(Long config_no) {
 		this.config_no = config_no;
 	}
 
@@ -53,7 +53,7 @@ public class JsonDesignRequest implements Serializable {
 		return type;
 	}
 
-	public Integer getUom() {
+	public Long getUom() {
 		return uom;
 	}
 
@@ -65,7 +65,7 @@ public class JsonDesignRequest implements Serializable {
 		return order;
 	}
 
-	public Integer getLookup_id() {
+	public Long getLookup_id() {
 		return lookup_id;
 	}
 
@@ -85,7 +85,7 @@ public class JsonDesignRequest implements Serializable {
 		this.type = type;
 	}
 
-	public void setUom(Integer uom) {
+	public void setUom(Long uom) {
 		this.uom = uom;
 	}
 
@@ -97,7 +97,7 @@ public class JsonDesignRequest implements Serializable {
 		this.order = order;
 	}
 
-	public void setLookup_id(Integer lookup_id) {
+	public void setLookup_id(Long lookup_id) {
 		this.lookup_id = lookup_id;
 	}
 
@@ -113,11 +113,11 @@ public class JsonDesignRequest implements Serializable {
 		this.readonly = readonly;
 	}
 
-	public Integer getJournalId() {
+	public Long getJournalId() {
 		return journalId;
 	}
 
-	public void setJournalId(Integer journalId) {
+	public void setJournalId(Long journalId) {
 		this.journalId = journalId;
 	}
 

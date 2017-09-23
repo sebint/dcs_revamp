@@ -7,9 +7,9 @@ import com.humworks.dcs.entities.JsonDesignRequest;
 
 public interface CommonService {
 	
-	Integer getPatternFromUrl(String pattern);
+	Long getPatternFromUrl(String pattern);
 	
-	Integer getIdFromUrl(String url);
+	Long getIdFromUrl(String url);
 	
 	String getNameFromUrl(String url);
 	

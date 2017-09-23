@@ -116,7 +116,7 @@ public class NonProgressiveJournalController {
 	
 	@GetMapping("{journalUrl}")
 	public String view(@PathVariable("journalUrl") String journalUrl, Model model)throws Exception{
-		Integer projectMasterId = commonService.getIdFromUrl(journalUrl);
+		Long projectMasterId = commonService.getIdFromUrl(journalUrl);
 		String journalName = commonService.getNameFromUrl(journalUrl);
 		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName,projectMasterId);
 		if(journal==null){
@@ -129,7 +129,7 @@ public class NonProgressiveJournalController {
 	
 	@GetMapping("{journalUrl}/design")
 	public String design(@PathVariable("journalUrl") String journalUrl, Model model)throws Exception{
-		Integer projectMasterId = commonService.getIdFromUrl(journalUrl);
+		Long projectMasterId = commonService.getIdFromUrl(journalUrl);
 		String journalName = commonService.getNameFromUrl(journalUrl);
 		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName, projectMasterId);
 		if(journal==null){
@@ -174,7 +174,7 @@ public class NonProgressiveJournalController {
 		try{		
 			NonProgressiveJournalDesign nonPrgvDesign = new NonProgressiveJournalDesign();
 			nonPrgvDesign.setIsValidPending(0);
-			nonPrgvDesign.setNonProgressiveMasterId(1);
+			nonPrgvDesign.setNonProgressiveMasterId(1L);
 			for(JsonDesignRequest design : jsonDesignRequest) {
 				nonPrgvDesign.setNonProgressiveMasterId(design.getJournalId());
 				nonPrgvDesign.setColHeaderText(design.getHeader());
@@ -252,7 +252,7 @@ public class NonProgressiveJournalController {
 	
 	@GetMapping("delete/{pattern}")
 	public String delete(@PathVariable String pattern, final RedirectAttributes redirectAttributes) throws Exception{
-		Integer nonProgressiveMasterId = commonService.getPatternFromUrl(pattern);
+		Long nonProgressiveMasterId = commonService.getPatternFromUrl(pattern);
 		final NonProgressiveJournalMaster journal = nonProgressiveService.findById(nonProgressiveMasterId);
 		if(journal==null){
 			throw new ResourceNotFoundException(nonProgressiveMasterId.toString());

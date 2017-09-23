@@ -11,15 +11,15 @@ import com.humworks.dcs.dao.UserRoleDao;
 import com.humworks.dcs.entities.UserRole;
 
 @Repository("userRoleDao")
-public class UserRoleDaoImpl extends AbstractDao<Integer, UserRole> implements UserRoleDao {
+public class UserRoleDaoImpl extends AbstractDao<Long, UserRole> implements UserRoleDao {
 
 	@Override
-	public Integer saveUserRole(UserRole userRole) {
+	public Long saveUserRole(UserRole userRole) {
 		return save(userRole);
 	}
 
 	@Override
-	public Integer updateUserRole(UserRole userRole) {
+	public Long updateUserRole(UserRole userRole) {
 		String hql = "UPDATE UserRole SET intRoleId = :intRoleId, intModifiedBy =:intModifiedBy,"
 				+ " dtDateModified =:dtDateModified"
 				+ " WHERE intUserId = :intUserId";
@@ -32,17 +32,17 @@ public class UserRoleDaoImpl extends AbstractDao<Integer, UserRole> implements U
 	}
 
 	@Override
-	public UserRole findById(Integer urid) {
+	public UserRole findById(Long urid) {
 		return getByKey(urid);
 	}
 
 	@Override
-	public ArrayList<Integer> findByRole(Integer roleMasterId) {	
+	public ArrayList<Long> findByRole(Long roleMasterId) {	
 				
 		String hql = "SELECT intUserId FROM UserRole WHERE intRoleId =:intRoleId";
 		@SuppressWarnings("unchecked")
-		TypedQuery<Integer> query = getSession().createQuery(hql).setParameter("intRoleId", roleMasterId);
-		ArrayList<Integer> uids = (ArrayList<Integer>) query.getResultList();
+		TypedQuery<Long> query = getSession().createQuery(hql).setParameter("intRoleId", roleMasterId);
+		ArrayList<Long> uids = (ArrayList<Long>) query.getResultList();
 		if(uids != null){
 			return uids;
 		}

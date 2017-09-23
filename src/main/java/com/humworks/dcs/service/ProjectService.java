@@ -6,7 +6,7 @@ import com.humworks.dcs.entities.ProjectMaster;
 
 public interface ProjectService {
 	
-	Integer save(ProjectMaster project);
+	Long save(ProjectMaster project);
 	
 	Integer update(ProjectMaster project);
 	

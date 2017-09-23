@@ -11,21 +11,21 @@ public interface UserService {
 	
 	Integer update(User user);
     
-	Integer resetPassword(Login reset);
+	Long resetPassword(Login reset);
 	
 	void delete(User user);
 	
-    User findById(Integer id);
+    User findById(Long id);
     
-    Integer findUid(String username);
+    Long findUid(String username);
     
-    Integer updateStatus(String field, Integer value, Integer userId);
+    Long updateStatus(String field, Integer value, Long userId);
     
     User findByUsername(String username);
     
-    ArrayList<User> findByRoleId(Integer roleMasterId);
+    ArrayList<User> findByRoleId(Long roleMasterId);
     
-    Boolean checkPassword(Integer uid, String password);
+    Boolean checkPassword(Long uid, String password);
     
     ArrayList<User> selectAll();
 }

@@ -13,10 +13,10 @@ import com.humworks.dcs.dao.UnitMeasureDao;
 import com.humworks.dcs.entities.UnitMeasure;
 
 @Repository("unitMeasureDao")
-public class UnitMeasureDaoImpl extends AbstractDao<Integer, UnitMeasure> implements UnitMeasureDao {
+public class UnitMeasureDaoImpl extends AbstractDao<Long, UnitMeasure> implements UnitMeasureDao {
 
 	@Override
-	public Integer saveUnitMeasure(UnitMeasure uom) {		
+	public Long saveUnitMeasure(UnitMeasure uom) {		
 		return save(uom);
 	}
 

@@ -15,10 +15,10 @@ import com.humworks.dcs.dao.NonProgressiveJournalDao;
 import com.humworks.dcs.entities.NonProgressiveJournalMaster;
 
 @Repository("nonProgressiveDao")
-public class NonProgressiveJournalDaoImpl extends AbstractDao<Integer, NonProgressiveJournalMaster> implements NonProgressiveJournalDao {
+public class NonProgressiveJournalDaoImpl extends AbstractDao<Long, NonProgressiveJournalMaster> implements NonProgressiveJournalDao {
 
 	@Override
-	public Integer saveNonProgressive(NonProgressiveJournalMaster nonProgressive) {
+	public Long saveNonProgressive(NonProgressiveJournalMaster nonProgressive) {
 		return save(nonProgressive);
 	}
 
@@ -39,12 +39,12 @@ public class NonProgressiveJournalDaoImpl extends AbstractDao<Integer, NonProgre
 	}
 
 	@Override
-	public NonProgressiveJournalMaster findById(Integer npid) {
+	public NonProgressiveJournalMaster findById(Long npid) {
 		return getByKey(npid);
 	}
 
 	@Override
-	public NonProgressiveJournalMaster findByName(String nonProgressiveName,Integer projectMasterId) {
+	public NonProgressiveJournalMaster findByName(String nonProgressiveName,Long projectMasterId) {
 		try{
 			CriteriaBuilder cb = createCriteriaQuery();
 			CriteriaQuery<NonProgressiveJournalMaster> cq = cb.createQuery(NonProgressiveJournalMaster.class);
@@ -86,7 +86,7 @@ public class NonProgressiveJournalDaoImpl extends AbstractDao<Integer, NonProgre
 	}
 
 	@Override
-	public ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId) {
+	public ArrayList<NonProgressiveJournalMaster> findByProjectId(Long projectMasterId) {
 		CriteriaBuilder cb = createCriteriaQuery();
 		CriteriaQuery<NonProgressiveJournalMaster> cq = cb.createQuery(NonProgressiveJournalMaster.class);
 		Root<NonProgressiveJournalMaster> root = cq.from(NonProgressiveJournalMaster.class);

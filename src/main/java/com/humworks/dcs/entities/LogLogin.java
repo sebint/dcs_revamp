@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,7 +32,8 @@ public class LogLogin implements Serializable{
 	  
 	@Id
 	@Column(name = "USER_LOGIN_LOG_ID", updatable = false, unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_login_log_master_seq")
+	@SequenceGenerator(name="user_login_log_master_seq", sequenceName="tbl_user_login_log_user_login_log_id_seq")
 	private Long userLogId;
 	
 	@Column(name = "USER_ID", updatable = false, nullable = false)
@@ -176,8 +178,5 @@ public class LogLogin implements Serializable{
 		} else if (!userLogId.equals(other.userLogId))
 			return false;
 		return true;
-	}
-	
-	
-	
+	}	
 }

@@ -35,6 +35,7 @@ public class MenuListInterceptor extends HandlerInterceptorAdapter {
 				if (authUserDetails instanceof SpringUser) {
 					//SpringUser user = (SpringUser) authUserDetails;    
 				}
+				
 				request.setAttribute("menuList", objectService.findParentMenu());
 			}
 		}catch(Exception ex){

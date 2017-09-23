@@ -2,7 +2,6 @@ package com.humworks.dcs.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Optional;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,10 +16,10 @@ import com.humworks.dcs.entities.Login;
 import com.humworks.dcs.entities.User;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
+public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 
 	@Override
-	public Integer saveUser(User user) {
+	public Long saveUser(User user) {
 		 return save(user);
 	}
 
@@ -31,7 +30,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		});
 	}*/
 	@Override
-	public User findById(Integer uid) {
+	public User findById(Long uid) {
 		return getByKey(uid);
 	}
 	
@@ -63,7 +62,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@Override
-	public Integer updateUser(User user) {		
+	public Long updateUser(User user) {		
 		String hql = "UPDATE User SET strFirstName = :strFirstName,strLastName =:strLastName, "
 					+ "strEmail = :strEmail, strDeptName= :strDeptName, "
 					+ "boolPwdChange =:boolPwdChange, boolLockPwd =:boolLockPwd, "
@@ -90,10 +89,10 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@Override
-	public Integer findUid(String username) {
+	public Long findUid(String username) {
 		String hql = "SELECT intUserId FROM User WHERE strUserName =:strUserName";
 		Query query = getSession().createQuery(hql).setParameter("strUserName", username);
-		Integer uid = (Integer) query.getSingleResult();
+		Long uid = (Long) query.getSingleResult();
 		if(uid != null){
 			return uid;
 		}
@@ -107,14 +106,14 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@Override
-	public Integer resetPassword(Login reset) {
+	public Long resetPassword(Login reset) {
 		String hql = "UPDATE User SET strPassword =:strPassword WHERE intUserId =:intUserId";
 		Query query = getSession().createQuery(hql).setParameter("strPassword", reset.getStrPassword()).setParameter("intUserId", reset.getIntUserId());
 		return query(query);
 	}
 
 	@Override
-	public String checkPassword(Integer uid) {
+	public String checkPassword(Long uid) {
 		String hql = "SELECT strPassword FROM User WHERE intUserId =:intUserId";
 		Query query = getSession().createQuery(hql).setParameter("intUserId", uid);
 		String strPassword = (String) query.getSingleResult();
@@ -123,7 +122,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@Override
-	public ArrayList<User> findByRoleId(ArrayList<Integer> roleMasterId) {
+	public ArrayList<User> findByRoleId(ArrayList<Long> roleMasterId) {
 		// TODO Auto-generated method stub
 		CriteriaBuilder cb = createCriteriaQuery();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
@@ -133,7 +132,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	@Override
-	public Integer updateStatusField(String field, Integer value,Integer uid) {
+	public Long updateStatusField(String field, Integer value,Long uid) {
 		String hql = "UPDATE User SET "+field +"="+value+" WHERE intUserId =:intUserId";
 		Query query = getSession().createQuery(hql).setParameter("intUserId", uid);
 		return query(query);		

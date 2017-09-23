@@ -6,19 +6,19 @@ import com.humworks.dcs.entities.NonProgressiveJournalMaster;
 
 public interface NonProgressiveJournalDao {
 	
-	Integer saveNonProgressive(NonProgressiveJournalMaster nonProgressive);
+	Long saveNonProgressive(NonProgressiveJournalMaster nonProgressive);
 	
 	Integer updateNonProgressive(NonProgressiveJournalMaster nonProgressive);
 		
 	void deleteNonProgressive(NonProgressiveJournalMaster nonProgressive);
 	
-	NonProgressiveJournalMaster findById(Integer npid);
+	NonProgressiveJournalMaster findById(Long npid);
      
-	NonProgressiveJournalMaster findByName(String nonProgressiveName, Integer projrctMasterId);
+	NonProgressiveJournalMaster findByName(String nonProgressiveName, Long projrctMasterId);
     
     ArrayList<NonProgressiveJournalMaster> selectAll();
     
-    ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId);
+    ArrayList<NonProgressiveJournalMaster> findByProjectId(Long projectMasterId);
     
     ArrayList<NonProgressiveJournalMaster> findByIds(ArrayList<Long> idx);
     

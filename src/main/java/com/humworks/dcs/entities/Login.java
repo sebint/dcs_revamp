@@ -28,7 +28,7 @@ public class Login implements Serializable {
 
 	@Id
 	@Column(name = "USER_MASTER_ID", updatable = false)
-	private Integer intUserId;
+	private Long intUserId;
 	
 	@NotEmpty
 	@Column(name = "USER_NAME", unique = true, nullable = false)
@@ -44,11 +44,11 @@ public class Login implements Serializable {
 	@Transient
 	private String strExPassword;
 	
-	public Integer getIntUserId() {
+	public Long getIntUserId() {
 		return intUserId;
 	}
 
-	public void setIntUserId(Integer intUserId) {
+	public void setIntUserId(Long intUserId) {
 		this.intUserId = intUserId;
 	}
 

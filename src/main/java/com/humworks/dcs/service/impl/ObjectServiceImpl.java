@@ -30,7 +30,7 @@ public class ObjectServiceImpl implements ObjectService {
 	@Override
 	@Transactional(readOnly = true)
 	public ArrayList<ObjectsMaster> findParentMenu() {
-//		System.out.println(objectDao.getParentMenu());
+		System.out.println(objectDao.getParentMenu());
 		return objectDao.getParentMenu();
 	}
 

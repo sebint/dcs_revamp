@@ -5,4 +5,6 @@ public interface SessionService {
 	Long getActiveUid();
 	
 	String getActiveUsername();
+	
+	String getActiveFullName();
 }

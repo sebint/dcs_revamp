@@ -11,15 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -27,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @DynamicInsert
 @DynamicUpdate
 @SelectBeforeUpdate
-public class NonProgressiveJournalMaster implements Serializable {
+public class NonProgressiveJournalMaster extends  AuditMaster implements Serializable {
 
 	/**
 	 * 
@@ -37,11 +33,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 	@Id
 	@Column(name = "NON_PGRV_JRNL_MASTER_ID", updatable = false, unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer nonProgressiveMasterId;
+	private Long nonProgressiveMasterId;
 	
 	@NotNull
 	@Column(name = "PJCT_TEMPLATE_MASTER_ID")
-	private Integer projectMasterId;
+	private Long projectMasterId;
 	
 	@NotEmpty
 	@Column(name = "JRNL_NAME", nullable = false)
@@ -49,37 +45,21 @@ public class NonProgressiveJournalMaster implements Serializable {
 	
 	@NotNull
 	@Column(name = "OWNER")
-	private Integer jounralOwner;
+	private Long jounralOwner;
 	
 	@NotNull
 	@Column(name = "VAL_ID")
-	private Integer validatorId;
+	private Long validatorId;
 	
 	@NotNull
 	@Column(name = "DTETR_OPERATOR_ID")
-	private Integer dataEntryId;
+	private Long dataEntryId;
 	
 	@Column(name = "STATUS")
 	private Integer status;
 	
 	@Column(name = "REMAINDER_FREQUENCY")
-	private Integer reminderFreq;
-	
-	@Column(name = "CREATED_BY", updatable = false)
-	private Integer intCreatedBy;
-
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATED_DATE", updatable = false)
-	private Date dtDateCreated;
-
-	@Column(name = "MODIFIED_BY")
-	private Integer intModifiedBy;
-
-	@UpdateTimestamp
-	@Column(name = "MODIFIED_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dtDateModified;
+	private Integer reminderFreq;	
 	
 	@ManyToOne
     @JoinColumn(name="PJCT_TEMPLATE_MASTER_ID", insertable = false, updatable = false)
@@ -105,11 +85,11 @@ public class NonProgressiveJournalMaster implements Serializable {
     @JoinColumn(name="MODIFIED_BY", insertable = false, updatable = false)
     private User modifiedUser;
 
-	public Integer getNonProgressiveMasterId() {
+	public Long getNonProgressiveMasterId() {
 		return nonProgressiveMasterId;
 	}
 
-	public Integer getProjectMasterId() {
+	public Long getProjectMasterId() {
 		return projectMasterId;
 	}
 
@@ -117,15 +97,15 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return journalName;
 	}
 
-	public Integer getJounralOwner() {
+	public Long getJounralOwner() {
 		return jounralOwner;
 	}
 
-	public Integer getValidatorId() {
+	public Long getValidatorId() {
 		return validatorId;
 	}
 
-	public Integer getDataEntryId() {
+	public Long getDataEntryId() {
 		return dataEntryId;
 	}
 
@@ -137,7 +117,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return reminderFreq;
 	}
 
-	public Integer getIntCreatedBy() {
+	public String getIntCreatedBy() {
 		return intCreatedBy;
 	}
 
@@ -145,7 +125,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return dtDateCreated;
 	}
 
-	public Integer getIntModifiedBy() {
+	public String getIntModifiedBy() {
 		return intModifiedBy;
 	}
 
@@ -177,11 +157,11 @@ public class NonProgressiveJournalMaster implements Serializable {
 		return modifiedUser;
 	}
 
-	public void setNonProgressiveMasterId(Integer nonProgressiveMasterId) {
+	public void setNonProgressiveMasterId(Long nonProgressiveMasterId) {
 		this.nonProgressiveMasterId = nonProgressiveMasterId;
 	}
 
-	public void setProjectMasterId(Integer projectMasterId) {
+	public void setProjectMasterId(Long projectMasterId) {
 		this.projectMasterId = projectMasterId;
 	}
 
@@ -189,15 +169,15 @@ public class NonProgressiveJournalMaster implements Serializable {
 		this.journalName = journalName;
 	}
 
-	public void setJounralOwner(Integer jounralOwner) {
+	public void setJounralOwner(Long jounralOwner) {
 		this.jounralOwner = jounralOwner;
 	}
 
-	public void setValidatorId(Integer validatorId) {
+	public void setValidatorId(Long validatorId) {
 		this.validatorId = validatorId;
 	}
 
-	public void setDataEntryId(Integer dataEntryId) {
+	public void setDataEntryId(Long dataEntryId) {
 		this.dataEntryId = dataEntryId;
 	}
 
@@ -209,7 +189,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 		this.reminderFreq = reminderFreq;
 	}
 
-	public void setIntCreatedBy(Integer intCreatedBy) {
+	public void setIntCreatedBy(String intCreatedBy) {
 		this.intCreatedBy = intCreatedBy;
 	}
 
@@ -217,7 +197,7 @@ public class NonProgressiveJournalMaster implements Serializable {
 		this.dtDateCreated = dtDateCreated;
 	}
 
-	public void setIntModifiedBy(Integer intModifiedBy) {
+	public void setIntModifiedBy(String intModifiedBy) {
 		this.intModifiedBy = intModifiedBy;
 	}
 

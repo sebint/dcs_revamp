@@ -14,7 +14,7 @@ import com.humworks.dcs.entities.Objects;
 import com.humworks.dcs.entities.ObjectsMaster;
 
 @Repository("objectDao")
-public class ObjectsDaoImpl extends AbstractDao<Objects, Integer> implements ObjectsDao {
+public class ObjectsDaoImpl extends AbstractDao<Objects, Long> implements ObjectsDao {
 
 	@Override
 	public ArrayList<Objects> selectAll() {
@@ -33,7 +33,6 @@ public class ObjectsDaoImpl extends AbstractDao<Objects, Integer> implements Obj
 		Root<ObjectsMaster> root = cq.from(ObjectsMaster.class);
 		cq.select(root);
 		cq.orderBy(cb.asc(root.get("intSeqNo")));
-		return (ArrayList<ObjectsMaster>) getSession().createQuery(cq).getResultList();
-		
+		return (ArrayList<ObjectsMaster>) getSession().createQuery(cq).getResultList();		
 	}
 }

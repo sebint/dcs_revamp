@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void save(User user) {
-		   Integer currentUser = sessionService.getActiveUid();
+		   String currentUser = sessionService.getActiveFullName();
 	       user.setStrPassword(passwordEncoder.encode(environment.getProperty("default_password")));	     
 	       user.setIntCreatedBy(currentUser);
 	       user.setIntModifiedBy(currentUser);
-	       Integer uid = userDao.saveUser(user);
+	       Long uid = userDao.saveUser(user);
 	       if(uid!=null){
 	    	   //User Role Info
 		       UserRole userRole = new UserRole();
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public User findById(Integer id) {
+	public User findById(Long id) {
 		return userDao.findById(id);
 	}
 
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public Integer update(User user) {
 		try{
-		   Integer currentUser = sessionService.getActiveUid();
+		   String currentUser = sessionService.getActiveFullName();
 		   user.setIntModifiedBy(currentUser);
 		   if(userDao.updateUser(user)>0){
 		       UserRole userRole = new UserRole();
@@ -137,19 +137,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Integer findUid(String username) {		
+	public Long findUid(String username) {		
 		return userDao.findUid(username);
 	}
 
 	@Override
 	@Transactional
-	public Integer resetPassword(Login reset) {
+	public Long resetPassword(Login reset) {
 		reset.setStrPassword(passwordEncoder.encode(reset.getStrPassword()));
 		return userDao.resetPassword(reset);
 	}
 
 	@Override
-	public Boolean checkPassword(Integer uid, String password) {	
+	public Boolean checkPassword(Long uid, String password) {	
 		if(passwordEncoder.matches(password, userDao.checkPassword(uid))){
 			return true;
 		}
@@ -158,13 +158,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ArrayList<User> findByRoleId(Integer roleMasterId) {		
+	public ArrayList<User> findByRoleId(Long roleMasterId) {		
 		return userDao.findByRoleId(userRoleDao.findByRole(roleMasterId));
 	}
 
 	@Override
 	@Transactional
-	public Integer updateStatus(String field, Integer value, Integer userId) {
+	public Long updateStatus(String field, Integer value, Long userId) {
 		return userDao.updateStatusField(field, value, userId) ;
 	}
 

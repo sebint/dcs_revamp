@@ -30,7 +30,7 @@ public class UnitMeasureImpl implements UnitMeasureService {
 
 	@Override
 	@Transactional
-	public Integer save(UnitMeasure uom) {
+	public Long save(UnitMeasure uom) {
 		Long currentUser = sessionService.getActiveUid();
 		uom.setIntCreatedBy(currentUser);
 		uom.setIntModifiedBy(currentUser);

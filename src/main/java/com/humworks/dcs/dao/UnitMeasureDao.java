@@ -6,7 +6,7 @@ import com.humworks.dcs.entities.UnitMeasure;
 
 public interface UnitMeasureDao {
 	
-	Integer saveUnitMeasure(UnitMeasure uom);
+	Long saveUnitMeasure(UnitMeasure uom);
 	
 	Integer updateUnitMeasure(UnitMeasure uom);
 	

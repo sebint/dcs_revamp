@@ -7,27 +7,27 @@ import com.humworks.dcs.entities.User;
 
 public interface UserDao {
 
-	Integer saveUser(User user);
+	Long saveUser(User user);
 	
-	Integer updateUser(User user);
+	Long updateUser(User user);
 	
-	Integer resetPassword(Login reset);
+	Long resetPassword(Login reset);
 	
 	void deleteUser(User user);
 	
-	Integer updateStatusField(String field, Integer value, Integer uid);
+	Long updateStatusField(String field, Integer value, Long uid);
     
-	Integer findUid(String username);
+	Long findUid(String username);
 	
-    User findById(Integer uid);
+    User findById(Long uid);
      
     User findByUsername(String username);
     
-    ArrayList<User> findByRoleId(ArrayList<Integer> roleMasterId);
+    ArrayList<User> findByRoleId(ArrayList<Long> roleMasterId);
     
     ArrayList<User> selectAll();
     
-    String checkPassword(Integer uid);
+    String checkPassword(Long uid);
     
     void transactionRollback();
 }

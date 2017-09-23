@@ -9,5 +9,5 @@ public interface LoginAttemptService {
 	boolean isBlocked(String key);
 	Integer countAttempts(String key);
 	void saveOrUpdate(String key1, String key2);
-	Integer updateStatus(String field, Integer value, Integer userId);
+	Long updateStatus(String field, Integer value, Long userId);
 }

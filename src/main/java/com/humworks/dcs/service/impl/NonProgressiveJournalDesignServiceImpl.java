@@ -30,8 +30,8 @@ public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJou
 
 	@Override
 	@Transactional
-	public Integer save(NonProgressiveJournalDesign nonProgressive) {
-		Integer currentUser = sessionService.getActiveUid();
+	public Long save(NonProgressiveJournalDesign nonProgressive) {
+		String currentUser = sessionService.getActiveFullName();
 		nonProgressive.setIntCreatedBy(currentUser);
 		nonProgressive.setIntModifiedBy(currentUser);
 		nonProgressive.setStatus(1);
@@ -80,7 +80,7 @@ public class NonProgressiveJournalDesignServiceImpl implements NonProgressiveJou
 
 	@Override
 	@Transactional(readOnly = true)
-	public ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer journalMasterId) {
+	public ArrayList<NonProgressiveJournalDesign> findByJournalId(Long journalMasterId) {
 		// TODO Auto-generated method stub
 		return nonProgressiveDesignDao.findByJournalId(journalMasterId);
 	}

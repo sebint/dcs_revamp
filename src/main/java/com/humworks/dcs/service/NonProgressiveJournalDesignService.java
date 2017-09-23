@@ -6,7 +6,7 @@ import com.humworks.dcs.entities.NonProgressiveJournalDesign;
 
 public interface NonProgressiveJournalDesignService {
 
-	Integer save(NonProgressiveJournalDesign nonProgressive);
+	Long save(NonProgressiveJournalDesign nonProgressive);
 	
 	Integer update(NonProgressiveJournalDesign nonProgressive);
 	
@@ -18,7 +18,7 @@ public interface NonProgressiveJournalDesignService {
     
     ArrayList<NonProgressiveJournalDesign> selectAll();
 
-    ArrayList<NonProgressiveJournalDesign> findByJournalId(Integer projectMasterId);
+    ArrayList<NonProgressiveJournalDesign> findByJournalId(Long projectMasterId);
 
 	ArrayList<Long> selectUnique();
 }

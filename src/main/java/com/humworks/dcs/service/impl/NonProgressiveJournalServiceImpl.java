@@ -30,8 +30,8 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 
 	@Override
 	@Transactional
-	public Integer save(NonProgressiveJournalMaster nonProgressive) {
-		Integer currentUser = sessionService.getActiveUid();
+	public Long save(NonProgressiveJournalMaster nonProgressive) {
+		String currentUser = sessionService.getActiveFullName();
 		nonProgressive.setIntCreatedBy(currentUser);
 		nonProgressive.setIntModifiedBy(currentUser);
 		nonProgressive.setStatus(1);
@@ -42,7 +42,7 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 	@Transactional
 	public Integer update(NonProgressiveJournalMaster nonProgressive) {
 		try{
-			   Integer currentUser = sessionService.getActiveUid();
+			   String currentUser = sessionService.getActiveFullName();
 			   nonProgressive.setIntModifiedBy(currentUser);
 			   nonProgressive.setStatus(1);
 			   if(nonProgressiveDao.updateNonProgressive(nonProgressive)>0){
@@ -65,13 +65,13 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 
 	@Override
 	@Transactional(readOnly = true)
-	public NonProgressiveJournalMaster findById(Integer id) {
+	public NonProgressiveJournalMaster findById(Long id) {
 		return nonProgressiveDao.findById(id); 
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public NonProgressiveJournalMaster findByName(String journalName, Integer projectMasterId) {
+	public NonProgressiveJournalMaster findByName(String journalName, Long projectMasterId) {
 		return nonProgressiveDao.findByName(journalName.replace('-', ' ').toLowerCase(), projectMasterId);
 	}
 
@@ -83,7 +83,7 @@ public class NonProgressiveJournalServiceImpl implements NonProgressiveJournalSe
 
 	@Override
 	@Transactional(readOnly = true)
-	public ArrayList<NonProgressiveJournalMaster> findByProjectId(Integer projectMasterId) {
+	public ArrayList<NonProgressiveJournalMaster> findByProjectId(Long projectMasterId) {
 		return nonProgressiveDao.findByProjectId(projectMasterId);
 	}
 

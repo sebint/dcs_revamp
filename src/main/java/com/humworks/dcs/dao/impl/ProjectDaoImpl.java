@@ -16,7 +16,7 @@ import com.humworks.dcs.entities.ProjectMaster;
 public class ProjectDaoImpl extends AbstractDao<Integer, ProjectMaster> implements ProjectDao {
 
 	@Override
-	public Integer saveProject(ProjectMaster project) {
+	public Long saveProject(ProjectMaster project) {
 		return save(project);
 	}
 

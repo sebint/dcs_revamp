@@ -103,7 +103,7 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 
 	@Override
 	@Transactional
-	public Integer updateStatus(String field, Integer value, Integer userId) {
+	public Long updateStatus(String field, Integer value, Long userId) {
 		return userStatusDao.updateStatus(field, value, userId);
 	}
 

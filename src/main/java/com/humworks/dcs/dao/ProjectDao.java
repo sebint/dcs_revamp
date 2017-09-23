@@ -6,7 +6,7 @@ import com.humworks.dcs.entities.ProjectMaster;
 
 public interface ProjectDao {
 	
-	Integer saveProject(ProjectMaster project);
+	Long saveProject(ProjectMaster project);
 	
 	Integer updateProject(ProjectMaster project);
 		

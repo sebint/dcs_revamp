@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,8 +34,9 @@ public class LoginAttempt implements Serializable{
 	
 	@Id
 	@Column(name = "USER_ATTEMPT_ID", updatable = false, unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userAtmptId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="user_login_monitor_master_seq")
+	@SequenceGenerator(name="user_login_monitor_master_seq", sequenceName="tbl_user_login_monitor_user_attempt_id_seq")
+	private Long userAtmptId;
 	  
 	@Column(name = "USER_ATTEMPT_COUNT", nullable = false)
 	private Integer userAtmptCount;	  
@@ -69,11 +71,11 @@ public class LoginAttempt implements Serializable{
 		this.isHistory = isHistory;
 	}
 
-	public Integer getUserAtmptId() {
+	public Long getUserAtmptId() {
 		return userAtmptId;
 	}
 
-	public void setUserAtmptId(Integer userAtmptId) {
+	public void setUserAtmptId(Long userAtmptId) {
 		this.userAtmptId = userAtmptId;
 	}
 
@@ -192,7 +194,4 @@ public class LoginAttempt implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 }

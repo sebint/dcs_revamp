@@ -305,7 +305,7 @@
     </changeSet>
     <changeSet author="Sebin Thomas (generated)" id="1506062439009-13">
         <createTable tableName="tbl_menu_master">
-            <column autoIncrement="true" name="menu_master_id" type="BIGSERIAL">
+            <column autoIncrement="true" name="menu_master_id" type="SERIAL">
                 <constraints primaryKey="true" primaryKeyName="tbl_menu_master_pkey"/>
             </column>
             <column name="menu_name" type="VARCHAR(50)">
@@ -339,13 +339,13 @@
     </changeSet>
     <changeSet author="Sebin Thomas (generated)" id="1506062439009-14">
         <createTable remarks="For Menu Details(Sub of tbl_menu_master)" tableName="tbl_menu_sub">
-            <column autoIncrement="true" name="menu_sub_id" type="BIGSERIAL">
+            <column autoIncrement="true" name="menu_sub_id" type="SERIAL">
                 <constraints primaryKey="true" primaryKeyName="tbl_menu_sub_pkey"/>
             </column>
             <column name="menu_sub_label" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="menu_master_id" type="BIGINT">
+            <column name="menu_master_id" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="url_path" type="VARCHAR(150)">

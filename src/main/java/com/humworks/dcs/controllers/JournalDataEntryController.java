@@ -62,7 +62,7 @@ public class JournalDataEntryController {
 	
 	@GetMapping("{journalUrl}")
 	public String design(@PathVariable("journalUrl") String journalUrl, Model model)throws Exception{
-		Integer projectMasterId = commonService.getIdFromUrl(journalUrl);
+		Long projectMasterId = commonService.getIdFromUrl(journalUrl);
 		String journalName = commonService.getNameFromUrl(journalUrl);
 		final NonProgressiveJournalMaster journal = nonProgressiveService.findByName(journalName, projectMasterId);
 		if(journal==null){
