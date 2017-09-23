@@ -1,4 +1,4 @@
 remind_freq_name,created_by,created_date,modified_by,modified_date
-None,system,now(),system,now()
-Weekly,system,now(),system,now()
-Monthly,system,now(),system,now()
+None,System,now(),System,now()
+Weekly,System,now(),System,now()
+Monthly,System,now(),System,now()
