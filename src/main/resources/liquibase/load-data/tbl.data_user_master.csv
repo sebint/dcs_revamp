@@ -1,0 +1,2 @@
+first_name, last_name, user_name, user_pass, email, user_dept_name, next_login_pwd_chng, pwd_lock_status, pwd_attempt_count, created_by, created_date, modified_by, modified_date
+DCS,Administrator,administrator,$2a$10$5gYralkrgOviAbQDdZav2.D42bkU.QW9M7l//GJUf258XT0VnyX8K,dcsadmin@hummingsoft.com.my,Administration,1,1,5,System,now(),System,now()

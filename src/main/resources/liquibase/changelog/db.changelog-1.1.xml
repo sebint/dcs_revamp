@@ -22,20 +22,80 @@
    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
      
     <changeSet author="Sebin Thomas" id="2209201712363000-01">
-		 <insert tableName="StudentClassMap">
-	        <column name="first_name" value="DCS"/>
-	        <column name="last_name" value="Administrator"/>
-	        <column name="user_name" value="administrator" />
-	        <column name="user_pass" value=""/>
-	        <column name="email" value="McSc. 1st Year"/>
-	        <column name="user_dept_name" value="McSc. 1st Year"/>
-	        <column name="next_login_pwd_chng" value="McSc. 1st Year"/>
-	        <column name="pwd_lock_status" value="McSc. 1st Year"/>
-	        <column name="pwd_attempt_count" value="McSc. 1st Year"/>
-	        <column name="created_by" value="McSc. 1st Year"/>
-	        <column name="created_date" value="McSc. 1st Year"/>
-	        <column name="modified_by" value="McSc. 1st Year"/>
-	        <column name="modified_date" value="McSc. 1st Year"/>
-	    </insert>
+ 		<loadData encoding="UTF-8"
+                  file="classpath:liquibase/load-data/tbl.data_user_master.csv"
+                  separator=","
+                  tableName="TBL_USER_MASTER">
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </loadData>
     </changeSet>
+    <changeSet author="Sebin Thomas" id="2209201712363000-02">
+ 		<loadData encoding="UTF-8"
+                  file="classpath:liquibase/load-data/tbl.data_role_master.csv"
+                  separator=","
+                  tableName="TBL_ROLE_MASTER">
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </loadData>
+    </changeSet>
+    <changeSet author="Sebin Thomas" id="2209201712363000-03">
+	  	<insert tableName="TBL_USER_ROLE_MASTER">
+	        <column name="user_master_id" valueComputed="(SELECT user_master_id FROM tbl_user_master WHERE user_name = 'administrator')"/>
+	        <column name="role_master_id" valueComputed="(SELECT role_master_id FROM tbl_role_master WHERE role_name = 'Administrator')"/>
+	        <column name="created_by" value="System"/>
+	        <column name="created_date" value="now()"/>
+	        <column name="modified_by" value="System"/>
+	        <column name="modified_date" value="now()"/>  
+	    </insert>		
+    </changeSet> 
+    <changeSet author="Sebin Thomas" id="2209201712363000-04">
+	  	<insert tableName="TBL_USER_STATUS">
+	        <column name="user_master_id" valueComputed="(SELECT user_master_id FROM tbl_user_master WHERE user_name = 'administrator')"/>
+	        <column name="is_enabled" value="1"/>
+	        <column name="is_account_non_expired" value="1"/>
+	        <column name="is_credentials_non_expired" value="1"/>
+	        <column name="is_account_non_locked" value="1"/>
+	        <column name="created_by" value="System"/>
+	        <column name="created_date" value="now()"/>
+	        <column name="modified_by" value="System"/>
+	        <column name="modified_date" value="now()"/>  
+	    </insert>		
+    </changeSet>    
+    <changeSet author="Sebin Thomas" id="2209201712363000-05">
+ 		<loadData encoding="UTF-8"
+                  file="classpath:liquibase/load-data/tbl.data_uom_master.csv"
+                  separator=","
+                  tableName="TBL_UOM_MASTER">
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </loadData>
+    </changeSet>  
+    <changeSet author="Sebin Thomas" id="2209201712363000-06">
+ 		<loadData encoding="UTF-8"
+                  file="classpath:liquibase/load-data/tbl.data_reminder_freq_master.csv"
+                  separator=","
+                  tableName="TBL_REMINDER_FREQ_MASTER">
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </loadData>
+    </changeSet> 
+    <changeSet author="Sebin Thomas" id="2209201712363000-07">
+ 		<loadData encoding="UTF-8"
+                  file="classpath:liquibase/load-data/tbl.data_menu_master.csv"
+                  separator=","
+                  tableName="TBL_MENU_MASTER">
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </loadData>
+    </changeSet>     
+    <changeSet author="Sebin Thomas" id="2209201712363000-08">
+ 		<loadData encoding="UTF-8"
+                  file="classpath:liquibase/load-data/tbl.data_menu_sub.csv"
+                  separator=","
+                  tableName="TBL_MENU_SUB">
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+            <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </loadData>
+    </changeSet>                 
  </databaseChangeLog>

@@ -1,0 +1,12 @@
+uom_label,uom_desc,created_by,created_date,modified_by,modified_date,status
+(Not Selected),No Units,System,now(),System,now(),1
+None,None,System,now(),System,now(),1
+Percent,Percentage,System,now(),System,now(),1
+Weeks,Weeks,System,now(),System,now(),1
+Date,Date,System,now(),System,now(),1
+Number,Numbers (Quantity),System,now(),System,now(),1
+m,Metres,System,now(),System,now(),1
+m²,Meters Squared,System,now(),System,now(),1
+Mt,Metric Tonnes,System,now(),System,now(),1
+Type,Type,System,now(),System,now(),1
+Yes/No,Yes or No,System,now(),System,now(),1

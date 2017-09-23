@@ -1,0 +1,5 @@
+role_name,role_desc,created_by,created_date,modified_date,modified_by,home_page_url
+Administrator,DCS Administrator with Full power,system,now(),now(),system,1
+Gate Keeper,Formally known as Data Entry,system,now(),now(),system,1
+Information Manager,Validator,system,now(),now(),system,1
+PDO,PDO,system,now(),now(),system,1

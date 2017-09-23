@@ -1,0 +1,13 @@
+menu_name,url_path,url_icon,seq_number,is_enabled,created_by,created_date,modified_by,modified_date
+Dashboard,dashboard,glyphicon glyphicon-home,1,1,System,now(),System,now()
+Timeline,#,glyphicon glyphicon-time,2,1,System,now(),System,now()
+Assessment,#,fa fa-tasks,3,1,System,now(),System,now()
+Design,#,fa fa-star,4,1,System,now(),System,now()
+Administrator,#,fa fa-briefcase,5,1,System,now(),System,now()
+Security,#,fa fa-lock,6,1,System,now(),System,now()
+Report,#,glyphicon glyphicon-duplicate,7,1,System,now(),System,now()
+
+
+
+
+
