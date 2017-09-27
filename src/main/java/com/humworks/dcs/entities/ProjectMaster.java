@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,7 +35,8 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 	
 	@Id
 	@Column(name = "PJCT_TEMPLATE_MASTER_ID", updatable = false, unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="pjct_temp_master_seq")
+	@SequenceGenerator(name="pjct_temp_master_seq", sequenceName="tbl_pjct_template_master_pjct_template_master_id_seq")
 	private Long projectMasterId;
 	
 	@NotEmpty
@@ -63,14 +65,6 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 	@ManyToOne
     @JoinColumn(name="USER_MASTER_ID", insertable = false, updatable = false)
     private User user;
-	
-	@ManyToOne
-    @JoinColumn(name="MODIFIED_BY", insertable = false, updatable = false)
-    private User modifiedUser;
-	
-	@ManyToOne
-    @JoinColumn(name="CREATED_BY", insertable = false, updatable = false)
-    private User createdUser;
 
 	public Long getProjectMasterId() {
 		return projectMasterId;
@@ -114,14 +108,6 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 
 	public User getUser() {
 		return user;
-	}
-
-	public User getModifiedUser() {
-		return modifiedUser;
-	}
-
-	public User getCreatedUser() {
-		return createdUser;
 	}
 
 	public void setProjectMasterId(Long projectMasterId) {
@@ -168,34 +154,23 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 		this.user = user;
 	}
 
-	public void setModifiedUser(User modifiedUser) {
-		this.modifiedUser = modifiedUser;
-	}
-
-	public void setCreatedUser(User createdUser) {
-		this.createdUser = createdUser;
-	}
-
 	@Override
 	public String toString() {
 		return "ProjectMaster [projectMasterId=" + projectMasterId + ", projectName=" + projectName + ", projectDesc="
 				+ projectDesc + ", userMasterId=" + userMasterId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", user=" + user + ", modifiedUser=" + modifiedUser + ", createdUser=" + createdUser
-				+ ", strCreatedBy=" + strCreatedBy + ", dtDateCreated=" + dtDateCreated + ", strModifiedBy="
-				+ strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
+				+ ", user=" + user + ", strCreatedBy=" + strCreatedBy + ", dtDateCreated=" + dtDateCreated
+				+ ", strModifiedBy=" + strModifiedBy + ", dtDateModified=" + dtDateModified + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((createdUser == null) ? 0 : createdUser.hashCode());
 		result = prime * result + ((dtDateCreated == null) ? 0 : dtDateCreated.hashCode());
 		result = prime * result + ((dtDateModified == null) ? 0 : dtDateModified.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((strCreatedBy == null) ? 0 : strCreatedBy.hashCode());
 		result = prime * result + ((strModifiedBy == null) ? 0 : strModifiedBy.hashCode());
-		result = prime * result + ((modifiedUser == null) ? 0 : modifiedUser.hashCode());
 		result = prime * result + ((projectDesc == null) ? 0 : projectDesc.hashCode());
 		result = prime * result + ((projectMasterId == null) ? 0 : projectMasterId.hashCode());
 		result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
@@ -214,11 +189,6 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProjectMaster other = (ProjectMaster) obj;
-		if (createdUser == null) {
-			if (other.createdUser != null)
-				return false;
-		} else if (!createdUser.equals(other.createdUser))
-			return false;
 		if (dtDateCreated == null) {
 			if (other.dtDateCreated != null)
 				return false;
@@ -243,11 +213,6 @@ public class ProjectMaster extends AuditMaster implements Serializable {
 			if (other.strModifiedBy != null)
 				return false;
 		} else if (!strModifiedBy.equals(other.strModifiedBy))
-			return false;
-		if (modifiedUser == null) {
-			if (other.modifiedUser != null)
-				return false;
-		} else if (!modifiedUser.equals(other.modifiedUser))
 			return false;
 		if (projectDesc == null) {
 			if (other.projectDesc != null)
